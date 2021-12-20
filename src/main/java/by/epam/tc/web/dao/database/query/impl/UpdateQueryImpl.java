@@ -11,7 +11,7 @@ public class UpdateQueryImpl implements UpdateQuery {
         String params = "";
         switch (tableName){
             case Metadata.USERS_TABLE:
-                params = "login=?,password=?,role_id=?"; break;
+                params = "login=?"; break;
             case Metadata.USER_ROLES_TABLE:
                 params = "role_name=?"; break;
             case Metadata.ADMINS_TABLE:
@@ -32,5 +32,12 @@ public class UpdateQueryImpl implements UpdateQuery {
                 params = "user_id=?, room_number=?, from_date=?, to_date=?, guests_count=?, approved=?, approve_date=?, paid=?"; break;
         }
         return String.format(insertQuery, tableName, params, whereClauseColumnName);
+    }
+    
+    @Override
+    public String getUpdatePasswordQueryWhere(String whereClauseColumnName) {
+    	String insertQuery = "update %s set %s where %s = ?;";
+    	String params = "password=?";
+    	return String.format(insertQuery, Metadata.USERS_TABLE, params, whereClauseColumnName);
     }
 }

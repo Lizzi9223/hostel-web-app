@@ -65,6 +65,18 @@ public class Client extends User{
 	  this.email = email;
 	}
     
+    public Client(String login, String firstName, String lastName,
+            String passportId, LocalDate birthDate, String country, String phoneNumber, String email) {
+	  super(login, Role.CLIENT);
+	  this.firstName = firstName;
+	  this.lastName = lastName;
+	  this.passportId = passportId;
+	  this.birthDate = birthDate;
+	  this.country = country;
+	  this.phoneNumber = phoneNumber;
+	  this.email = email;
+	}
+    
     public int getClientId() {
         return clientId;
     }

@@ -1,11 +1,13 @@
 package by.epam.tc.web.service;
 
+import by.epam.tc.web.service.impl.RoomServiceImpl;
 import by.epam.tc.web.service.impl.UserServiceImpl;
 
 public final class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();
 
     private UserService userService;
+    private RoomService roomService;
 
     private ServiceFactory() {
     }
@@ -20,6 +22,18 @@ public final class ServiceFactory {
 			throw e;
 		}
     	return userService;
+    }
+    
+    public RoomService geRoomService() throws ServiceException {
+    	try {
+    		if(roomService == null) {
+    			roomService = new RoomServiceImpl();
+    		}
+		} 
+    	catch (ServiceException e) {
+			throw e;
+		}
+    	return roomService;
     }
 
     public static ServiceFactory getInstance() {

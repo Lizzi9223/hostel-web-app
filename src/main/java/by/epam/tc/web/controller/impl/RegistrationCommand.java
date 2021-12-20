@@ -50,28 +50,34 @@ public class RegistrationCommand implements Command{
 				String phone = request.getParameter("phone");
 				String email = request.getParameter("email");				
 				client = new Client(login, password, name, surname, passportId, dateOfBith, 
-						country, phone, email);				
+						country, phone, email);
+				System.out.println("client before: " + client.toString());
 				client = userService.signUp(client);
+				System.out.println("client after: " + client.toString());
+				request.getSession().setAttribute("role", "CLIENT");
+				request.getSession().setAttribute("login", login);
+				request.getSession().setAttribute("name", client.getFirstName());
+				request.getSession().setAttribute("surname", client.getLastName());
+				request.getSession().setAttribute("passportId", client.getPassportId());
+				request.getSession().setAttribute("dateOfBith", client.getBirthDate());
+				request.getSession().setAttribute("country", client.getCountry());
+				request.getSession().setAttribute("phone", client.getPhoneNumber());
+				request.getSession().setAttribute("email", client.getEmail());
 			}
 			else {
 				name = request.getParameter("name");
 				String photo = request.getParameter("photo");				
 				admin = new Admin(login, password, name, photo);				
 				admin = userService.signUp(admin);
-			}			
-		} catch (ServiceException e) {
-			// TODO: handle exception
-		}
-		
-		if(client!=null || admin!=null) {
-			request.setAttribute("name", name);
-			request.setAttribute("info", "Congrats! You signed in!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+				request.getSession().setAttribute("role", "ADMIN");
+				request.getSession().setAttribute("login", login);
+				request.getSession().setAttribute("name", admin.getName());
+				request.getSession().setAttribute("photo", admin.getPhotoPath());
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myAccount.jsp");
 			dispatcher.forward(request, response);
-		}
-		else {
+		} catch (ServiceException e) {
 			response.sendRedirect("Controller?command=GO_TO_REGISTRATION_PAGE&errorMessage="+errorMessage);
 		}
-		
 	}
 }

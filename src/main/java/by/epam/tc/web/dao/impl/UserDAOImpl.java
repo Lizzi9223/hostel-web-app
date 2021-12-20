@@ -45,6 +45,7 @@ public class UserDAOImpl implements UserDAO{
             st.setString(1, login);
             st.setString(2, password);
             rs = st.executeQuery();
+            password = null;
 
             while (rs.next()){
                 int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
@@ -374,7 +375,6 @@ public class UserDAOImpl implements UserDAO{
         int clientId = 0;
         try{
             con = connectionPool.takeConnection();
-
             st = con.prepareStatement(insertQueryProvider.getInsertQuery(
             		Metadata.ALL_CLIENTS_TABLE),
             		Statement.RETURN_GENERATED_KEYS);            
@@ -397,6 +397,65 @@ public class UserDAOImpl implements UserDAO{
             clientId = rs.getInt(1);
         }
         catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return clientId;
+    } 
+    
+    @Override
+    public int addUserClient(Client client) throws DAOException{
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int clientId = 0;
+        try{
+            con = connectionPool.takeConnection();
+            con.setAutoCommit(false);
+            
+            int roleId = getRoleId(client.getRole());
+            st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.USERS_TABLE),
+            		Statement.RETURN_GENERATED_KEYS);
+            st.setString(1,client.getLogin());
+            st.setString(2,client.getPassword());
+            st.setInt(3,roleId);
+            st.executeUpdate();
+            rs = st.getGeneratedKeys();
+            rs.next();
+            client.setUserId(rs.getInt(1));
+
+            st = con.prepareStatement(insertQueryProvider.getInsertQuery(
+            		Metadata.ALL_CLIENTS_TABLE),
+            		Statement.RETURN_GENERATED_KEYS);
+            st.setInt(1, client.getUserId());
+            st.setString(2,client.getLastName());
+            st.setString(3, client.getFirstName());
+            st.setString(4, client.getPassportId());
+            st.setDate(5, java.sql.Date.valueOf(client.getBirthDate()));
+            st.setString(6, client.getCountry());
+            st.setString(7,client.getPhoneNumber());
+            st.setString(8, client.getEmail());
+            st.executeUpdate();
+            rs = st.getGeneratedKeys();
+            rs.next();
+            clientId = rs.getInt(1);
+            
+            con.commit();
+        }
+        catch (ConnectionPoolException | SQLException e){
+        	try{
+                con.rollback();
+            }
+            catch (SQLException ex){
+                throw new DAOException(ex);
+            }
             throw new DAOException(e);
         }
         finally {
@@ -550,7 +609,42 @@ public class UserDAOImpl implements UserDAO{
                 int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
                 String login = rs.getString(Metadata.UsersTableColumn.LOGIN);
                 String name = rs.getString(Metadata.AdminsTableColumn.NAME);
-                admin = new Admin(id, login, name);
+                String photo = rs.getString(Metadata.AdminsTableColumn.PHOTO);
+                admin = new Admin(id, login, name, photo);
+            }
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return admin;
+    }
+    
+    @Override
+    public Admin findAdminByLogin(String login) throws DAOException{
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        Admin admin = new Admin();
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.USERS_TABLE,
+                    Metadata.ADMINS_TABLE, Metadata.UsersTableColumn.USER_ID, Metadata.UsersTableColumn.LOGIN));
+            st.setString(1,login);
+            rs = st.executeQuery();
+
+            while (rs.next()){
+                int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
+                String name = rs.getString(Metadata.AdminsTableColumn.NAME);
+                String photo = rs.getString(Metadata.AdminsTableColumn.PHOTO);
+                admin = new Admin(id, login, name, photo);
             }
         }
         catch (ConnectionPoolException | SQLException e){
@@ -583,6 +677,46 @@ public class UserDAOImpl implements UserDAO{
             while (rs.next()){
                 int userId = rs.getInt(Metadata.UsersTableColumn.USER_ID);
                 String login = rs.getString(Metadata.UsersTableColumn.LOGIN);
+                int clientId = rs.getInt(Metadata.AllClientsTableColumn.CLIENT_ID);
+                String name = rs.getString(Metadata.AllClientsTableColumn.FIRST_NAME);
+                String surname = rs.getString(Metadata.AllClientsTableColumn.LAST_NAME);
+                String passport = rs.getString(Metadata.AllClientsTableColumn.PASSPORT_ID);
+                LocalDate birth = rs.getDate(Metadata.AllClientsTableColumn.DATE_OF_BIRTH).toLocalDate();
+                String country = rs.getString(Metadata.AllClientsTableColumn.COUNTY);
+                String phone = rs.getString(Metadata.AllClientsTableColumn.PHONE_NUMBER);
+                String email = rs.getString(Metadata.AllClientsTableColumn.EMAIL);
+                client = new Client(userId, login, clientId, name, surname, passport, birth, country, phone, email);
+            }
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return client;
+    }
+    
+    @Override
+    public Client findClientByLogin(String login) throws DAOException{
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        Client client = new Client();
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.ALL_CLIENTS_TABLE,
+                    Metadata.USERS_TABLE, Metadata.UsersTableColumn.USER_ID, Metadata.USERS_TABLE, Metadata.UsersTableColumn.LOGIN));
+            st.setString(1,login);
+            rs = st.executeQuery();
+
+            while (rs.next()){
+                int userId = rs.getInt(Metadata.UsersTableColumn.USER_ID);
                 int clientId = rs.getInt(Metadata.AllClientsTableColumn.CLIENT_ID);
                 String name = rs.getString(Metadata.AllClientsTableColumn.FIRST_NAME);
                 String surname = rs.getString(Metadata.AllClientsTableColumn.LAST_NAME);
@@ -743,9 +877,7 @@ public class UserDAOImpl implements UserDAO{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(updateQueryProvide.getUpdateQueryWhere(Metadata.USERS_TABLE, Metadata.UsersTableColumn.USER_ID));
             st.setString(1,user.getLogin());
-            st.setString(2,user.getPassword());
-            st.setInt(3,getRoleId(user.getRole()));
-            st.setInt(4,userId);
+            st.setInt(2,userId);
             st.executeUpdate();
         }
         catch (ConnectionPoolException | SQLException e){
@@ -853,6 +985,31 @@ public class UserDAOImpl implements UserDAO{
             st.setString(3,client.getNote());
             st.setInt(4,clientId);
             st.executeUpdate();
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+    }
+    
+    @Override
+    public void updatePassword(String login, String password) throws DAOException{
+    	Connection con = null;
+        PreparedStatement st = null;
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(updateQueryProvide.getUpdatePasswordQueryWhere(Metadata.UsersTableColumn.LOGIN));
+            st.setString(1, password);
+            st.setString(2,login);
+            st.executeUpdate();
+            password = null;
         }
         catch (ConnectionPoolException | SQLException e){
             throw new DAOException(e);

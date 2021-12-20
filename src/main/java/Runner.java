@@ -11,6 +11,7 @@ import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.entity.stay.Stay;
 import by.epam.tc.web.entity.user.*;
+import by.epam.tc.web.service.RoomService;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.UserService;
 
@@ -19,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Runner {
 
@@ -31,9 +34,35 @@ public class Runner {
             
             ServiceFactory serviceFactory = ServiceFactory.getInstance();
             UserService userService = serviceFactory.getUserService();
+            RoomService roomService = serviceFactory.geRoomService();
+            
+            
+//            ResourceBundle resourceBundle;
+//            String key = "prop.key1";
+//            
+//            resourceBundle = ResourceBundle.getBundle("prop",new Locale("ru"));
+//            System.out.println(resourceBundle.getString(key));
+//            
+//            resourceBundle = ResourceBundle.getBundle("prop",new Locale("en"));
+//            System.out.println(resourceBundle.getString(key));
+//            
+//            resourceBundle = ResourceBundle.getBundle("prop",new Locale("fr","FR"));
+//            System.out.println(resourceBundle.getString(key));
+            
+//            
+//            
+//            List<Room> rooms = roomService.getAllRooms();
+//            for(Room room : rooms) {
+//            	System.out.println(room.toString());
+//            	System.out.println("Images of room #" + room.getRoomNumber());
+//            	System.out.println(room.getImages().toString());
+//            	System.out.println("--------------------------");
+//            }
 
 
-            System.out.println(userService.signIn("user10", "qwe12345"));
+            
+            
+            //System.out.println(userService.signIn("user10", "qwe12345"));
             
             
 //--------StaysDAO Test-----------

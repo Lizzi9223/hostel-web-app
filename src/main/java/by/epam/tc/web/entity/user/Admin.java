@@ -37,6 +37,12 @@ public class Admin extends User{
     	this.name = name;
         this.photoPath = photoPath;
     }
+    
+    public Admin(String login, String name, String photo) {
+    	super(login, Role.ADMIN);
+    	this.name = name;
+        this.photoPath = photoPath;
+    }
 
     public String getName() {
         return name;

@@ -49,16 +49,70 @@ public class UserServiceImpl implements UserService {
 
 	@Override
     public Client signUp(Client client) throws ServiceException{
-		int userId = 0;
 		int clientId = 0;
-    	try {
-    		userId = userDAO.addUser(client);
-    		client.setUserId(userId);
-    		clientId = userDAO.addClient(client);
+    	try {    		
+    		clientId = userDAO.addUserClient(client);
     		client.setClientId(clientId);
     	}catch (DAOException e) {
     		throw new ServiceException(e);
 		}    
     	return client;
     }
+	
+	@Override
+	public Admin edit(Admin admin, String login) throws ServiceException {    	
+    	try {
+    		int userId = userDAO.getUserId(login);
+    		userDAO.updateUser(userId, admin);
+    		userDAO.updateAdmin(userId, admin);
+    	}catch (DAOException e) {
+    		throw new ServiceException(e);
+		}    
+    	return admin;
+	}
+	
+	@Override
+	public Client edit(Client client, String login, String passportId) throws ServiceException{
+    	try {
+    		int userId = userDAO.getUserId(login);
+    		userDAO.updateUser(userId, client);
+    		int clientId = userDAO.getClientId(passportId);
+    		userDAO.updateClient(clientId, client);
+    	}catch (DAOException e) {
+    		throw new ServiceException(e);
+		}    
+    	return client;
+    }
+	
+	@Override
+	public void editPassword(String login, String password) throws ServiceException{
+		try {
+			userDAO.updatePassword(login, password);
+			password = null;
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Override
+	public Admin findAdminByLogin(String login) throws ServiceException{
+		Admin admin = null;
+		try {
+			admin = userDAO.findAdminByLogin(login);
+		}catch (DAOException e) {
+    		throw new ServiceException(e);
+		}    
+    	return admin;
+	}
+	
+	@Override
+	public Client findClientByLogin(String login) throws ServiceException{
+		Client client = null;
+		try {
+			client = userDAO.findClientByLogin(login);
+		}catch (DAOException e) {
+    		throw new ServiceException(e);
+		}    
+    	return client;
+	}
 }

@@ -1,6 +1,7 @@
 package by.epam.tc.web.entity.room;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Room implements Serializable {
@@ -10,6 +11,7 @@ public class Room implements Serializable {
     private String gender;
     private boolean isBathroomInRoom;
     private String notes;
+    private List<Image> images;
 
     public Room(){}
 
@@ -68,9 +70,17 @@ public class Room implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
+    }  
 
-    @Override
+    public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

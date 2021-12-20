@@ -3,9 +3,3 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:redirect url="Controller?command=GO_TO_WELCOME_PAGE" />
-
-<%--
-	<%
-	response.sendRedirect("Controller?command=GO_TO_WELCOME_PAGE");
-	%>
---%>
