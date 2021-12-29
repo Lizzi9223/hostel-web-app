@@ -7,11 +7,12 @@ import by.epam.tc.web.dao.database.connection_pool.ConnectionPoolException;
 import by.epam.tc.web.dao.database.metadata.Metadata;
 import by.epam.tc.web.dao.database.query.*;
 import by.epam.tc.web.entity.user.*;
-import by.epam.tc.web.service.ServiceException;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UserDAOImpl implements UserDAO{
 
@@ -39,19 +40,23 @@ public class UserDAOImpl implements UserDAO{
         User user = null;
         try{
             con = connectionPool.takeConnection();
-            st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryDoubleWhere(
+            st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(
             		Metadata.USERS_TABLE, Metadata.USER_ROLES_TABLE, Metadata.UsersTableColumn.ROLE_ID, 
-            		Metadata.UsersTableColumn.LOGIN, Metadata.UsersTableColumn.PASSWORD));
+            		Metadata.UsersTableColumn.LOGIN));
             st.setString(1, login);
-            st.setString(2, password);
             rs = st.executeQuery();
-            password = null;
-
             while (rs.next()){
-                int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
-                String roleName = rs.getString(Metadata.UserRolesTableColumn.ROLE_NAME);
-                Role role = Role.valueOf(roleName.toUpperCase());
-                user = new User(id, login, role);
+            	try {
+            		if(BCrypt.checkpw(password, rs.getString(Metadata.UsersTableColumn.PASSWORD))){
+                		password = null;
+                		int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
+                        String roleName = rs.getString(Metadata.UserRolesTableColumn.ROLE_NAME);
+                        Role role = Role.valueOf(roleName.toUpperCase());
+                        user = new User(id, login, role);
+                	}     
+				} catch (Exception e) {
+					return user;
+				}           
             }
         }
         catch (ConnectionPoolException | SQLException e){
@@ -292,8 +297,9 @@ public class UserDAOImpl implements UserDAO{
             st = con.prepareStatement(insertQueryProvider.getInsertQuery(
             		Metadata.USERS_TABLE),
             		Statement.RETURN_GENERATED_KEYS);
-            st.setString(1,user.getLogin());
-            st.setString(2,user.getPassword());
+            st.setString(1,user.getLogin());            
+            st.setString(2,BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+            user.setPassword(null);
             st.setInt(3,roleId);
             st.executeUpdate();
             rs = st.getGeneratedKeys();
@@ -340,7 +346,8 @@ public class UserDAOImpl implements UserDAO{
             st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.USERS_TABLE),
             		Statement.RETURN_GENERATED_KEYS);
             st.setString(1,user.getLogin());
-            st.setString(2,user.getPassword());
+            st.setString(2,BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+            user.setPassword(null);
             st.setInt(3,roleId);
             st.executeUpdate();
             rs = st.getGeneratedKeys();
@@ -424,7 +431,8 @@ public class UserDAOImpl implements UserDAO{
             st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.USERS_TABLE),
             		Statement.RETURN_GENERATED_KEYS);
             st.setString(1,client.getLogin());
-            st.setString(2,client.getPassword());
+            st.setString(2,BCrypt.hashpw(client.getPassword(), BCrypt.gensalt()));
+            client.setPassword(null);
             st.setInt(3,roleId);
             st.executeUpdate();
             rs = st.getGeneratedKeys();
@@ -1006,10 +1014,10 @@ public class UserDAOImpl implements UserDAO{
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(updateQueryProvide.getUpdatePasswordQueryWhere(Metadata.UsersTableColumn.LOGIN));
-            st.setString(1, password);
+            st.setString(1, BCrypt.hashpw(password, BCrypt.gensalt()));
+            password = null;
             st.setString(2,login);
             st.executeUpdate();
-            password = null;
         }
         catch (ConnectionPoolException | SQLException e){
             throw new DAOException(e);

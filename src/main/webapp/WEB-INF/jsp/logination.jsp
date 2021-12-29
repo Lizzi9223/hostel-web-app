@@ -98,7 +98,11 @@
 	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
 	<fmt:message bundle="${lang}" key="menu.en" var="en" />
 	<fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
-	<fmt:message bundle="${lang}" key="main.hostel_Samartia" var="hostel_Samartia" /> 
+	<fmt:message bundle="${lang}" key="main.hostel_Samartia" var="hostel_Samartia" />
+	<fmt:message bundle="${lang}" key="logination.logination" var="logination" /> 
+	<fmt:message bundle="${lang}" key="logination.login" var="login" /> 
+	<fmt:message bundle="${lang}" key="logination.password" var="password" /> 
+	<fmt:message bundle="${lang}" key="logination.back" var="back" /> 
     
 
 </head>
@@ -145,26 +149,26 @@
                 <form action="Controller" method="post">
                 <table>
                     <tr>
-                        <td><h2>Logination:</h2><br></td>
+                        <td><h2><c:out value="${logination}"/>:</h2><br></td>
                         <td><input type="hidden" name="command" value="Logination" /></td>
                     </tr>
 
                     <tr>
-                        <td>Login:<br><br></td>
+                        <td><c:out value="${login}"/>:<br><br></td>
                         <td><input style="width:200px" type="text" name="login" value = ""/><br><br></td>
                     </tr>
                     <tr>
-                        <td>Password:<br><br><br></td>
+                        <td><c:out value="${password}"/>:<br><br><br></td>
                         <td><input style="width:200px" type="password" name="password" value = ""/><br><br><br></td>
                     </tr>
 
                     <tr>
-                        <td><input class="submit_button" type="submit" value="Sign In"/><br><br><br></td>
+                        <td><input class="submit_button" type="submit" value="${sign_in}"/><br><br><br></td>
                         <td></td>
                     </tr>
 
                     <tr>
-                        <td><a href="Controller?command=GO_TO_WELCOME_PAGE">back</a><br><br></td>
+                        <td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${back}"/></a><br><br></td>
                         <td></td>
                     </tr>
 

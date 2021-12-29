@@ -1,7 +1,6 @@
 package by.epam.tc.web.controller.impl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.entity.user.Admin;
 import by.epam.tc.web.entity.user.Client;
-import by.epam.tc.web.entity.user.Role;
-import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.*;
 
 public class RegistrationCommand implements Command{
@@ -51,9 +48,9 @@ public class RegistrationCommand implements Command{
 				String email = request.getParameter("email");				
 				client = new Client(login, password, name, surname, passportId, dateOfBith, 
 						country, phone, email);
-				System.out.println("client before: " + client.toString());
+				password = null;
 				client = userService.signUp(client);
-				System.out.println("client after: " + client.toString());
+				//request.getSession().setAttribute("client", client);
 				request.getSession().setAttribute("role", "CLIENT");
 				request.getSession().setAttribute("login", login);
 				request.getSession().setAttribute("name", client.getFirstName());
@@ -67,7 +64,8 @@ public class RegistrationCommand implements Command{
 			else {
 				name = request.getParameter("name");
 				String photo = request.getParameter("photo");				
-				admin = new Admin(login, password, name, photo);				
+				admin = new Admin(login, password, name, photo);
+				password = null;
 				admin = userService.signUp(admin);
 				request.getSession().setAttribute("role", "ADMIN");
 				request.getSession().setAttribute("login", login);

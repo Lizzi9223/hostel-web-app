@@ -14,9 +14,11 @@ public class GoToRegistrationPageCommand implements Command{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("create") != null && request.getParameter("create").equals("admin")) {
+			request.setAttribute("create", "admin");
+		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registration.jsp");
-		dispatcher.forward(request, response);
-		
+		dispatcher.forward(request, response);		
 	}
 
 }

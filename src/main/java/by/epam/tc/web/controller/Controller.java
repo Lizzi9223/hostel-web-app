@@ -1,7 +1,6 @@
 package by.epam.tc.web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;

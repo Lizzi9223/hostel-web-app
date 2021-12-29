@@ -8,12 +8,8 @@ import by.epam.tc.web.dao.database.metadata.Metadata;
 import by.epam.tc.web.dao.database.query.*;
 import by.epam.tc.web.entity.room.Image;
 import by.epam.tc.web.entity.room.Room;
-import by.epam.tc.web.entity.user.Client;
-import by.epam.tc.web.entity.user.Role;
-import by.epam.tc.web.entity.user.User;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

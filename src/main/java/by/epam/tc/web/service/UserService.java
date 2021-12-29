@@ -17,5 +17,5 @@ public interface UserService {
     Admin findAdminByLogin(String login) throws ServiceException;
     Client findClientByLogin(String login) throws ServiceException;
     
-    
+    void deleteAccount(String login) throws ServiceException;
 }

@@ -80,20 +80,25 @@ public class Stay implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Stay stay = (Stay) o;
-        return id == stay.id && clientId == stay.clientId && roomNumber == stay.roomNumber
-                && Objects.equals(fromDate, stay.fromDate) && Objects.equals(toDate, stay.toDate);
-    }
+	public int hashCode() {
+		return Objects.hash(clientId, fromDate, id, notes, roomNumber, toDate);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, clientId, roomNumber, fromDate, toDate);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stay other = (Stay) obj;
+		return clientId == other.clientId && Objects.equals(fromDate, other.fromDate) && id == other.id
+				&& Objects.equals(notes, other.notes) && roomNumber == other.roomNumber
+				&& Objects.equals(toDate, other.toDate);
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Stay{" +
                 "id=" + id +

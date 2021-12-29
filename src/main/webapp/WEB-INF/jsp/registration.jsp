@@ -21,7 +21,6 @@
             background: rgba(255,255,255,0.8);
             display: flex;
             flex-direction: column;
-            height: 100vh;
         }
         
         .menu{
@@ -104,6 +103,18 @@
 	<fmt:message bundle="${lang}" key="menu.en" var="en" />
 	<fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
 	<fmt:message bundle="${lang}" key="main.hostel_Samartia" var="hostel_Samartia" /> 
+	<fmt:message bundle="${lang}" key="logination.login" var="login_word" /> 
+	<fmt:message bundle="${lang}" key="logination.password" var="password_word" /> 
+	<fmt:message bundle="${lang}" key="logination.back" var="back" /> 
+	<fmt:message bundle="${lang}" key="registration.registration" var="registration" />
+	<fmt:message bundle="${lang}" key="registration.name" var="name_word" />
+	<fmt:message bundle="${lang}" key="registration.photo" var="photo_word" />
+	<fmt:message bundle="${lang}" key="registration.surname" var="surname_word" />
+	<fmt:message bundle="${lang}" key="registration.passport_id" var="passport_id_word" />
+	<fmt:message bundle="${lang}" key="registration.date_of_birth" var="date_of_birth_word" />
+	<fmt:message bundle="${lang}" key="registration.country" var="country_word" />
+	<fmt:message bundle="${lang}" key="registration.phone_number" var="phone_number_word" />
+	<fmt:message bundle="${lang}" key="registration.email" var="email_word" />
       
     
 </head>
@@ -151,69 +162,69 @@
                 <form action="Controller" method="post">
                 <table>
                     <tr>
-                        <td><h2>Registration:</h2><br></td>
+                        <td><h2><c:out value="${registration}"/>:</h2><br></td>
                         <td><input type="hidden" name="command" value="Registration" /></td>
                     </tr>
 
                     <tr>
-                        <td>Login:<br><br></td>
+                        <td><c:out value="${login_word}"/>:<br><br></td>
                         <td><input type="text" name="login" value = ""/><br><br></td>
                     </tr>
                     <tr>
-                        <td>Password:<br><br><br></td>
+                        <td><c:out value="${password_word}"/>:<br><br><br></td>
                         <td><input type="password" name="password" value = ""/><br><br><br></td>
                     </tr>
                     
                     		<c:choose>
-                                <c:when test="${create eq 'ADMIN'}">
+                                <c:when test="${create eq 'admin'}">
                                     <tr>
-                                        <td>Name:<br><br></td>
+                                        <td><c:out value="${name_word}"/>:<br><br></td>
                                         <td><input type="text" name="name" value = ""/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Photo:<br><br></td>
+                                        <td><c:out value="${photo_word}"/>:<br><br></td>
                                         <td><input type="text" name="photo" value = ""/><br><br></td>
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
                                     <tr>
-                                        <td>Name:<br><br></td>
+                                        <td><c:out value="${name_word}"/>:<br><br></td>
                                         <td><input type="text" name="name" value = ""/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Surname:<br><br></td>
+                                        <td><c:out value="${surname_word}"/>:<br><br></td>
                                         <td><input type="text" name="surname" value = ""/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Passport id:<br><br></td>
+                                        <td><c:out value="${passport_id_word}"/>:<br><br></td>
                                         <td><input type="text" name="passportId" value = ""/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Date of birth:<br><br></td>
+                                        <td><c:out value="${date_of_birth_word}"/>:<br><br></td>
                                         <td><input type="text" name="dateOfBith" value = "2000-01-01"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Country:<br><br></td>
+                                        <td><c:out value="${country_word}"/>:<br><br></td>
                                         <td><input type="text" name="country" value = "Belarus"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Phone number:<br><br></td>
+                                        <td><c:out value="${phone_number_word}"/>:<br><br></td>
                                         <td><input type="text" name="phone" value = "+4546"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Email:<br><br></td>
+                                        <td><c:out value="${email_word}"/>:<br><br></td>
                                         <td><input type="text" name="email" value = "a@gmail.com"/><br><br></td>
                                     </tr>	
                                 </c:otherwise>
                             </c:choose>
 
                     <tr>
-                        <td><input class="submit_button" type="submit" value="Sign Up"/><br><br><br></td>
+                        <td><input class="submit_button" type="submit" value="${sign_up}"/><br><br><br></td>
                         <td></td>
                     </tr>
 
                     <tr>
-                        <td><a href="Controller?command=GO_TO_WELCOME_PAGE">back</a><br><br></td>
+                        <td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${back}"/></a><br><br></td>
                         <td></td>
                     </tr>
                 </table>

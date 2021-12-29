@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.epam.tc.web.controller.Command;
 
-public class GoToHomePageCommand implements Command {
+public class GoToErrorPageCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-		dispatcher.forward(request, response);	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

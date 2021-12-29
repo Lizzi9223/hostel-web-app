@@ -67,19 +67,24 @@ public class User implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(role, user.role);
-    }
+	public int hashCode() {
+		return Objects.hash(id, login, password, role);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, login, password, role);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return id == other.id && Objects.equals(login, other.login) && Objects.equals(password, other.password)
+				&& role == other.role;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "User{" +
                 "id=" + id +

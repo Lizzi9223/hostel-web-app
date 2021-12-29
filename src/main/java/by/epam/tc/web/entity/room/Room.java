@@ -81,28 +81,27 @@ public class Room implements Serializable {
 	}
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Room room = (Room) o;
-        return roomNumber == room.roomNumber && cost == room.cost && capacity == room.capacity
-                && isBathroomInRoom == room.isBathroomInRoom && Objects.equals(gender, room.gender);
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Room other = (Room) obj;
+		return capacity == other.capacity && cost == other.cost && Objects.equals(gender, other.gender)
+				&& Objects.equals(images, other.images) && isBathroomInRoom == other.isBathroomInRoom
+				&& Objects.equals(notes, other.notes) && roomNumber == other.roomNumber;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(capacity, cost, gender, images, isBathroomInRoom, notes, roomNumber);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(roomNumber, cost, capacity, gender, isBathroomInRoom);
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomNumber=" + roomNumber +
-                ", cost=" + cost +
-                ", capacity=" + capacity +
-                ", gender='" + gender + '\'' +
-                ", isBathroomInRoom=" + isBathroomInRoom +
-                ", notes='" + notes + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Room [roomNumber=" + roomNumber + ", cost=" + cost + ", capacity=" + capacity + ", gender=" + gender
+				+ ", isBathroomInRoom=" + isBathroomInRoom + ", notes=" + notes + ", images=" + images + "]";
+	}
 }

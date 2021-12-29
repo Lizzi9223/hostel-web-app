@@ -1,7 +1,6 @@
 package by.epam.tc.web.controller.impl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.epam.tc.web.controller.Command;
-import by.epam.tc.web.dao.DAOException;
 import by.epam.tc.web.entity.user.Admin;
 import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.entity.user.Role;
@@ -25,7 +23,7 @@ public class LoginationCommand implements Command{
 	public LoginationCommand() {
 		try {
 			userService = ServiceFactory.getInstance().getUserService();
-		} catch (Exception e) {
+		} catch (ServiceException e) {
 			//WHAT TO DO
 		}
 	}
@@ -40,6 +38,7 @@ public class LoginationCommand implements Command{
 		String errorMessage = "No such login or password. Please check correctness and try again";
 		try {
 			user = userService.signIn(login, password);
+			password = null;
 		} catch (ServiceException e) {
 			// TODO: handle exception
 		}  

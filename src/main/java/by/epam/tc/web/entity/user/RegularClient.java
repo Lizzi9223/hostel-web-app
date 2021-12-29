@@ -56,19 +56,27 @@ public class RegularClient extends Client {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RegularClient that = (RegularClient) o;
-        return this.getClientId() == that.getClientId() && discount == that.discount && Objects.equals(sinceDate, that.sinceDate) && Objects.equals(note, that.note);
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(discount, note, sinceDate);
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getClientId(), sinceDate, discount, note);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegularClient other = (RegularClient) obj;
+		return discount == other.discount && Objects.equals(note, other.note)
+				&& Objects.equals(sinceDate, other.sinceDate);
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "RegularClient{" +
                 "id=" + getClientId() +

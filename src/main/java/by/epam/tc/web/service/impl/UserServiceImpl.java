@@ -5,7 +5,6 @@ import by.epam.tc.web.dao.DAOFactory;
 import by.epam.tc.web.dao.UserDAO;
 import by.epam.tc.web.entity.user.Admin;
 import by.epam.tc.web.entity.user.Client;
-import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.UserService;
@@ -26,7 +25,9 @@ public class UserServiceImpl implements UserService {
     public User signIn(String login, String password) throws ServiceException {    	
     	User user = null;
     	try {
+    		
     		user = userDAO.findUserByLoginAndPassword(login, password);
+    		password = null;
     		
 		} catch (DAOException e) {
 			throw new ServiceException(e);
@@ -114,5 +115,15 @@ public class UserServiceImpl implements UserService {
     		throw new ServiceException(e);
 		}    
     	return client;
+	}
+	
+	@Override
+	public void deleteAccount(String login) throws ServiceException{
+		try {
+			int userId = userDAO.getUserId(login);
+			userDAO.deleteUser(userId);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 	}
 }

@@ -106,7 +106,7 @@
 
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
-                <div><c:out value="${rooms}"/></div>|
+                <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
                 <div><c:out value="${photos}"/></div>|
                 <div><c:out value="${contacts}"/></div>|
                 <c:if test="${not empty sessionScope.login}" >
@@ -123,7 +123,7 @@
                     </select>  
                 </form>
                 <c:choose>
-        			<c:when test="${empty role}">
+        			<c:when test="${empty sessionScope.role}">
 		        		<div><a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out value="${sign_in}"/></a></div>|
 		        		<div><a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out value="${sign_up}"/></a></div>
         			</c:when>

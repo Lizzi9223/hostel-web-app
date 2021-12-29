@@ -142,22 +142,30 @@ public class Client extends User{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Client client = (Client) o;
-        return clientId == client.clientId && Objects.equals(firstName, client.firstName)
-                && Objects.equals(lastName, client.lastName) && Objects.equals(passportId, client.passportId)
-                && Objects.equals(birthDate, client.birthDate);
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ Objects.hash(birthDate, clientId, country, email, firstName, lastName, passportId, phoneNumber);
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), clientId, firstName, lastName, passportId, birthDate);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		return Objects.equals(birthDate, other.birthDate) && clientId == other.clientId
+				&& Objects.equals(country, other.country) && Objects.equals(email, other.email)
+				&& Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(passportId, other.passportId) && Objects.equals(phoneNumber, other.phoneNumber);
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Client{" +
                 "id=" + clientId +

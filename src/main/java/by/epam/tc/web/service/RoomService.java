@@ -6,6 +6,10 @@ import by.epam.tc.web.entity.room.Room;
 
 public interface RoomService {
 
-	List<Room> getAllRooms() throws ServiceException;
-	
+	List<Room> getAllRooms();
+	Room getRoomByNumber(int roomNumber) throws ServiceException;	
+	int getMinCost();
+	int getMaxCost();
+	int getMinCapacity();
+	int getMaxCapacity();
 }

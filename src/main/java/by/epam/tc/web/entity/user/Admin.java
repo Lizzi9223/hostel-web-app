@@ -61,19 +61,26 @@ public class Admin extends User{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Admin admin = (Admin) o;
-        return this.getUserId() == admin.getUserId() && Objects.equals(name, admin.name);
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(name, photoPath);
+		return result;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.getUserId(), name);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Admin other = (Admin) obj;
+		return Objects.equals(name, other.name) && Objects.equals(photoPath, other.photoPath);
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Admin{" +
                 "id=" + getUserId() +

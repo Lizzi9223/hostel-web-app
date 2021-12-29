@@ -34,7 +34,7 @@ public class Runner {
             
             ServiceFactory serviceFactory = ServiceFactory.getInstance();
             UserService userService = serviceFactory.getUserService();
-            RoomService roomService = serviceFactory.geRoomService();
+            RoomService roomService = serviceFactory.getRoomService();
             
             
 //            ResourceBundle resourceBundle;

@@ -107,7 +107,7 @@
             padding-top: 60px;
         }
         
-        .close-popup{
+        .close-popup:not(.buttons){
             position: absolute;
             top: 30px;
             left: 30px;
@@ -129,6 +129,14 @@
         .change-password-form input{
             width: 40%;
             margin: 2% 0;
+        }
+        
+        .buttons-list{
+            margin-bottom: 45px;
+        }
+        
+        .buttons-list input, .buttons-list button{
+        	width: 220px;
         }
         
     
@@ -166,14 +174,25 @@
         
         $(document).ready(function(){
                 
-              $('.open-popup').click(function(e){
+            $('.open-popup.change-pass').click(function(e){
                 e.preventDefault();
-                $('.popup-bg').fadeIn(300);
+                $('.popup-bg.change-pass').fadeIn(300);
                 $('html').addClass('no-scroll');
             })
         
-            $('.close-popup').click(function(){
-                $('.popup-bg').fadeOut(300);
+            $('.close-popup.change-pass').click(function(){
+                $('.popup-bg.change-pass').fadeOut(300);
+                $('html').removeClass('no-scroll');
+            })
+            
+            $('.open-popup.del-acc').click(function(e){
+                e.preventDefault();
+                $('.popup-bg.del-acc').fadeIn(300);
+                $('html').addClass('no-scroll');
+            })
+        
+            $('.close-popup.del-acc').click(function(){
+                $('.popup-bg.del-acc').fadeOut(300);
                 $('html').removeClass('no-scroll');
             })
             
@@ -308,30 +327,40 @@
             </div>
             
             <div class="form base-form">
-                <table>
+                <table class="buttons-list">
                     <tr>
                         <td>
-                            <form>                                
-                                <input class="buttons open-popup" type="button" value="Change password"/>
+                            <form>   
+                            	<c:if test="${sessionScope.login ne 'ADMIN'}" >
+                                	<input class="buttons open-popup change-pass" type="button" value="Change password"/>                                	
+								</c:if> 
                             </form>
                         </td>
                     </tr>
-<!--
                     <tr>
                         <td>
                             <form>
-                                <input class="buttons" type="submit" value="Change password"/>
-                                <input type="hidden" name="command" value="" />
+                                <c:if test="${sessionScope.login eq 'ADMIN'}" >
+                                	<a href="Controller?command=GO_TO_REGISTRATION_PAGE&create=admin">
+                                		<button class="buttons" type="button">Create new administrator</button>
+                                	</a>                                	
+								</c:if>
                             </form> 
                         </td>                       
                     </tr>
--->
+                    <tr>
+                        <td>
+                            <form>                                
+                                <input class="buttons open-popup del-acc" type="button" value="Delete account"/>
+                            </form>
+                        </td>
+                    </tr>
                 </table>            
             </div>
             
-            <div class="popup-bg">
+            <div class="popup-bg change-pass">
                 <div class="popup">
-                    <img class="close-popup" alt="icon">
+                    <img class="close-popup change-pass" alt="icon">
                     <form class="change-password-form">
                         <input type="hidden" name="command" value="ChangePassword" />
                         <p>Current password:</p>
@@ -345,6 +374,20 @@
                 </div>
             </div>
             
+            <div class="popup-bg del-acc">
+                <div class="popup">
+                    <img class="close-popup del-acc" alt="icon">
+                    <form class="change-password-form">
+                        <input type="hidden" name="command" value="DeleteAccount" />
+                        <p>Are you sure you want to delete your account?</p>
+                        <div style="display:flex; flex-direction: row">
+                        	<input class="buttons" type="submit" name="changePassword" value="Delete" style="width:100px; margin-right:100px"/>
+                        	<input class="close-popup del-acc buttons" type="button" name="changePassword" value="Cancel" style="width:100px"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
 
         </div>  
     
@@ -352,34 +395,3 @@
 
 </body>
 </html>
-
-
-
-
-<%-- <html>
-<head>
-</head>
-<body>
-
-
-<c:if test="${not empty sessionScope.login}"  var="testif">
-	<p>You logged as <c:out value="${sessionScope.role}"/>. Your login: <c:out value="${sessionScope.login}" /></p>
-</c:if>
-
-
-<c:if test="${not empty name}">
-	<p>Welcome <c:out value="${name}"/>!</p>
-</c:if>
-
-
-<c:if test="${not empty sessionScope.login and sessionScope.login eq 'ADMIN'}" >
-	<p>
-		This is BOSS ADMIN account. Only you can create new admins: 
-		<br>
-		<a href="Controller?command=GO_TO_REGISTRATION_PAGE&create=ADMIN">New admin</a>
-	</p>
-</c:if>
-
-</body>
-</html>
---%>
