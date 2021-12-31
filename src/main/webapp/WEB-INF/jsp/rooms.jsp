@@ -5,52 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Rooms</title>
+	<title>Rooms</title>
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
-
-<style>
     
-        body{
-            background-color: #D2B48C;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;            
-        }
-        
-        .container{
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        
-        .menu{
-            background-color: #DEB887;
-            border: 3px outset black;  
-            height: 6vh; 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            box-sizing: border-box; 
-        }        
-                
-        .tabs{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 0 3em 0 3em;
-        }
-        
-        .tabs div {
-            margin: 0 2.5em;
-            width: auto;
-        }
-        
-        .main{
+	<link rel="stylesheet" href="css/style.css">
+	
+	<style>
+	
+		.main{
             margin-top: 3em;
             flex-grow: 1;
             display: flex;
@@ -62,237 +28,27 @@
         .form{
             margin: 0em 3em;
             margin-bottom: 3em;
-            padding: 3em 4em;
-            padding-bottom: 0;
-            background-color: rgba(255, 228, 181, 1);
-            border: 2px solid black;
-            border-radius: 10px;
             width: 1100px;
         }
-    
-        .search.form{   
-            margin-top: 3em;
-            margin-right: 0;
-            padding: 20px;            
-            background-color: rgba(255, 228, 181, 1);
-            border: 2px solid black;
-            border-radius: 10px;
-        }
         
-        .base-form{
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .submit_button{
-            font-size: 16px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;            
-        }
-        
-        .buttons{
-            font-size: 16px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;            
-        }
-        
-        .buttons:hover{
-            cursor: pointer;
-        }
-        
-        a{
-            text-decoration: none;
-            color: black;
-        }
-        
-        
-        .rooms{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-                
-                
-        .slider-container{
-            width:700px;
-            height: 500px;
-            margin-right: 2em;
-        }
-        
-        .product-slider {
-          height: 450px;
-          box-shadow: 0 0 15px black;
-         }
+	</style>
+	
+	<fmt:setLocale value="${sessionScope.language}"/>
+	<fmt:setBundle basename="prop" var="lang"/>
+	<fmt:message bundle="${lang}" key="menu.main" var="main" />
+	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
+	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
+	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
+	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
+	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
+	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
+	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
+	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
+	<fmt:message bundle="${lang}" key="menu.en" var="en" />
+	
 
-        .product-slider .swiper-slide {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .product-thumbs {
-          height: 400px;
-        }
-
-        .product-thumbs .swiper-wrapper {
-          margin-top: calc(-100% + 5px);
-        }
-
-        .product-thumbs .swiper-slide {
-          width: auto;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        
-        .swiper-slide img{
-            width: 100%;
-            height: 100%;
-        }
-
-        .product-thumbs .swiper-slide-active {
-          border: solid 2px black;
-        }
-        
-        .swiper-button-prev {
-         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23DEB887' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-        }
-
-        .swiper-button-next {
-          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23DEB887' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-        }
-        
-        .info{
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items:center;
-        }
-        
-        .popup-bg{
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: rgba(255,255,255,0.8);
-            z-index: 5;
-            display: none;
-        }
-        
-        .popup{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            background: rgba(255, 228, 181, 1);
-            padding: 20px;
-            transform: translate(-50%, -50%);
-            padding-top: 60px;
-        }
-        
-        .close-popup{
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            cursor: pointer;
-        }
-        
-        .no-scroll{
-            overflow-y: hidden;
-        }
-        
-        .container-body{
-        	display:flex;
-        	flex-direction: row;
-        	justify-content: center;
-            align-content: center;
-        }
-    
-        .middle {
-            position:relative;        
-        }
-
-        .slider {
-            position: relative;
-            z-index: 1;
-            height: 7px;
-            margin: 0 15px;
-            width: 180px;
-        }
-        .slider > .track {
-            position: absolute;
-            z-index: 1;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            border-radius: 5px;
-            background-color: rgb(0,0,0,0.4);
-        }
-        .slider > .range {
-            position: absolute;
-            z-index: 2;
-            left: 25%;
-            right: 25%;
-            top: 0;
-            bottom: 0;
-            border-radius: 5px;
-            background-color: rgb(0,0,0,0.45);
-        }
-        .slider > .thumb {
-            position: absolute;
-            z-index: 3;
-            width: 20px;
-            height: 20px;
-            background-color: #CD853F;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(98,0,238,.1);    
-            transition: box-shadow .3s ease-in-out;
-        }
-        .slider > .thumb.left {
-            transform: translate(-15px, -7px);
-        }
-        .slider > .thumb.right {
-            right: 0%;
-            transform: translate(15px, -7px);
-        }
-
-        input[type=range] {
-            position: absolute;
-            pointer-events: none;
-            -webkit-appearance: none;
-            z-index: 2;
-            height: 10px;
-            width: 100%;
-            background: rgb(0,0,0,0.6);
-            opacity: 0;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            pointer-events: all;
-            width: 30px;
-            height: 30px;
-            border-radius: 0;
-            border: 0 none;
-            background: #CD853F;
-            cursor: pointer;
-            -webkit-appearance: none;
-        }
-    
-        .rangeInput{
-            width: 30px;
-            border: 0;
-            border-radius: 10px;
-            background: #CD853F;
-        }
-    
-    </style>
 </head>
-<body>
+<body style="background-color: #D2B48C">
 
 	<script>
                 
@@ -346,19 +102,36 @@
         <div class="menu">
 
             <div class="tabs" style="justify-content: flex-start">
-                <div>Main</div>|
-                <div>Rooms</div>|
-                <div>Photos</div>|
-                <div>Contacts</div>
+                <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
+                <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
+                <div><c:out value="${photos}"/></div>|
+                <div><c:out value="${contacts}"/></div>|
+                <c:if test="${not empty sessionScope.login}" >
+                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
+                </c:if>                
             </div>
 
             <div class="tabs" style="justify-content: flex-end">
-                <div><a href="">Sign In</a></div>|
-                <div><a href="">Sign Up</a></div>
+                <form>
+                    <input type="hidden" name="command" value="ChangeLanguage" >
+                    <select name="language" onchange="submit()">
+                            <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
+                            <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
+                    </select>  
+                </form>
+                <c:choose>
+        			<c:when test="${empty sessionScope.role}">
+		        		<div><a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out value="${sign_in}"/></a></div>|
+		        		<div><a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out value="${sign_up}"/></a></div>
+        			</c:when>
+        			<c:otherwise>
+        				<div><a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true"><c:out value="${log_out}"/></a></div>|
+        			</c:otherwise>
+        		</c:choose>
             </div>
 
         </div>
-
+        
         <div class="container-body">
         
         	<div class="search form">
@@ -593,13 +366,11 @@
 	         
           </div>        
         
-        </div>
-        
+        </div>        
 
        </div> 
     
-    <script>
-    
+    <script>    
                
         var inputLeft = document.getElementById("price-left");
         var inputRight = document.getElementById("price-right");
@@ -685,7 +456,6 @@
         
     
     </script>
-
 
 	</body>
 </html>

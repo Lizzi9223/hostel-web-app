@@ -7,78 +7,17 @@
 <head>
 <title>Welcome</title>
 
+    <link rel="stylesheet" href="css/style.css">
+    
     <style>
     
-        body{
+    	body{
             background: url("images/bg.jpg") no-repeat;
             background-size: cover;
             margin: 0;
             padding: 0;
             font-family: sans-serif;            
         }
-        
-        .container{
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        
-        .menu{
-            background-color: #DEB887;
-            border: 3px outset black;  
-            height: 6vh; 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            box-sizing: border-box; 
-        }        
-                
-        .tabs{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 0 3em 0 3em;
-        }
-        
-        .tabs div {
-            margin: 0 2.5em;
-            width: auto;
-        }
-        
-        .main{
-            flex-grow: 1;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-content: center;
-        }
-        
-        .label{
-            margin-top: 15em;
-            margin-left: 5em;
-            width: 30em;
-            height: 12em;
-            background-color: rgba(255,255,255,0.5);
-            background-color:rgba(255, 228, 181, 0.85);
-            border-radius: 15px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .menu a{
-            text-decoration: none;
-            color: black;
-        }
-        
-        form select{
-            font-size: 14px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;
-        }        
     
     </style>   
 

@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface StaysDAO {
     List<Booking> getAllBookings() throws DAOException;
+    List<Booking> getAllUserBookings(int userId) throws DAOException;
     List<Stay> getAllStays() throws DAOException;
+    List<Stay> getAllClientStays(int clientId) throws DAOException;
     Booking findBookingById(int id) throws DAOException;
     List<Booking> findAllBookingsByRoomNumber(int roomNumber) throws DAOException;
     Stay findStayById(int id) throws DAOException;

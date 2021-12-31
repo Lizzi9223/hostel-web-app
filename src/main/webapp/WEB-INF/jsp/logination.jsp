@@ -7,44 +7,16 @@
 <head>
 <title>Sign In</title>
 
+    <link rel="stylesheet" href="css/style.css">  
+    
     <style>
     
-        body{
+    	body{
             background: url("images/bg.jpg") no-repeat;
             background-size: cover;
             margin: 0;
             padding: 0;
             font-family: sans-serif;            
-        }
-        
-        .container{
-            background: rgba(255,255,255,0.8);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        
-        .menu{
-            background-color: #DEB887;
-            border: 3px outset black;  
-            height: 6vh; 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            box-sizing: border-box; 
-        }        
-                
-        .tabs{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 0 3em 0 3em;
-        }
-        
-        .tabs div {
-            margin: 0 2.5em;
-            width: auto;
         }
         
         .main{
@@ -54,36 +26,8 @@
             justify-content: center;
             align-items: center;
         }
-        
-        .form{
-            padding: 3em 4em;
-            padding-bottom: 0;
-            background-color: rgba(255,255,255,0.5);
-            background-color:rgba(255, 228, 181, 1);
-            border: 2px solid black;
-            border-radius: 10px;
-        } 
-        
-        .submit_button{
-            font-size: 16px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;            
-        }
-        
-        .menu a{
-            text-decoration: none;
-            color: black;
-        }
-        
-        form select{
-            font-size: 14px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;
-        }    
     
-    </style>  
+    </style>
     
     <fmt:setLocale value="${sessionScope.language}"/>
 	<fmt:setBundle basename="prop" var="lang"/>
@@ -108,7 +52,7 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" style="background: rgba(255,255,255,0.7)">
     
         <div class="menu">
 

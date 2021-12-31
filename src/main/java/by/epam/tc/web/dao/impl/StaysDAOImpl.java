@@ -74,6 +74,48 @@ public class StaysDAOImpl implements StaysDAO {
     }
 
     @Override
+	public List<Booking> getAllUserBookings(int userId) throws DAOException {
+    	Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<Booking> bookings = new ArrayList<>();
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.BOOKING_TABLE, Metadata.BookingTableColumn.USER_ID));
+            st.setInt(1, userId);
+            rs = st.executeQuery();
+
+            while (rs.next()){
+                int id = rs.getInt(Metadata.BookingTableColumn.BOOKING_ID);
+                int roomNumber = rs.getInt(Metadata.BookingTableColumn.ROOM_NUMBER);
+                LocalDate fromDate = rs.getDate(Metadata.BookingTableColumn.FROM_DATE).toLocalDate();
+                LocalDate toDate = rs.getDate(Metadata.BookingTableColumn.TO_DATE).toLocalDate();
+                int guestsCount = rs.getInt(Metadata.BookingTableColumn.GUESTS_COUNT);
+                boolean isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                java.sql.Date date = rs.getDate(Metadata.BookingTableColumn.APPROVE_DATE);
+                LocalDate approveDate = null;
+                if(date!=null){
+                    approveDate = date.toLocalDate();
+                }
+                boolean isPaid = rs.getBoolean(Metadata.BookingTableColumn.PAID);
+                bookings.add(new Booking(id,userId,roomNumber,fromDate,toDate,guestsCount,isApproved,approveDate,isPaid));
+            }
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return bookings;
+	}
+
+	@Override
     public List<Stay> getAllStays() throws DAOException {
         Connection con = null;
         Statement st = null;
@@ -109,6 +151,41 @@ public class StaysDAOImpl implements StaysDAO {
     }
 
     @Override
+	public List<Stay> getAllClientStays(int clientId) throws DAOException {
+    	Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<Stay> stays = new ArrayList<>();
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.ALL_STAYS_TABLE, Metadata.AllStaysTableColumn.CLIENT_ID));
+            st.setInt(1, clientId);
+            rs = st.executeQuery();
+
+            while (rs.next()){
+                int id = rs.getInt(Metadata.AllStaysTableColumn.STAY_ID);
+                int roomNumber = rs.getInt(Metadata.AllStaysTableColumn.ROOM_NUMBER);
+                LocalDate fromDate = rs.getDate(Metadata.AllStaysTableColumn.FROM_DATE).toLocalDate();
+                LocalDate toDate = rs.getDate(Metadata.AllStaysTableColumn.TO_DATE).toLocalDate();
+                String notes = rs.getString(Metadata.AllStaysTableColumn.NOTES);
+                stays.add(new Stay(id,clientId,roomNumber,fromDate,toDate,notes));
+            }
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return stays;
+	}
+
+	@Override
     public Booking findBookingById(int id) throws DAOException {
         Connection con = null;
         PreparedStatement st = null;

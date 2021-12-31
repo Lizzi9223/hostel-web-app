@@ -12,209 +12,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
 
+	<script type="text/javascript" src="js/script.js" ></script>
+	<link rel="stylesheet" href="css/style.css">
+
     <style>
     
-        body{
-            background-color: #D2B48C;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;            
-        }
-        
-        .container{
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        
-        .menu{
-            background-color: #DEB887;
-            border: 3px outset black;  
-            height: 6vh; 
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            box-sizing: border-box; 
-        }        
-                
-        .tabs{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 0 3em 0 3em;
-        }
-        
-        .tabs div {
-            margin: 0 2.5em;
-            width: auto;
-        }
-        
-        .main{
-            margin-top: 3em;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .form{
+    	.form{
             margin: 0em 3em;
             margin-bottom: 3em;
-            padding: 3em 4em;
-            padding-bottom: 0;
-            background-color: rgba(255, 228, 181, 1);
-            border: 2px solid black;
-            border-radius: 10px;
-            width: 1100px;
         }
     
-        .search.form{   
-            margin-top: 3em;
-            margin-right: 0;
-            padding: 20px;            
-            background-color: rgba(255, 228, 181, 1);
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        
-        .base-form{
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .submit_button{
-            font-size: 16px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;            
-        }
-        
-        .buttons{
-            font-size: 16px;
-            border: 0;
-            padding: 0.5em 1em;
-            background-color: #CD853F;            
-        }
-        
-        .buttons:hover{
-            cursor: pointer;
-        }
-        
-        a{
-            text-decoration: none;
-            color: black;
-        }
-        
-        
-        .rooms{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-                
-                
-        .slider-container{
-            width:700px;
-            height: 500px;
-            margin-right: 2em;
-        }
-        
-        .product-slider {
-          height: 450px;
-          box-shadow: 0 0 15px black;
-         }
-
-        .product-slider .swiper-slide {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .product-thumbs {
-          height: 400px;
-        }
-
-        .product-thumbs .swiper-wrapper {
-          margin-top: calc(-100% + 5px);
-        }
-
-        .product-thumbs .swiper-slide {
-          width: auto;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        
-        .swiper-slide img{
-            width: 100%;
-            height: 100%;
-        }
-
-        .product-thumbs .swiper-slide-active {
-          border: solid 2px black;
-        }
-        
-        .swiper-button-prev {
-         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23DEB887' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-        }
-
-        .swiper-button-next {
-          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23DEB887' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-        }
-        
-        .info{
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items:center;
-        }
-        
-        .popup-bg{
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: rgba(255,255,255,0.8);
-            z-index: 5;
-            display: none;
-        }
-        
-        .popup{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            background: rgba(255, 228, 181, 1);
-            padding: 20px;
-            transform: translate(-50%, -50%);
-            padding-top: 60px;
-        }
-        
-        .close-popup{
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            cursor: pointer;
-        }
-        
-        .no-scroll{
-            overflow-y: hidden;
-        }
-        
-        .container-body{
-        	display:flex;
-        	flex-direction: row;
-        	justify-content: center;
-            align-content: center;
-        }
-    
-        input[type=range] {
+    	input[type=range] {
             -webkit-appearance: none;
             background: rgb(0,0,0,0.6);
             height: 10px;
@@ -227,44 +35,7 @@
           background: #CD853F;
           cursor: pointer;
           -webkit-appearance: none;
-        }
-        
-        input[type=date], input[type=number] {
-            background: #DEB887;
-            border: 0;            
-        }
-        
-        .popup-bg{
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: rgba(255,255,255,0.8);
-            display: none;
-        }
-        
-        .popup{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            background: rgba(255, 228, 181, 1);
-            padding: 20px;
-            transform: translate(-50%, -50%);
-            padding-top: 60px;
-        }
-        
-        .close-popup{
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            cursor: pointer;
-        }
-        
-        .no-scroll{
-            overflow-y: hidden;
-        }
+        }        
     
     </style>  
 
@@ -282,75 +53,7 @@
 	<fmt:message bundle="${lang}" key="menu.en" var="en" />
     
 </head>
-<body>
-
-	<script>
-        
-		$(document).ready(function() { 
-	
-	        document.querySelectorAll('.slider-container').forEach(n => {
-	           const slider = new Swiper(n.querySelector('.product-slider'), {
-	               navigation: {
-	                 nextEl: n.querySelector('.swiper-button-next'),
-	                 prevEl: n.querySelector('.swiper-button-prev'),
-	               },
-	               spaceBetween: 10,
-	           });
-	
-	         const thumbs = new Swiper(n.querySelector('.product-thumbs'), {
-	           spaceBetween: 5,
-	           centeredSlides: true,
-	           slidesPerView: 4,
-	           touchRatio: 0.2,
-	           slideToClickedSlide: true,
-	           direction: 'vertical',
-	         });
-	
-	         slider.controller.control = thumbs;
-	         thumbs.controller.control = slider;
-	       });
-            
-            
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-               dd = '0' + dd;
-            }
-            if (mm < 10) {
-               mm = '0' + mm;
-            } 
-            today = yyyy + '-' + mm + '-' + dd;            
-            document.getElementById("fromDate").setAttribute("min", today);
-            
-            
-            $('.close-popup').click(function(){
-                $('.popup-bg').fadeOut(300);
-                $('html').removeClass('no-scroll');
-            })
-            
-	   });
-        
-        function setToDate() {
-            var date = new Date(document.getElementById("fromDate").value);
-            date.setDate(date.getDate() + 1);
-            document.getElementById("toDate").valueAsDate = date;
-            var dd = date.getDate();
-            var mm = date.getMonth() + 1; //January is 0!
-            var yyyy = date.getFullYear();
-            if (dd < 10) {
-               dd = '0' + dd;
-            }
-            if (mm < 10) {
-               mm = '0' + mm;
-            } 
-            date = yyyy + '-' + mm + '-' + dd;            
-            document.getElementById("toDate").setAttribute("min", date);            
-        }
-        
-    </script>
-		
+<body style="background-color: #D2B48C">		
 
     <div class="container">
     
@@ -387,7 +90,7 @@
 
         </div>
 
-        <div class="main">
+        <div class="main" style="flex-direction: column; justify-content: center">
             
             <div class="form" style="padding-bottom: 20px">
                 
@@ -483,7 +186,7 @@
         <c:choose>
 	            	<c:when test="${checkResult eq false}">
 	            		<div class="popup-bg" style="display: block">
-			                <div class="popup">
+			                <div class="popup" style="width:auto">
 			                    <img class="close-popup" alt="icon">
 			                    <p>Sorry, no available places</p>
 			                </div>
@@ -491,17 +194,21 @@
 	            	</c:when>
 	            	<c:when test="${checkResult eq true}">
 	            		<div class="popup-bg" style="display: block">
-			                <div class="popup">
+			                <div class="popup" style="width:auto">
 			                    <img class="close-popup" alt="icon">
-			                    <p>Please, check data:</p>
-			                    Room number:<br>
-			                    <c:forEach var="room" items="${availableRooms}">
-			                    	<c:out value=" ${room.getRoomNumber()}" />
-			                    </c:forEach>
-			                    Since:<c:out value=" ${fromDate}" /><br>
-			                    To:<c:out value=" ${toDate}" /><br>
-			                    Guests number:<c:out value=" ${guestsNumber}" /><br>
-			                    
+			                    <h5>Please, check data:</h5>
+			                    <form>
+			                    	<b>Room number:</b><br>
+				                    <c:forEach var="room" items="${availableRooms}">
+	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
+				                    	<c:out value="${room.getRoomNumber()}" /><br>
+				                    </c:forEach>
+				                    <b>Since:</b><input type="date" name="fromDate" value="${fromDate}" readonly /><br>
+				                    <b>To:</b><input type="date" name="toDate" value="${toDate}" readonly /><br>				                    
+				                    <b>Guests number:</b><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /><br><br>
+				                    <input type="hidden" name="command" value="SubmitBooking" />
+				                    <input class="submit_button" type="submit" value="Submit booking"/>
+			                    </form>			                    
 			                </div>
 			            </div>
 	            	</c:when>

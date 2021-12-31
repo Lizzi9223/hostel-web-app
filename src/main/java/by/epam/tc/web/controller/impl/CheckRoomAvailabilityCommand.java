@@ -21,8 +21,8 @@ public class CheckRoomAvailabilityCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"));
-		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"));
+		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"), formatter);
+		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"), formatter);
 		int guestsNumber = Integer.parseInt(request.getParameter("guestsNumber"));
 		int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
 		List<Room> availableRooms = new ArrayList<Room>();

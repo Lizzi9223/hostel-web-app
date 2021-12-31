@@ -11,6 +11,8 @@ import by.epam.tc.web.controller.impl.DeleteAccountCommand;
 import by.epam.tc.web.controller.impl.EditCommand;
 import by.epam.tc.web.controller.impl.LoginationCommand;
 import by.epam.tc.web.controller.impl.RegistrationCommand;
+import by.epam.tc.web.controller.impl.SubmitBookingCommand;
+import by.epam.tc.web.controller.impl.gotopage.GoToBookingsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToErrorPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToLoginationPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToMyAccountPageCommand;
@@ -32,6 +34,7 @@ public final class CommandProvider {
 		commands.put("DeleteAccount", new DeleteAccountCommand());
 		commands.put("SearchRooms", new GoToRoomsPageCommand());
 		commands.put("CheckRoomAvailability", new CheckRoomAvailabilityCommand());
+		commands.put("SubmitBooking", new SubmitBookingCommand());
 		
 		commands.put("GO_TO_ERROR_PAGE", new GoToErrorPageCommand());
 		commands.put("GO_TO_REGISTRATION_PAGE", new GoToRegistrationPageCommand());
@@ -39,6 +42,7 @@ public final class CommandProvider {
 		commands.put("GO_TO_WELCOME_PAGE", new GoToWelcomePageCommand());
 		commands.put("GO_TO_ROOMS_PAGE", new GoToRoomsPageCommand());
 		commands.put("GO_TO_MY_ACCOUNT_PAGE", new GoToMyAccountPageCommand());
+		commands.put("GO_TO_BOOKINGS_PAGE", new GoToBookingsPageCommand());
 	}
 	
 	public final Command getCommand(String commandName) {
