@@ -11,14 +11,14 @@ public class Booking implements Serializable {
     private LocalDate fromDate;
     private LocalDate toDate;
     private int guestsCount;
-    private boolean isApproved;
+    private Boolean isApproved;
     private LocalDate approveDate;
     private boolean isPaid;
 
     public Booking(){}
 
     public Booking(int userId, int roomNumber, LocalDate fromDate, LocalDate toDate,
-                   int guestsCount, boolean isApproved, LocalDate approveDate, boolean isPaid) {
+                   int guestsCount, Boolean isApproved, LocalDate approveDate, boolean isPaid) {
         this.userId = userId;
         this.roomNumber = roomNumber;
         this.fromDate = fromDate;
@@ -30,7 +30,7 @@ public class Booking implements Serializable {
     }
 
     public Booking(int id, int userId, int roomNumber, LocalDate fromDate, LocalDate toDate,
-                   int guestsCount, boolean isApproved, LocalDate approveDate, boolean isPaid) {
+                   int guestsCount, Boolean isApproved, LocalDate approveDate, boolean isPaid) {
         this.id = id;
         this.userId = userId;
         this.roomNumber = roomNumber;
@@ -90,11 +90,11 @@ public class Booking implements Serializable {
         this.guestsCount = guestsCount;
     }
 
-    public boolean isApproved() {
+    public Boolean isApproved() {
         return isApproved;
     }
 
-    public void setApproved(boolean approved) {
+    public void setApproved(Boolean approved) {
         isApproved = approved;
     }
 
@@ -115,21 +115,26 @@ public class Booking implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return id == booking.id && userId == booking.userId && roomNumber == booking.roomNumber
-                && guestsCount == booking.guestsCount && Objects.equals(fromDate, booking.fromDate)
-                && Objects.equals(toDate, booking.toDate);
-    }
+	public int hashCode() {
+		return Objects.hash(approveDate, fromDate, guestsCount, id, isApproved, isPaid, roomNumber, toDate, userId);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, userId, roomNumber, fromDate, toDate, guestsCount);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Booking other = (Booking) obj;
+		return Objects.equals(approveDate, other.approveDate) && Objects.equals(fromDate, other.fromDate)
+				&& guestsCount == other.guestsCount && id == other.id && Objects.equals(isApproved, other.isApproved)
+				&& isPaid == other.isPaid && roomNumber == other.roomNumber && Objects.equals(toDate, other.toDate)
+				&& userId == other.userId;
+	}
 
-    @Override
+	@Override
     public String toString() {
         return "Booking{" +
                 "id=" + id +

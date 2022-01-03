@@ -55,11 +55,22 @@ public class StaysServiceImpl implements StaysService {
 	}
 
 	@Override
+	public Booking getBookingById(int id) throws ServiceException {
+		Booking booking = new Booking();
+		try {
+			booking = staysDAO.findBookingById(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return booking;
+	}
+
+	@Override
 	public void addBooking(String userLogin, LocalDate fromDate, LocalDate toDate, int guestsNumber, int roomNumber)
 			throws ServiceException {		
 		try {
 			int userId = userDAO.getUserId(userLogin);
-			Booking booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, false, null, false);
+			Booking booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, null, null, false);
 			staysDAO.addBooking(booking);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
@@ -108,5 +119,34 @@ public class StaysServiceImpl implements StaysService {
 			throw new ServiceException(e);
 		}		
 		return availableRooms;
+	}
+
+	@Override
+	public void approveBooking(int id, boolean isApproved) throws ServiceException {
+		try {
+			Booking booking = staysDAO.findBookingById(id);
+			booking.setApproved(isApproved);
+			staysDAO.updateBooking(id, booking);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}	
+	}
+
+	@Override
+	public void deleteBooking(int id) throws ServiceException {
+		try {
+			staysDAO.deleteBooking(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}	
+	}
+
+	@Override
+	public void deleteStay(int id) throws ServiceException {
+		try {
+			staysDAO.deleteStay(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}	
 	}
 }

@@ -32,6 +32,15 @@
     <fmt:setLocale value="${sessionScope.language}"/>
 	<fmt:setBundle basename="prop" var="lang"/>
 	<fmt:message bundle="${lang}" key="menu.main" var="main" />
+	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
+	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
+	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
+	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
+	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
+	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
+	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
+	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
+	<fmt:message bundle="${lang}" key="menu.en" var="en" />
 
 </head>
 <body style="background-color: #D2B48C">
@@ -44,11 +53,11 @@
 
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
-                <div>Rooms</div>|
-                <div>Photos</div>|
-                <div>Contacts</div>|
+                <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
+                <div><c:out value="${photos}"/></div>|
+                <div><c:out value="${contacts}"/></div>|
                 <c:if test="${not empty sessionScope.login}" >
-                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE">My account</a></div>
+                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>                    
                 </c:if>                
             </div>
 
@@ -56,17 +65,17 @@
                 <form>
                     <input type="hidden" name="command" value="ChangeLanguage" >
                     <select name="language" onchange="submit()">
-                            <option value="ru" ${language == 'ru' ? 'selected' : ''}>ru</option>
-                            <option value="en" ${language == 'en' ? 'selected' : ''}>en</option>
+                            <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
+                            <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
                 </form>
                 <c:choose>
-        			<c:when test="${empty role}">
-		        		<div><a href="Controller?command=GO_TO_LOGINATION_PAGE">Sign In</a></div>|
-		        		<div><a href="Controller?command=GO_TO_REGISTRATION_PAGE">Sign Up</a></div>
+        			<c:when test="${empty sessionScope.role}">
+		        		<div><a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out value="${sign_in}"/></a></div>|
+		        		<div><a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out value="${sign_up}"/></a></div>
         			</c:when>
         			<c:otherwise>
-        				<div><a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true">Log out</a></div>|
+        				<div><a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true"><c:out value="${log_out}"/></a></div>|
         			</c:otherwise>
         		</c:choose>
             </div>
@@ -137,7 +146,7 @@
                     <tr>
                           <td><input id="save_button" style="visibility: hidden;" class="buttons" type="submit" value="Save"/><br><br><br></td>
                           <td><div></div></td>
-                          <td><button id="cancel_button" class="buttons" style="visibility: hidden;" type="button" command="GO_TO_MY_ACCOUNT_PAGE" onclick="cancelEdit()">
+                          <td><button id="cancel_button" class="buttons" style="visibility: hidden" type="button" onclick="cancelEdit()">
                           	<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE">Cancel</a></button><br><br><br></td>
                     </tr>
                     
@@ -156,7 +165,7 @@
                 	<tr>
                         <td>
                             <form> 
-                            	<a href="Controller?command=GO_TO_BOOKINGS_PAGE">
+                            	<a href="Controller?command=GO_TO_BOOKINGS_PAGE">                            	
                                 	<input class="buttons" type="button" value="Bookings"/>
                                 </a>
                             </form>
@@ -195,7 +204,7 @@
             
             <div class="popup-bg change-pass">
                 <div class="popup">
-                    <img class="close-popup change-pass" alt="icon">
+                    <img class="close-popup" src="images/close.png" style="width:25px">
                     <form class="change-password-form">
                         <input type="hidden" name="command" value="ChangePassword" />
                         <p>Current password:</p>
@@ -211,7 +220,7 @@
             
             <div class="popup-bg del-acc">
                 <div class="popup">
-                    <img class="close-popup del-acc" alt="icon">
+                     <img class="close-popup" src="images/close.png" style="width:25px">
                     <form class="change-password-form">
                         <input type="hidden" name="command" value="DeleteAccount" />
                         <p>Are you sure you want to delete your account?</p>
@@ -228,5 +237,6 @@
     
     </div>
 
+	
 </body>
 </html>

@@ -34,10 +34,10 @@ public class RoomServiceImpl implements RoomService {
 	}
 	
 	@Override
-	public Room getRoomByNumber(int roomNUmber) throws ServiceException{
+	public Room getRoomByNumber(int roomNumber) throws ServiceException{
 		Room room = null;
 		try {
-			room = roomDAO.findRoomByNumber(roomNUmber);
+			room = roomDAO.findRoomByNumber(roomNumber);
 			List<Image> images = roomDAO.getAllRoomImages(room.getRoomNumber());
 			room.setImages(images);
 		}

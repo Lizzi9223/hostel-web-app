@@ -88,10 +88,19 @@
 	       })
             
             
-            $('#clear-button').click(function(){                
-                window.location.reload();
-            })        
-        
+            $('#clear-button').click(function(){
+             $('#price-left').val($('#price-left').prop('min'));
+             setLeftValue();
+             $('#price-right').val($('#price-right').prop('max'));
+			 setRightValue();
+			 $('#capacity-left').val($('#capacity-left').prop('min'));
+			 setLeftValue2();
+			 $('#capacity-right').val($('#capacity-right').prop('max'));
+			 setRightValue2();
+			 $('input[name="searchGender"]').prop('checked', false);
+			 $('#bathroom').prop('checked', false);
+			 $('#search-form').submit();
+			})        
             
         });
         
@@ -136,7 +145,7 @@
         
         	<div class="search form">
                 
-                <form>
+                <form id="search-form">
                 
                     <br><p><b>SEARCH</b></p><br>
                 
@@ -150,8 +159,8 @@
 
                         <div class="multi-range-slider" id="priceRange">
 
-                            <input type="range"  id="price-left" min="${minCost}" max="${maxCost}" value="${minCost}">
-                            <input type="range"  id="price-right" min="${minCost}" max="${maxCost}" value="${maxCost}">
+                            <input type="range" id="price-left" min="${minCost}" max="${maxCost}" value="${currentMinCost}">
+                            <input type="range" id="price-right" min="${minCost}" max="${maxCost}" value="${currentMaxCost}">
 
                             <div class="slider">
                                 <div class="track"></div>
@@ -173,8 +182,8 @@
 
                         <div class="multi-range-slider" id="capacityRange">
 
-                            <input type="range"  id="capacity-left" min="${minCapacity}" max="${maxCapacity}" value="${minCapacity}">
-                            <input type="range"  id="capacity-right" min="${minCapacity}" max="${maxCapacity}" value="${maxCapacity}">
+                            <input type="range"  id="capacity-left" min="${minCapacity}" max="${maxCapacity}" value="${currentMinCapacity}">
+                            <input type="range"  id="capacity-right" min="${minCapacity}" max="${maxCapacity}" value="${currentMaxCapacity}">
 
                             <div class="slider">
                                 <div class="track"></div>
@@ -186,17 +195,51 @@
                     </div>
 
 
-                    <div style="margin-bottom: 15px; margin-top: 50px;"><b>Gender:&#160;&#160;&#160;</b></div>                    
-                    <input type="radio" id="genderChoice1" name="searchGender" value="м">
-                    <label for="genderChoice1" style="margin-right: 20px">м</label>
-                    <input type="radio" id="genderChoice2" name="searchGender" value="ж">
-                    <label for="genderChoice2" style="margin-right: 20px">ж</label>
-                    <input type="radio" id="genderChoice3" name="searchGender" value="мж">
-                    <label for="genderChoice3">мж</label>
-
+                    <div style="margin-bottom: 15px; margin-top: 50px;"><b>Gender:&#160;&#160;&#160;</b></div>
+                    <c:choose>
+                    	<c:when test="${currentGender eq 'м'}">
+                    		<input type="radio" id="genderChoice1" name="searchGender" value="м" checked>
+                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
+                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж">
+                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
+                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж">
+                    		<label for="genderChoice3">мж</label>
+                    	</c:when>
+                    	<c:when test="${currentGender eq 'ж'}">
+                    		<input type="radio" id="genderChoice1" name="searchGender" value="м">
+                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
+                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж" checked>
+                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
+                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж">
+                    		<label for="genderChoice3">мж</label>
+                    	</c:when>
+                    	<c:when test="${currentGender eq 'мж'}">
+                    		<input type="radio" id="genderChoice1" name="searchGender" value="м">
+                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
+                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж">
+                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
+                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж" checked>
+                    		<label for="genderChoice3">мж</label>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<input type="radio" id="genderChoice1" name="searchGender" value="м">
+                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
+                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж">
+                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
+                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж">
+                    		<label for="genderChoice3">мж</label>
+                    	</c:otherwise>
+                    </c:choose> 
 
                     <div style="margin-bottom: 15px; margin-top: 50px;"><b>Private bathroom:&#160;&#160;&#160;</b></div>
-                    <input type="checkbox" id="bathroom" name="searchBathroom">
+                    <c:choose>
+                    	<c:when test="${currentIsBathroom eq true}">
+                    		<input type="checkbox" id="bathroom" name="searchBathroom" checked>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<input type="checkbox" id="bathroom" name="searchBathroom">
+                    	</c:otherwise>
+                    </c:choose>                    
                     <label for="bathroom">Yes</label><br>
 
                     <input type="hidden" name="command" value="SearchRooms">
@@ -216,28 +259,16 @@
                       <div class="swiper-container product-slider">
                         <div class="swiper-wrapper">
                           <div class="swiper-slide">
-                            <img src="C:/Users/User/eclipse-workspace/hostel-maven-project/src/main/webapp/images/bg.jpg" alt="1">
+                            <img src="images/0.jpg" alt="1">
                           </div>
                           <div class="swiper-slide">
-                            <img src="C:/Users/User/eclipse-workspace/hostel-maven-project/src/main/webapp/images/bg.jpg" alt="2">
+                            <img src="images/0_2.jpg" alt="2">
                           </div>
                           <div class="swiper-slide">
-                            <img src="" alt="3">
+                            <img src="images/0_3.jpg" alt="3">
                           </div>
                           <div class="swiper-slide">
-                            <img src="" alt="4">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="5">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="6">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="7">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="8">
+                            <img src="images/0_4.jpg" alt="4">
                           </div>
                         </div>
                         <div class="swiper-button-next">
@@ -252,28 +283,16 @@
                       <div class="swiper-container product-thumbs">
                         <div class="swiper-wrapper">
                           <div class="swiper-slide">
-                            <img src="" alt="1">
+                            <img src="images/0.jpg" alt="1">
                           </div>
                           <div class="swiper-slide">
-                            <img src="" alt="2">
+                            <img src="images/0_2.jpg" alt="2">
                           </div>
                           <div class="swiper-slide">
-                            <img src="" alt="3">
+                            <img src="images/0_3.jpg" alt="3">
                           </div>
                           <div class="swiper-slide">
-                            <img src="" alt="4">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="5">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="6">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="7">
-                          </div>
-                          <div class="swiper-slide">
-                            <img src="" alt="8">
+                            <img src="images/0_4.jpg" alt="4">
                           </div>
                         </div>
                       </div>
@@ -358,7 +377,7 @@
 	        	<div class="popup-bg">
 	                <div class="popup">
 	                    <h3>Sign In first!</h3>
-	                    <img class="close-popup" alt="icon">
+	                     <img class="close-popup" src="images/close.png" style="width:25px">
 	                </div>
 	            </div>
 	        </c:if>

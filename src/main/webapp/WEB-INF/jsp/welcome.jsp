@@ -49,7 +49,7 @@
                 <div><c:out value="${photos}"/></div>|
                 <div><c:out value="${contacts}"/></div>|
                 <c:if test="${not empty sessionScope.login}" >
-                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
+                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>                    
                 </c:if>                
             </div>
 

@@ -9,7 +9,11 @@ import by.epam.tc.web.entity.stay.Booking;
 public interface StaysService {
 	List<Booking> getAllBookings() throws ServiceException;
 	List<Booking> getAllUserBookings(String userLogin) throws ServiceException;
+	Booking getBookingById (int id) throws ServiceException;
 	void addBooking(String userLogin, LocalDate fromDate, LocalDate toDate, int guestsNumber, int roomNumber) throws ServiceException;
 	boolean areAvailablePlaces(int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsNumber) throws ServiceException;
 	List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber) throws ServiceException;
+	void approveBooking(int id, boolean isApproved) throws ServiceException;
+	void deleteBooking(int id) throws ServiceException;
+	void deleteStay(int id) throws ServiceException;
 }

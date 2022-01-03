@@ -49,7 +49,11 @@ public class StaysDAOImpl implements StaysDAO {
                 LocalDate fromDate = rs.getDate(Metadata.BookingTableColumn.FROM_DATE).toLocalDate();
                 LocalDate toDate = rs.getDate(Metadata.BookingTableColumn.TO_DATE).toLocalDate();
                 int guestsCount = rs.getInt(Metadata.BookingTableColumn.GUESTS_COUNT);
-                boolean isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                Object isApprovedObj = rs.getObject(Metadata.BookingTableColumn.APPROVED);
+                Boolean isApproved = null;
+                if(isApprovedObj != null) {
+                	isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                }  
                 java.sql.Date date = rs.getDate(Metadata.BookingTableColumn.APPROVE_DATE);
                 LocalDate approveDate = null;
                 if(date!=null){
@@ -91,7 +95,11 @@ public class StaysDAOImpl implements StaysDAO {
                 LocalDate fromDate = rs.getDate(Metadata.BookingTableColumn.FROM_DATE).toLocalDate();
                 LocalDate toDate = rs.getDate(Metadata.BookingTableColumn.TO_DATE).toLocalDate();
                 int guestsCount = rs.getInt(Metadata.BookingTableColumn.GUESTS_COUNT);
-                boolean isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                Object isApprovedObj = rs.getObject(Metadata.BookingTableColumn.APPROVED);
+                Boolean isApproved = null;
+                if(isApprovedObj != null) {
+                	isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                }                
                 java.sql.Date date = rs.getDate(Metadata.BookingTableColumn.APPROVE_DATE);
                 LocalDate approveDate = null;
                 if(date!=null){
@@ -203,7 +211,11 @@ public class StaysDAOImpl implements StaysDAO {
                 LocalDate fromDate = rs.getDate(Metadata.BookingTableColumn.FROM_DATE).toLocalDate();
                 LocalDate toDate = rs.getDate(Metadata.BookingTableColumn.TO_DATE).toLocalDate();
                 int guestsCount = rs.getInt(Metadata.BookingTableColumn.GUESTS_COUNT);
-                boolean isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                Object isApprovedObj = rs.getObject(Metadata.BookingTableColumn.APPROVED);
+                Boolean isApproved = null;
+                if(isApprovedObj != null) {
+                	isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                }  
                 java.sql.Date date = rs.getDate(Metadata.BookingTableColumn.APPROVE_DATE);
                 LocalDate approveDate = null;
                 if(date!=null){
@@ -245,7 +257,11 @@ public class StaysDAOImpl implements StaysDAO {
                 LocalDate fromDate = rs.getDate(Metadata.BookingTableColumn.FROM_DATE).toLocalDate();
                 LocalDate toDate = rs.getDate(Metadata.BookingTableColumn.TO_DATE).toLocalDate();
                 int guestsCount = rs.getInt(Metadata.BookingTableColumn.GUESTS_COUNT);
-                boolean isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                Object isApprovedObj = rs.getObject(Metadata.BookingTableColumn.APPROVED);
+                Boolean isApproved = null;
+                if(isApprovedObj != null) {
+                	isApproved = rs.getBoolean(Metadata.BookingTableColumn.APPROVED);
+                }  
                 java.sql.Date date = rs.getDate(Metadata.BookingTableColumn.APPROVE_DATE);
                 LocalDate approveDate = null;
                 if(date!=null){
@@ -351,7 +367,11 @@ public class StaysDAOImpl implements StaysDAO {
             st.setDate(3,java.sql.Date.valueOf(booking.getFromDate()));
             st.setDate(4,java.sql.Date.valueOf(booking.getToDate()));
             st.setInt(5,booking.getGuestsCount());
-            st.setBoolean(6,booking.isApproved());
+            if(booking.isApproved() != null) {
+            	st.setBoolean(6,booking.isApproved());
+            }else {
+            	st.setObject(6, null);
+            }            
             LocalDate date = booking.getApproveDate();
             if(date!=null){
                 st.setDate(7,java.sql.Date.valueOf(date));
@@ -414,7 +434,11 @@ public class StaysDAOImpl implements StaysDAO {
             st.setDate(3,java.sql.Date.valueOf(booking.getFromDate()));
             st.setDate(4,java.sql.Date.valueOf(booking.getToDate()));
             st.setInt(5,booking.getGuestsCount());
-            st.setBoolean(6,booking.isApproved());
+            if(booking.isApproved() != null) {
+            	st.setBoolean(6,booking.isApproved());
+            }else {
+            	st.setObject(6, null);
+            }   
             LocalDate date = booking.getApproveDate();
             if(date!=null){
                 st.setDate(7,java.sql.Date.valueOf(date));

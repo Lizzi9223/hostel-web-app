@@ -68,6 +68,7 @@ body{
  a:hover{
  text-decoration: none;
  color: black;
+ cursor: pointer;
  }
  
  form select{
@@ -90,6 +91,10 @@ body{
  border: 0;
  padding: 0.5em 1em;
  background-color: #CD853F; 
+ }
+ 
+ .submit_button:hover{
+ cursor: pointer;
  }
 
  .error{

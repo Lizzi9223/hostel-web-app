@@ -3,11 +3,15 @@ package by.epam.tc.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import by.epam.tc.web.controller.impl.ApproveBookingCommand;
 import by.epam.tc.web.controller.impl.BookRoomCommand;
 import by.epam.tc.web.controller.impl.ChangeLanguageCommand;
 import by.epam.tc.web.controller.impl.ChangePasswordCommand;
 import by.epam.tc.web.controller.impl.CheckRoomAvailabilityCommand;
+import by.epam.tc.web.controller.impl.ChooseBookingCommand;
 import by.epam.tc.web.controller.impl.DeleteAccountCommand;
+import by.epam.tc.web.controller.impl.DeleteBookingCommand;
+import by.epam.tc.web.controller.impl.EditBookingCommand;
 import by.epam.tc.web.controller.impl.EditCommand;
 import by.epam.tc.web.controller.impl.LoginationCommand;
 import by.epam.tc.web.controller.impl.RegistrationCommand;
@@ -35,6 +39,10 @@ public final class CommandProvider {
 		commands.put("SearchRooms", new GoToRoomsPageCommand());
 		commands.put("CheckRoomAvailability", new CheckRoomAvailabilityCommand());
 		commands.put("SubmitBooking", new SubmitBookingCommand());
+		commands.put("ChooseBooking", new ChooseBookingCommand());
+		commands.put("ApproveBooking", new ApproveBookingCommand());
+		commands.put("EditBooking", new EditBookingCommand());
+		commands.put("DeleteBooking", new DeleteBookingCommand());
 		
 		commands.put("GO_TO_ERROR_PAGE", new GoToErrorPageCommand());
 		commands.put("GO_TO_REGISTRATION_PAGE", new GoToRegistrationPageCommand());

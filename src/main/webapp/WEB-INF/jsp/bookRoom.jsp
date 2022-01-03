@@ -187,7 +187,7 @@
 	            	<c:when test="${checkResult eq false}">
 	            		<div class="popup-bg" style="display: block">
 			                <div class="popup" style="width:auto">
-			                    <img class="close-popup" alt="icon">
+			                     <img class="close-popup" src="images/close.png" style="width:25px">
 			                    <p>Sorry, no available places</p>
 			                </div>
 			            </div>
@@ -195,7 +195,7 @@
 	            	<c:when test="${checkResult eq true}">
 	            		<div class="popup-bg" style="display: block">
 			                <div class="popup" style="width:auto">
-			                    <img class="close-popup" alt="icon">
+			                     <img class="close-popup" src="images/close.png" style="width:25px">
 			                    <h5>Please, check data:</h5>
 			                    <form>
 			                    	<b>Room number:</b><br>

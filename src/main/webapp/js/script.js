@@ -34,6 +34,8 @@
  document.getElementById("toDate").setAttribute("min", date); 
  }
  
+
+
  $(document).ready(function(){
  
  $('.open-popup.change-pass').click(function(e){
@@ -118,7 +120,20 @@
  })
  
  
- $('#clear-button').click(function(){ 
- window.location.reload();
- }) 
+ $('#clear-button').click(function(){
+             $('#price-left').val($('#price-left').prop('min'));
+             setLeftValue();
+             $('#price-right').val($('#price-right').prop('max'));
+			 setRightValue();
+			 $('#capacity-left').val($('#capacity-left').prop('min'));
+			 setLeftValue2();
+			 $('#capacity-right').val($('#capacity-right').prop('max'));
+			 setRightValue2();
+			 $('input[name="searchGender"]').prop('checked', false);
+			 $('#bathroom').prop('checked', false);
+			 $('#search-form').submit();
+			})
+
+
+ 
  })
