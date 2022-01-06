@@ -95,10 +95,8 @@
             <div class="form" style="padding-bottom: 20px">
                 
                 <h4>Check for available places room #<c:out value="${room.getRoomNumber()}"/>:</h4>
-                <br>
-                
-                <form>
-                
+                <br>                
+                <form>                
                     <label for="fromDate">Arrive date:</label>
                     <input type="date" id="fromDate" name="fromDate" onchange="setToDate()" required>
                     <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
@@ -110,10 +108,8 @@
                     <input type="hidden" name="command" value="CheckRoomAvailability" />
                     <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
                     <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" />
-                    <label for="check-among-all-rooms" >Check among all rooms</label>
-                
+                    <label for="check-among-all-rooms" >Check among all rooms</label>                
                 </form>
-
             </div>
 
             <div class="form rooms">  

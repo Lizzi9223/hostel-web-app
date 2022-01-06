@@ -59,6 +59,28 @@
  $('.popup-bg.del-acc').fadeOut(300);
  $('html').removeClass('no-scroll');
  })
+
+ $('.open-popup.options').click(function(e){
+ e.preventDefault();
+ $('.popup-bg.change-pass').fadeIn(300);
+ $('html').addClass('no-scroll');
+ })
+ 
+ $('.close-popup.options').click(function(){
+ $('.popup-bg.change-pass').fadeOut(300);
+ $('html').removeClass('no-scroll');
+ })
+
+ $('.open-popup.booking').click(function(e){
+ e.preventDefault();
+ $('.popup-bg.booking').fadeIn(300);
+ $('html').addClass('no-scroll');
+ })
+ 
+ $('.close-popup.booking').click(function(){
+ $('.popup-bg.booking').fadeOut(300);
+ $('html').removeClass('no-scroll');
+ })
  
  $("input[name=confirmPassword]").keyup(function(){
  if ($('input[name=newPassword]').val() == $('input[name=confirmPassword]').val()) {

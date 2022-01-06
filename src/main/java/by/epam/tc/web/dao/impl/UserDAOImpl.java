@@ -1080,6 +1080,35 @@ public class UserDAOImpl implements UserDAO{
         }
         return  id;
     }
+    
+    @Override
+    public Role getUserRole(String login) throws DAOException {
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String role = null;
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.USERS_TABLE, Metadata.USER_ROLES_TABLE, Metadata.UsersTableColumn.ROLE_ID, Metadata.UsersTableColumn.LOGIN));
+            st.setString(1,login);
+            rs = st.executeQuery();
+            while (rs.next()){
+                role = rs.getString(Metadata.UserRolesTableColumn.ROLE_NAME);
+            }
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return  Role.valueOf(role.toUpperCase());
+    }
 
     @Override
     public int getClientId(String passportId) throws DAOException{

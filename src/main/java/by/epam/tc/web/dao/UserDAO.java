@@ -43,6 +43,7 @@ public interface UserDAO {
     void deleteFromRegularCustomers(int clientId) throws DAOException;
 
     int getUserId(String login) throws DAOException;
+    Role getUserRole(String login) throws DAOException;
     int getClientId(String passportId) throws DAOException;    
     
 }

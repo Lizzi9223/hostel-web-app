@@ -12,6 +12,7 @@ import by.epam.tc.web.dao.UserDAO;
 import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.entity.stay.Stay;
+import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.StaysService;
 
@@ -67,10 +68,15 @@ public class StaysServiceImpl implements StaysService {
 
 	@Override
 	public void addBooking(String userLogin, LocalDate fromDate, LocalDate toDate, int guestsNumber, int roomNumber)
-			throws ServiceException {		
+			throws ServiceException {
 		try {
+			Booking booking;
 			int userId = userDAO.getUserId(userLogin);
-			Booking booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, null, null, false);
+			if(userDAO.getUserRole(userLogin) == Role.CLIENT) {
+				booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, null, null, false);
+			}else {
+				booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, true, LocalDate.now(), false);
+			}			
 			staysDAO.addBooking(booking);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
@@ -126,6 +132,18 @@ public class StaysServiceImpl implements StaysService {
 		try {
 			Booking booking = staysDAO.findBookingById(id);
 			booking.setApproved(isApproved);
+			if(isApproved) {
+				booking.setApproveDate(LocalDate.now());
+			}
+			staysDAO.updateBooking(id, booking);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}	
+	}
+	
+	@Override
+	public void updateBooking(int id, Booking booking) throws ServiceException {
+		try {
 			staysDAO.updateBooking(id, booking);
 		} catch (DAOException e) {
 			throw new ServiceException(e);

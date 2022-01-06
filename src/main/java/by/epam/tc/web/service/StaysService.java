@@ -14,6 +14,7 @@ public interface StaysService {
 	boolean areAvailablePlaces(int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsNumber) throws ServiceException;
 	List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber) throws ServiceException;
 	void approveBooking(int id, boolean isApproved) throws ServiceException;
+	void updateBooking(int id, Booking booking) throws ServiceException;
 	void deleteBooking(int id) throws ServiceException;
 	void deleteStay(int id) throws ServiceException;
 }

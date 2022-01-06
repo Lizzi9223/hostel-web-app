@@ -119,7 +119,8 @@
                 	<h3>
                 	 	<c:choose>
                 	 		<c:when test="${role eq 'ADMIN' }">
-                	 			All bookings
+                	 			All bookings 
+                	 			<input class="submit_button open-popup booking" value="New booking" style="margin-left:20px; width:auto"/>
                 	 		</c:when>
                 	 		<c:otherwise>
                 	 			My bookings
@@ -177,10 +178,10 @@
                         </c:forEach>
                     </table>
                 
-                </div>  
+                </div> 
                 
 	        	<c:if test="${popUpView eq 'options'}">
-	        		<div class="popup-bg" style="display: block">
+	        		<div class="popup-bg options" style="display: block">
 		                <div class="popup" style="width:auto; padding: 40px">	                    
 		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
 		                    <c:choose>
@@ -200,7 +201,25 @@
 			                    				<input class="submit_button" type="submit" value="Disapprove"/>
 			                    			</form>		                    				
 		                    			</c:when>
+		                    			<c:when test="${chosenBookingIsApproved eq false}">
+			                    			<form>
+			                    				<input type="hidden" name="command" value="ApproveBooking" />
+			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+			                    				<input type="hidden" name="approve" value="true" />
+			                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
+			                    			</form>
+		                    				<form>
+			                    				<input type="hidden" name="command" value="DeleteBooking" />
+			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+			                    				<input class="submit_button" type="submit" value="Delete"/>
+			                    			</form>		                    				
+		                    			</c:when>
 		                    			<c:otherwise>
+		                    				<form>
+			                    				<input type="hidden" name="command" value="AddStay" />
+			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+			                    				<input class="submit_button" type="submit" value="Guests arrived" style="margin-right:20px"/>
+			                    			</form>			                    			
 		                    				<form>
 			                    				<input type="hidden" name="command" value="EditBooking" />
 			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
@@ -210,7 +229,7 @@
 			                    				<input type="hidden" name="command" value="DeleteBooking" />
 			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
 			                    				<input class="submit_button" type="submit" value="Delete"/>
-			                    			</form>
+			                    			</form>			                    			
 		                    			</c:otherwise>
 		                    		</c:choose>
 		                    	</c:when>
@@ -238,7 +257,81 @@
 		                </div>
 		            </div>
 	        	</c:if>
+	        	
+	        	<c:if test="${popUpView eq 'editBooking'}">
+	        		<div class="popup-bg editBooking" style="display: block">
+		                <div class="popup" style="width:auto; padding: 40px">	                    
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
+		                    <form>                
+			                    <label for="fromDate">Arrive date:</label>
+			                    <input type="date" id="fromDate" name="fromDate" value="${booking.getFromDate()}" onchange="setToDate()" required>
+			                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
+			                    <input type="date" id="toDate" name="toDate" value="${booking.getToDate()}" required>                
+			                    <br><br>
+			                    <label for="questsNumber">Number of guests:&#160;</label>
+			                    <input type="number" id="guestsNumber" name="guestsNumber" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 90px">
+			                    <input type="radio" name="roomNumber" value="${booking.getRoomNumber()}">
+			                    <c:out value="${booking.getRoomNumber()}" /><br>
+			                    <input type="hidden" name="bookingId" value="${booking.getId()}" />
+			                    <input type="hidden" name="command" value="EditCheckRoomAvailability" />
+			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
+			                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
+			                </form>
+		                </div>
+		            </div>
+	        	</c:if>
+
+				<div class="popup-bg booking">
+	                <div class="popup">
+	                    <img class="close-popup" src="images/close.png" style="width:25px">
+	                    <form>                
+		                    <label for="fromDate">Arrive date:</label>
+		                    <input type="date" id="fromDate" name="fromDate" onchange="setToDate()" required>
+		                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
+		                    <input type="date" id="toDate" name="toDate" required>                
+		                    <br><br>
+		                    <label for="questsNumber">Number of guests:&#160;</label>
+		                    <input type="number" id="guestsNumber" name="guestsNumber" value="1" min="1" max="15" style="margin-right: 90px">
+		                    <input type="hidden" name="command" value="CheckRoomAvailability" />
+		                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
+		                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
+		                </form>
+	                </div>
+	            </div>
+	            
+	            <c:choose>
+	            	<c:when test="${checkResult eq false}">
+	            		<div class="popup-bg" style="display: block">
+			                <div class="popup" style="width:auto">
+			                     <img class="close-popup" src="images/close.png" style="width:25px">
+			                    <p>Sorry, no available places</p>
+			                </div>
+			            </div>
+	            	</c:when>
+	            	<c:when test="${checkResult eq true}">
+	            		<div class="popup-bg" style="display: block">
+			                <div class="popup" style="width:auto">
+			                     <img class="close-popup" src="images/close.png" style="width:25px">
+			                    <h5>Please, check data:</h5>
+			                    <form>
+			                    	<b>Room number:</b><br>
+				                    <c:forEach var="room" items="${availableRooms}">
+	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
+				                    	<c:out value="${room.getRoomNumber()}" /><br>
+				                    </c:forEach>
+				                    <b>Since:</b><input type="date" name="fromDate" value="${fromDate}" readonly /><br>
+				                    <b>To:</b><input type="date" name="toDate" value="${toDate}" readonly /><br>				                    
+				                    <b>Guests number:</b><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /><br><br>
+				                    <input type="hidden" name="bookingId" value="${bookingId}" />
+				                    <input type="hidden" name="command" value="SubmitBooking" />
+				                    <input class="submit_button" type="submit" value="Submit booking"/>
+			                    </form>			                    
+			                </div>
+			            </div>
+	            	</c:when>
+	            </c:choose>
 	         	
+	         	<c:remove var="booking"/>
 	         	<c:remove var="chosenBookingId"/>
 	         	<c:remove var="chosenBookingIsApproved"/>
 	         	<c:remove var="chosenBookingIsPaid"/>

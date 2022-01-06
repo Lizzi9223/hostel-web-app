@@ -3,6 +3,7 @@ package by.epam.tc.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import by.epam.tc.web.controller.impl.AddStayCommand;
 import by.epam.tc.web.controller.impl.ApproveBookingCommand;
 import by.epam.tc.web.controller.impl.BookRoomCommand;
 import by.epam.tc.web.controller.impl.ChangeLanguageCommand;
@@ -41,8 +42,11 @@ public final class CommandProvider {
 		commands.put("SubmitBooking", new SubmitBookingCommand());
 		commands.put("ChooseBooking", new ChooseBookingCommand());
 		commands.put("ApproveBooking", new ApproveBookingCommand());
-		commands.put("EditBooking", new EditBookingCommand());
+		commands.put("EditBooking", new EditBookingCommand());		
 		commands.put("DeleteBooking", new DeleteBookingCommand());
+		commands.put("AddStay", new AddStayCommand());
+		commands.put("AddBooking", new CheckRoomAvailabilityCommand());
+		commands.put("EditCheckRoomAvailability", new CheckRoomAvailabilityCommand());
 		
 		commands.put("GO_TO_ERROR_PAGE", new GoToErrorPageCommand());
 		commands.put("GO_TO_REGISTRATION_PAGE", new GoToRegistrationPageCommand());

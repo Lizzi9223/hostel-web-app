@@ -21,41 +21,55 @@ public class CheckRoomAvailabilityCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"), formatter);
-		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"), formatter);
+		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"));
+		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"));
 		int guestsNumber = Integer.parseInt(request.getParameter("guestsNumber"));
-		int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+		int roomNumber = -1;
+		if(request.getParameter("roomNumber") != null) {
+			roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+		}		
+		
 		List<Room> availableRooms = new ArrayList<Room>();
 		Room room = null;
 		try {			
 			if(request.getParameter("checkAmongAllRooms")!=null) {
 				availableRooms = ServiceFactory.getInstance().getStaysService().areAvailablePlaces(fromDate, toDate, guestsNumber);				
 			}
-			else {				
+			else {					
 				if(ServiceFactory.getInstance().getStaysService().areAvailablePlaces(roomNumber, fromDate, toDate, guestsNumber)) {					
 					availableRooms.add(ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber));
 				}
 			}
-			room = ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber);
-			request.setAttribute("room", room);
+			if(roomNumber>0) {
+				room = ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber);
+				request.setAttribute("room", room);
+			}			
 		} catch (ServiceException e) {
 			// TODO: handle exception
 		}
+		
 		if(availableRooms.size()>0) {
-			request.setAttribute("availableRooms", availableRooms);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookRoom.jsp");
+			request.setAttribute("availableRooms", availableRooms);			
 			request.setAttribute("fromDate", fromDate);
 			request.setAttribute("toDate", toDate);
 			request.setAttribute("guestsNumber", guestsNumber);			
-			request.setAttribute("checkResult", true);
-			dispatcher.forward(request, response);	
+			request.setAttribute("checkResult", true);				
 		}
 		else {
 			request.setAttribute("checkResult", false);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookRoom.jsp");
-			dispatcher.forward(request, response);
 		}
 		
+		if(request.getParameter("bookingId")!=null) {
+			request.setAttribute("bookingId", request.getParameter("bookingId"));	
+		}
+		
+		if(request.getParameter("command").equals("AddBooking") || request.getParameter("command").equals("EditCheckRoomAvailability")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookings.jsp");
+			dispatcher.forward(request, response);
+		}else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookRoom.jsp");
+			dispatcher.forward(request, response);
+		}				
 	}
 
 }

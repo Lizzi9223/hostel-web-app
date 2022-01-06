@@ -24,9 +24,21 @@ public class SubmitBookingCommand implements Command {
 		int guestsNumber = Integer.parseInt(request.getParameter("guestsNumber"));
 		int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
 		try {
-			String userLogin = (String)request.getSession().getAttribute("login");
-			ServiceFactory.getInstance().getStaysService().addBooking(
-					userLogin, fromDate, toDate, guestsNumber, roomNumber);
+			if(request.getParameter("bookingId")!=null) {
+				int id = Integer.parseInt(request.getParameter("bookingId"));
+				Booking booking = ServiceFactory.getInstance().getStaysService().getBookingById(id);
+				booking.setFromDate(fromDate);
+				booking.setToDate(toDate);
+				booking.setGuestsCount(guestsNumber);
+				booking.setRoomNumber(roomNumber);
+				booking.setApproved(true);
+				booking.setApproveDate(LocalDate.now());
+				ServiceFactory.getInstance().getStaysService().updateBooking(id, booking);
+			}else {
+				String userLogin = (String)request.getSession().getAttribute("login");
+				ServiceFactory.getInstance().getStaysService().addBooking(
+						userLogin, fromDate, toDate, guestsNumber, roomNumber);
+			}			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}		
