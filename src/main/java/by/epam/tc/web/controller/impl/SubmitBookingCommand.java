@@ -22,7 +22,10 @@ public class SubmitBookingCommand implements Command {
 		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"));
 		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"));
 		int guestsNumber = Integer.parseInt(request.getParameter("guestsNumber"));
-		int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+		int roomNumber = -1;
+		if(request.getParameter("roomNumber")!=null) {
+			roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+		}
 		try {
 			if(request.getParameter("bookingId")!=null) {
 				int id = Integer.parseInt(request.getParameter("bookingId"));
@@ -30,7 +33,9 @@ public class SubmitBookingCommand implements Command {
 				booking.setFromDate(fromDate);
 				booking.setToDate(toDate);
 				booking.setGuestsCount(guestsNumber);
-				booking.setRoomNumber(roomNumber);
+				if(roomNumber>0) {
+					booking.setRoomNumber(roomNumber);
+				}
 				booking.setApproved(true);
 				booking.setApproveDate(LocalDate.now());
 				ServiceFactory.getInstance().getStaysService().updateBooking(id, booking);

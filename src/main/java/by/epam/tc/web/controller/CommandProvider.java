@@ -10,10 +10,13 @@ import by.epam.tc.web.controller.impl.ChangeLanguageCommand;
 import by.epam.tc.web.controller.impl.ChangePasswordCommand;
 import by.epam.tc.web.controller.impl.CheckRoomAvailabilityCommand;
 import by.epam.tc.web.controller.impl.ChooseBookingCommand;
+import by.epam.tc.web.controller.impl.ChooseStayCommand;
 import by.epam.tc.web.controller.impl.DeleteAccountCommand;
 import by.epam.tc.web.controller.impl.DeleteBookingCommand;
+import by.epam.tc.web.controller.impl.DeleteStayCommand;
 import by.epam.tc.web.controller.impl.EditBookingCommand;
 import by.epam.tc.web.controller.impl.EditCommand;
+import by.epam.tc.web.controller.impl.EditStayCommand;
 import by.epam.tc.web.controller.impl.LoginationCommand;
 import by.epam.tc.web.controller.impl.RegistrationCommand;
 import by.epam.tc.web.controller.impl.SubmitBookingCommand;
@@ -23,6 +26,7 @@ import by.epam.tc.web.controller.impl.gotopage.GoToLoginationPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToMyAccountPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToRegistrationPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToRoomsPageCommand;
+import by.epam.tc.web.controller.impl.gotopage.GoToStaysPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToWelcomePageCommand;
 
 public final class CommandProvider {
@@ -47,6 +51,9 @@ public final class CommandProvider {
 		commands.put("AddStay", new AddStayCommand());
 		commands.put("AddBooking", new CheckRoomAvailabilityCommand());
 		commands.put("EditCheckRoomAvailability", new CheckRoomAvailabilityCommand());
+		commands.put("EditStay", new EditStayCommand());
+		commands.put("DeleteStay", new DeleteStayCommand());
+		commands.put("ChooseStay", new ChooseStayCommand());
 		
 		commands.put("GO_TO_ERROR_PAGE", new GoToErrorPageCommand());
 		commands.put("GO_TO_REGISTRATION_PAGE", new GoToRegistrationPageCommand());
@@ -55,6 +62,7 @@ public final class CommandProvider {
 		commands.put("GO_TO_ROOMS_PAGE", new GoToRoomsPageCommand());
 		commands.put("GO_TO_MY_ACCOUNT_PAGE", new GoToMyAccountPageCommand());
 		commands.put("GO_TO_BOOKINGS_PAGE", new GoToBookingsPageCommand());
+		commands.put("GO_TO_STAYS_PAGE", new GoToStaysPageCommand());
 	}
 	
 	public final Command getCommand(String commandName) {

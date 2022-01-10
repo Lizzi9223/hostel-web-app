@@ -12,6 +12,7 @@ import by.epam.tc.web.dao.UserDAO;
 import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.entity.stay.Stay;
+import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.StaysService;
@@ -67,6 +68,41 @@ public class StaysServiceImpl implements StaysService {
 	}
 
 	@Override
+	public List<Stay> getAllStays() throws ServiceException {
+		List<Stay> stays = new ArrayList<Stay>();
+		try {
+			stays = staysDAO.getAllStays();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return stays;
+	}
+
+	@Override
+	public List<Stay> getAllUserStays(String userLogin) throws ServiceException {
+		List<Stay> stays = new ArrayList<Stay>();
+		try {
+			int userId = userDAO.getUserId(userLogin);
+			Client client = userDAO.findClientByUserId(userId);
+			stays = staysDAO.getAllClientStays(client.getClientId());
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return stays;
+	}
+
+	@Override
+	public Stay getStayById(int id) throws ServiceException {
+		Stay stay = new Stay();
+		try {
+			stay = staysDAO.findStayById(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return stay;
+	}
+
+	@Override
 	public void addBooking(String userLogin, LocalDate fromDate, LocalDate toDate, int guestsNumber, int roomNumber)
 			throws ServiceException {
 		try {
@@ -100,7 +136,11 @@ public class StaysServiceImpl implements StaysService {
 					if(i.isBefore(stay.getToDate())) {
 						bookedPlacesAmount += 1;
 					}
-				}	
+				}
+				if((roomDAO.findRoomByNumber(roomNumber).getGender().equals(null) 
+						|| roomDAO.findRoomByNumber(roomNumber).getGender().equals("")) && bookedPlacesAmount > 0) {
+					return false;
+				}
 				if(roomDAO.findRoomByNumber(roomNumber).getCapacity() - bookedPlacesAmount < guestsNumber) {
 					return false;
 				}

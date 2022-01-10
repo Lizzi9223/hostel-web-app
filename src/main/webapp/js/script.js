@@ -33,7 +33,6 @@
  date = yyyy + '-' + mm + '-' + dd; 
  document.getElementById("toDate").setAttribute("min", date); 
  }
- 
 
 
  $(document).ready(function(){

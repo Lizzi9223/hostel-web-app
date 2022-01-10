@@ -7,6 +7,7 @@
 <head>
 <title>Sign Up</title>
 
+	<script type="text/javascript" src="js/script.js" ></script>
     <link rel="stylesheet" href="css/style.css">
     
     <style>
@@ -108,18 +109,18 @@
 
                     <tr>
                         <td><c:out value="${login_word}"/>:<br><br></td>
-                        <td><input type="text" name="login" value = ""/><br><br></td>
+                        <td><input type="text" name="login" value = "" required/><br><br></td>
                     </tr>
                     <tr>
                         <td><c:out value="${password_word}"/>:<br><br><br></td>
-                        <td><input type="password" name="password" value = ""/><br><br><br></td>
+                        <td><input type="password" name="password" value = "" required/><br><br><br></td>
                     </tr>
                     
                     		<c:choose>
                                 <c:when test="${create eq 'admin'}">
                                     <tr>
                                         <td><c:out value="${name_word}"/>:<br><br></td>
-                                        <td><input type="text" name="name" value = ""/><br><br></td>
+                                        <td><input type="text" name="name" value = "" required/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${photo_word}"/>:<br><br></td>
@@ -129,19 +130,19 @@
                                 <c:otherwise>
                                     <tr>
                                         <td><c:out value="${name_word}"/>:<br><br></td>
-                                        <td><input type="text" name="name" value = ""/><br><br></td>
+                                        <td><input type="text" name="name" value = "" required/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${surname_word}"/>:<br><br></td>
-                                        <td><input type="text" name="surname" value = ""/><br><br></td>
+                                        <td><input type="text" name="surname" value = "" required/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${passport_id_word}"/>:<br><br></td>
-                                        <td><input type="text" name="passportId" value = ""/><br><br></td>
+                                        <td><input type="text" name="passportId" value = "" required/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${date_of_birth_word}"/>:<br><br></td>
-                                        <td><input type="text" name="dateOfBith" value = "2000-01-01"/><br><br></td>
+                                        <td><input type="date" id="datefield" name="dateOfBith" required></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${country_word}"/>:<br><br></td>
@@ -149,11 +150,11 @@
                                     </tr>
                                     <tr>
                                         <td><c:out value="${phone_number_word}"/>:<br><br></td>
-                                        <td><input type="text" name="phone" value = "+4546"/><br><br></td>
+                                        <td><input type="text" name="phone" value = "+4546" required/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${email_word}"/>:<br><br></td>
-                                        <td><input type="text" name="email" value = "a@gmail.com"/><br><br></td>
+                                        <td><input type="text" name="email" value = "a@gmail.com" required/><br><br></td>
                                     </tr>	
                                 </c:otherwise>
                             </c:choose>
@@ -177,6 +178,24 @@
         </div>  
     
     </div>
+    
+    <script>
+	    var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth() + 1; //January is 0!
+	    var yyyy = today.getFullYear();
+	
+	    if (dd < 10) {
+	       dd = '0' + dd;
+	    }
+	
+	    if (mm < 10) {
+	       mm = '0' + mm;
+	    } 
+	        
+	    today = yyyy + '-' + mm + '-' + dd;
+	    document.getElementById("datefield").setAttribute("max", today);
+    </script>
 
 </body>
 </html>

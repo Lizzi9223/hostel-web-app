@@ -30,6 +30,10 @@
             margin-bottom: 3em;
             width: 1100px;
         }
+        
+        .buttons-list input, .buttons-list button{
+		 	width: 150px;
+		 }
     
     </style>
     
@@ -45,6 +49,8 @@
 	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
 	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
 	<fmt:message bundle="${lang}" key="menu.en" var="en" />
+	
+	
     
 </head>
 
@@ -119,8 +125,8 @@
                 	<h3>
                 	 	<c:choose>
                 	 		<c:when test="${role eq 'ADMIN' }">
-                	 			All bookings 
-                	 			<input class="submit_button open-popup booking" value="New booking" style="margin-left:20px; width:auto"/>
+                	 			All bookings
+                	 			<input class="submit_button open-popup booking" type="button" value="New booking" style="margin-left:20px"/>
                 	 		</c:when>
                 	 		<c:otherwise>
                 	 			My bookings
@@ -158,13 +164,19 @@
                                 	</td>
                                 	<c:if test="${role eq 'ADMIN'}">
 		                            	<td><c:out value="${booking.getUserId()}" /></td>                               	
-			                        </c:if>                                	                             	
-                                    <td><c:out value="${booking.getFromDate()}" /></td>
-                                    <td><c:out value="${booking.getToDate()}" /></td>
+			                        </c:if>
+                                    <c:set var="dateToParse" value="${booking.getFromDate()}"/>
+                                    <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+                                    <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>	
+                                    <c:set var="dateToParse" value="${booking.getToDate()}"/>
+                                    <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+                                    <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
                                     <td><c:out value="${booking.getGuestsCount()}" /></td>
                                     <td><c:out value="${booking.getRoomNumber()}" /></td>
                                     <td><c:out value="${booking.isApproved()}" /></td>
-                                    <td><c:out value="${booking.getApproveDate()}" /></td>
+                                    <c:set var="dateToParse" value="${booking.getApproveDate()}"/>
+                                    <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+                                    <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
                                     <td><c:out value="${booking.isPaid()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">
@@ -183,53 +195,82 @@
 	        	<c:if test="${popUpView eq 'options'}">
 	        		<div class="popup-bg options" style="display: block">
 		                <div class="popup" style="width:auto; padding: 40px">	                    
-		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>
+		                    <table class="buttons-list">
 		                    <c:choose>
 		                    	<c:when test="${role eq 'ADMIN'}">
 		                    		<c:choose>		                    			
 		                    			<c:when test="${empty chosenBookingIsApproved}">
-			                    			<form>
-			                    				<input type="hidden" name="command" value="ApproveBooking" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input type="hidden" name="approve" value="true" />
-			                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
-			                    			</form>
-		                    				<form>
-			                    				<input type="hidden" name="command" value="ApproveBooking" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input type="hidden" name="approve" value="false" />
-			                    				<input class="submit_button" type="submit" value="Disapprove"/>
-			                    			</form>		                    				
+			                    			<tr>
+			                    				<td>
+			                    					<form>
+					                    				<input type="hidden" name="command" value="ApproveBooking" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input type="hidden" name="approve" value="true" />
+					                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
+					                    			</form>
+			                    				</td>
+			                    			</tr>
+		                    				<tr>
+		                    					<td>
+		                    						<form>
+					                    				<input type="hidden" name="command" value="ApproveBooking" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input type="hidden" name="approve" value="false" />
+					                    				<input class="submit_button" type="submit" value="Disapprove"/>
+					                    			</form>	
+		                    					</td>
+		                    				</tr>	                    				
 		                    			</c:when>
 		                    			<c:when test="${chosenBookingIsApproved eq false}">
-			                    			<form>
-			                    				<input type="hidden" name="command" value="ApproveBooking" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input type="hidden" name="approve" value="true" />
-			                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
-			                    			</form>
-		                    				<form>
-			                    				<input type="hidden" name="command" value="DeleteBooking" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input class="submit_button" type="submit" value="Delete"/>
-			                    			</form>		                    				
+			                    			<tr>
+			                    				<td>
+			                    					<form>
+					                    				<input type="hidden" name="command" value="ApproveBooking" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input type="hidden" name="approve" value="true" />
+					                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
+					                    			</form>
+			                    				</td>
+			                    			</tr>
+		                    				<tr>
+		                    					<td>
+		                    						<form>
+					                    				<input type="hidden" name="command" value="DeleteBooking" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="Delete"/>
+					                    			</form>
+		                    					</td>
+		                    				</tr>		                    				
 		                    			</c:when>
 		                    			<c:otherwise>
-		                    				<form>
-			                    				<input type="hidden" name="command" value="AddStay" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input class="submit_button" type="submit" value="Guests arrived" style="margin-right:20px"/>
-			                    			</form>			                    			
-		                    				<form>
-			                    				<input type="hidden" name="command" value="EditBooking" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input class="submit_button" type="submit" value="Edit" style="margin-right:20px"/>
-			                    			</form>
-			                    			<form>
-			                    				<input type="hidden" name="command" value="DeleteBooking" />
-			                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-			                    				<input class="submit_button" type="submit" value="Delete"/>
-			                    			</form>			                    			
+		                    				<tr>
+		                    					<td>
+		                    						<form>
+					                    				<input type="hidden" name="command" value="AddStay" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="Guests arrived" style="margin-right:20px"/>
+					                    			</form>	
+		                    					</td>
+		                    				</tr>		                    			
+		                    				<tr>
+		                    					<td>
+		                    						<form>
+					                    				<input type="hidden" name="command" value="EditBooking" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="Edit" style="margin-right:20px"/>
+					                    			</form>
+		                    					</td>
+		                    				</tr>
+			                    			<tr>
+			                    				<td>
+			                    					<form>
+					                    				<input type="hidden" name="command" value="DeleteBooking" />
+					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="Delete"/>
+					                    			</form>
+			                    				</td>
+			                    			</tr>			                    			
 		                    			</c:otherwise>
 		                    		</c:choose>
 		                    	</c:when>
@@ -237,23 +278,32 @@
 		                    			<c:choose>
 		                    				<c:when test="${chosenBookingIsApproved eq true}">
 			                    				<c:if test="${chosenBookingIsPaid eq false}">
-			                    					<input class="submit_button" type="submit" value="Pay" style="margin-right:10px"/>
+			                    					<tr>
+			                    						<td>
+			                    							<input class="submit_button" type="submit" value="Pay" style="margin-right:10px"/>
+			                    						</td>
+			                    					</tr>
 			                    				</c:if>
-			                    				<form>
-				                    				<input type="hidden" name="command" value="DeleteBooking" />
-				                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-				                    				<input class="submit_button" type="submit" value="Delete"/>
-				                    			</form>
+			                    				<tr>
+			                    					<td>
+			                    						<form>
+						                    				<input type="hidden" name="command" value="DeleteBooking" />
+						                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
+						                    				<input class="submit_button" type="submit" value="Delete"/>
+						                    			</form>
+			                    					</td>
+			                    				</tr>
 			                    			</c:when>
 			                    			<c:when test="${chosenBookingIsApproved eq false}">
-			                    				<p>Your booking has been rejected</p>
+			                    				<tr><td><p>Your booking has been rejected</p></td></tr>
 			                    			</c:when>
 			                    			<c:otherwise>
-			                    				<p>Your booking hasn't been approved yet</p>
+			                    				<tr><td><p>Your booking hasn't been approved yet</p></td></tr>
 			                    			</c:otherwise>
 		                    			</c:choose>
 		                    	</c:otherwise>
 		                    </c:choose>
+		                    </table>
 		                </div>
 		            </div>
 	        	</c:if>
@@ -269,8 +319,9 @@
 			                    <input type="date" id="toDate" name="toDate" value="${booking.getToDate()}" required>                
 			                    <br><br>
 			                    <label for="questsNumber">Number of guests:&#160;</label>
-			                    <input type="number" id="guestsNumber" name="guestsNumber" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 90px">
-			                    <input type="radio" name="roomNumber" value="${booking.getRoomNumber()}">
+			                    <input type="number" id="guestsNumber" name="guestsNumber" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 40px">
+			                    <label for="roomNumber">Current room:</label>
+			                    <input type="radio" id="roomNumber" name="roomNumber" value="${booking.getRoomNumber()}" checked>
 			                    <c:out value="${booking.getRoomNumber()}" /><br>
 			                    <input type="hidden" name="bookingId" value="${booking.getId()}" />
 			                    <input type="hidden" name="command" value="EditCheckRoomAvailability" />
@@ -292,7 +343,7 @@
 		                    <br><br>
 		                    <label for="questsNumber">Number of guests:&#160;</label>
 		                    <input type="number" id="guestsNumber" name="guestsNumber" value="1" min="1" max="15" style="margin-right: 90px">
-		                    <input type="hidden" name="command" value="CheckRoomAvailability" />
+		                    <input type="hidden" name="command" value="AddBooking" />
 		                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
 		                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
 		                </form>
@@ -314,7 +365,7 @@
 			                     <img class="close-popup" src="images/close.png" style="width:25px">
 			                    <h5>Please, check data:</h5>
 			                    <form>
-			                    	<b>Room number:</b><br>
+			                    	<b>New room (don't select if u don't need):</b><br>
 				                    <c:forEach var="room" items="${availableRooms}">
 	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
 				                    	<c:out value="${room.getRoomNumber()}" /><br>

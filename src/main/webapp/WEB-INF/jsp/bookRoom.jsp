@@ -92,7 +92,7 @@
 
         <div class="main" style="flex-direction: column; justify-content: center">
             
-            <div class="form" style="padding-bottom: 20px">
+            <div class="form" style="padding-bottom: 20px; margin-top:20px">
                 
                 <h4>Check for available places room #<c:out value="${room.getRoomNumber()}"/>:</h4>
                 <br>                
@@ -164,10 +164,6 @@
                 <div style="padding-bottom: 30px">                     
                     <c:forEach var="room" items="${allRooms}">
                         <div style="display: inline-block; margin-right: 20px; margin-bottom: 20px">
-                        	<c:if test="${room.getImages().size()>0}">
-                        		<img src="${room.getImages().get(0).getImgPath()}" style="display: block; width: 250px"/>
-                        	</c:if>
-                            
                             <form>
                                  <input type="hidden" name="command" value="BookRoom" />
 							     <input type="hidden" name="roomNumber" value="${room.getRoomNumber()}" />

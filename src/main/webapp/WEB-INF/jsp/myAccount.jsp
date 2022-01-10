@@ -172,6 +172,15 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <form> 
+                            	<a href="Controller?command=GO_TO_STAYS_PAGE">                            	
+                                	<input class="buttons" type="button" value="Stays"/>
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
                     <tr>
                         <td>
                             <form>   
@@ -194,8 +203,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <form>                                
-                                <input class="buttons open-popup del-acc" type="button" value="Delete account"/>
+                            <form>
+                            	<c:if test="${sessionScope.login ne 'ADMIN'}" >
+                                	<input class="buttons open-popup del-acc" type="button" value="Delete account"/>                                	
+								</c:if>   
                             </form>
                         </td>
                     </tr>
