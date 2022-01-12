@@ -99,11 +99,11 @@
 
                     <tr>
                         <td><c:out value="${login}"/>:<br><br></td>
-                        <td><input style="width:200px" type="text" name="login" value = ""/><br><br></td>
+                        <td><input style="width:200px" type="text" name="login" value = "" required/><br><br></td>
                     </tr>
                     <tr>
                         <td><c:out value="${password}"/>:<br><br><br></td>
-                        <td><input style="width:200px" type="password" name="password" value = ""/><br><br><br></td>
+                        <td><input style="width:200px" type="password" name="password" value = "" required/><br><br><br></td>
                     </tr>
 
                     <tr>

@@ -20,7 +20,7 @@ public class CheckRoomAvailabilityCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"));
 		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"));
 		int guestsNumber = Integer.parseInt(request.getParameter("guestsNumber"));
@@ -60,10 +60,10 @@ public class CheckRoomAvailabilityCommand implements Command {
 		}
 		
 		if(request.getParameter("bookingId")!=null) {
-			request.setAttribute("bookingId", request.getParameter("bookingId"));	
+			request.setAttribute("editedBookingId", request.getParameter("bookingId"));	
 		}
 		
-		if(request.getParameter("command").equals("AddBooking") || request.getParameter("command").equals("EditCheckRoomAvailability")) {
+		if(request.getParameter("command").equals("AddBooking") || request.getParameter("command").equals("EditBookingCheck")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookings.jsp");
 			dispatcher.forward(request, response);
 		}else {

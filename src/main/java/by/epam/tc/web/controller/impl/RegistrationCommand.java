@@ -11,20 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.entity.user.Admin;
 import by.epam.tc.web.entity.user.Client;
+import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.service.*;
 
-public class RegistrationCommand implements Command{
-	
-	private UserService userService = null;
-	
-	public RegistrationCommand() {
-		try {
-			userService = ServiceFactory.getInstance().getUserService();
-		} catch (Exception e) {
-			//TODO
-		}
-	}
-	  
+public class RegistrationCommand implements Command{	  
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -49,31 +39,20 @@ public class RegistrationCommand implements Command{
 				client = new Client(login, password, name, surname, passportId, dateOfBith, 
 						country, phone, email);
 				password = null;
-				client = userService.signUp(client);
-				//request.getSession().setAttribute("client", client);
-				request.getSession().setAttribute("role", "CLIENT");
+				client = ServiceFactory.getInstance().getUserService().signUp(client);
+				request.getSession().setAttribute("role", Role.CLIENT.toString());
 				request.getSession().setAttribute("login", login);
-				request.getSession().setAttribute("name", client.getFirstName());
-				request.getSession().setAttribute("surname", client.getLastName());
-				request.getSession().setAttribute("passportId", client.getPassportId());
-				request.getSession().setAttribute("dateOfBith", client.getBirthDate());
-				request.getSession().setAttribute("country", client.getCountry());
-				request.getSession().setAttribute("phone", client.getPhoneNumber());
-				request.getSession().setAttribute("email", client.getEmail());
 			}
 			else {
 				name = request.getParameter("name");
 				String photo = request.getParameter("photo");				
 				admin = new Admin(login, password, name, photo);
 				password = null;
-				admin = userService.signUp(admin);
-				request.getSession().setAttribute("role", "ADMIN");
+				admin = ServiceFactory.getInstance().getUserService().signUp(admin);
+				request.getSession().setAttribute("role", Role.ADMIN.toString());
 				request.getSession().setAttribute("login", login);
-				request.getSession().setAttribute("name", admin.getName());
-				request.getSession().setAttribute("photo", admin.getPhotoPath());
-			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myAccount.jsp");
-			dispatcher.forward(request, response);
+			}			
+			response.sendRedirect("Controller?command=GO_TO_MY_ACCOUNT_PAGE");
 		} catch (ServiceException e) {
 			response.sendRedirect("Controller?command=GO_TO_REGISTRATION_PAGE&errorMessage="+errorMessage);
 		}

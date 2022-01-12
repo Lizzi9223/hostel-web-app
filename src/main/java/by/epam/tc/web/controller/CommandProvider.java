@@ -50,7 +50,7 @@ public final class CommandProvider {
 		commands.put("DeleteBooking", new DeleteBookingCommand());
 		commands.put("AddStay", new AddStayCommand());
 		commands.put("AddBooking", new CheckRoomAvailabilityCommand());
-		commands.put("EditCheckRoomAvailability", new CheckRoomAvailabilityCommand());
+		commands.put("EditBookingCheck", new CheckRoomAvailabilityCommand());
 		commands.put("EditStay", new EditStayCommand());
 		commands.put("DeleteStay", new DeleteStayCommand());
 		commands.put("ChooseStay", new ChooseStayCommand());

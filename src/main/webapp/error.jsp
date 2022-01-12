@@ -9,9 +9,12 @@
       <style>
         
           .container{
+            background-color: #D2B48C;
             display: flex;
             flex-direction: column;
             height: 100vh;
+            justify-content: center;
+            align-items: center;
         }
     
     </style>
@@ -20,12 +23,12 @@
 </head>
 <body>
 
-    <div class="container">
-    
-        <img src="" alt="image" />
-        <h1>Oops...</h1>
-        <h3>Something went wrong</h3>
-    
+    <div class="container">    
+        <div>    
+            <h1>Oops...</h1>
+            <h2>Something went wrong :(</h2>
+            <h3>Try again later</h3>            
+        </div>        
     </div>
 
 </body>

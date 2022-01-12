@@ -128,7 +128,7 @@ public class StaysServiceImpl implements StaysService {
 				int bookedPlacesAmount = 0;
 				for(Booking booking : bookings) {
 					if((i.isAfter(booking.getFromDate()) || i.equals(booking.getFromDate())) 
-							&& (i.isBefore(booking.getToDate()) || i.equals(booking.getToDate()))) {
+							&& (i.isBefore(booking.getToDate()) /*|| i.equals(booking.getToDate())*/  )) {
 						bookedPlacesAmount += booking.getGuestsCount();
 					}
 				}	

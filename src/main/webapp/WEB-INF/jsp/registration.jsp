@@ -166,12 +166,10 @@
 
                     <tr>
                         <td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${back}"/></a><br><br></td>
-                        <td></td>
+                        <td><p class="error"><c:out value="${param.errorMessage}" /></p></td>
                     </tr>
                 </table>
-               </form>  
-            	<p class="error"><c:out value="${param.errorMessage}" /></p>
-	        	<br>
+               </form> 
             </div>
             
 

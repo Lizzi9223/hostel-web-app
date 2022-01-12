@@ -194,7 +194,7 @@
                 
 	        	<c:if test="${popUpView eq 'options'}">
 	        		<div class="popup-bg options" style="display: block">
-		                <div class="popup" style="width:auto; padding: 40px">	                    
+		                <div class="popup" style="width:auto; padding: 40px; padding-bottom:0">	                    
 		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>
 		                    <table class="buttons-list">
 		                    <c:choose>
@@ -324,7 +324,7 @@
 			                    <input type="radio" id="roomNumber" name="roomNumber" value="${booking.getRoomNumber()}" checked>
 			                    <c:out value="${booking.getRoomNumber()}" /><br>
 			                    <input type="hidden" name="bookingId" value="${booking.getId()}" />
-			                    <input type="hidden" name="command" value="EditCheckRoomAvailability" />
+			                    <input type="hidden" name="command" value="EditBookingCheck" />
 			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
 			                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
 			                </form>
@@ -354,26 +354,42 @@
 	            	<c:when test="${checkResult eq false}">
 	            		<div class="popup-bg" style="display: block">
 			                <div class="popup" style="width:auto">
-			                     <img class="close-popup" src="images/close.png" style="width:25px">
+			                	<a href="Controller?command=GO_TO_BOOKINGS_PAGE">
+			                		<img src="images/close.png" style="width:25px">
+			                	</a>
 			                    <p>Sorry, no available places</p>
 			                </div>
 			            </div>
 	            	</c:when>
 	            	<c:when test="${checkResult eq true}">
 	            		<div class="popup-bg" style="display: block">
-			                <div class="popup" style="width:auto">
-			                     <img class="close-popup" src="images/close.png" style="width:25px">
-			                    <h5>Please, check data:</h5>
+			                <div class="popup" style="width:auto; padding-top:30px">
+			                    <a href="Controller?command=GO_TO_BOOKINGS_PAGE">
+			                		<img src="images/close.png" style="width:25px;">
+			                	</a>
+			                    <h5 style="margin-top:15px">Please, check data:</h5>
 			                    <form>
 			                    	<b>New room (don't select if u don't need):</b><br>
 				                    <c:forEach var="room" items="${availableRooms}">
 	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
 				                    	<c:out value="${room.getRoomNumber()}" /><br>
 				                    </c:forEach>
-				                    <b>Since:</b><input type="date" name="fromDate" value="${fromDate}" readonly /><br>
-				                    <b>To:</b><input type="date" name="toDate" value="${toDate}" readonly /><br>				                    
-				                    <b>Guests number:</b><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /><br><br>
-				                    <input type="hidden" name="bookingId" value="${bookingId}" />
+				                    <table>
+				                    	<tr>
+				                    		<td><b>Since:</b></td>
+				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
+				                    	</tr>
+				                    	<tr>
+				                    		<td><b>To:</b></td>
+				                    		<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
+				                    	</tr>
+				                    	<tr>
+				                    		<td><b>Guests number:</b></td>
+				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
+				                    	</tr>
+				                    </table>			                    
+				                    <br>
+				                    <input type="hidden" name="editedBookingId" value="${editedBookingId}" />
 				                    <input type="hidden" name="command" value="SubmitBooking" />
 				                    <input class="submit_button" type="submit" value="Submit booking"/>
 			                    </form>			                    

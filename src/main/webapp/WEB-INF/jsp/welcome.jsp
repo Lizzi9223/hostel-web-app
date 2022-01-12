@@ -25,7 +25,6 @@
 	<fmt:setBundle basename="prop" var="lang"/>
 	<fmt:message bundle="${lang}" key="menu.main" var="main" />
 	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
 	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
 	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
 	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
@@ -46,7 +45,6 @@
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
                 <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
-                <div><c:out value="${photos}"/></div>|
                 <div><c:out value="${contacts}"/></div>|
                 <c:if test="${not empty sessionScope.login}" >
                     <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>                    

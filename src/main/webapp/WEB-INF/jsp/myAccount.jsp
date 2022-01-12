@@ -104,41 +104,41 @@
                                 <c:when test="${sessionScope.role eq 'ADMIN'}">
                                     <tr>
                                         <td>Name:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="name" value = "${sessionScope.name}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="name" value = "${admin.getName()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Photo:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="photo" value = "${sessionScope.photo}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="photo" value = "${admin.getPhotoPath()}"/><br><br></td>
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
                                     <tr>
                                         <td>Name:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="name" value="${sessionScope.name}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="name" value="${client.getFirstName()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Surname:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="surname" value = "${sessionScope.surname}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="surname" value = "${client.getLastName()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Passport id:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="passportId" value = "${sessionScope.passportId}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="passportId" value = "${client.getPassportId()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Date of birth:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="dateOfBith" value = "${sessionScope.dateOfBith}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="dateOfBith" value = "${client.getBirthDate()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Country:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="country" value = "${sessionScope.country}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="country" value = "${client.getCountry()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Phone number:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="phone" value = "${sessionScope.phone}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="phone" value = "${client.getPhoneNumber()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td>Email:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="email" value = "${sessionScope.email}"/><br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="email" value = "${client.getEmail()}"/><br><br></td>
                                     </tr>	
                                 </c:otherwise>
                             </c:choose>
@@ -247,7 +247,6 @@
         </div>  
     
     </div>
-
 	
 </body>
 </html>
