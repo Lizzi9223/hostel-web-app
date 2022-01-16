@@ -7,20 +7,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 
 public class GoToWelcomePageCommand implements Command{	
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("logOut")!=null) {
-			request.getSession().removeAttribute("role");
-			request.getSession().removeAttribute("login");
+		if(request.getParameter(Constant.Utility.LOG_OUT)!=null) {
+			request.getSession().removeAttribute(Constant.Utility.ROLE);
+			request.getSession().removeAttribute(Constant.Utility.LOGIN);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/welcome.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_WELCOME_PAGE);
 		dispatcher.forward(request, response);
 		
 	}

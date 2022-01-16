@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class BlackListClient extends Client {
+	private static final long serialVersionUID = 1L;
+	
     private String reason;
     private LocalDate sinceDate;
 

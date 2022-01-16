@@ -6,14 +6,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 
 public class AddStayCommand implements Command {
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.AddStayCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
+//		try {
+//			
+//		}catch(ServletException e) {
+//			logger.error("error while creating stay", e);
+//			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+//		}
 	}
 
 }

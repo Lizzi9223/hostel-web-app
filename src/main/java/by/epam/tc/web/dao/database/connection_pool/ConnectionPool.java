@@ -3,6 +3,7 @@ package by.epam.tc.web.dao.database.connection_pool;
 import by.epam.tc.web.dao.database.DBParameter;
 import by.epam.tc.web.dao.database.DBResourceManager;
 
+import java.net.ConnectException;
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
@@ -34,10 +35,9 @@ public class ConnectionPool {
         }
     }
 
-    public static ConnectionPool getInstance() throws ConnectionPoolException{
+    public static ConnectionPool getInstance(){
         if(instance == null){
             instance = new ConnectionPool();
-            instance.initPoolData();
         }
         return instance;
     }
@@ -101,22 +101,24 @@ public class ConnectionPool {
         } catch (SQLException e){
             throw new ConnectionPoolException(e);
         }
-
-        try {
-            if(st!=null){
-                st.close();
+        finally {
+        	try {
+                if(st!=null){
+                    st.close();
+                }
+            } catch (SQLException e){
+                throw new ConnectionPoolException(e);
             }
-        } catch (SQLException e){
-            throw new ConnectionPoolException(e);
-        }
-
-        try {
-            if(con!=null){
-                con.close();
-            }
-        } catch (SQLException e){
-            throw new ConnectionPoolException(e);
-        }
+            finally {
+            	try {
+                    if(con!=null){
+                        con.close();
+                    }
+                } catch (SQLException e){
+                    throw new ConnectionPoolException(e);
+                }
+			}
+		}
     }
 
     public void closeConnection(Connection con, Statement st) throws ConnectionPoolException {
@@ -127,13 +129,15 @@ public class ConnectionPool {
         } catch (SQLException e){
             throw new ConnectionPoolException(e);
         }
-        try {
-            if(con!=null){
-                con.close();
+        finally {
+        	try {
+                if(con!=null){
+                    con.close();
+                }
+            } catch (SQLException e){
+                throw new ConnectionPoolException(e);
             }
-        } catch (SQLException e){
-            throw new ConnectionPoolException(e);
-        }
+		}
     }
 
     private class PooledConnection implements Connection {

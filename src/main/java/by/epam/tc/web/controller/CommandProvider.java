@@ -20,6 +20,7 @@ import by.epam.tc.web.controller.impl.EditStayCommand;
 import by.epam.tc.web.controller.impl.LoginationCommand;
 import by.epam.tc.web.controller.impl.RegistrationCommand;
 import by.epam.tc.web.controller.impl.SubmitBookingCommand;
+import by.epam.tc.web.controller.impl.SubmitStayCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToBookingsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToErrorPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToLoginationPageCommand;
@@ -54,6 +55,8 @@ public final class CommandProvider {
 		commands.put("EditStay", new EditStayCommand());
 		commands.put("DeleteStay", new DeleteStayCommand());
 		commands.put("ChooseStay", new ChooseStayCommand());
+		commands.put("EditStayCheck", new EditStayCommand());
+		commands.put("SubmitStay", new SubmitStayCommand());
 		
 		commands.put("GO_TO_ERROR_PAGE", new GoToErrorPageCommand());
 		commands.put("GO_TO_REGISTRATION_PAGE", new GoToRegistrationPageCommand());

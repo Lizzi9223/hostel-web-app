@@ -11,15 +11,9 @@ import by.epam.tc.web.service.UserService;
 
 public class UserServiceImpl implements UserService {
 	
-	private final UserDAO userDAO;
+	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 	
-	public UserServiceImpl() throws ServiceException {
-		try {
-			userDAO = DAOFactory.getInstance().getUserDAO();
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-	}
+	public UserServiceImpl(){}
 	
     @Override
     public User signIn(String login, String password) throws ServiceException {    	

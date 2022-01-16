@@ -9,18 +9,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import by.epam.tc.web.controller.constant.Constant;
+
 public class CharsetFilter implements Filter {
 
 	private String encoding;	
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		encoding = filterConfig.getInitParameter("requestEncoding");
+		encoding = filterConfig.getInitParameter(Constant.Utility.REQUEST_ENCODING);
 		if (encoding == null) {
 			encoding = "utf-8";
 		}
 	}
-
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

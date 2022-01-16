@@ -3,6 +3,8 @@ package by.epam.tc.web.entity.user;
 import java.util.Objects;
 
 public class Admin extends User{
+	private static final long serialVersionUID = 1L;
+	
     private String name;
     private String photoPath;
 
@@ -32,13 +34,13 @@ public class Admin extends User{
         this.photoPath = photoPath;
     }
     
-    public Admin(String login, String password, String name, String photo) {
+    public Admin(String login, String password, String name, String photoPath) {
     	super(login, password, Role.ADMIN);
     	this.name = name;
         this.photoPath = photoPath;
     }
     
-    public Admin(String login, String name, String photo) {
+    public Admin(String login, String name, String photoPath) {
     	super(login, Role.ADMIN);
     	this.name = name;
         this.photoPath = photoPath;

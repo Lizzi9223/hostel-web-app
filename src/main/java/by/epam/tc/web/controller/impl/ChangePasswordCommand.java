@@ -6,41 +6,37 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
-import by.epam.tc.web.service.UserService;
 
 public class ChangePasswordCommand implements Command {
-
-	private UserService userService = null;
-	
-	public ChangePasswordCommand() {
-		try {
-			userService = ServiceFactory.getInstance().getUserService();
-		} catch (Exception e) {
-			//TODO
-		}
-	}
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.ChangePasswordCommand.class);
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		try {			
-			String login = request.getSession().getAttribute("login").toString();
-			String password = request.getParameter("initialPassword");
-			if(userService.signIn(login, password)!=null) {
-				password = request.getParameter("newPassword");
-				userService.editPassword(login, password);
+			String login = request.getSession().getAttribute(Constant.Utility.LOGIN).toString();
+			String password = request.getParameter(Constant.Utility.INITIAL_PASSWORD);
+			if(ServiceFactory.getInstance().getUserService().signIn(login, password)!=null) {
+				password = request.getParameter(Constant.Utility.NEW_PASSWORD);
+				ServiceFactory.getInstance().getUserService().editPassword(login, password);
 				password = null;
+				response.sendRedirect(Constant.Redirect.LOG_OUT);
 			}
 			else {
-				// TODO !!!!!!!!!!!!!!!!!!!!!!!!!!
+				password = null;
+				request.getSession().setAttribute(Constant.Utility.ERROR,Constant.Message.WRONG_PASSWORD);
+				response.sendRedirect(Constant.Redirect.TO_ACCOUNT_PAGE);
 			}
-			password = null;
-			response.sendRedirect("Controller?command=GO_TO_WELCOME_PAGE&logOut=true");
 		} catch (ServiceException e) {
-			// TODO: handle exception
+			logger.error("error while changing password", e);
+			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
 		}
 	}
 

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class RegularClient extends Client {
+	private static final long serialVersionUID = 1L;
+	
     private LocalDate sinceDate;
     private int discount;
     private String note;

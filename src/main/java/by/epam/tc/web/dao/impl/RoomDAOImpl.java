@@ -9,26 +9,20 @@ import by.epam.tc.web.dao.database.query.*;
 import by.epam.tc.web.entity.room.Image;
 import by.epam.tc.web.entity.room.Room;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDAOImpl implements RoomDAO {
 
-    private final ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool = ConnectionPool.getInstance();
     private final SelectQuery selectQueryProvider = QueryFactory.getInstance().getSelectQuery();
     private final InsertQuery insertQueryProvider = QueryFactory.getInstance().getInsertQuery();
     private final DeleteQuery deleteQueryProvider = QueryFactory.getInstance().getDeleteQuery();
     private final UpdateQuery updateQueryProvider = QueryFactory.getInstance().getUpdateQuery();
 
-    public RoomDAOImpl() throws DAOException {
-        try {
-        	connectionPool = ConnectionPool.getInstance();
-        }
-        catch (ConnectionPoolException e){
-            throw new DAOException(e);
-        }
-    }
+    public RoomDAOImpl(){}
 
     @Override
     public List<Room> getAllRooms() throws DAOException {
@@ -43,7 +37,7 @@ public class RoomDAOImpl implements RoomDAO {
 
             while (rs.next()){
                 int roomNumber = rs.getInt(Metadata.RoomsTableColumn.ROOM_NUMBER);
-                int cost = rs.getInt(Metadata.RoomsTableColumn.COST);
+                BigDecimal cost = rs.getBigDecimal(Metadata.RoomsTableColumn.COST);
                 int capacity = rs.getInt(Metadata.RoomsTableColumn.CAPACITY);
                 String gender = rs.getString(Metadata.RoomsTableColumn.GENDER);
                 boolean isBathroomInRoom = rs.getBoolean(Metadata.RoomsTableColumn.BATHROOM);
@@ -111,7 +105,7 @@ public class RoomDAOImpl implements RoomDAO {
             rs = st.executeQuery();
 
             while (rs.next()){
-                int cost = rs.getInt(Metadata.RoomsTableColumn.COST);
+                BigDecimal cost = rs.getBigDecimal(Metadata.RoomsTableColumn.COST);
                 int capacity = rs.getInt(Metadata.RoomsTableColumn.CAPACITY);
                 String gender = rs.getString(Metadata.RoomsTableColumn.GENDER);
                 boolean isBathroomInRoom = rs.getBoolean(Metadata.RoomsTableColumn.BATHROOM);
@@ -174,7 +168,7 @@ public class RoomDAOImpl implements RoomDAO {
             con = connectionPool.takeConnection();
             st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.ROOMS_TABLE));
             st.setInt(1,room.getRoomNumber());
-            st.setInt(2,room.getCost());
+            st.setBigDecimal(2,room.getCost());
             st.setInt(3,room.getCapacity());
             st.setString(4,room.getGender());
             st.setBoolean(5,room.isBathroomInRoom());
@@ -226,7 +220,7 @@ public class RoomDAOImpl implements RoomDAO {
             con = connectionPool.takeConnection();
             st = con.prepareStatement(updateQueryProvider.getUpdateQueryWhere(Metadata.ROOMS_TABLE, Metadata.RoomsTableColumn.ROOM_NUMBER));
             st.setInt(1,room.getRoomNumber());
-            st.setInt(2,room.getCost());
+            st.setBigDecimal(2,room.getCost());
             st.setInt(3,room.getCapacity());
             st.setString(4,room.getGender());
             st.setBoolean(5,room.isBathroomInRoom());

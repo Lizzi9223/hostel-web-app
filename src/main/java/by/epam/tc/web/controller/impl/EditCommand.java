@@ -8,78 +8,55 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 import by.epam.tc.web.entity.user.Admin;
 import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
-import by.epam.tc.web.service.UserService;
 
 public class EditCommand implements Command {
-
-	private UserService userService = null;
-	
-	public EditCommand() {
-		try {
-			userService = ServiceFactory.getInstance().getUserService();
-		} catch (Exception e) {
-			//TODO
-		}
-	}
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.EditCommand.class);
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Client client = null;
-		Admin admin = null;
-		
-		String name = "";
-		String errorMessage = "Issues while edit. Try again";		
+		Admin admin = null;	
 		
 		try {
-			String login = request.getParameter("login");	
-			String passportId = request.getParameter("passportId");
+			String login = request.getParameter(Constant.Utility.LOGIN);	
+			String passportId = request.getParameter(Constant.Utility.PASSPORT_ID);
 			
 			if(passportId != null) { 
-				name = request.getParameter("name");
-				String surname = request.getParameter("surname");
-				LocalDate dateOfBith = LocalDate.parse(request.getParameter("dateOfBith"));
-				String country = request.getParameter("country");
-				String phone = request.getParameter("phone");
-				String email = request.getParameter("email");				
+				String name = request.getParameter(Constant.Utility.NAME);
+				String surname = request.getParameter(Constant.Utility.SURNAME);
+				LocalDate dateOfBith = LocalDate.parse(request.getParameter(Constant.Utility.DATE_OF_BIRTH));
+				String country = request.getParameter(Constant.Utility.COUNTRY);
+				String phone = request.getParameter(Constant.Utility.PHONE);
+				String email = request.getParameter(Constant.Utility.EMAIL);				
 				client = new Client(login, name, surname, passportId, dateOfBith, 
 						country, phone, email);				
-				client = userService.edit(client, 
-						request.getSession().getAttribute("login").toString(),
-						request.getSession().getAttribute("passportId").toString());				
-				request.getSession().setAttribute("login", login);
-				request.getSession().setAttribute("name", name);
-				request.getSession().setAttribute("surname", surname);
-				request.getSession().setAttribute("passportId", passportId);
-				request.getSession().setAttribute("dateOfBith", dateOfBith);
-				request.getSession().setAttribute("country", country);
-				request.getSession().setAttribute("phone", phone);
-				request.getSession().setAttribute("email", email);
+				client = ServiceFactory.getInstance().getUserService().edit(client, 
+						request.getSession().getAttribute(Constant.Utility.LOGIN).toString(),
+						request.getSession().getAttribute(Constant.Utility.PASSPORT_ID).toString());				
+				request.getSession().setAttribute(Constant.Utility.LOGIN, login);
 			}
 			else {
-				name = request.getParameter("name");
-				String photo = request.getParameter("photo");				
+				String name = request.getParameter(Constant.Utility.NAME);
+				String photo = request.getParameter(Constant.Utility.PHOTO);				
 				admin = new Admin(login, name, photo);				
-				admin = userService.edit(admin, 
-						request.getSession().getAttribute("login").toString());
-				request.getSession().setAttribute("login", login);
-				request.getSession().setAttribute("name", name);
-				request.getSession().setAttribute("photo", photo);
-			}			
-		} catch (ServiceException e) {
-			// TODO: handle exception
-		}
-		
-		if(client!=null || admin!=null) {			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/myAccount.jsp");
+				admin = ServiceFactory.getInstance().getUserService().edit(admin, 
+						request.getSession().getAttribute(Constant.Utility.LOGIN).toString());
+				request.getSession().setAttribute(Constant.Utility.LOGIN, login);
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_ACCOUNT_PAGE);
 			dispatcher.forward(request, response);
-		}
-		else {
-			response.sendRedirect("Controller?command=GO_TO_MY_ACCOUNT_PAGE&errorMessage="+errorMessage);
+		} catch (ServiceException e) {
+			logger.error("error while editing account", e);
+			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
 		}
 	}
 

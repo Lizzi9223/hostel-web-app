@@ -16,21 +16,13 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class UserDAOImpl implements UserDAO{
 
-    private final ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool = ConnectionPool.getInstance();
     private final SelectQuery selectQueryProvider = QueryFactory.getInstance().getSelectQuery();
     private final InsertQuery insertQueryProvider = QueryFactory.getInstance().getInsertQuery();
     private final DeleteQuery deleteQueryProvide = QueryFactory.getInstance().getDeleteQuery();
     private final UpdateQuery updateQueryProvide = QueryFactory.getInstance().getUpdateQuery();
 
-    public UserDAOImpl() throws DAOException {
-        try {
-        	connectionPool = ConnectionPool.getInstance();
-        }
-        catch (ConnectionPoolException e){
-            throw new DAOException(e);
-        }
-    }    
-    
+    public UserDAOImpl(){} 
 
     @Override
     public User findUserByLoginAndPassword(String login, String password) throws DAOException {    	
@@ -46,17 +38,13 @@ public class UserDAOImpl implements UserDAO{
             st.setString(1, login);
             rs = st.executeQuery();
             while (rs.next()){
-            	try {
-            		if(BCrypt.checkpw(password, rs.getString(Metadata.UsersTableColumn.PASSWORD))){
-                		password = null;
-                		int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
-                        String roleName = rs.getString(Metadata.UserRolesTableColumn.ROLE_NAME);
-                        Role role = Role.valueOf(roleName.toUpperCase());
-                        user = new User(id, login, role);
-                	}     
-				} catch (Exception e) {
-					return user;
-				}           
+            	if(BCrypt.checkpw(password, rs.getString(Metadata.UsersTableColumn.PASSWORD))){
+            		password = null;
+            		int id = rs.getInt(Metadata.UsersTableColumn.USER_ID);
+                    String roleName = rs.getString(Metadata.UserRolesTableColumn.ROLE_NAME);
+                    Role role = Role.valueOf(roleName.toUpperCase());
+                    user = new User(id, login, role);
+            	}           
             }
         }
         catch (ConnectionPoolException | SQLException e){

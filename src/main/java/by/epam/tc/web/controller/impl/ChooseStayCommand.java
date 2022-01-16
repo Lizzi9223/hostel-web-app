@@ -7,26 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.epam.tc.web.controller.Command;
-import by.epam.tc.web.entity.stay.Booking;
-import by.epam.tc.web.entity.stay.Stay;
-import by.epam.tc.web.service.ServiceException;
-import by.epam.tc.web.service.ServiceFactory;
+import by.epam.tc.web.controller.constant.Constant;
 
 public class ChooseStayCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("chosenStayId"));			
-		try {
-			Stay stay = ServiceFactory.getInstance().getStaysService().getStayById(id);
-			request.getSession().setAttribute("chosenStayId", id);
-			request.getSession().setAttribute("popUpView", "options");
-		}
-		catch (ServiceException e) {
-			// TODO: handle exception
-		}	
-		
-		response.sendRedirect("Controller?command=GO_TO_STAYS_PAGE");
+		int id = Integer.parseInt(request.getParameter(Constant.Utility.CHOSEN_STAY_ID));			
+		request.getSession().setAttribute(Constant.Utility.CHOSEN_STAY_ID, id);
+		request.getSession().setAttribute(Constant.Utility.POPUP_VIEW, Constant.Utility.OPTIONS);
+		response.sendRedirect(Constant.Redirect.TO_STAYS_PAGE);
 	}
 
 }

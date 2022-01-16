@@ -27,7 +27,9 @@
         <div>    
             <h1>Oops...</h1>
             <h2>Something went wrong :(</h2>
-            <h3>Try again later</h3>            
+            <h3>Try again later</h3>
+            <br><br>
+            <a href="Controller?command=GO_TO_WELCOME_PAGE"><button class="buttons">Main</button></a>            
         </div>        
     </div>
 

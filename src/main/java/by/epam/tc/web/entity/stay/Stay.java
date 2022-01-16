@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Stay implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int id;
     private int clientId;
     private int roomNumber;

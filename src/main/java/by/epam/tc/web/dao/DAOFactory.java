@@ -17,38 +17,23 @@ public final class DAOFactory {
         return instance;
     }
 
-    public UserDAO getUserDAO() throws DAOException {
-        try{
-            if(userDAO == null){
-                userDAO = new UserDAOImpl();
-            }
-        }
-        catch (DAOException e){
-            throw e;
+    public UserDAO getUserDAO(){
+    	if(userDAO == null){
+            userDAO = new UserDAOImpl();
         }
         return userDAO;
     }
 
-    public StaysDAO getStaysDAO() throws DAOException{
-        try{
-            if(staysDAO == null){
-                staysDAO = new StaysDAOImpl();
-            }
-        }
-        catch (DAOException e){
-            throw e;
+    public StaysDAO getStaysDAO(){
+    	if(staysDAO == null){
+            staysDAO = new StaysDAOImpl();
         }
         return staysDAO;
     }
 
-    public RoomDAO getRoomDAO() throws DAOException{
-        try{
-            if(roomDAO == null){
-                roomDAO = new RoomDAOImpl();
-            }
-        }
-        catch (DAOException e){
-            throw e;
+    public RoomDAO getRoomDAO(){
+    	if(roomDAO == null){
+            roomDAO = new RoomDAOImpl();
         }
         return roomDAO;
     }

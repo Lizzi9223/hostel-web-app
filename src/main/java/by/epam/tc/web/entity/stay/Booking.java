@@ -1,10 +1,13 @@
 package by.epam.tc.web.entity.stay;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Booking implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int id;
     private int userId;
     private int roomNumber;
@@ -14,6 +17,7 @@ public class Booking implements Serializable {
     private Boolean isApproved;
     private LocalDate approveDate;
     private boolean isPaid;
+    private BigDecimal price;
 
     public Booking(){}
 
@@ -106,7 +110,15 @@ public class Booking implements Serializable {
         this.approveDate = approveDate;
     }
 
-    public boolean isPaid() {
+    public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public boolean isPaid() {
         return isPaid;
     }
 
@@ -114,9 +126,10 @@ public class Booking implements Serializable {
         isPaid = paid;
     }
 
-    @Override
+	@Override
 	public int hashCode() {
-		return Objects.hash(approveDate, fromDate, guestsCount, id, isApproved, isPaid, roomNumber, toDate, userId);
+		return Objects.hash(approveDate, fromDate, guestsCount, id, isApproved, isPaid, price, roomNumber, toDate,
+				userId);
 	}
 
 	@Override
@@ -130,22 +143,15 @@ public class Booking implements Serializable {
 		Booking other = (Booking) obj;
 		return Objects.equals(approveDate, other.approveDate) && Objects.equals(fromDate, other.fromDate)
 				&& guestsCount == other.guestsCount && id == other.id && Objects.equals(isApproved, other.isApproved)
-				&& isPaid == other.isPaid && roomNumber == other.roomNumber && Objects.equals(toDate, other.toDate)
-				&& userId == other.userId;
+				&& isPaid == other.isPaid && Objects.equals(price, other.price) && roomNumber == other.roomNumber
+				&& Objects.equals(toDate, other.toDate) && userId == other.userId;
 	}
 
 	@Override
-    public String toString() {
-        return "Booking{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", roomNumber=" + roomNumber +
-                ", fromDate=" + fromDate +
-                ", toDate=" + toDate +
-                ", guestsCount=" + guestsCount +
-                ", isApproved=" + isApproved +
-                ", approveDate=" + approveDate +
-                ", isPaid=" + isPaid +
-                '}';
-    }
+	public String toString() {
+		return "Booking [id=" + id + ", userId=" + userId + ", roomNumber=" + roomNumber + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + ", guestsCount=" + guestsCount + ", isApproved=" + isApproved
+				+ ", approveDate=" + approveDate + ", isPaid=" + isPaid + ", price=" + price + "]";
+	}
+	
 }

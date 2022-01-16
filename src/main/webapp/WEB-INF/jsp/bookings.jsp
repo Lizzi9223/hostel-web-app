@@ -148,6 +148,7 @@
                                 <th scope="col">Room</th>
                                 <th scope="col">Is approved</th>
                                 <th scope="col">Approve date</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Is paid</th>
                                 <th scope="col" style="visibility: hidden"></th>
                             </tr>
@@ -177,6 +178,7 @@
                                     <c:set var="dateToParse" value="${booking.getApproveDate()}"/>
                                     <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
                                     <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
+                                    <td><c:out value="${booking.getPrice()}" /></td>
                                     <td><c:out value="${booking.isPaid()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">

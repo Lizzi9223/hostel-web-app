@@ -3,9 +3,7 @@ package by.epam.tc.web.controller.impl;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
@@ -24,16 +23,16 @@ public class SubmitBookingCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		LocalDate fromDate = LocalDate.parse(request.getParameter("fromDate"));
-		LocalDate toDate = LocalDate.parse(request.getParameter("toDate"));
-		int guestsNumber = Integer.parseInt(request.getParameter("guestsNumber"));
+		LocalDate fromDate = LocalDate.parse(request.getParameter(Constant.Utility.FROM_DATE));
+		LocalDate toDate = LocalDate.parse(request.getParameter(Constant.Utility.TO_DATE));
+		int guestsNumber = Integer.parseInt(request.getParameter(Constant.Utility.GUESTS_NUMBER));
 		int roomNumber = -1;
-		if(request.getParameter("roomNumber")!=null) {
-			roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+		if(request.getParameter(Constant.Utility.ROOM_NUMBER)!=null) {
+			roomNumber = Integer.parseInt(request.getParameter(Constant.Utility.ROOM_NUMBER));
 		}
 		try {
-			if(!request.getParameter("editedBookingId").equals("")) {
-				int id = Integer.parseInt(request.getParameter("editedBookingId"));
+			if(!request.getParameter(Constant.Utility.EDITED_BOOKING_ID).equals(Constant.Utility.EMPTY)) {
+				int id = Integer.parseInt(request.getParameter(Constant.Utility.EDITED_BOOKING_ID));
 				Booking booking = ServiceFactory.getInstance().getStaysService().getBookingById(id);
 				booking.setFromDate(fromDate);
 				booking.setToDate(toDate);
@@ -45,15 +44,16 @@ public class SubmitBookingCommand implements Command {
 				booking.setApproveDate(LocalDate.now());
 				ServiceFactory.getInstance().getStaysService().updateBooking(id, booking);
 			}else {
-				String userLogin = (String)request.getSession().getAttribute("login");
+				String userLogin = (String)request.getSession().getAttribute(Constant.Utility.LOGIN);
 				ServiceFactory.getInstance().getStaysService().addBooking(
 						userLogin, fromDate, toDate, guestsNumber, roomNumber);
-			}			
+			}	
+			response.sendRedirect(Constant.Redirect.TO_BOOKINGS_PAGE);
 		} catch (ServiceException e) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
-			dispatcher.forward(request, response);
-		}		
-		response.sendRedirect("Controller?command=GO_TO_BOOKINGS_PAGE");
+			logger.error("error while submitting booking", e);
+			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+		}	
+		
 	}
 	
 }

@@ -16,20 +16,13 @@ import java.util.List;
 
 public class StaysDAOImpl implements StaysDAO {
 
-    private final ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool = ConnectionPool.getInstance();
     private final SelectQuery selectQueryProvider = QueryFactory.getInstance().getSelectQuery();
     private final InsertQuery insertQueryProvider = QueryFactory.getInstance().getInsertQuery();
     private final DeleteQuery deleteQueryProvider = QueryFactory.getInstance().getDeleteQuery();
     private final UpdateQuery updateQueryProvider = QueryFactory.getInstance().getUpdateQuery();
 
-    public StaysDAOImpl() throws DAOException {
-        try {
-        	connectionPool = ConnectionPool.getInstance();
-        }
-        catch (ConnectionPoolException e){
-            throw new DAOException(e);
-        }
-    }
+    public StaysDAOImpl(){}
 
     @Override
     public List<Booking> getAllBookings() throws DAOException {

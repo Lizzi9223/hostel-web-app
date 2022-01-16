@@ -76,11 +76,6 @@
  $('html').addClass('no-scroll');
  })
  
- $('.close-popup.booking').click(function(){
- $('.popup-bg.booking').fadeOut(300);
- $('html').removeClass('no-scroll');
- })
- 
  $("input[name=confirmPassword]").keyup(function(){
  if ($('input[name=newPassword]').val() == $('input[name=confirmPassword]').val()) {
  $('input[name=confirmPassword]').css('background', 'white');

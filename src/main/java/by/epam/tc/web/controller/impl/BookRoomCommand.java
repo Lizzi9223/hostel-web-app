@@ -7,23 +7,31 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
 
 public class BookRoomCommand implements Command {
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.BookRoomCommand.class);
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int roomNumber = Integer.parseInt(request.getParameter("roomNumber"));
+		int roomNumber = Integer.parseInt(request.getParameter(Constant.Utility.ROOM_NUMBER));
 		try {
-			request.setAttribute("room", ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber));
-			request.getSession().setAttribute("allRooms", ServiceFactory.getInstance().getRoomService().getAllRooms());
+			request.setAttribute(Constant.Utility.ROOM, 
+					ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber));
+			request.getSession().setAttribute(Constant.Utility.ALL_ROOMS, 
+					ServiceFactory.getInstance().getRoomService().getAllRooms());
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_BOOK_ROOM_PAGE);
+			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/bookRoom.jsp");
-		dispatcher.forward(request, response);	
+			logger.error("error while booking room", e);
+			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+		}			
 	}
 
 }

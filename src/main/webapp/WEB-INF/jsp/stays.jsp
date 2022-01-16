@@ -176,7 +176,7 @@
                 
 	        	<c:if test="${popUpView eq 'options'}">
 	        		<div class="popup-bg options" style="display: block">
-		                <div class="popup" style="width:auto; padding: 40px">	                    
+		                <div class="popup" style="width:auto; padding: 40px; padding-bottom:0">	                    
 		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>
 		                    <table class="buttons-list">
 		                    <c:choose>
@@ -208,12 +208,70 @@
 		            </div>
 	        	</c:if>
 	        	
+	        	<c:if test="${popUpView eq 'EditStay'}">
+	        		<div class="popup-bg editStay" style="display: block">
+		                <div class="popup" style="width:auto; padding: 40px">	                    
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
+		                    <form>
+			                    <label for="toDate">Departure date:</label>
+			                    <input type="date" id="toDate" name="toDate" value="${stay.getToDate()}" min="${stay.getFromDate().plusDays(1)}">                
+			                    <br><br>
+			                    <label>Notes:&#160;</label><br>
+			                    <textarea id="notes" name="notes" rows="5" cols="30"><c:out value="${stay.getNotes()}"></c:out></textarea>
+			                    <input type="hidden" name="stayId" value="${stay.getId()}" />
+			                    <input type="hidden" name="command" value="EditStayCheck" />
+			                    <br>
+			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
+			                </form>
+		                </div>
+		            </div>
+	        	</c:if>
+	        	
 	        	<div class="popup-bg stay">
 	                <div class="popup">
 	                    <img class="close-popup" src="images/close.png" style="width:25px">
 	                    
 	                </div>
 	            </div>
+	            
+	            <c:choose>
+	            	<c:when test="${checkResult eq false}">
+	            		<div class="popup-bg" style="display: block">
+			                <div class="popup" style="width:auto">
+			                	<a href="Controller?command=GO_TO_STAYS_PAGE">
+			                		<img src="images/close.png" style="width:25px">
+			                	</a>
+			                    <p>Sorry, no available places</p>
+			                </div>
+			            </div>
+	            	</c:when>
+	            	<c:when test="${checkResult eq true}">
+	            		<div class="popup-bg" style="display: block">
+			                <div class="popup" style="width:auto; padding-top:30px">
+			                    <a href="Controller?command=GO_TO_STAYS_PAGE">
+			                		<img src="images/close.png" style="width:25px;">
+			                	</a>
+			                    <h5 style="margin-top:15px">Please, check data:</h5>
+			                    <form>
+				                    <table>
+				                    	<tr>
+					                    	<td><b>To:</b></td>
+					                    	<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
+					                    </tr>			                    	
+				                    	<tr>
+				                    		<td><b>Notes:</b></td>
+				                    		<td><textarea name="notes" rows="5" cols="30" readonly><c:out value="${notes}"></c:out></textarea></td>
+				                    	</tr>
+				                    </table>			                    
+				                    <br>
+				                    <input type="hidden" name="editedStayId" value="${editedStayId}" />
+				                    <input type="hidden" name="command" value="SubmitStay" />
+				                    <input class="submit_button" type="submit" value="Submit stay"/>
+			                    </form>			                    
+			                </div>
+			            </div>
+	            	</c:when>
+	            </c:choose>
 	         	
 	         	<c:remove var="stay"/>
 	         	<c:remove var="chosenStayId"/>

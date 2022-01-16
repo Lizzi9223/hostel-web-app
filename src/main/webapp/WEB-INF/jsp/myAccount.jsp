@@ -91,7 +91,9 @@
                     <tr>
                         <td><h2>My account</h2><br></td>
                         <td><div></div></td>
-                        <td><button class="buttons" type="button" onclick="edit()">Edit</button></td>
+                        <c:if test="${login ne 'ADMIN'}">
+                        	<td><button class="buttons" type="button" onclick="edit()">Edit</button></td>
+                        </c:if>                        
                         <td><input type="hidden" name="command" value="Edit" /><br></td>
                     </tr>
 
@@ -215,15 +217,15 @@
             
             <div class="popup-bg change-pass">
                 <div class="popup">
-                    <img class="close-popup" src="images/close.png" style="width:25px">
+                    <img class="close-popup change-pass" src="images/close.png" style="width:25px">
                     <form class="change-password-form">
                         <input type="hidden" name="command" value="ChangePassword" />
                         <p>Current password:</p>
-                        <input type="password" name="initialPassword" value="" />
+                        <input type="password" name="initialPassword" value="" required/>
                         <p>New password:</p>
-                        <input type="password" name="newPassword" value="" />
+                        <input type="password" name="newPassword" value="" required/>
                         <p>Repeat new password:</p>
-                        <input type="password" name="confirmPassword" value="" />
+                        <input type="password" name="confirmPassword" value="" required/>
                         <input class="buttons" type="submit" name="changePassword" value="Change password"/>
                     </form>
                 </div>
@@ -231,7 +233,7 @@
             
             <div class="popup-bg del-acc">
                 <div class="popup">
-                     <img class="close-popup" src="images/close.png" style="width:25px">
+                     <img class="close-popup del-acc" src="images/close.png" style="width:25px">
                     <form class="change-password-form">
                         <input type="hidden" name="command" value="DeleteAccount" />
                         <p>Are you sure you want to delete your account?</p>
@@ -243,10 +245,27 @@
                 </div>
             </div>
             
+            <c:if test="${not empty error}">
+            	<div class="popup-bg info" style="display:block">
+	                <div class="popup" style="width:auto">
+	                    <img id="closePopUp" class="close-popup" src="images/close.png" style="width:25px">
+	                    <p><c:out value="${error}" /></p>
+	                </div>
+	            </div>
+            </c:if>
+            
+            <c:remove var="error" />            
 
         </div>  
     
     </div>
+    
+    <script>
+    	$('#closePopUp').click(function(){
+    		 $('.popup-bg.info').fadeOut(300);
+    		 $('html').removeClass('no-scroll');
+    	});
+    </script>
 	
 </body>
 </html>

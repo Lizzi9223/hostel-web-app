@@ -14,14 +14,9 @@ public final class ServiceFactory {
     private ServiceFactory() {
     }
 
-    public UserService getUserService() throws ServiceException {
-    	try {
-    		if(userService == null) {
-    			userService = new UserServiceImpl();
-    		}
-		} 
-    	catch (ServiceException e) {
-			throw e;
+    public UserService getUserService(){
+    	if(userService == null) {
+			userService = new UserServiceImpl();
 		}
     	return userService;
     }
@@ -38,14 +33,9 @@ public final class ServiceFactory {
     	return roomService;
     }
     
-    public StaysService getStaysService() throws ServiceException {
-    	try {
-    		if(staysService == null) {
-    			staysService = new StaysServiceImpl();
-    		}
-		} 
-    	catch (ServiceException e) {
-			throw e;
+    public StaysService getStaysService(){
+    	if(staysService == null) {
+			staysService = new StaysServiceImpl();
 		}
     	return staysService;
     }

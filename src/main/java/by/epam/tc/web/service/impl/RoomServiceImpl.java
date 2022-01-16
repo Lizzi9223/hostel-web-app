@@ -1,5 +1,6 @@
 package by.epam.tc.web.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import by.epam.tc.web.dao.DAOException;
@@ -12,12 +13,11 @@ import by.epam.tc.web.service.ServiceException;
 
 public class RoomServiceImpl implements RoomService {
 	
-	private final RoomDAO roomDAO;
+	private final RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 	private final List<Room> rooms;
 	
 	public RoomServiceImpl() throws ServiceException {
 		try {
-			roomDAO = DAOFactory.getInstance().getRoomDAO();
 			rooms = roomDAO.getAllRooms();
 			for(Room room : rooms) {
 				List<Image> images = roomDAO.getAllRoomImages(room.getRoomNumber());
@@ -48,10 +48,10 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public int getMinCost(){
-		int minCost = Integer.MAX_VALUE;
+	public BigDecimal getMinCost(){
+		BigDecimal minCost = BigDecimal.valueOf(Integer.MAX_VALUE);
 		for(Room room : rooms) {
-			if(room.getCost()<minCost) {
+			if(room.getCost().compareTo(minCost) < 0) {
 				minCost = room.getCost();
 			}
 		}
@@ -59,10 +59,10 @@ public class RoomServiceImpl implements RoomService {
 	}
 	
 	@Override
-	public int getMaxCost(){
-		int maxCost = Integer.MIN_VALUE;
+	public BigDecimal getMaxCost(){
+		BigDecimal maxCost = BigDecimal.valueOf(Integer.MIN_VALUE);
 		for(Room room : rooms) {
-			if(room.getCost()>maxCost) {
+			if(room.getCost().compareTo(maxCost) > 0) {
 				maxCost = room.getCost();
 			}
 		}

@@ -6,23 +6,28 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
 
 public class DeleteBookingCommand implements Command {
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.DeleteBookingCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("bookingId"));			
+		int id = Integer.parseInt(request.getParameter(Constant.Utility.BOOKING_ID));			
 		try {
 			ServiceFactory.getInstance().getStaysService().deleteBooking(id);
+			response.sendRedirect(Constant.Redirect.TO_BOOKINGS_PAGE);
 		}
 		catch (ServiceException e) {
-			// TODO: handle exception
-		}	
-		
-		response.sendRedirect("Controller?command=GO_TO_BOOKINGS_PAGE");
+			logger.error("error while deleting booking", e);
+			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+		}
 	}
 
 }

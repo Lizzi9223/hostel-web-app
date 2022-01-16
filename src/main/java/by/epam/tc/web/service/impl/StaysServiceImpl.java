@@ -1,6 +1,8 @@
 package by.epam.tc.web.service.impl;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +21,11 @@ import by.epam.tc.web.service.StaysService;
 
 public class StaysServiceImpl implements StaysService {
 	
-	private final StaysDAO staysDAO;
-	private final RoomDAO roomDAO;
-	private final UserDAO userDAO;
+	private final StaysDAO staysDAO = DAOFactory.getInstance().getStaysDAO();
+	private final RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
+	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 	
-	public StaysServiceImpl() throws ServiceException {
-		try {
-			staysDAO = DAOFactory.getInstance().getStaysDAO();
-			roomDAO = DAOFactory.getInstance().getRoomDAO();
-			userDAO = DAOFactory.getInstance().getUserDAO();
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-	}
+	public StaysServiceImpl(){}
 	
 	@Override
 	public List<Booking> getAllBookings() throws ServiceException {
@@ -65,6 +59,18 @@ public class StaysServiceImpl implements StaysService {
 			throw new ServiceException(e);
 		}
 		return booking;
+	}
+	
+	@Override
+	public BigDecimal getBookingPrice(Booking booking) throws ServiceException{
+		try {
+			int nights = (int)ChronoUnit.DAYS.between(booking.getFromDate(), booking.getToDate());
+			BigDecimal pricePerNight = roomDAO.findRoomByNumber(booking.getRoomNumber()).getCost();
+			return pricePerNight.multiply(BigDecimal.valueOf(nights));
+			
+		}catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 	}
 
 	@Override
@@ -120,7 +126,15 @@ public class StaysServiceImpl implements StaysService {
 	}
 
 	@Override
-	public boolean areAvailablePlaces(int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsNumber) throws ServiceException {
+	public void addStay(String userLogin, LocalDate fromDate, LocalDate toDate, int roomNumber, String notes)
+			throws ServiceException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean areAvailablePlaces(int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsNumber,
+			int bookingToEditId, int stayToEditId) throws ServiceException {
 		try {
 			List<Booking> bookings = staysDAO.findAllBookingsByRoomNumber(roomNumber);
 			List<Stay> stays = staysDAO.findAllStaysByRoomNumber(roomNumber);
@@ -128,12 +142,12 @@ public class StaysServiceImpl implements StaysService {
 				int bookedPlacesAmount = 0;
 				for(Booking booking : bookings) {
 					if((i.isAfter(booking.getFromDate()) || i.equals(booking.getFromDate())) 
-							&& (i.isBefore(booking.getToDate()) /*|| i.equals(booking.getToDate())*/  )) {
+							&& (i.isBefore(booking.getToDate()) && booking.getId()!=bookingToEditId)) {
 						bookedPlacesAmount += booking.getGuestsCount();
 					}
 				}	
 				for(Stay stay : stays) {
-					if(i.isBefore(stay.getToDate())) {
+					if(i.isBefore(stay.getToDate()) && stay.getId()!=stayToEditId) {
 						bookedPlacesAmount += 1;
 					}
 				}
@@ -152,12 +166,13 @@ public class StaysServiceImpl implements StaysService {
 	}
 
 	@Override
-	public List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber) throws ServiceException {
+	public List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber, 
+			int bookingToEditId, int stayToEditId) throws ServiceException {
 		List<Room> availableRooms = new ArrayList<Room>();
 		try {
 			List<Room> rooms = roomDAO.getAllRooms();			
 			for(Room room : rooms) {
-				if(areAvailablePlaces(room.getRoomNumber(), fromDate, toDate, guestsNumber)) {
+				if(areAvailablePlaces(room.getRoomNumber(), fromDate, toDate, guestsNumber, bookingToEditId, stayToEditId)){
 					availableRooms.add(room);
 				}
 			}			
@@ -185,6 +200,15 @@ public class StaysServiceImpl implements StaysService {
 	public void updateBooking(int id, Booking booking) throws ServiceException {
 		try {
 			staysDAO.updateBooking(id, booking);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}	
+	}
+
+	@Override
+	public void updateStay(int id, Stay stay) throws ServiceException {
+		try {
+			staysDAO.updateStay(id, stay);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}	

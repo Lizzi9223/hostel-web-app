@@ -1,12 +1,15 @@
 package by.epam.tc.web.entity.room;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
 public class Room implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int roomNumber;
-    private int cost;
+    private BigDecimal cost;
     private int capacity;
     private String gender;
     private boolean isBathroomInRoom;
@@ -15,7 +18,7 @@ public class Room implements Serializable {
 
     public Room(){}
 
-    public Room(int roomNumber, int cost, int capacity, String gender, boolean isBathroomInRoom, String notes) {
+    public Room(int roomNumber, BigDecimal cost, int capacity, String gender, boolean isBathroomInRoom, String notes) {
         this.roomNumber = roomNumber;
         this.cost = cost;
         this.capacity = capacity;
@@ -32,11 +35,11 @@ public class Room implements Serializable {
         this.roomNumber = roomNumber;
     }
 
-    public int getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
@@ -81,6 +84,11 @@ public class Room implements Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(capacity, cost, gender, images, isBathroomInRoom, notes, roomNumber);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -89,14 +97,9 @@ public class Room implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Room other = (Room) obj;
-		return capacity == other.capacity && cost == other.cost && Objects.equals(gender, other.gender)
+		return capacity == other.capacity && Objects.equals(cost, other.cost) && Objects.equals(gender, other.gender)
 				&& Objects.equals(images, other.images) && isBathroomInRoom == other.isBathroomInRoom
 				&& Objects.equals(notes, other.notes) && roomNumber == other.roomNumber;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(capacity, cost, gender, images, isBathroomInRoom, notes, roomNumber);
 	}
 
 	@Override
@@ -104,4 +107,5 @@ public class Room implements Serializable {
 		return "Room [roomNumber=" + roomNumber + ", cost=" + cost + ", capacity=" + capacity + ", gender=" + gender
 				+ ", isBathroomInRoom=" + isBathroomInRoom + ", notes=" + notes + ", images=" + images + "]";
 	}
+	
 }

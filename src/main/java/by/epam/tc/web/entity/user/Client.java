@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Client extends User{
+	private static final long serialVersionUID = 1L;
+	
     private int clientId;
     private String firstName;
     private String lastName;

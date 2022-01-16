@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.Constant;
 
 public class GoToErrorPageCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_ERROR_PAGE);
 		dispatcher.forward(request, response);
 	}
 

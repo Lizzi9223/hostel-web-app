@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Image implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
     private int imgId;
     private String imgPath;
     private int roomNumber;
