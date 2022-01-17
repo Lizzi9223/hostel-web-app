@@ -62,8 +62,7 @@
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
                 <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
-                <div><c:out value="${photos}"/></div>|
-                <div><c:out value="${contacts}"/></div>|
+                <div><a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out value="${contacts}"/></a></div>|
                 <c:if test="${not empty sessionScope.login}" >
                     <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
                 </c:if>                
@@ -195,9 +194,21 @@
 	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
 				                    	<c:out value="${room.getRoomNumber()}" /><br>
 				                    </c:forEach>
-				                    <b>Since:</b><input type="date" name="fromDate" value="${fromDate}" readonly /><br>
-				                    <b>To:</b><input type="date" name="toDate" value="${toDate}" readonly /><br>				                    
-				                    <b>Guests number:</b><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /><br><br>
+				                    <table>
+				                    	<tr>
+				                    		<td><b>Since:</b></td>
+				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
+				                    	</tr>
+				                    	<tr>
+				                    		<td><b>To:</b></td>
+				                    		<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
+				                    	</tr>
+				                    	<tr>
+				                    		<td><b>Guests number:</b></td>
+				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
+				                    	</tr>
+				                    </table>			                    
+				                    <br>
 				                    <input type="hidden" name="command" value="SubmitBooking" />
 				                    <input class="submit_button" type="submit" value="Submit booking"/>
 			                    </form>			                    

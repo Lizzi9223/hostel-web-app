@@ -2,7 +2,6 @@ package by.epam.tc.web.controller.impl;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,6 @@ public class SubmitBookingCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		LocalDate fromDate = LocalDate.parse(request.getParameter(Constant.Utility.FROM_DATE));
 		LocalDate toDate = LocalDate.parse(request.getParameter(Constant.Utility.TO_DATE));
 		int guestsNumber = Integer.parseInt(request.getParameter(Constant.Utility.GUESTS_NUMBER));
@@ -31,7 +29,8 @@ public class SubmitBookingCommand implements Command {
 			roomNumber = Integer.parseInt(request.getParameter(Constant.Utility.ROOM_NUMBER));
 		}
 		try {
-			if(!request.getParameter(Constant.Utility.EDITED_BOOKING_ID).equals(Constant.Utility.EMPTY)) {
+			if(request.getParameter(Constant.Utility.EDITED_BOOKING_ID)!=null 
+					&& !request.getParameter(Constant.Utility.EDITED_BOOKING_ID).equals(Constant.Utility.EMPTY)) {
 				int id = Integer.parseInt(request.getParameter(Constant.Utility.EDITED_BOOKING_ID));
 				Booking booking = ServiceFactory.getInstance().getStaysService().getBookingById(id);
 				booking.setFromDate(fromDate);

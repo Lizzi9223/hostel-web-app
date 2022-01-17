@@ -24,9 +24,7 @@ public class LoginationFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request; 
 	    HttpServletResponse httpResponse = (HttpServletResponse) response;
 	    
-	    String urlQuery = httpRequest.getQueryString(); 
-	    //urlQuery!=null && urlQuery.contains("GO_TO_MY_ACCOUNT_PAGE")
-	    //urlQuery!=null && needAuthorizationCommands.stream().anyMatch(urlQuery::contains)
+	    String urlQuery = httpRequest.getQueryString();
 	    if(urlQuery!=null 
 	    		&& !(availableForGuestCommands.stream().anyMatch(urlQuery::contains)) ){
 	    	HttpSession session = httpRequest.getSession(false);

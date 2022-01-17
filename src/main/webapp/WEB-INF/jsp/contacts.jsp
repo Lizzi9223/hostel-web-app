@@ -7,17 +7,12 @@
 <head>
 <title>Welcome</title>
 
+	<script type="text/javascript" src="js/script.js" ></script>
     <link rel="stylesheet" href="css/style.css">
     
     <style>
     
-    	body{
-            background: url("images/bg.jpg") no-repeat;
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;            
-        }
+    	
     
     </style>   
 
@@ -32,8 +27,6 @@
 	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
 	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
 	<fmt:message bundle="${lang}" key="menu.en" var="en" />
-	<fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
-	<fmt:message bundle="${lang}" key="main.hostel_Samartia" var="hostel_Samartia" />
     
 </head>
 <body>
@@ -74,9 +67,7 @@
 
         <div class="main">
 
-            <div class="label">
-                <h1><c:out value="${welcome_to}"/><br><c:out value="${hostel_Samartia}"/></h1>
-            </div>
+            
 
         </div>  
     

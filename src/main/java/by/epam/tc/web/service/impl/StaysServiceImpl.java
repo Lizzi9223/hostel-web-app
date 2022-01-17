@@ -126,10 +126,14 @@ public class StaysServiceImpl implements StaysService {
 	}
 
 	@Override
-	public void addStay(String userLogin, LocalDate fromDate, LocalDate toDate, int roomNumber, String notes)
+	public void addStay(int clientId, LocalDate fromDate, LocalDate toDate, int roomNumber, String notes)
 			throws ServiceException {
-		// TODO Auto-generated method stub
-		
+		try {
+			Stay stay = new Stay(clientId, roomNumber, fromDate, toDate, notes);
+			staysDAO.addStay(stay);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}	
 	}
 
 	@Override

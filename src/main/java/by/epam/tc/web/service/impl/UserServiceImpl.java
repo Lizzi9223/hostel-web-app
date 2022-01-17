@@ -1,5 +1,8 @@
 package by.epam.tc.web.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import by.epam.tc.web.dao.DAOException;
 import by.epam.tc.web.dao.DAOFactory;
 import by.epam.tc.web.dao.UserDAO;
@@ -119,5 +122,31 @@ public class UserServiceImpl implements UserService {
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
+	}
+
+	@Override
+	public List<Client> getAllClients() throws ServiceException {
+		List<Client> clients = new ArrayList<Client>();
+		try {
+			clients = userDAO.getAllClients();
+			for(Client client : clients) {
+				User user = userDAO.findUserById(client.getUserId());
+				client.setLogin(user.getLogin());
+			}			
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return clients;
+	}
+
+	@Override
+	public List<User> getAllUsers() throws ServiceException {
+		List<User> users = new ArrayList<User>();
+		try {
+			users = userDAO.getAllUsers();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return users;
 	}
 }

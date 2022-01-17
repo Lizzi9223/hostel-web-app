@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bookings</title>
+<title>Clients</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
@@ -49,6 +49,8 @@
 	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
 	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
 	<fmt:message bundle="${lang}" key="menu.en" var="en" />
+	
+	
     
 </head>
 
@@ -62,7 +64,7 @@
                 e.preventDefault();
                 $('.popup-bg').fadeIn(300);
                 $('html').addClass('no-scroll');
-                $('#chosen-booking-id').val($(this).find('.booking-id').text());
+                $('#chosen-client-id').val($(this).find('.client-id').text());
                 
             })
         
@@ -71,7 +73,7 @@
                 $('html').removeClass('no-scroll');
             })
             
-            $('.choose-stay').click(function(){
+            $('.choose-client').click(function(){
             	$(this).find('.target').submit();
             })
             
@@ -120,13 +122,13 @@
                 <div class="form">
                 
                 	<h3>
-                	 	<c:choose>
-                	 		<c:when test="${role eq 'ADMIN' }">
-                	 			All stays 
-                	 			<input class="submit_button open-popup stay" type="button" value="New stay" style="margin-left:20px"/>
+                		<c:choose>
+                	 		<c:when test="${newStayGuestsNumber > 0}">
+                	 			CHOOSE CLIENT:
                 	 		</c:when>
                 	 		<c:otherwise>
-                	 			My stays
+                	 			All clients
+                	 			<input class="submit_button open-popup client" type="button" value="New client" style="margin-left:20px"/>
                 	 		</c:otherwise>
                 	 	</c:choose>
                 	</h3><br>
@@ -135,141 +137,112 @@
                     
                         <thead>
                             <tr>
-                            	<c:if test="${role eq 'ADMIN'}">
-	                            	<th scope="col">ClientId</th>                               	
-		                        </c:if>                           	
-                                <th scope="col">Since</th>
-                                <th scope="col">To</th>                                
-                                <th scope="col">Room</th>
-                                <th scope="col">Notes</th>
+                            	<th scope="col">ClientId</th>                            	
+                                <th scope="col">Login</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Passport ID</th>
+                                <th scope="col">Date of birth</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Email</th>
                                 <th scope="col" style="visibility: hidden"></th>
                             </tr>
                         </thead>
 
-                        <c:forEach var="stay" items="${stays}">                            
+                        <c:forEach var="client" items="${clients}">
+                            
                             <tbody>
-                                <tr class="choose-stay" style="cursor: pointer">
-                                	<c:if test="${role eq 'ADMIN'}">
-		                            	<td><c:out value="${stay.getClientId()}" /></td>                               	
-			                        </c:if>                        
-                                    <c:set var="dateToParse" value="${stay.getFromDate()}"/>
-                                    <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
-                                    <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
-                                    <c:set var="dateToParse" value="${stay.getToDate()}"/>
-                                    <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
-                                    <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
-                                    <td><c:out value="${stay.getRoomNumber()}" /></td>
-                                    <td><c:out value="${stay.getNotes()}" /></td>
+                                <tr class="choose-client" style="cursor: pointer">
+                                	<td><c:out value="${client.getClientId()}" /></td>
+                                	<c:choose>
+                                		<c:when test="${not empty client.getUserId() and client.getUserId() ne ''}">
+                                			<td><c:out value="${client.getLogin()}" /></td>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<td><c:out value="-" /></td>
+                                		</c:otherwise>
+                                	</c:choose>
+                                	<td><c:out value="${client.getLastName()}" /></td>
+                                    <td><c:out value="${client.getFirstName()}" /></td>
+                                    <td><c:out value="${client.getPassportId()}" /></td>
+                                    <td><c:out value="${client.getBirthDate()}" /></td>
+                                    <td><c:out value="${client.getCountry()}" /></td>
+                                    <td><c:out value="${client.getPhoneNumber()}" /></td>
+                                    <td><c:out value="${client.getEmail()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">
-                                    		<input type="hidden" name="command" value="ChooseStay" />
-                                    		<input type="hidden" name="chosenStayId" value="${stay.getId()}" />
+                                    		<input type="hidden" name="command" value="ChooseClient" />
+                                    		<input type="hidden" name="chosenClientId" value="${client.getClientId()}" />
                                     	</form>
                                     </td>
                                 </tr>
                             </tbody>
+
                         </c:forEach>
-                    </table>
-                
-                </div> 
+                    </table>                
+                </div>
                 
 	        	<c:if test="${popUpView eq 'options'}">
 	        		<div class="popup-bg options" style="display: block">
 		                <div class="popup" style="width:auto; padding: 40px; padding-bottom:0">	                    
-		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>
-		                    <table class="buttons-list">
-		                    <c:choose>
-		                    	<c:when test="${role eq 'ADMIN'}">             			
-		                    				<tr>
-		                    					<td>
-		                    						<form>
-					                    				<input type="hidden" name="command" value="EditStay" />
-					                    				<input type="hidden" name="stayId" value="${chosenStayId}" />
-					                    				<input class="submit_button" type="submit" value="Edit" style="margin-right:20px"/>
-					                    			</form>
-		                    					</td>
-		                    				</tr>
-			                    			<c:if test="${login eq 'ADMIN'}">
-			                    				<tr>
-			                    					<td>
-			                    						<form>
-						                    				<input type="hidden" name="command" value="DeleteStay" />
-						                    				<input type="hidden" name="stayId" value="${chosenStayId}" />
-						                    				<input class="submit_button" type="submit" value="Delete"/>
-						                    			</form>
-			                    					</td>
-			                    				</tr>
-			                    			</c:if>	
-		                    	</c:when>
-		                    </c:choose>
-		                    </table>
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>		                    
 		                </div>
 		            </div>
 	        	</c:if>
 	        	
-	        	<c:if test="${popUpView eq 'EditStay'}">
-	        		<div class="popup-bg editStay" style="display: block">
+	        	<c:if test="${popUpView eq 'editClient'}">
+	<%--        		<div class="popup-bg editBooking" style="display: block">
 		                <div class="popup" style="width:auto; padding: 40px">	                    
 		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
-		                    <form>
-			                    <label for="toDate">Departure date:</label>
-			                    <input type="date" id="toDate" name="toDate" value="${stay.getToDate()}" min="${stay.getFromDate().plusDays(1)}">                
+		                    <form>                
+			                    <label for="fromDate">Arrive date:</label>
+			                    <input type="date" id="fromDate" name="fromDate" value="${booking.getFromDate()}" onchange="setToDate()" required>
+			                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
+			                    <input type="date" id="toDate" name="toDate" value="${booking.getToDate()}" required>                
 			                    <br><br>
-			                    <label>Notes:&#160;</label><br>
-			                    <textarea id="notes" name="notes" rows="5" cols="30"><c:out value="${stay.getNotes()}"></c:out></textarea>
-			                    <input type="hidden" name="stayId" value="${stay.getId()}" />
-			                    <input type="hidden" name="command" value="EditStayCheck" />
-			                    <br>
+			                    <label for="questsNumber">Number of guests:&#160;</label>
+			                    <input type="number" id="guestsNumber" name="guestsNumber" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 40px">
+			                    <label for="roomNumber">Current room:</label>
+			                    <input type="radio" id="roomNumber" name="roomNumber" value="${booking.getRoomNumber()}" checked>
+			                    <c:out value="${booking.getRoomNumber()}" /><br>
+			                    <input type="hidden" name="bookingId" value="${booking.getId()}" />
+			                    <input type="hidden" name="command" value="EditBookingCheck" />
 			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
+			                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
 			                </form>
 		                </div>
-		            </div>
+		            </div>  --%> 
 	        	</c:if>
-	        	
-	        	<div class="popup-bg stay">
+
+				<div class="popup-bg client">
 	                <div class="popup">
 	                    <img class="close-popup" src="images/close.png" style="width:25px">
 	                    <form>                
-		                    <label for="fromDate">Arrive date:</label>
+		     <%--               <label for="fromDate">Arrive date:</label>
 		                    <input type="date" id="fromDate" name="fromDate" onchange="setToDate()" required>
 		                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
 		                    <input type="date" id="toDate" name="toDate" required>                
 		                    <br><br>
 		                    <label for="questsNumber">Number of guests:&#160;</label>
 		                    <input type="number" id="guestsNumber" name="guestsNumber" value="1" min="1" max="15" style="margin-right: 90px">
-		                    <input type="hidden" name="command" value="AddStay" />
+		                    <input type="hidden" name="command" value="AddBooking" />
 		                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
 		                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
-		                </form>
+		     --%>            </form>
 	                </div>
 	            </div>
 	            
-	            <c:choose>
-	            	<c:when test="${checkResult eq false}">
-	            		<div class="popup-bg" style="display: block">
-			                <div class="popup" style="width:auto">
-			                	<a href="Controller?command=GO_TO_STAYS_PAGE">
-			                		<img src="images/close.png" style="width:25px">
-			                	</a>
-			                    <p>Sorry, no available places</p>
-			                </div>
-			            </div>
-	            	</c:when>
-	            	<c:when test="${create eq true && checkResult eq true}">
+	            <c:if test="">
 	            		<div class="popup-bg" style="display: block">
 			                <div class="popup" style="width:auto; padding-top:30px">
-			                    <a href="Controller?command=GO_TO_STAYS_PAGE">
+			                    <a href="Controller?command=GO_TO_BOOKINGS_PAGE">
 			                		<img src="images/close.png" style="width:25px;">
 			                	</a>
 			                    <h5 style="margin-top:15px">Please, check data:</h5>
-			                    <form>
-			                    	<b>Room:</b><br>
-				                    <c:forEach var="room" items="${availableRooms}">
-	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}" required>
-				                    	<c:out value="${room.getRoomNumber()}" /><br>
-				                    </c:forEach>
+			                    <form>			                    	
 				                    <table>
-				                    	<tr>
+				                    <%-- 	<tr>
 				                    		<td><b>Since:</b></td>
 				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
 				                    	</tr>
@@ -280,58 +253,22 @@
 				                    	<tr>
 				                    		<td><b>Guests number:</b></td>
 				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
-				                    	</tr>
+				                    	</tr>   --%>
 				                    </table>			                    
 				                    <br>
-				                    <input type="hidden" name="command" value="SubmitStay" />
-				                    <input class="submit_button" type="submit" value="Submit stay"/>
+				                    <input type="hidden" name="editedClientId" value="${editedClientId}" />
+				                    <input type="hidden" name="command" value="SubmitClient" />
+				                    <input class="submit_button" type="submit" value="Submit"/>
 			                    </form>			                    
 			                </div>
 			            </div>
-	            	</c:when>
-	            	<c:when test="${checkResult eq true}">
-	            		<div class="popup-bg" style="display: block">
-			                <div class="popup" style="width:auto; padding-top:30px">
-			                    <a href="Controller?command=GO_TO_STAYS_PAGE">
-			                		<img src="images/close.png" style="width:25px;">
-			                	</a>
-			                    <h5 style="margin-top:15px">Please, check data:</h5>
-			                    <form>
-				                    <table>
-				                    	<tr>
-					                    	<td><b>To:</b></td>
-					                    	<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
-					                    </tr>			                    	
-				                    	<tr>
-				                    		<td><b>Notes:</b></td>
-				                    		<td><textarea name="notes" rows="5" cols="30" readonly><c:out value="${notes}"></c:out></textarea></td>
-				                    	</tr>
-				                    </table>			                    
-				                    <br>
-				                    <input type="hidden" name="editedStayId" value="${editedStayId}" />
-				                    <input type="hidden" name="command" value="SubmitStay" />
-				                    <input class="submit_button" type="submit" value="Submit stay"/>
-			                    </form>			                    
-			                </div>
-			            </div>
-	            	</c:when>
-	            </c:choose>
-	         	
-	         	<c:remove var="stay"/>
-	         	<c:remove var="chosenStayId"/>
-	         	<c:remove var="popUpView"/>
-	         	
-	         	
-	         	<c:if test="${newStayGuestsNumber == 0}">
-		       		<c:remove var="newStayGuestsNumber"/>
-		       		<c:remove var="newStayFromDate"/>
-		       		<c:remove var="newStayToDate"/>
-		       		<c:remove var="newStayRoomNumber"/>
-		       </c:if>
+	            </c:if>
 	         	
           </div> 
         </div>
        </div> 
+       
+       <c:remove var="popUpView"/>
 
 	</body>
 </html>

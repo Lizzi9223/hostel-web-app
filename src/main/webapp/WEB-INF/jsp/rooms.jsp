@@ -113,8 +113,7 @@
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
                 <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
-                <div><c:out value="${photos}"/></div>|
-                <div><c:out value="${contacts}"/></div>|
+                <div><a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out value="${contacts}"/></a></div>|
                 <c:if test="${not empty sessionScope.login}" >
                     <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
                 </c:if>                
@@ -360,11 +359,15 @@
 		                    </c:if>		                    
 		                    
 		                    <div>                    
-		                        <div>${room.getRoomNumber()}</div>
-		                        <div>${room.getCost()}</div>
-		                        <div>${room.getCapacity()}</div>
-		                        <div>${room.getGender()}</div>
-		                        <div>${room.isBathroomInRoom()}</div>
+		                        <div><span style="font-size:16px"><b>Room #</b></span>${room.getRoomNumber()}</div>
+		                        <div><b>Cost: </b>${room.getCost()} BYN</div>
+		                        <div><b>People in room: </b>${room.getCapacity()}</div>
+		                        <c:if test="${not empty room.getGender() and room.getGender() ne ''}">
+		                        	<div><b>Gender in room: </b>${room.getGender()}</div>
+		                        </c:if>
+		                        <c:if test="${room.isBathroomInRoom() eq true }">
+		                        	<c:out value="Private bathoom in room"/>
+		                        </c:if>
 		                        <div>${room.getNotes()}</div>                    
 		                    </div>
 		                    

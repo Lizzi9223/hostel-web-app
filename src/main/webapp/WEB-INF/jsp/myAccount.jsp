@@ -54,8 +54,7 @@
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
                 <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
-                <div><c:out value="${photos}"/></div>|
-                <div><c:out value="${contacts}"/></div>|
+                <div><a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out value="${contacts}"/></a></div>|
                 <c:if test="${not empty sessionScope.login}" >
                     <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>                    
                 </c:if>                
@@ -164,6 +163,17 @@
             
             <div class="form base-form">
                 <table class="buttons-list">
+                	<c:if test="${sessionScope.role eq 'ADMIN'}">
+                		<tr>
+	                        <td>
+	                            <form> 
+	                            	<a href="Controller?command=GO_TO_CLIENTS_PAGE">                            	
+	                                	<input class="buttons" type="button" value="Clients"/>
+	                                </a>
+	                            </form>
+	                        </td>
+	                    </tr>
+                	</c:if> 
                 	<tr>
                         <td>
                             <form> 

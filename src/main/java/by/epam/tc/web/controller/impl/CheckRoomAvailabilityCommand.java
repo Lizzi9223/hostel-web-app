@@ -68,7 +68,13 @@ public class CheckRoomAvailabilityCommand implements Command {
 					|| request.getParameter(Constant.Utility.COMMAND).equals(Constant.Command.EDIT_BOOKING_CHECK)) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_BOOKINGS_PAGE);
 				dispatcher.forward(request, response);
-			}else {
+			}
+			else if(request.getParameter(Constant.Utility.COMMAND).equals(Constant.Command.ADD_STAY)) {
+				request.setAttribute(Constant.Utility.CREATE, true);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_STAYS_PAGE);
+				dispatcher.forward(request, response);
+			}
+			else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_BOOK_ROOM_PAGE);
 				dispatcher.forward(request, response);
 			}

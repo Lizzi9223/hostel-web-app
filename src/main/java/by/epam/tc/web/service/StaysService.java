@@ -17,7 +17,7 @@ public interface StaysService {
 	List<Stay> getAllUserStays(String userLogin) throws ServiceException;
 	Stay getStayById (int id) throws ServiceException;
 	void addBooking(String userLogin, LocalDate fromDate, LocalDate toDate, int guestsNumber, int roomNumber) throws ServiceException;
-	void addStay(String userLogin, LocalDate fromDate, LocalDate toDate, int roomNumber, String notes) throws ServiceException;
+	void addStay(int clietnId, LocalDate fromDate, LocalDate toDate, int roomNumber, String notes) throws ServiceException;
 	boolean areAvailablePlaces(int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsNumber, 
 			int bookingToEditId, int stayToEditId) throws ServiceException;
 	List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber, 

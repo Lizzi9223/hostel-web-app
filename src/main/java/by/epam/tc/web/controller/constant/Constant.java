@@ -12,6 +12,8 @@ public final class Constant {
 		public final static String TO_ROOMS_PAGE = "/WEB-INF/jsp/rooms.jsp";
 		public final static String TO_STAYS_PAGE = "/WEB-INF/jsp/stays.jsp";
 		public final static String TO_WELCOME_PAGE = "/WEB-INF/jsp/welcome.jsp";
+		public final static String TO_CONTACTS_PAGE = "/WEB-INF/jsp/contacts.jsp";
+		public final static String TO_CLIENTS_PAGE = "/WEB-INF/jsp/clients.jsp";
 	}
 
 	public final class Redirect{
@@ -21,18 +23,21 @@ public final class Constant {
 		public final static String TO_STAYS_PAGE = "Controller?command=GO_TO_STAYS_PAGE";
 		public final static String TO_ACCOUNT_PAGE = "Controller?command=GO_TO_MY_ACCOUNT_PAGE";
 		public final static String LOG_OUT = "Controller?command=GO_TO_WELCOME_PAGE&logOut=true";
+		public final static String TO_CLIENTS_PAGE = "Controller?command=GO_TO_CLIENTS_PAGE";
 	}
 	
 	public final class Command{
 		public final static String EDIT_STAY = "EditStay";
 		public final static String EDIT_STAY_CHECK = "EditStayCheck";
 		public final static String ADD_BOOKING = "AddBooking";
+		public final static String ADD_STAY = "AddStay";
 		public final static String EDIT_BOOKING_CHECK = "EditBookingCheck";
 		public final static String CHANGE_LANGUAGE = "ChangeLanguage";
 	}
 	
 	public final class Utility{
 		public final static String EMPTY = "";
+		public final static String CLIENTS = "clients";
 		public final static String BOOKINGS = "bookings";
 		public final static String STAYS = "stays";
 		public final static String BOOKING = "booking";
@@ -98,6 +103,11 @@ public final class Constant {
 		public final static String CHOSEN_BOOKING_IS_PAID = "chosenBookingIsPaid";
 		public final static String CHOSEN_STAY_ID = "chosenStayId";
 		public final static String OPTIONS = "options";
+		public final static String NEW_STAY_FROM_DATE = "newStayFromDate";
+		public final static String NEW_STAY_TO_DATE = "newStayToDate";
+		public final static String NEW_STAY_ROOM_NUMBER = "newStayRoomNumber";
+		public final static String NEW_STAY_GUESTS_NUMBER = "newStayGuestsNumber";
+		public final static String CHOSEN_CLIENT_ID = "chosenClientId";
 	}
 	
 	public final class Message{

@@ -88,8 +88,7 @@
             <div class="tabs" style="justify-content: flex-start">
                 <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
                 <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
-                <div><c:out value="${photos}"/></div>|
-                <div><c:out value="${contacts}"/></div>|
+                <div><a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out value="${contacts}"/></a></div>|
                 <c:if test="${not empty sessionScope.login}" >
                     <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
                 </c:if>                
@@ -371,11 +370,22 @@
 			                	</a>
 			                    <h5 style="margin-top:15px">Please, check data:</h5>
 			                    <form>
-			                    	<b>New room (don't select if u don't need):</b><br>
-				                    <c:forEach var="room" items="${availableRooms}">
-	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
-				                    	<c:out value="${room.getRoomNumber()}" /><br>
-				                    </c:forEach>
+			                    	<c:choose>
+			                    		<c:when test="${not empty editedBookingId and editedBookingId ne ''}">
+			                    			<b>New room (don't select if u don't need):</b><br>
+			                    			<c:forEach var="room" items="${availableRooms}">
+			                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
+						                    	<c:out value="${room.getRoomNumber()}" /><br>
+						                    </c:forEach>
+			                    		</c:when>
+			                    		<c:otherwise>
+			                    			<b>Room:</b><br>
+			                    			<c:forEach var="room" items="${availableRooms}">
+			                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}" required>
+						                    	<c:out value="${room.getRoomNumber()}" /><br>
+						                    </c:forEach>
+			                    		</c:otherwise>
+			                    	</c:choose>
 				                    <table>
 				                    	<tr>
 				                    		<td><b>Since:</b></td>
