@@ -11,9 +11,7 @@
   <name>hostel-maven-project Maven Webapp</name>
   <url>http://maven.apache.org</url>
   
-  <dependencies>
-  
-  	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+  <dependencies>  
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
@@ -23,7 +21,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     
@@ -34,7 +32,6 @@
     	<scope>provided</scope>
     </dependency>
     
-    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 	<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>jstl</artifactId>

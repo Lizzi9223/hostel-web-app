@@ -83,56 +83,63 @@
 
     <div class="container">
     
-        <div class="menu">
+    	<c:if test="${!(newStayGuestsNumber > 0)}">
+    		<div class="menu">
+	            <div class="tabs" style="justify-content: flex-start">
+	                <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
+	                <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
+	                <div><a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out value="${contacts}"/></a></div>|
+	                <c:if test="${not empty sessionScope.login}" >
+	                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
+	                </c:if>                
+	            </div>	
+	            <div class="tabs" style="justify-content: flex-end">
+	                <form>
+	                    <input type="hidden" name="command" value="ChangeLanguage" >
+	                    <select name="language" onchange="submit()">
+	                            <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
+	                            <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
+	                    </select>  
+	                </form>
+	                <c:choose>
+	        			<c:when test="${empty sessionScope.role}">
+			        		<div><a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out value="${sign_in}"/></a></div>|
+			        		<div><a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out value="${sign_up}"/></a></div>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<div><a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true"><c:out value="${log_out}"/></a></div>|
+	        			</c:otherwise>
+	        		</c:choose>
+	            </div>	
+	        </div>
+    	</c:if>
 
-            <div class="tabs" style="justify-content: flex-start">
-                <div><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${main}"/></a></div>|
-                <div><a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out value="${rooms}"/></a></div>|
-                <div><a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out value="${contacts}"/></a></div>|
-                <c:if test="${not empty sessionScope.login}" >
-                    <div><a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${my_account}"/></a></div>
-                </c:if>                
-            </div>
-
-            <div class="tabs" style="justify-content: flex-end">
-                <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
-                            <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
-                            <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
-                    </select>  
-                </form>
-                <c:choose>
-        			<c:when test="${empty sessionScope.role}">
-		        		<div><a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out value="${sign_in}"/></a></div>|
-		        		<div><a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out value="${sign_up}"/></a></div>
-        			</c:when>
-        			<c:otherwise>
-        				<div><a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true"><c:out value="${log_out}"/></a></div>|
-        			</c:otherwise>
-        		</c:choose>
-            </div>
-
-        </div>
-
-        <div class="container-body">   
-        
+        <div class="container-body"> 
         	<div class="main">
-                
-                <div class="form">
-                
+                <div class="form" style="padding-left:20px">
                 	<h3>
                 		<c:choose>
                 	 		<c:when test="${newStayGuestsNumber > 0}">
                 	 			CHOOSE CLIENT:
                 	 		</c:when>
                 	 		<c:otherwise>
-                	 			All clients
-                	 			<input class="submit_button open-popup client" type="button" value="New client" style="margin-left:20px"/>
-                	 		</c:otherwise>
+                	 			All clients                	 			
+                	 		</c:otherwise>                	 		
                 	 	</c:choose>
-                	</h3><br>
-                
+                	 	<input class="submit_button open-popup client" type="button" value="New client" style="margin-left:20px"/>
+                	</h3>
+                	<form style="margin-left:50%">
+                		<label><c:out value="Search by:" /></label>
+                	 	<select name="searchOption" style="padding:10">
+                	 		<option value="login"><c:out value="Login" /></option>
+                	 		<option value="passportId" selected><c:out value="Passport ID"/></option>
+                	 		<option value="surname"><c:out value="Surname" /></option>
+                	 	</select>
+                	 	<input type="text" name="searchData" value=""/>
+                	 	<input type="hidden" name="command" value="SearchClient"/>
+                	 	<input class="submit_button" type="submit" value="Search" style="padding:10; font-size:14px"/>
+                	</form><br>
+                	
                     <table class="table table-hover">
                     
                         <thead>
@@ -146,7 +153,6 @@
                                 <th scope="col">Country</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">Email</th>
-                                <th scope="col" style="visibility: hidden"></th>
                             </tr>
                         </thead>
 
@@ -163,22 +169,20 @@
                                 			<td><c:out value="-" /></td>
                                 		</c:otherwise>
                                 	</c:choose>
-                                	<td><c:out value="${client.getLastName()}" /></td>
-                                    <td><c:out value="${client.getFirstName()}" /></td>
+                                	<td><c:out value="${client.getFirstName()}" /></td>
+                                    <td><c:out value="${client.getLastName()}" /></td>
                                     <td><c:out value="${client.getPassportId()}" /></td>
-                                    <td><c:out value="${client.getBirthDate()}" /></td>
+                                    <fmt:parseDate value="${client.getBirthDate()}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+                                    <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
                                     <td><c:out value="${client.getCountry()}" /></td>
                                     <td><c:out value="${client.getPhoneNumber()}" /></td>
                                     <td><c:out value="${client.getEmail()}" /></td>
-                                    <td style="visibility: hidden" >
-                                    	<form class="target">
-                                    		<input type="hidden" name="command" value="ChooseClient" />
-                                    		<input type="hidden" name="chosenClientId" value="${client.getClientId()}" />
-                                    	</form>
-                                    </td>
-                                </tr>
-                            </tbody>
-
+                                 </tr>
+                             </tbody>
+                             <form class="target">
+                                   <input type="hidden" name="command" value="ChooseClient" />
+                                   <input type="hidden" name="chosenClientId" value="${client.getClientId()}"/>
+                             </form>
                         </c:forEach>
                     </table>                
                 </div>
@@ -214,22 +218,44 @@
 		                </div>
 		            </div>  --%> 
 	        	</c:if>
-
+                                
 				<div class="popup-bg client">
 	                <div class="popup">
 	                    <img class="close-popup" src="images/close.png" style="width:25px">
-	                    <form>                
-		     <%--               <label for="fromDate">Arrive date:</label>
-		                    <input type="date" id="fromDate" name="fromDate" onchange="setToDate()" required>
-		                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
-		                    <input type="date" id="toDate" name="toDate" required>                
-		                    <br><br>
-		                    <label for="questsNumber">Number of guests:&#160;</label>
-		                    <input type="number" id="guestsNumber" name="guestsNumber" value="1" min="1" max="15" style="margin-right: 90px">
-		                    <input type="hidden" name="command" value="AddBooking" />
-		                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
-		                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
-		     --%>            </form>
+	                    <form>
+		                    <table style="margin-left:20px;margin-top:10px">
+		                    	<tr>
+		                    		<td><c:out value="Name:"/></td>
+		                    		<td><input type="text" id="newClientName" name="name" required></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><c:out value="Surname:"/></td>
+		                    		<td><input type="text" id="newClientSurname" name="surname" required></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><c:out value="Passport ID:"/></td>
+		                    		<td><input type="text" id="newClientPassportId" name="passportId" required></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><c:out value="Date of birth:"/></td>
+		                    		<td><input type="date" id="newClientBirthDate" name="dateOfBith" required></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><c:out value="Country:"/></td>
+		                    		<td><input type="text" id="newClientCountry" name="country"></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><c:out value="Phone:"/></td>
+		                    		<td><input type="text" id="newClientPhone" name="phone"></td>
+		                    	</tr>
+		                    	<tr>
+		                    		<td><c:out value="Email:"/></td>
+		                    		<td><input type="text" id="newClientEmail" name="email"></td>
+		                    	</tr>
+		                    </table><br>
+		                    <input type="hidden" name="command" value="AddClient" />
+		                    <input class="submit_button" type="submit" value="Submit" style="margin-left:20px"/>
+		               </form>
 	                </div>
 	            </div>
 	            
@@ -269,6 +295,25 @@
        </div> 
        
        <c:remove var="popUpView"/>
+       <c:remove var="chosenClientId"/>
+       
+       <script>
+		    var today = new Date();
+		    var dd = today.getDate();
+		    var mm = today.getMonth() + 1; //January is 0!
+		    var yyyy = today.getFullYear();
+		
+		    if (dd < 10) {
+		       dd = '0' + dd;
+		    }
+		
+		    if (mm < 10) {
+		       mm = '0' + mm;
+		    } 
+		        
+		    today = yyyy + '-' + mm + '-' + dd;
+		    document.getElementById("newClientBirthDate").setAttribute("max", today);
+	    </script>
 
 	</body>
 </html>

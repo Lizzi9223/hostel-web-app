@@ -14,7 +14,10 @@ import by.epam.tc.web.controller.constant.Constant;
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private final CommandProvider provider = new CommandProvider(); 
+	private final CommandProvider provider = new CommandProvider();
+	private final String QUESTION_MARK = "?";
+	private final String AMPERSAND = "&";
+	private final String EQUALS = "=";
 
     public Controller() {
         super();
@@ -39,18 +42,18 @@ public class Controller extends HttpServlet {
 				urlBuilder.append(request.getRequestURI());
 				Enumeration<String> parameterNames = request.getParameterNames();
 				if(parameterNames.hasMoreElements()) {
-					urlBuilder.append("?");
+					urlBuilder.append(QUESTION_MARK);
 				}
 		        while (parameterNames.hasMoreElements()) { 
 		            String paramName = parameterNames.nextElement();
 		            String[] paramValues = request.getParameterValues(paramName);
 		            for (int i = 0; i < paramValues.length; i++) {
 		            	if(urlBuilder.charAt(urlBuilder.length()-1)!='?') {
-		            		urlBuilder.append("&");
+		            		urlBuilder.append(AMPERSAND);
 		            	}
 		                String paramValue = paramValues[i];
 		                urlBuilder.append(paramName);
-		                urlBuilder.append("=");
+		                urlBuilder.append(EQUALS);
 		                urlBuilder.append(paramValue);
 		            }
 		        }

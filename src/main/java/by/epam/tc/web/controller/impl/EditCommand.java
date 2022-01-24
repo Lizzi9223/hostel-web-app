@@ -23,9 +23,6 @@ public class EditCommand implements Command {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Client client = null;
-		Admin admin = null;	
-		
 		try {
 			String login = request.getParameter(Constant.Utility.LOGIN);	
 			String passportId = request.getParameter(Constant.Utility.PASSPORT_ID);
@@ -37,7 +34,7 @@ public class EditCommand implements Command {
 				String country = request.getParameter(Constant.Utility.COUNTRY);
 				String phone = request.getParameter(Constant.Utility.PHONE);
 				String email = request.getParameter(Constant.Utility.EMAIL);				
-				client = new Client(login, name, surname, passportId, dateOfBith, 
+				Client client = new Client(login, name, surname, passportId, dateOfBith, 
 						country, phone, email);				
 				client = ServiceFactory.getInstance().getUserService().edit(client, 
 						request.getSession().getAttribute(Constant.Utility.LOGIN).toString(),
@@ -47,7 +44,7 @@ public class EditCommand implements Command {
 			else {
 				String name = request.getParameter(Constant.Utility.NAME);
 				String photo = request.getParameter(Constant.Utility.PHOTO);				
-				admin = new Admin(login, name, photo);				
+				Admin admin = new Admin(login, name, photo);				
 				admin = ServiceFactory.getInstance().getUserService().edit(admin, 
 						request.getSession().getAttribute(Constant.Utility.LOGIN).toString());
 				request.getSession().setAttribute(Constant.Utility.LOGIN, login);

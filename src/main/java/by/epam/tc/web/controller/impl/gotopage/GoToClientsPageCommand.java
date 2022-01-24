@@ -17,7 +17,6 @@ import org.apache.logging.log4j.Logger;
 import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Constant;
 import by.epam.tc.web.entity.user.Client;
-import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
 
@@ -27,14 +26,15 @@ public class GoToClientsPageCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {			
-			if(request.getSession().getAttribute(Constant.Utility.ROLE).toString().equals(Role.ADMIN.toString())) {
-				List<Client> clients = new LinkedList<Client>(ServiceFactory.getInstance().getUserService().getAllClients());
-				Collections.sort(clients, 
-					     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
-				request.setAttribute(Constant.Utility.CLIENTS, clients);
-				RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_CLIENTS_PAGE);
-				dispatcher.forward(request, response);
+			List<Client> clients = new LinkedList<Client>(ServiceFactory.getInstance().getUserService().getAllClients());
+			Collections.sort(clients, 
+				     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
+			request.setAttribute(Constant.Utility.CLIENTS, clients);
+			if(request.getParameter(Constant.Utility.COMMAND).equals(Constant.Command.SEARCH_CLIENT)) {
+				
 			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_CLIENTS_PAGE);
+			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
 			logger.error("error while going to clients page", e);
 			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);

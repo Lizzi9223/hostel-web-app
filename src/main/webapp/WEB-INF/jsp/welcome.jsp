@@ -52,8 +52,8 @@
             </div>
 
             <div class="tabs" style="justify-content: flex-end">
-                <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
+                <form action="Controller" method="post">
+                    <input type="hidden" name="command" value="ChangeLanguage">
                     <select name="language" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
@@ -73,11 +73,9 @@
         </div>
 
         <div class="main">
-
             <div class="label">
                 <h1><c:out value="${welcome_to}"/><br><c:out value="${hostel_Samartia}"/></h1>
             </div>
-
         </div>  
     
     </div>

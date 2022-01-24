@@ -165,7 +165,10 @@
 
                     <tr>
                         <td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${back}"/></a><br><br></td>
-                        <td><p class="error"><c:out value="${param.errorMessage}" /></p></td>
+                        <c:if test="${not empty error and error ne ''}">
+                        	<td><p class="error"><c:out value="${error}" /></p></td>
+                        	<c:remove var="error"/>
+                        </c:if>
                     </tr>
                 </table>
                </form> 

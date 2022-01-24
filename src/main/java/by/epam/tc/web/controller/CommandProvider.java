@@ -3,6 +3,8 @@ package by.epam.tc.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.impl.AddClientCommand;
 import by.epam.tc.web.controller.impl.ApproveBookingCommand;
 import by.epam.tc.web.controller.impl.BookRoomCommand;
 import by.epam.tc.web.controller.impl.ChangeLanguageCommand;
@@ -37,40 +39,42 @@ public final class CommandProvider {
 	private final Map<String, Command> commands = new HashMap<String, Command>();
 	
 	public CommandProvider() {
-		commands.put("Logination", new LoginationCommand());
-		commands.put("Registration", new RegistrationCommand());
-		commands.put("Edit", new EditCommand());	
-		commands.put("ChangePassword", new ChangePasswordCommand());
-		commands.put("ChangeLanguage", new ChangeLanguageCommand());
-		commands.put("BookRoom", new BookRoomCommand());
-		commands.put("DeleteAccount", new DeleteAccountCommand());
-		commands.put("SearchRooms", new GoToRoomsPageCommand());
-		commands.put("CheckRoomAvailability", new CheckRoomAvailabilityCommand());
-		commands.put("SubmitBooking", new SubmitBookingCommand());
-		commands.put("ChooseBooking", new ChooseBookingCommand());
-		commands.put("ApproveBooking", new ApproveBookingCommand());
-		commands.put("EditBooking", new EditBookingCommand());		
-		commands.put("DeleteBooking", new DeleteBookingCommand());
-		commands.put("AddStay", new CheckRoomAvailabilityCommand());
-		commands.put("AddBooking", new CheckRoomAvailabilityCommand());
-		commands.put("EditBookingCheck", new CheckRoomAvailabilityCommand());
-		commands.put("EditStay", new EditStayCommand());
-		commands.put("DeleteStay", new DeleteStayCommand());
-		commands.put("ChooseStay", new ChooseStayCommand());
-		commands.put("EditStayCheck", new EditStayCommand());
-		commands.put("SubmitStay", new SubmitStayCommand());
-		commands.put("ChooseClient", new ChooseClientCommand());
+		commands.put(Constant.Command.LOGINATION, new LoginationCommand());
+		commands.put(Constant.Command.REGISTRATION, new RegistrationCommand());
+		commands.put(Constant.Command.EDIT_ACCOUNT, new EditCommand());	
+		commands.put(Constant.Command.CHANGE_PASSWORD, new ChangePasswordCommand());
+		commands.put(Constant.Command.CHANGE_LANGUAGE, new ChangeLanguageCommand());
+		commands.put(Constant.Command.BOOK_ROOM, new BookRoomCommand());
+		commands.put(Constant.Command.DELETE_ACCOUNT, new DeleteAccountCommand());
+		commands.put(Constant.Command.SEARCH_ROOMS, new GoToRoomsPageCommand());
+		commands.put(Constant.Command.CHECK_ROOM_AVAILABILITY, new CheckRoomAvailabilityCommand());
+		commands.put(Constant.Command.SUBMIT_BOOKING, new SubmitBookingCommand());
+		commands.put(Constant.Command.CHOOSE_BOOKING, new ChooseBookingCommand());
+		commands.put(Constant.Command.APPROVE_BOOKING, new ApproveBookingCommand());
+		commands.put(Constant.Command.EDIT_BOOKING, new EditBookingCommand());		
+		commands.put(Constant.Command.DELETE_BOOKING, new DeleteBookingCommand());
+		commands.put(Constant.Command.ADD_STAY, new CheckRoomAvailabilityCommand());
+		commands.put(Constant.Command.ADD_BOOKING, new CheckRoomAvailabilityCommand());
+		commands.put(Constant.Command.EDIT_BOOKING_CHECK, new CheckRoomAvailabilityCommand());
+		commands.put(Constant.Command.EDIT_STAY, new EditStayCommand());
+		commands.put(Constant.Command.DELETE_STAY, new DeleteStayCommand());
+		commands.put(Constant.Command.CHOOSE_STAY, new ChooseStayCommand());
+		commands.put(Constant.Command.EDIT_STAY_CHECK, new EditStayCommand());
+		commands.put(Constant.Command.SUBMIT_STAY, new SubmitStayCommand());
+		commands.put(Constant.Command.CHOOSE_CLIENT, new ChooseClientCommand());
+		commands.put(Constant.Command.ADD_CLIENT, new AddClientCommand());
+		commands.put(Constant.Command.SEARCH_CLIENT, new AddClientCommand());
 		
-		commands.put("GO_TO_ERROR_PAGE", new GoToErrorPageCommand());
-		commands.put("GO_TO_REGISTRATION_PAGE", new GoToRegistrationPageCommand());
-		commands.put("GO_TO_LOGINATION_PAGE", new GoToLoginationPageCommand());
-		commands.put("GO_TO_WELCOME_PAGE", new GoToWelcomePageCommand());
-		commands.put("GO_TO_ROOMS_PAGE", new GoToRoomsPageCommand());
-		commands.put("GO_TO_MY_ACCOUNT_PAGE", new GoToMyAccountPageCommand());
-		commands.put("GO_TO_BOOKINGS_PAGE", new GoToBookingsPageCommand());
-		commands.put("GO_TO_STAYS_PAGE", new GoToStaysPageCommand());
-		commands.put("GO_TO_CONTACTS_PAGE", new GoToContactsPageCommand());
-		commands.put("GO_TO_CLIENTS_PAGE", new GoToClientsPageCommand());
+		commands.put(Constant.Command.GO_TO_ERROR_PAGE, new GoToErrorPageCommand());
+		commands.put(Constant.Command.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());
+		commands.put(Constant.Command.GO_TO_LOGINATION_PAGE, new GoToLoginationPageCommand());
+		commands.put(Constant.Command.GO_TO_WELCOME_PAGE, new GoToWelcomePageCommand());
+		commands.put(Constant.Command.GO_TO_ROOMS_PAGE, new GoToRoomsPageCommand());
+		commands.put(Constant.Command.GO_TO_MY_ACCOUNT_PAGE, new GoToMyAccountPageCommand());
+		commands.put(Constant.Command.GO_TO_BOOKINGS_PAGE, new GoToBookingsPageCommand());
+		commands.put(Constant.Command.GO_TO_STAYS_PAGE, new GoToStaysPageCommand());
+		commands.put(Constant.Command.GO_TO_CONTACTS_PAGE, new GoToContactsPageCommand());
+		commands.put(Constant.Command.GO_TO_CLIENTS_PAGE, new GoToClientsPageCommand());
 	}
 	
 	public final Command getCommand(String commandName) {

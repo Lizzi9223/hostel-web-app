@@ -13,23 +13,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import by.epam.tc.web.controller.constant.Constant;
+
 public class LoginationFilter implements Filter {
 	
 	private final List<String> availableForGuestCommands = Arrays.asList(
-			"GO_TO_WELCOME_PAGE", "GO_TO_LOGINATION_PAGE", "GO_TO_REGISTRATION_PAGE", "GO_TO_ROOMS_PAGE",
-			"Logination", "Registration", "ChangeLanguage", "SearchRooms");
+			Constant.Command.GO_TO_WELCOME_PAGE, 
+			Constant.Command.GO_TO_LOGINATION_PAGE, 
+			Constant.Command.GO_TO_REGISTRATION_PAGE, 
+			Constant.Command.GO_TO_ROOMS_PAGE,
+			Constant.Command.LOGINATION, 
+			Constant.Command.REGISTRATION, 
+			Constant.Command.CHANGE_LANGUAGE, 
+			Constant.Command.SEARCH_ROOMS);
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request; 
-	    HttpServletResponse httpResponse = (HttpServletResponse) response;
-	    
+	    HttpServletResponse httpResponse = (HttpServletResponse) response;	    
 	    String urlQuery = httpRequest.getQueryString();
 	    if(urlQuery!=null 
 	    		&& !(availableForGuestCommands.stream().anyMatch(urlQuery::contains)) ){
 	    	HttpSession session = httpRequest.getSession(false);
-		    if (session.getAttribute("role")==null || session.getAttribute("login")==null) {
-		    	httpResponse.sendRedirect("Controller?command=GO_TO_LOGINATION_PAGE");
+		    if (session.getAttribute(Constant.Utility.ROLE)==null || session.getAttribute(Constant.Utility.LOGIN)==null) {
+		    	httpResponse.sendRedirect(Constant.Redirect.TO_LOGINATION_PAGE);
 		    } else {        
 		        chain.doFilter(request, response);
 		    }

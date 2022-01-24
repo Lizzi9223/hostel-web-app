@@ -31,13 +31,17 @@ public class ChooseClientCommand implements Command {
 				int guestsNumber = (int)request.getSession().getAttribute(Constant.Utility.NEW_STAY_GUESTS_NUMBER);
 				request.getSession().setAttribute(Constant.Utility.NEW_STAY_GUESTS_NUMBER, --guestsNumber);				
 				if(guestsNumber==0) {
+					request.getSession().removeAttribute(Constant.Utility.NEW_STAY_FROM_DATE);
+					request.getSession().removeAttribute(Constant.Utility.NEW_STAY_TO_DATE);
+					request.getSession().removeAttribute(Constant.Utility.NEW_STAY_GUESTS_NUMBER);
+					request.getSession().removeAttribute(Constant.Utility.NEW_STAY_ROOM_NUMBER);
 					response.sendRedirect(Constant.Redirect.TO_STAYS_PAGE);
 				}else {
 					response.sendRedirect(Constant.Redirect.TO_CLIENTS_PAGE);
 				}				
 			}else {
 				request.getSession().setAttribute(Constant.Utility.CHOSEN_CLIENT_ID, id);
-				request.getSession().setAttribute(Constant.Utility.POPUP_VIEW, Constant.Utility.OPTIONS);
+				request.getSession().setAttribute(Constant.Utility.POPUP_VIEW, Constant.Utility.OPTIONS);				
 				response.sendRedirect(Constant.Redirect.TO_CLIENTS_PAGE);
 			}	
 		}catch (ServiceException e) {

@@ -3,6 +3,9 @@ package by.epam.tc.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.tc.web.dao.DAOException;
 import by.epam.tc.web.dao.DAOFactory;
 import by.epam.tc.web.dao.UserDAO;
@@ -11,9 +14,10 @@ import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.UserService;
+import by.epam.tc.web.service.validator.UserValidator;
 
 public class UserServiceImpl implements UserService {
-	
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.service.impl.UserServiceImpl.class);	
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 	
 	public UserServiceImpl(){}
@@ -21,11 +25,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User signIn(String login, String password) throws ServiceException {    	
     	User user = null;
-    	try {
-    		
+    	try {    		
     		user = userDAO.findUserByLoginAndPassword(login, password);
-    		password = null;
-    		
+    		password = null;    		
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} 
@@ -46,17 +48,34 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-    public Client signUp(Client client) throws ServiceException{
+    public boolean signUp(Client client) throws ServiceException{
 		int clientId = 0;
-    	try {    		
+    	try {
+    		if(!UserValidator.isValidClient(client)) {
+    			logger.info("Validation failed while client registration");
+    			return false;
+    		}
     		clientId = userDAO.addUserClient(client);
     		client.setClientId(clientId);
     	}catch (DAOException e) {
     		throw new ServiceException(e);
 		}    
-    	return client;
+    	return true;
     }
 	
+	@Override
+	public void addClient(Client client) throws ServiceException {
+    	try {    	
+    		if(client.getLogin()!=null && !client.getLogin().equals("")) {
+    			int userId = userDAO.getUserId(client.getLogin());
+    			client.setUserId(userId);
+    		}    		
+    		userDAO.addClient(client);
+    	}catch (DAOException e) {
+    		throw new ServiceException(e);
+		}
+	}
+
 	@Override
 	public Admin edit(Admin admin, String login) throws ServiceException {    	
     	try {
@@ -148,5 +167,16 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}
 		return users;
+	}
+
+	@Override
+	public List<Client> getAllClientUsers() throws ServiceException {
+		List<Client> clientUsers = new ArrayList<Client>();
+		try {
+			clientUsers = userDAO.getAllClientUsers();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return clientUsers;
 	}
 }

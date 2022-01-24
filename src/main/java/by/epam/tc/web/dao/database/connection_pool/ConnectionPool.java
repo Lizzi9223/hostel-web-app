@@ -3,7 +3,6 @@ package by.epam.tc.web.dao.database.connection_pool;
 import by.epam.tc.web.dao.database.DBParameter;
 import by.epam.tc.web.dao.database.DBResourceManager;
 
-import java.net.ConnectException;
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;

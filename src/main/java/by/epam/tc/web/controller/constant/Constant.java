@@ -19,20 +19,51 @@ public final class Constant {
 	public final class Redirect{
 		public final static String TO_ERROR_PAGE = "Controller?command=GO_TO_ERROR_PAGE";
 		public final static String TO_LOGINATION_PAGE = "Controller?command=GO_TO_LOGINATION_PAGE";
+		public final static String TO_REGISTRATION_PAGE = "Controller?command=GO_TO_REGISTRATION_PAGE";
 		public final static String TO_BOOKINGS_PAGE = "Controller?command=GO_TO_BOOKINGS_PAGE";
 		public final static String TO_STAYS_PAGE = "Controller?command=GO_TO_STAYS_PAGE";
 		public final static String TO_ACCOUNT_PAGE = "Controller?command=GO_TO_MY_ACCOUNT_PAGE";
 		public final static String LOG_OUT = "Controller?command=GO_TO_WELCOME_PAGE&logOut=true";
 		public final static String TO_CLIENTS_PAGE = "Controller?command=GO_TO_CLIENTS_PAGE";
+		public final static String TO_WELCOME_PAGE = "Controller?command=GO_TO_WELCOME_PAGE";
 	}
 	
 	public final class Command{
+		public final static String LOGINATION = "Logination";
+		public final static String REGISTRATION = "Registration";
+		public final static String EDIT_ACCOUNT = "Edit";
 		public final static String EDIT_STAY = "EditStay";
 		public final static String EDIT_STAY_CHECK = "EditStayCheck";
+		public final static String ADD_CLIENT = "AddClient";
 		public final static String ADD_BOOKING = "AddBooking";
 		public final static String ADD_STAY = "AddStay";
+		public final static String EDIT_BOOKING = "EditBooking";
 		public final static String EDIT_BOOKING_CHECK = "EditBookingCheck";
 		public final static String CHANGE_LANGUAGE = "ChangeLanguage";
+		public final static String CHANGE_PASSWORD = "ChangePassword";
+		public final static String SEARCH_ROOMS = "SearchRooms";
+		public final static String BOOK_ROOM = "BookRoom";
+		public final static String DELETE_ACCOUNT = "DeleteAccount";
+		public final static String DELETE_BOOKING = "DeleteBooking";
+		public final static String DELETE_STAY = "DeleteStay";
+		public final static String CHECK_ROOM_AVAILABILITY = "CheckRoomAvailability";
+		public final static String SUBMIT_BOOKING = "SubmitBooking";
+		public final static String CHOOSE_BOOKING = "ChooseBooking";
+		public final static String APPROVE_BOOKING = "ApproveBooking";
+		public final static String CHOOSE_STAY = "ChooseStay";
+		public final static String SUBMIT_STAY = "SubmitStay";
+		public final static String CHOOSE_CLIENT = "ChooseClient";	
+		public final static String SEARCH_CLIENT = "SearchClient";	
+		public final static String GO_TO_WELCOME_PAGE = "GO_TO_WELCOME_PAGE";
+		public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";	
+		public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";	
+		public final static String GO_TO_ROOMS_PAGE = "GO_TO_ROOMS_PAGE";
+		public final static String GO_TO_ERROR_PAGE = "GO_TO_ERROR_PAGE";
+		public final static String GO_TO_MY_ACCOUNT_PAGE = "GO_TO_MY_ACCOUNT_PAGE";
+		public final static String GO_TO_BOOKINGS_PAGE = "GO_TO_BOOKINGS_PAGE";
+		public final static String GO_TO_STAYS_PAGE = "GO_TO_STAYS_PAGE";
+		public final static String GO_TO_CONTACTS_PAGE = "GO_TO_CONTACTS_PAGE";
+		public final static String GO_TO_CLIENTS_PAGE = "GO_TO_CLIENTS_PAGE";
 	}
 	
 	public final class Utility{
@@ -108,10 +139,12 @@ public final class Constant {
 		public final static String NEW_STAY_ROOM_NUMBER = "newStayRoomNumber";
 		public final static String NEW_STAY_GUESTS_NUMBER = "newStayGuestsNumber";
 		public final static String CHOSEN_CLIENT_ID = "chosenClientId";
+		public final static String ALL_CLIENT_USERS = "allClientUsers";
 	}
 	
 	public final class Message{
 		public final static String LOGINATION = "No such login or password. Please, check correctness and try again";
+		public final static String VALIDATION = "Incorrect data. Please, check correctness and try again";
 		public final static String WRONG_PASSWORD = "Wrong password. Please, check correctness and try again";
 	}
 }
