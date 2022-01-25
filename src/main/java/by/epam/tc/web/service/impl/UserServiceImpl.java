@@ -17,7 +17,7 @@ import by.epam.tc.web.service.UserService;
 import by.epam.tc.web.service.validator.UserValidator;
 
 public class UserServiceImpl implements UserService {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.service.impl.UserServiceImpl.class);	
+	
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 	
 	public UserServiceImpl(){}
@@ -36,23 +36,25 @@ public class UserServiceImpl implements UserService {
     
     
     @Override
-	public Admin signUp(Admin admin) throws ServiceException {
+	public boolean signUp(Admin admin) throws ServiceException {
     	int userId = 0;
     	try {
+    		if(!UserValidator.isValidAdmin(admin) || !UserValidator.isValidPassword(admin.getPassword())){    			
+    			return false;
+    		}
     		userId = userDAO.addUser(admin); 
     		admin.setUserId(userId);
     	}catch (DAOException e) {
     		throw new ServiceException(e);
 		}    
-    	return admin;
+    	return true;
 	}
 
 	@Override
     public boolean signUp(Client client) throws ServiceException{
 		int clientId = 0;
     	try {
-    		if(!UserValidator.isValidClient(client)) {
-    			logger.info("Validation failed while client registration");
+    		if(!UserValidator.isValidClient(client) || !UserValidator.isValidPassword(client.getPassword())) {    			
     			return false;
     		}
     		clientId = userDAO.addUserClient(client);
@@ -64,8 +66,11 @@ public class UserServiceImpl implements UserService {
     }
 	
 	@Override
-	public void addClient(Client client) throws ServiceException {
-    	try {    	
+	public boolean addClient(Client client) throws ServiceException {
+    	try {   
+    		if(!UserValidator.isValidClient(client)) {    			
+    			return false;
+    		}
     		if(client.getLogin()!=null && !client.getLogin().equals("")) {
     			int userId = userDAO.getUserId(client.getLogin());
     			client.setUserId(userId);
@@ -74,23 +79,30 @@ public class UserServiceImpl implements UserService {
     	}catch (DAOException e) {
     		throw new ServiceException(e);
 		}
+    	return true;
 	}
 
 	@Override
-	public Admin edit(Admin admin, String login) throws ServiceException {    	
+	public boolean edit(Admin admin, String login) throws ServiceException {    	
     	try {
+    		if(!UserValidator.isValidAdmin(admin)) {    			
+    			return false;
+    		}
     		int userId = userDAO.getUserId(login);
     		userDAO.updateUser(userId, admin);
     		userDAO.updateAdmin(userId, admin);
     	}catch (DAOException e) {
     		throw new ServiceException(e);
 		}    
-    	return admin;
+    	return true;
 	}
 	
 	@Override
-	public Client edit(Client client, String login, String passportId) throws ServiceException{
+	public boolean edit(Client client, String login, String passportId) throws ServiceException{
     	try {
+    		if(!UserValidator.isValidClient(client)) {
+    			return false;
+    		}
     		int userId = userDAO.getUserId(login);
     		userDAO.updateUser(userId, client);
     		int clientId = userDAO.getClientId(passportId);
@@ -98,17 +110,21 @@ public class UserServiceImpl implements UserService {
     	}catch (DAOException e) {
     		throw new ServiceException(e);
 		}    
-    	return client;
+    	return true;
     }
 	
 	@Override
-	public void editPassword(String login, String password) throws ServiceException{
+	public boolean editPassword(String login, String password) throws ServiceException{
 		try {
+			if(!UserValidator.isValidPassword(password)) {
+				return false;
+			}
 			userDAO.updatePassword(login, password);
 			password = null;
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
+		return true;
 	}
 	
 	@Override

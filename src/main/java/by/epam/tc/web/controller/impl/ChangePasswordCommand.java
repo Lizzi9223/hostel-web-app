@@ -25,12 +25,18 @@ public class ChangePasswordCommand implements Command {
 			String password = request.getParameter(Constant.Utility.INITIAL_PASSWORD);
 			if(ServiceFactory.getInstance().getUserService().signIn(login, password)!=null) {
 				password = request.getParameter(Constant.Utility.NEW_PASSWORD);
-				ServiceFactory.getInstance().getUserService().editPassword(login, password);
-				password = null;
-				response.sendRedirect(Constant.Redirect.LOG_OUT);
+				if(ServiceFactory.getInstance().getUserService().editPassword(login, password)) {
+					password = null;
+					response.sendRedirect(Constant.Redirect.LOG_OUT);
+				}else {
+					password = null;
+					request.getSession().setAttribute(Constant.Utility.ERROR,Constant.Message.VALIDATION);
+					response.sendRedirect(Constant.Redirect.TO_ACCOUNT_PAGE);
+				}
 			}
 			else {
 				password = null;
+				logger.info("Validation failed while changing password registration");
 				request.getSession().setAttribute(Constant.Utility.ERROR,Constant.Message.WRONG_PASSWORD);
 				response.sendRedirect(Constant.Redirect.TO_ACCOUNT_PAGE);
 			}

@@ -10,7 +10,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ConnectionPool {
+	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.dao.database.connection_pool.ConnectionPool.class);
     private static ConnectionPool instance;
 
     private final String driverName;
@@ -67,7 +71,7 @@ public class ConnectionPool {
             closeConnectionsQueue(givenAwayConQueue);
             closeConnectionsQueue(connectionQueue);
         } catch (SQLException e) {
-            // logger.log(Level.ERROR, "Error closing the connection.", e);
+        	logger.error("Error while clearing connection queue", e);
         }
     }
 

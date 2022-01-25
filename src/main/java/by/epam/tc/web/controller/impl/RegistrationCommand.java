@@ -43,6 +43,7 @@ public class RegistrationCommand implements Command{
 					request.getSession().setAttribute(Constant.Utility.LOGIN, login);
 					response.sendRedirect(Constant.Redirect.TO_ACCOUNT_PAGE);
 				}else {
+					logger.info("Validation failed while client registration");
 					request.getSession().setAttribute(Constant.Utility.ERROR, Constant.Message.VALIDATION);
 					response.sendRedirect(Constant.Redirect.TO_REGISTRATION_PAGE);
 				}				
@@ -52,10 +53,16 @@ public class RegistrationCommand implements Command{
 				String photo = request.getParameter(Constant.Utility.PHOTO);				
 				Admin admin = new Admin(login, password, name, photo);
 				password = null;
-				admin = ServiceFactory.getInstance().getUserService().signUp(admin);
-				request.getSession().setAttribute(Constant.Utility.ROLE, Role.ADMIN.toString());
-				request.getSession().setAttribute(Constant.Utility.LOGIN, login);
-				response.sendRedirect(Constant.Redirect.TO_ACCOUNT_PAGE);
+				boolean isSignedUp = ServiceFactory.getInstance().getUserService().signUp(admin);
+				if(isSignedUp) {					
+					request.getSession().setAttribute(Constant.Utility.ROLE, Role.ADMIN.toString());
+					request.getSession().setAttribute(Constant.Utility.LOGIN, login);
+					response.sendRedirect(Constant.Redirect.TO_ACCOUNT_PAGE);
+				}else {
+					logger.info("Validation failed while admin registration");
+					request.getSession().setAttribute(Constant.Utility.ERROR, Constant.Message.VALIDATION);
+					response.sendRedirect(Constant.Redirect.TO_REGISTRATION_PAGE);
+				}				
 			}
 		} catch (ServiceException e) {
 			logger.error("error while registration", e);

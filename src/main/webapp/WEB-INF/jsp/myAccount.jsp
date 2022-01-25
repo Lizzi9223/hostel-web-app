@@ -145,15 +145,11 @@
                             </c:choose>
                     
                     <tr>
+                    	  <c:set var="passportId" scope="session" value="${client.getPassportId()}"/> 
                           <td><input id="save_button" style="visibility: hidden;" class="buttons" type="submit" value="Save"/><br><br><br></td>
                           <td><div></div></td>
                           <td><button id="cancel_button" class="buttons" style="visibility: hidden" type="button" onclick="cancelEdit()">
                           	<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE">Cancel</a></button><br><br><br></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><c:out value="${param.errorMessage}" /></td>
-                        <td></td>
                     </tr>
                     
                 </table>

@@ -120,6 +120,7 @@
                 	<h3>
                 		<c:choose>
                 	 		<c:when test="${newStayGuestsNumber > 0}">
+                	 			
                 	 			CHOOSE CLIENT:
                 	 		</c:when>
                 	 		<c:otherwise>
@@ -156,8 +157,7 @@
                             </tr>
                         </thead>
 
-                        <c:forEach var="client" items="${clients}">
-                            
+                        <c:forEach var="client" items="${clients}">                            
                             <tbody>
                                 <tr class="choose-client" style="cursor: pointer">
                                 	<td><c:out value="${client.getClientId()}" /></td>
@@ -177,12 +177,14 @@
                                     <td><c:out value="${client.getCountry()}" /></td>
                                     <td><c:out value="${client.getPhoneNumber()}" /></td>
                                     <td><c:out value="${client.getEmail()}" /></td>
+                                    <td style="visibility: hidden" >
+                                    	<form class="target">
+                                    		<input type="hidden" name="command" value="ChooseClient" />
+                                   			<input type="hidden" name="chosenClientId" value="${client.getClientId()}"/>
+                                    	</form>
+                                    </td>
                                  </tr>
                              </tbody>
-                             <form class="target">
-                                   <input type="hidden" name="command" value="ChooseClient" />
-                                   <input type="hidden" name="chosenClientId" value="${client.getClientId()}"/>
-                             </form>
                         </c:forEach>
                     </table>                
                 </div>
@@ -258,6 +260,16 @@
 		               </form>
 	                </div>
 	            </div>
+	            
+	            <c:if test="${not empty error and error ne ''}">
+	            	<div class="popup-bg editBooking" style="display: block">
+		                <div class="popup" style="width:auto; padding: 40px">	                    
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
+		                    <p><c:out value="${error}" /></p>
+		                </div>
+		                <c:remove var="error"/>
+		            </div>
+	            </c:if>
 	            
 	            <c:if test="">
 	            		<div class="popup-bg" style="display: block">

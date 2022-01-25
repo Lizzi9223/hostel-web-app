@@ -27,7 +27,7 @@ public class ChooseClientCommand implements Command {
 				ServiceFactory.getInstance().getStaysService().addStay(id,
 						(LocalDate)request.getSession().getAttribute(Constant.Utility.NEW_STAY_FROM_DATE),
 						(LocalDate)request.getSession().getAttribute(Constant.Utility.NEW_STAY_TO_DATE),
-						(int)request.getSession().getAttribute(Constant.Utility.NEW_STAY_ROOM_NUMBER), "");
+						(int)request.getSession().getAttribute(Constant.Utility.NEW_STAY_ROOM_NUMBER), Constant.Utility.EMPTY);
 				int guestsNumber = (int)request.getSession().getAttribute(Constant.Utility.NEW_STAY_GUESTS_NUMBER);
 				request.getSession().setAttribute(Constant.Utility.NEW_STAY_GUESTS_NUMBER, --guestsNumber);				
 				if(guestsNumber==0) {
