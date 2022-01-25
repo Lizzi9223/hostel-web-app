@@ -2,6 +2,8 @@
     pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,21 +21,7 @@
             font-family: sans-serif;            
         }
     
-    </style>   
-
-	<fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
-	<fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
-	<fmt:message bundle="${lang}" key="main.hostel_Samartia" var="hostel_Samartia" />
+    </style> 
     
 </head>
 <body>
@@ -53,8 +41,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form action="Controller" method="post">
-                    <input type="hidden" name="command" value="ChangeLanguage">
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
@@ -74,7 +62,7 @@
 
         <div class="main">
             <div class="label">
-                <h1><c:out value="${welcome_to}"/><br><c:out value="${hostel_Samartia}"/></h1>
+            	<h1><c:out value="${welcome_to}"/><br><c:out value="${hostel_Samartia}"/></h1>
             </div>
         </div>  
     

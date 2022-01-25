@@ -2,6 +2,8 @@
     pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,19 +30,6 @@
         }
     
     </style>
-    
-    <fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
 
 </head>
 <body style="background-color: #D2B48C">
@@ -62,8 +51,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
@@ -81,31 +70,29 @@
 
         </div>
 
-        <div class="main">            
-                      
+        <div class="main">
             <div class="form">
-            
                 <form action="Controller" method="post">
                 <table>
                     <tr>
-                        <td><h2>My account</h2><br></td>
+                        <td><h2><c:out value="${my_account}"/></h2><br></td>
                         <td><div></div></td>
                         <c:if test="${login ne 'ADMIN'}">
-                        	<td><button class="buttons" type="button" onclick="edit()">Edit</button></td>
+                        	<td><button class="buttons" type="button" onclick="edit()"><c:out value="${edit}"/></button></td>
                         </c:if>                        
-                        <td><input type="hidden" name="command" value="Edit" /><br></td>
+                        <td><input type="hidden" name="${Utility.COMMAND}" value="${CommandName.EDIT_ACCOUNT}" /><br></td>
                     </tr>
 
                     <tr>
-                        <td>Login:<br><br></td>
-                        <td><input class="input" disabled="true" type="text" name="login" value = "${sessionScope.login}"/><br><br></td>
+                        <td>${login_word}:<br><br></td>
+                        <td><input class="input" disabled="true" type="text" name="${Utility.LOGIN}" value = "${sessionScope.login}"/><br><br></td>
                     </tr>
                     
                     		<c:choose>
                                 <c:when test="${sessionScope.role eq 'ADMIN'}">
                                     <tr>
-                                        <td>Name:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="name" value = "${admin.getName()}"/><br><br></td>
+                                        <td>${name_word}:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.NAME}" value = "${admin.getName()}"/><br><br></td>
                                     </tr>
                                <%--      <tr>
                                         <td>Photo:<br><br></td>
@@ -114,42 +101,42 @@
                                 </c:when>
                                 <c:otherwise>
                                     <tr>
-                                        <td>Name:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="name" value="${client.getFirstName()}"/><br><br></td>
+                                        <td><c:out value="${name_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.NAME}" value="${client.getFirstName()}"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Surname:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="surname" value = "${client.getLastName()}"/><br><br></td>
+                                        <td><c:out value="${surname_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.SURNAME}" value = "${client.getLastName()}"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Passport id:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="passportId" value = "${client.getPassportId()}"/><br><br></td>
+                                        <td><c:out value="${passport_id_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.PASSPORT_ID}" value = "${client.getPassportId()}"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Date of birth:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="dateOfBith" value = "${client.getBirthDate()}"/><br><br></td>
+                                        <td><c:out value="${date_of_birth_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.DATE_OF_BIRTH}" value = "${client.getBirthDate()}"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Country:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="country" value = "${client.getCountry()}"/><br><br></td>
+                                        <td><c:out value="${country_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.COUNTRY}" value = "${client.getCountry()}"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Phone number:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="phone" value = "${client.getPhoneNumber()}"/><br><br></td>
+                                        <td><c:out value="${phone_number_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.PHONE}" value = "${client.getPhoneNumber()}"/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td>Email:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="email" value = "${client.getEmail()}"/><br><br></td>
+                                        <td><c:out value="${email_word}"/>:<br><br></td>
+                                        <td><input class="input" disabled="true" type="text" name="${Utility.EMAIL}" value = "${client.getEmail()}"/><br><br></td>
                                     </tr>	
                                 </c:otherwise>
                             </c:choose>
                     
                     <tr>
                     	  <c:set var="passportId" scope="session" value="${client.getPassportId()}"/> 
-                          <td><input id="save_button" style="visibility: hidden;" class="buttons" type="submit" value="Save"/><br><br><br></td>
+                          <td><input id="save_button" style="visibility: hidden;" class="buttons" type="submit" value="<c:out value="${save}"/>"/><br><br><br></td>
                           <td><div></div></td>
                           <td><button id="cancel_button" class="buttons" style="visibility: hidden" type="button" onclick="cancelEdit()">
-                          	<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE">Cancel</a></button><br><br><br></td>
+                          	<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${cancel}"/></a></button><br><br><br></td>
                     </tr>
                     
                 </table>
@@ -164,7 +151,7 @@
 	                        <td>
 	                            <form> 
 	                            	<a href="Controller?command=GO_TO_CLIENTS_PAGE">                            	
-	                                	<input class="buttons" type="button" value="Clients"/>
+	                                	<input class="buttons" type="button" value="${clients_word}"/>
 	                                </a>
 	                            </form>
 	                        </td>
@@ -174,7 +161,7 @@
                         <td>
                             <form> 
                             	<a href="Controller?command=GO_TO_BOOKINGS_PAGE">                            	
-                                	<input class="buttons" type="button" value="Bookings"/>
+                                	<input class="buttons" type="button" value="${bookings_word}"/>
                                 </a>
                             </form>
                         </td>
@@ -183,7 +170,7 @@
                         <td>
                             <form> 
                             	<a href="Controller?command=GO_TO_STAYS_PAGE">                            	
-                                	<input class="buttons" type="button" value="Stays"/>
+                                	<input class="buttons" type="button" value="${stays_word}"/>
                                 </a>
                             </form>
                         </td>
@@ -193,7 +180,7 @@
                         <td>
                             <form>   
                             	<c:if test="${sessionScope.login ne 'ADMIN'}" >
-                                	<input class="buttons open-popup change-pass" type="button" value="Change password"/>                                	
+                                	<input class="buttons open-popup change-pass" type="button" value="${change_password}"/>                                	
 								</c:if> 
                             </form>
                         </td>
@@ -203,7 +190,9 @@
                             <form>
                                 <c:if test="${sessionScope.login eq 'ADMIN'}" >
                                 	<a href="Controller?command=GO_TO_REGISTRATION_PAGE&create=admin">
-                                		<button class="buttons" type="button">Create new administrator</button>
+                                		<button class="buttons" type="button">
+                                			<c:out value="${create_new_admin}"/>
+                                		</button>
                                 	</a>                                	
 								</c:if>
                             </form> 
@@ -213,7 +202,7 @@
                         <td>
                             <form>
                             	<c:if test="${sessionScope.login ne 'ADMIN'}" >
-                                	<input class="buttons open-popup del-acc" type="button" value="Delete account"/>                                	
+                                	<input class="buttons open-popup del-acc" type="button" value="${delete_account}"/>                                	
 								</c:if>   
                             </form>
                         </td>
@@ -225,14 +214,14 @@
                 <div class="popup">
                     <img class="close-popup change-pass" src="images/close.png" style="width:25px">
                     <form class="change-password-form">
-                        <input type="hidden" name="command" value="ChangePassword" />
-                        <p>Current password:</p>
-                        <input type="password" name="initialPassword" value="" required/>
-                        <p>New password:</p>
-                        <input type="password" name="newPassword" value="" required/>
-                        <p>Repeat new password:</p>
+                        <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_PASSWORD}" />
+                        <p><c:out value="${current_password}"/>:</p>
+                        <input type="password" name="${Utility.INITIAL_PASSWORD}" value="" required/>
+                        <p><c:out value="${new_password}"/>:</p>
+                        <input type="password" name="${Utility.NEW_PASSWORD}" value="" required/>
+                        <p><c:out value="${repeat_new_password}"/>:</p>
                         <input type="password" name="confirmPassword" value="" required/>
-                        <input class="buttons" type="submit" name="changePassword" value="Change password"/>
+                        <input class="buttons" type="submit" value="${change_password}"/>
                     </form>
                 </div>
             </div>
@@ -241,11 +230,11 @@
                 <div class="popup">
                      <img class="close-popup del-acc" src="images/close.png" style="width:25px">
                     <form class="change-password-form">
-                        <input type="hidden" name="command" value="DeleteAccount" />
-                        <p>Are you sure you want to delete your account?</p>
+                        <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.DELETE_ACCOUNT}" />
+                        <p><c:out value="${del_acc_check_msg}"/>?</p>
                         <div style="display:flex; flex-direction: row">
-                        	<input class="buttons" type="submit" name="changePassword" value="Delete" style="width:100px; margin-right:100px"/>
-                        	<input class="close-popup del-acc buttons" type="button" name="changePassword" value="Cancel" style="width:100px"/>
+                        	<input class="buttons" type="submit" name="changePassword" value="${delete}" style="width:100px; margin-right:100px"/>
+                        	<input class="close-popup del-acc buttons" type="button" name="changePassword" value="${cancel}" style="width:100px"/>
                         </div>
                     </form>
                 </div>

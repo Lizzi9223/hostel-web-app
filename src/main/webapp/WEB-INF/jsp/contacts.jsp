@@ -2,6 +2,8 @@
     pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,19 +16,7 @@
     
     	
     
-    </style>   
-
-	<fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
+    </style> 
     
 </head>
 <body>
@@ -46,8 +36,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  

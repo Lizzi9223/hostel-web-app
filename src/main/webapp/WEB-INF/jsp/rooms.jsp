@@ -2,6 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,21 +33,7 @@
             width: 1100px;
         }
         
-	</style>
-	
-	<fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
-	
+	</style>	
 
 </head>
 <body style="background-color: #D2B48C">
@@ -121,8 +109,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
@@ -146,15 +134,15 @@
                 
                 <form id="search-form">
                 
-                    <br><p><b>SEARCH</b></p><br>
+                    <br><h5><b><c:out value="${search}"/></b></h5><br>
                 
-                    <div style="margin-bottom: 15px"><b>Cost:&#160;&#160;&#160;</b></div>
+                    <div style="margin-bottom: 15px"><b><c:out value="${cost}"/>:&#160;&#160;&#160;</b></div>
 
                     <div class="middle">
-                        <label for="priceFrom">from:&#160;</label>
-                        <input id="priceFrom" type="text" readonly class="rangeInput" name="price-left">
-                        <label for="priceTo">&#160;&#160;&#160;to:&#160;</label>
-                        <input id="priceTo" type="text" readonly class="rangeInput" name="price-right"><br><br>
+                        <label for="priceFrom"><c:out value="${from}"/>:&#160;</label>
+                        <input id="priceFrom" type="text" readonly class="rangeInput" name="${Utility.PRICE_LEFT}">
+                        <label for="priceTo">&#160;&#160;&#160;<c:out value="${to}"/>:&#160;</label>
+                        <input id="priceTo" type="text" readonly class="rangeInput" name="${Utility.PRICE_RIGHT}"><br><br>
 
                         <div class="multi-range-slider" id="priceRange">
 
@@ -171,13 +159,13 @@
                     </div>  		     
 
 
-                    <div style="margin-bottom: 15px; margin-top: 50px;"><b>Capacity:&#160;&#160;&#160;</b></div>
+                    <div style="margin-bottom: 15px; margin-top: 50px;"><b><c:out value="${capacity}"/>:&#160;&#160;&#160;</b></div>
 
                     <div class="middle">
-                        <label for="capacityFrom">from:&#160;</label>
-                        <input id="capacityFrom" type="text" readonly class="rangeInput" name="capacity-left">
-                        <label for="capacityTo">&#160;&#160;&#160;to:&#160;</label>
-                        <input id="capacityTo" type="text" readonly class="rangeInput" name="capacity-right"><br><br>
+                        <label for="capacityFrom"><c:out value="${from}"/>:&#160;</label>
+                        <input id="capacityFrom" type="text" readonly class="rangeInput" name="${Utility.CAPACITY_LEFT}">
+                        <label for="capacityTo">&#160;&#160;&#160;<c:out value="${to}"/>:&#160;</label>
+                        <input id="capacityTo" type="text" readonly class="rangeInput" name="${Utility.CAPACITY_RIGHT}"><br><br>
 
                         <div class="multi-range-slider" id="capacityRange">
 
@@ -194,59 +182,57 @@
                     </div>
 
 
-                    <div style="margin-bottom: 15px; margin-top: 50px;"><b>Gender:&#160;&#160;&#160;</b></div>
+                    <div style="margin-bottom: 15px; margin-top: 50px;"><b><c:out value="${gender}"/>:&#160;&#160;&#160;</b></div>
                     <c:choose>
                     	<c:when test="${currentGender eq 'м'}">
-                    		<input type="radio" id="genderChoice1" name="searchGender" value="м" checked>
-                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
-                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж">
-                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
-                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж">
-                    		<label for="genderChoice3">мж</label>
+                    		<input type="radio" id="genderChoice1" name="${Utility.SEARCH_GENDER}" value="м" checked>
+                    		<label for="genderChoice1" style="margin-right: 20px"><c:out value="${m}"/></label>
+                    		<input type="radio" id="genderChoice2" name="${Utility.SEARCH_GENDER}" value="ж">
+                    		<label for="genderChoice2" style="margin-right: 20px"><c:out value="${f}"/></label>
+                    		<input type="radio" id="genderChoice3" name="${Utility.SEARCH_GENDER}" value="мж">
+                    		<label for="genderChoice3"><c:out value="${mf}"/></label>
                     	</c:when>
                     	<c:when test="${currentGender eq 'ж'}">
-                    		<input type="radio" id="genderChoice1" name="searchGender" value="м">
-                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
-                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж" checked>
-                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
-                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж">
-                    		<label for="genderChoice3">мж</label>
+                    		<input type="radio" id="genderChoice1" name="${Utility.SEARCH_GENDER}" value="м">
+                    		<label for="genderChoice1" style="margin-right: 20px"><c:out value="${m}"/></label>
+                    		<input type="radio" id="genderChoice2" name="${Utility.SEARCH_GENDER}" value="ж" checked>
+                    		<label for="genderChoice2" style="margin-right: 20px"><c:out value="${f}"/></label>
+                    		<input type="radio" id="genderChoice3" name="${Utility.SEARCH_GENDER}" value="мж">
+                    		<label for="genderChoice3"><c:out value="${mf}"/></label>
                     	</c:when>
                     	<c:when test="${currentGender eq 'мж'}">
-                    		<input type="radio" id="genderChoice1" name="searchGender" value="м">
-                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
-                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж">
-                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
-                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж" checked>
-                    		<label for="genderChoice3">мж</label>
+                    		<input type="radio" id="genderChoice1" name="${Utility.SEARCH_GENDER}" value="м">
+                    		<label for="genderChoice1" style="margin-right: 20px"><c:out value="${m}"/></label>
+                    		<input type="radio" id="genderChoice2" name="${Utility.SEARCH_GENDER}" value="ж">
+                    		<label for="genderChoice2" style="margin-right: 20px"><c:out value="${f}"/></label>
+                    		<input type="radio" id="genderChoice3" name="${Utility.SEARCH_GENDER}" value="мж" checked>
+                    		<label for="genderChoice3"><c:out value="${mf}"/></label>
                     	</c:when>
                     	<c:otherwise>
-                    		<input type="radio" id="genderChoice1" name="searchGender" value="м">
-                    		<label for="genderChoice1" style="margin-right: 20px">м</label>
-                    		<input type="radio" id="genderChoice2" name="searchGender" value="ж">
-                    		<label for="genderChoice2" style="margin-right: 20px">ж</label>
-                    		<input type="radio" id="genderChoice3" name="searchGender" value="мж">
-                    		<label for="genderChoice3">мж</label>
+                    		<input type="radio" id="genderChoice1" name="${Utility.SEARCH_GENDER}" value="м">
+                    		<label for="genderChoice1" style="margin-right: 20px"><c:out value="${m}"/></label>
+                    		<input type="radio" id="genderChoice2" name="${Utility.SEARCH_GENDER}" value="ж">
+                    		<label for="genderChoice2" style="margin-right: 20px"><c:out value="${f}"/></label>
+                    		<input type="radio" id="genderChoice3" name="${Utility.SEARCH_GENDER}" value="мж">
+                    		<label for="genderChoice3"><c:out value="${mf}"/></label>
                     	</c:otherwise>
                     </c:choose> 
 
-                    <div style="margin-bottom: 15px; margin-top: 50px;"><b>Private bathroom:&#160;&#160;&#160;</b></div>
+                    <div style="margin-bottom: 15px; margin-top: 50px;"><b><c:out value="${private_bathroom}"/>:&#160;&#160;&#160;</b></div>
                     <c:choose>
                     	<c:when test="${currentIsBathroom eq true}">
-                    		<input type="checkbox" id="bathroom" name="searchBathroom" checked>
+                    		<input type="checkbox" id="bathroom" name="${Utility.SEARCH_BATHROOM}" checked>
                     	</c:when>
                     	<c:otherwise>
-                    		<input type="checkbox" id="bathroom" name="searchBathroom">
+                    		<input type="checkbox" id="bathroom" name="${Utility.SEARCH_BATHROOM}">
                     	</c:otherwise>
                     </c:choose>                    
-                    <label for="bathroom">Yes</label><br>
+                    <label for="bathroom"><c:out value="${yes}"/></label><br>
 
-                    <input type="hidden" name="command" value="SearchRooms">
-                    <input style="margin-bottom: 15px; margin-top: 50px;" class="submit_button" type="submit" name="search" value="Search">
-                    <input id="clear-button" style="margin-left: 30px" class="buttons" type="button"  value="Clear" >                    
-                
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SEARCH_ROOMS}">
+                    <input style="margin-bottom: 15px; margin-top: 50px;" class="submit_button" type="submit" value="${search}">
+                    <input id="clear-button" style="margin-left: 30px" class="buttons" type="button"  value="${clear}" >  
                 </form>
-	
         	</div>
         
         	<div class="main">
@@ -298,13 +284,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="info">                    
-                    Photos of common areas                    
+                <div class="info">
+                	<c:out value="${photos_of_common_areas}"/> 
                 </div>
             </div>  
         
-	        <c:forEach var="room" items="${selected_rooms}">
-	
+	        <c:forEach var="room" items="${selected_rooms}">	
 	                <div class="form rooms">  
 					    <div class="slider-container">
 					      <div class="row">
@@ -339,19 +324,18 @@
 					      </div>
 					    </div>					
 	                
-		                <div class="info">
-                    
+		                <div class="info">                    
 		                    <c:if test="${sessionScope.role ne 'ADMIN'}">
 		                    	<div style="margin-bottom: 30px">
 						        	<form>
 						        		<c:choose>
 						        			<c:when test="${empty sessionScope.role}">
-							        			<input class="buttons open-popup" type="button" value="Booking">
+							        			<input class="buttons open-popup" type="button" value="${booking}">
 							        		</c:when>
 							        		<c:otherwise>
-							        			<input type="hidden" name="command" value="BookRoom" />
-							        			<input type="hidden" name="roomNumber" value="${room.getRoomNumber()}" />
-							        			<input class="submit_button" type="submit" value="Booking"/>
+							        			<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.BOOK_ROOM}" />
+							        			<input type="hidden" name="${Utility.ROOM_NUMBER}" value="${room.getRoomNumber()}" />
+							        			<input class="submit_button" type="submit" value="${booking_word}"/>
 							        		</c:otherwise>		
 						        		</c:choose>		                		
 						        	</form>
@@ -359,39 +343,34 @@
 		                    </c:if>		                    
 		                    
 		                    <div>                    
-		                        <div><span style="font-size:16px"><b>Room #</b></span>${room.getRoomNumber()}</div>
-		                        <div><b>Cost: </b>${room.getCost()} BYN</div>
-		                        <div><b>People in room: </b>${room.getCapacity()}</div>
+		                        <div><span style="font-size:16px"><b><c:out value="${roomLabel}"/>:</b></span>${room.getRoomNumber()}</div>
+		                        <div><b><c:out value="${cost}"/>:</b>${room.getCost()} BYN</div>
+		                        <div><b><c:out value="${capacity}"/>: </b>${room.getCapacity()}</div>
 		                        <c:if test="${not empty room.getGender() and room.getGender() ne ''}">
-		                        	<div><b>Gender in room: </b>${room.getGender()}</div>
+		                        	<div><b><c:out value="${gender}"/>: </b>${room.getGender()}</div>
 		                        </c:if>
 		                        <c:if test="${room.isBathroomInRoom() eq true }">
-		                        	<c:out value="Private bathoom in room"/>
+		                        	<c:out value="${private_bathroom_in_room}"/>
 		                        </c:if>
 		                        <div>${room.getNotes()}</div>                    
 		                    </div>
-		                    
 		                </div>	                
 	                </div>
-	                
 	        </c:forEach>
 	        
 	        <c:if test="${empty sessionScope.role}">
 	        	<div class="popup-bg">
 	                <div class="popup">
-	                    <h3>Sign In first!</h3>
+	                    <h3><c:out value="${sign_in_first}"/>!</h3>
 	                     <img class="close-popup" src="images/close.png" style="width:25px">
 	                </div>
 	            </div>
 	        </c:if>
 	        
 	         
-          </div>        
-        
-        </div>        
-
-       </div> 
-    
+          </div> 
+        </div> 
+       </div>
     <script>    
                
         var inputLeft = document.getElementById("price-left");

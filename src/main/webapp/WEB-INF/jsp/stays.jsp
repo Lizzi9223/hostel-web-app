@@ -2,10 +2,12 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bookings</title>
+<title>Stays</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet" />
@@ -36,19 +38,6 @@
 		 }
     
     </style>
-    
-    <fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
     
 </head>
 
@@ -94,8 +83,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
@@ -122,11 +111,11 @@
                 	<h3>
                 	 	<c:choose>
                 	 		<c:when test="${role eq 'ADMIN' }">
-                	 			All stays 
-                	 			<input class="submit_button open-popup stay" type="button" value="New stay" style="margin-left:20px"/>
+                	 			${all_stays}
+                	 			<input class="submit_button open-popup stay" type="button" value="${new_stay}" style="margin-left:20px"/>
                 	 		</c:when>
                 	 		<c:otherwise>
-                	 			My stays
+                	 			${my_stays}
                 	 		</c:otherwise>
                 	 	</c:choose>
                 	</h3><br>
@@ -136,12 +125,12 @@
                         <thead>
                             <tr>
                             	<c:if test="${role eq 'ADMIN'}">
-	                            	<th scope="col">ClientId</th>                               	
+	                            	<th scope="col">${clientId}</th>                               	
 		                        </c:if>                           	
-                                <th scope="col">Since</th>
-                                <th scope="col">To</th>                                
-                                <th scope="col">Room</th>
-                                <th scope="col">Notes</th>
+                                <th scope="col">${since}</th>
+                                <th scope="col">${to}</th>                                
+                                <th scope="col">${room}</th>
+                                <th scope="col">${notes}</th>
                                 <th scope="col" style="visibility: hidden"></th>
                             </tr>
                         </thead>
@@ -162,8 +151,8 @@
                                     <td><c:out value="${stay.getNotes()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">
-                                    		<input type="hidden" name="command" value="ChooseStay" />
-                                    		<input type="hidden" name="chosenStayId" value="${stay.getId()}" />
+                                    		<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHOOSE_STAY}" />
+                                    		<input type="hidden" name="${Utility.CHOSEN_STAY_ID}" value="${stay.getId()}" />
                                     	</form>
                                     </td>
                                 </tr>
@@ -183,9 +172,9 @@
 		                    				<tr>
 		                    					<td>
 		                    						<form>
-					                    				<input type="hidden" name="command" value="EditStay" />
-					                    				<input type="hidden" name="stayId" value="${chosenStayId}" />
-					                    				<input class="submit_button" type="submit" value="Edit" style="margin-right:20px"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.EDIT_STAY}" />
+					                    				<input type="hidden" name="${Utility.STAY_ID}" value="${chosenStayId}" />
+					                    				<input class="submit_button" type="submit" value="${edit}" style="margin-right:20px"/>
 					                    			</form>
 		                    					</td>
 		                    				</tr>
@@ -193,9 +182,9 @@
 			                    				<tr>
 			                    					<td>
 			                    						<form>
-						                    				<input type="hidden" name="command" value="DeleteStay" />
-						                    				<input type="hidden" name="stayId" value="${chosenStayId}" />
-						                    				<input class="submit_button" type="submit" value="Delete"/>
+						                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.DELETE_STAY}" />
+						                    				<input type="hidden" name="${Utility.STAY_ID}" value="${chosenStayId}" />
+						                    				<input class="submit_button" type="submit" value="${delete}"/>
 						                    			</form>
 			                    					</td>
 			                    				</tr>
@@ -212,15 +201,15 @@
 		                <div class="popup" style="width:auto; padding: 40px">	                    
 		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
 		                    <form>
-			                    <label for="toDate">Departure date:</label>
-			                    <input type="date" id="toDate" name="toDate" value="${stay.getToDate()}" min="${stay.getFromDate().plusDays(1)}">                
+			                    <label for="toDate"><c:out value="${departure_date}" />:</label>
+			                    <input type="date" id="toDate" name="${Utility.TO_DATE}" value="${stay.getToDate()}" min="${stay.getFromDate().plusDays(1)}">                
 			                    <br><br>
-			                    <label>Notes:&#160;</label><br>
-			                    <textarea id="notes" name="notes" rows="5" cols="30"><c:out value="${stay.getNotes()}"></c:out></textarea>
-			                    <input type="hidden" name="stayId" value="${stay.getId()}" />
-			                    <input type="hidden" name="command" value="EditStayCheck" />
+			                    <label><c:out value="${notes}" />:&#160;</label><br>
+			                    <textarea id="notes" name="${Utility.NOTES}" rows="5" cols="30"><c:out value="${stay.getNotes()}"></c:out></textarea>
+			                    <input type="hidden" name="${Utility.STAY_ID}" value="${stay.getId()}" />
+			                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.EDIT_STAY_CHECK}" />
 			                    <br>
-			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
+			                    <input class="submit_button" type="submit" value="${check}" style="margin-right: 50px"/>
 			                </form>
 		                </div>
 		            </div>
@@ -230,16 +219,16 @@
 	                <div class="popup">
 	                    <img class="close-popup" src="images/close.png" style="width:25px">
 	                    <form>                
-		                    <label for="fromDate">Arrive date:</label>
-		                    <input type="date" id="fromDate" name="fromDate" onchange="setToDate()" required>
-		                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
-		                    <input type="date" id="toDate" name="toDate" required>                
+		                    <label for="fromDate"><c:out value="${arrive_date}" />:</label>
+		                    <input type="date" id="fromDate" name="${Utility.FROM_DATE}" onchange="setToDate()" required>
+		                    <label for="toDate">&#160;&#160;&#160;&#160;<c:out value="${departure_date}" />:</label>
+		                    <input type="date" id="toDate" name="${Utility.TO_DATE}" required>                
 		                    <br><br>
-		                    <label for="questsNumber">Number of guests:&#160;</label>
-		                    <input type="number" id="guestsNumber" name="guestsNumber" value="1" min="1" max="15" style="margin-right: 90px">
-		                    <input type="hidden" name="command" value="AddStay" />
-		                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
-		                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
+		                    <label for="questsNumber"><c:out value="${number_of_guests}" />:&#160;</label>
+		                    <input type="number" id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="1" min="1" max="15" style="margin-right: 90px">
+		                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.ADD_STAY}" />
+		                    <input class="submit_button" type="submit" value="${check}" style="margin-right: 50px"/>
+		                    <input id="check-among-all-rooms" type="checkbox" name="${Utility.CHECK_AMONG_ALL_ROOMS}" value="${check_among_all_rooms}" checked style="visibility:hidden"/>
 		                </form>
 	                </div>
 	            </div>
@@ -263,28 +252,28 @@
 			                	</a>
 			                    <h5 style="margin-top:15px">Please, check data:</h5>
 			                    <form>
-			                    	<b>Room:</b><br>
+			                    	<b><c:out value="${room}" />:</b><br>
 				                    <c:forEach var="room" items="${availableRooms}">
-	                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}" required>
+	                                    <input type="radio" name="${Utility.ROOM_NUMBER}" value="${room.getRoomNumber()}" required>
 				                    	<c:out value="${room.getRoomNumber()}" /><br>
 				                    </c:forEach>
 				                    <table>
 				                    	<tr>
-				                    		<td><b>Since:</b></td>
-				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
+				                    		<td><b><c:out value="${since}" />:</b></td>
+				                    		<td><input type="date" name="${Utility.FROM_DATE}" value="${fromDate}" readonly /></td>
 				                    	</tr>
 				                    	<tr>
-				                    		<td><b>To:</b></td>
-				                    		<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
+				                    		<td><b><c:out value="${to}" />:</b></td>
+				                    		<td><input type="date" name="${Utility.TO_DATE}" value="${toDate}" readonly /></td>
 				                    	</tr>
 				                    	<tr>
-				                    		<td><b>Guests number:</b></td>
-				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
+				                    		<td><b><c:out value="${number_of_guests}" />:</b></td>
+				                    		<td><input type="number" name="${Utility.GUESTS_NUMBER}" value="${guestsNumber}" readonly /></td>
 				                    	</tr>
 				                    </table>			                    
 				                    <br>
-				                    <input type="hidden" name="command" value="SubmitStay" />
-				                    <input class="submit_button" type="submit" value="Submit stay"/>
+				                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SUBMIT_STAY}" />
+				                    <input class="submit_button" type="submit" value="${submit_stay}"/>
 			                    </form>			                    
 			                </div>
 			            </div>
@@ -295,22 +284,22 @@
 			                    <a href="Controller?command=GO_TO_STAYS_PAGE">
 			                		<img src="images/close.png" style="width:25px;">
 			                	</a>
-			                    <h5 style="margin-top:15px">Please, check data:</h5>
+			                    <h5 style="margin-top:15px"><c:out value="${please_check_data}"/>:</h5>
 			                    <form>
 				                    <table>
 				                    	<tr>
-					                    	<td><b>To:</b></td>
-					                    	<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
+					                    	<td><b>${to}:</b></td>
+					                    	<td><input type="date" name="${Utility.TO_DATE}" value="${toDate}" readonly /></td>
 					                    </tr>			                    	
 				                    	<tr>
-				                    		<td><b>Notes:</b></td>
-				                    		<td><textarea name="notes" rows="5" cols="30" readonly><c:out value="${notes}"></c:out></textarea></td>
+				                    		<td><b>${notes}:</b></td>
+				                    		<td><textarea name="${Utility.NOTES}" rows="5" cols="30" readonly><c:out value="${notes}"></c:out></textarea></td>
 				                    	</tr>
 				                    </table>			                    
 				                    <br>
-				                    <input type="hidden" name="editedStayId" value="${editedStayId}" />
-				                    <input type="hidden" name="command" value="SubmitStay" />
-				                    <input class="submit_button" type="submit" value="Submit stay"/>
+				                    <input type="hidden" name="${Utility.EDITED_STAY_ID}" value="${editedStayId}" />
+				                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SUBMIT_STAY}" />
+				                    <input class="submit_button" type="submit" value="${submit_stay}"/>
 			                    </form>			                    
 			                </div>
 			            </div>

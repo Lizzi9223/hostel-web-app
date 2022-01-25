@@ -2,6 +2,8 @@
     pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,26 +30,6 @@
         }
     
     </style>
-    
-    <fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
-	<fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
-	<fmt:message bundle="${lang}" key="main.hostel_Samartia" var="hostel_Samartia" />
-	<fmt:message bundle="${lang}" key="logination.logination" var="logination" /> 
-	<fmt:message bundle="${lang}" key="logination.login" var="login" /> 
-	<fmt:message bundle="${lang}" key="logination.password" var="password" /> 
-	<fmt:message bundle="${lang}" key="logination.back" var="back" /> 
-    
 
 </head>
 <body>
@@ -67,8 +49,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
@@ -93,16 +75,16 @@
                 <table>
                     <tr>
                         <td><h2><c:out value="${logination}"/>:</h2><br></td>
-                        <td><input type="hidden" name="command" value="Logination" /></td>
+                        <td><input type="hidden" name="${Utility.COMMAND}" value="${CommandName.LOGINATION}" /></td>
                     </tr>
 
                     <tr>
-                        <td><c:out value="${login}"/>:<br><br></td>
-                        <td><input style="width:200px" type="text" name="login" value = "" required/><br><br></td>
+                        <td><c:out value="${login_word}"/>:<br><br></td>
+                        <td><input style="width:200px" type="text" name="${Utility.LOGIN}" value = "" required/><br><br></td>
                     </tr>
                     <tr>
-                        <td><c:out value="${password}"/>:<br><br><br></td>
-                        <td><input style="width:200px" type="password" name="password" value = "" required/><br><br><br></td>
+                        <td><c:out value="${password_word}"/>:<br><br><br></td>
+                        <td><input style="width:200px" type="password" name="${Utility.PASSWORD}" value = "" required/><br><br><br></td>
                     </tr>
 
                     <tr>
