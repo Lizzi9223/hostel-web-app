@@ -1,5 +1,6 @@
 package by.epam.tc.web.service;
 
+import by.epam.tc.web.service.exception.ServiceException;
 import by.epam.tc.web.service.impl.RoomServiceImpl;
 import by.epam.tc.web.service.impl.StaysServiceImpl;
 import by.epam.tc.web.service.impl.UserServiceImpl;

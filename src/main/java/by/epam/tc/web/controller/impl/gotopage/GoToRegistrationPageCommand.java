@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.epam.tc.web.controller.Command;
-import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.constant.Forward;
+import by.epam.tc.web.controller.constant.Utility;
 
 public class GoToRegistrationPageCommand implements Command{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter(Constant.Utility.CREATE) != null && request.getParameter(Constant.Utility.CREATE).equals(Constant.Utility.ADMIN)) {
-			request.setAttribute(Constant.Utility.CREATE, Constant.Utility.ADMIN);
+		if(request.getParameter(Utility.CREATE) != null && request.getParameter(Utility.CREATE).equals(Utility.ADMIN)) {
+			request.setAttribute(Utility.CREATE, Utility.ADMIN);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_REGISTRATION_PAGE);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_REGISTRATION_PAGE);
 		dispatcher.forward(request, response);		
 	}
 

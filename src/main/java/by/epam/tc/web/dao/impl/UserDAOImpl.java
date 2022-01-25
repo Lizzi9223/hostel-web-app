@@ -777,10 +777,50 @@ public class UserDAOImpl implements UserDAO{
             }
         }
         return client;
-
     }
 
     @Override
+	public Client findClientByPassportId(String passportId) throws DAOException {
+    	Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        Client client = new Client();
+        try{
+            con = connectionPool.takeConnection();
+            st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.ALL_CLIENTS_TABLE,
+                    Metadata.AllClientsTableColumn.PASSPORT_ID));
+            st.setString(1,passportId);
+            rs = st.executeQuery();
+
+            while (rs.next()){
+                int userId = rs.getInt(Metadata.UsersTableColumn.USER_ID);
+                int clientId = rs.getInt(Metadata.AllClientsTableColumn.CLIENT_ID);
+                String name = rs.getString(Metadata.AllClientsTableColumn.FIRST_NAME);
+                String surname = rs.getString(Metadata.AllClientsTableColumn.LAST_NAME);
+                String passport = rs.getString(Metadata.AllClientsTableColumn.PASSPORT_ID);
+                LocalDate birth = rs.getDate(Metadata.AllClientsTableColumn.DATE_OF_BIRTH).toLocalDate();
+                String country = rs.getString(Metadata.AllClientsTableColumn.COUNTY);
+                String phone = rs.getString(Metadata.AllClientsTableColumn.PHONE_NUMBER);
+                String email = rs.getString(Metadata.AllClientsTableColumn.EMAIL);
+                client = new Client(clientId, name, surname, passport, birth, country, phone, email);
+                client.setUserId(userId);
+            }
+        }
+        catch (ConnectionPoolException | SQLException e){
+            throw new DAOException(e);
+        }
+        finally {
+            try{
+                connectionPool.closeConnection(con,st,rs);
+            }
+            catch (ConnectionPoolException e){
+                throw new DAOException(e);
+            }
+        }
+        return client;
+	}
+
+	@Override
     public BlackListClient findInBlacklistById(int id) throws DAOException{
         Connection con = null;
         PreparedStatement st = null;

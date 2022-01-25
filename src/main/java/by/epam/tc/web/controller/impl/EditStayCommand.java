@@ -12,10 +12,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.tc.web.controller.Command;
-import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.constant.CommandName;
+import by.epam.tc.web.controller.constant.Forward;
+import by.epam.tc.web.controller.constant.Redirect;
+import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.entity.stay.Stay;
-import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public class EditStayCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.EditStayCommand.class);
@@ -23,30 +26,30 @@ public class EditStayCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int stayId = Integer.parseInt(request.getParameter(Constant.Utility.STAY_ID));
+			int stayId = Integer.parseInt(request.getParameter(Utility.STAY_ID));
 			Stay stay = ServiceFactory.getInstance().getStaysService().getStayById(stayId);
-			if(request.getParameter(Constant.Utility.COMMAND).equals(Constant.Command.EDIT_STAY)) {				
-				request.getSession().setAttribute(Constant.Utility.STAY, stay);
-				request.getSession().setAttribute(Constant.Utility.POPUP_VIEW, Constant.Command.EDIT_STAY);
-				response.sendRedirect(Constant.Redirect.TO_STAYS_PAGE);
-			}else if(request.getParameter(Constant.Utility.COMMAND).equals(Constant.Command.EDIT_STAY_CHECK)) {
+			if(request.getParameter(Utility.COMMAND).equals(CommandName.EDIT_STAY)) {				
+				request.getSession().setAttribute(Utility.STAY, stay);
+				request.getSession().setAttribute(Utility.POPUP_VIEW, CommandName.EDIT_STAY);
+				response.sendRedirect(Redirect.TO_STAYS_PAGE);
+			}else if(request.getParameter(Utility.COMMAND).equals(CommandName.EDIT_STAY_CHECK)) {
 				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-				LocalDate toDate = LocalDate.parse(request.getParameter(Constant.Utility.TO_DATE));
+				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));
 				if(ServiceFactory.getInstance().getStaysService().areAvailablePlaces(
 						stay.getRoomNumber(), stay.getFromDate(), toDate, 1, 0, stayId)) {					
-					request.setAttribute(Constant.Utility.TO_DATE, toDate);
-					request.setAttribute(Constant.Utility.NOTES, request.getParameter(Constant.Utility.NOTES));
-					request.setAttribute(Constant.Utility.CHECK_RESULT, true);
-					request.setAttribute(Constant.Utility.EDITED_STAY_ID, stayId);
+					request.setAttribute(Utility.TO_DATE, toDate);
+					request.setAttribute(Utility.NOTES, request.getParameter(Utility.NOTES));
+					request.setAttribute(Utility.CHECK_RESULT, true);
+					request.setAttribute(Utility.EDITED_STAY_ID, stayId);
 				}else {
-					request.setAttribute(Constant.Utility.CHECK_RESULT, false);
+					request.setAttribute(Utility.CHECK_RESULT, false);
 				}
-				RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_STAYS_PAGE);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_STAYS_PAGE);
 				dispatcher.forward(request, response);
 			}
 		} catch (ServiceException e) {
 			logger.error("error while editing stay", e);
-			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+			response.sendRedirect(Redirect.TO_ERROR_PAGE);
 		}
 	}
 

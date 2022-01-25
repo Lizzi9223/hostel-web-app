@@ -9,7 +9,7 @@ import by.epam.tc.web.dao.RoomDAO;
 import by.epam.tc.web.entity.room.Image;
 import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.service.RoomService;
-import by.epam.tc.web.service.ServiceException;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public class RoomServiceImpl implements RoomService {
 	

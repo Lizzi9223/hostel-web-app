@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import by.epam.tc.web.entity.room.Room;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public interface RoomService {
 	List<Room> getAllRooms();

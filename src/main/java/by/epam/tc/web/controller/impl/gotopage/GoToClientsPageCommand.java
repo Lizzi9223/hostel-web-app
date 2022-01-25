@@ -15,10 +15,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.tc.web.controller.Command;
-import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.constant.CommandName;
+import by.epam.tc.web.controller.constant.Forward;
+import by.epam.tc.web.controller.constant.Redirect;
+import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.entity.user.Client;
-import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.ServiceFactory;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public class GoToClientsPageCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToClientsPageCommand.class);
@@ -28,16 +31,42 @@ public class GoToClientsPageCommand implements Command {
 		try {			
 			List<Client> clients = new LinkedList<Client>(ServiceFactory.getInstance().getUserService().getAllClients());
 			Collections.sort(clients, 
-				     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
-			request.setAttribute(Constant.Utility.CLIENTS, clients);
-			if(request.getParameter(Constant.Utility.COMMAND).equals(Constant.Command.SEARCH_CLIENT)) {
-				
+				     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));			
+			if(request.getParameter(Utility.COMMAND).equals(CommandName.SEARCH_CLIENT)) {
+				String criteria = (String)request.getParameter(Utility.SEARCH_CRITERIA);
+				String searchData = (String)request.getParameter(Utility.SEARCH_DATA);
+				if(searchData!=null && !searchData.equals(Utility.EMPTY)) {
+					switch(criteria) {
+					case Utility.LOGIN:
+						for(int i=0; i<clients.size();i++) {
+							if(clients.get(i).getLogin()== null || !clients.get(i).getLogin().startsWith(searchData)) {
+								clients.remove(i--);
+							}
+						}
+						break;
+					case Utility.PASSPORT_ID:
+						for(int i=0; i<clients.size();i++) {
+							if(!clients.get(i).getPassportId().startsWith(searchData)) {
+								clients.remove(i--);
+							}
+						}
+						break;
+					case Utility.SURNAME:
+						for(int i=0; i<clients.size();i++) {
+							if(!clients.get(i).getLastName().startsWith(searchData)) {
+								clients.remove(i--);
+							}
+						}
+						break;
+					}
+				}				
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.Forward.TO_CLIENTS_PAGE);
+			request.setAttribute(Utility.CLIENTS, clients);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_CLIENTS_PAGE);
 			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
 			logger.error("error while going to clients page", e);
-			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+			response.sendRedirect(Redirect.TO_ERROR_PAGE);
 		}
 	}
 

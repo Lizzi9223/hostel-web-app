@@ -7,6 +7,7 @@ import java.util.List;
 import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.entity.stay.Stay;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public interface StaysService {
 	List<Booking> getAllBookings() throws ServiceException;

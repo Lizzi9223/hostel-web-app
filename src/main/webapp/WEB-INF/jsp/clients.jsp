@@ -120,7 +120,13 @@
                 	<h3>
                 		<c:choose>
                 	 		<c:when test="${newStayGuestsNumber > 0}">
-                	 			
+                	 			<p style="font-size:14px; color: #808080">
+                	 				<c:out value="${newStayGuestsNumber} more clients to choose"/>
+                	 			</p>
+                	 			<form>
+                	 				<input type="hidden" name="command" value="FinishChoosingClient"/>
+                	 				<input class="submit_button" type="submit" value="Finish" style="font-size:14px"/>
+                	 			</form><br>                	 			                	 			
                 	 			CHOOSE CLIENT:
                 	 		</c:when>
                 	 		<c:otherwise>
@@ -131,7 +137,7 @@
                 	</h3>
                 	<form style="margin-left:50%">
                 		<label><c:out value="Search by:" /></label>
-                	 	<select name="searchOption" style="padding:10">
+                	 	<select name="searchCriteria" style="padding:10">
                 	 		<option value="login"><c:out value="Login" /></option>
                 	 		<option value="passportId" selected><c:out value="Passport ID"/></option>
                 	 		<option value="surname"><c:out value="Surname" /></option>

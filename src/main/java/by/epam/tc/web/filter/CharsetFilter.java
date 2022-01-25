@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.constant.Utility;
 
 public class CharsetFilter implements Filter {
 
@@ -17,7 +17,7 @@ public class CharsetFilter implements Filter {
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		encoding = filterConfig.getInitParameter(Constant.Utility.REQUEST_ENCODING);
+		encoding = filterConfig.getInitParameter(Utility.REQUEST_ENCODING);
 		if (encoding == null) {
 			encoding = "utf-8";
 		}

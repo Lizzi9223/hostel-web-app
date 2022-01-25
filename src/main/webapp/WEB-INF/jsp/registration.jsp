@@ -121,10 +121,10 @@
                                         <td><c:out value="${name_word}"/>:<br><br></td>
                                         <td><input type="text" name="name" value = "" required/><br><br></td>
                                     </tr>
-                                    <tr>
+                        <%--            <tr>
                                         <td><c:out value="${photo_word}"/>:<br><br></td>
                                         <td><input type="text" name="photo" value = ""/><br><br></td>
-                                    </tr>
+                                    </tr>  --%> 
                                 </c:when>
                                 <c:otherwise>
                                     <tr>

@@ -3,21 +3,19 @@ package by.epam.tc.web.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.epam.tc.web.dao.DAOException;
 import by.epam.tc.web.dao.DAOFactory;
 import by.epam.tc.web.dao.UserDAO;
 import by.epam.tc.web.entity.user.Admin;
 import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.entity.user.User;
-import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.UserService;
+import by.epam.tc.web.service.exception.LoginAlreadyExistsException;
+import by.epam.tc.web.service.exception.PassportIdAlreadyExistsException;
+import by.epam.tc.web.service.exception.ServiceException;
 import by.epam.tc.web.service.validator.UserValidator;
 
-public class UserServiceImpl implements UserService {
-	
+public class UserServiceImpl implements UserService {	
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 	
 	public UserServiceImpl(){}
@@ -36,11 +34,14 @@ public class UserServiceImpl implements UserService {
     
     
     @Override
-	public boolean signUp(Admin admin) throws ServiceException {
+	public boolean signUp(Admin admin) throws ServiceException, LoginAlreadyExistsException {
     	int userId = 0;
     	try {
     		if(!UserValidator.isValidAdmin(admin) || !UserValidator.isValidPassword(admin.getPassword())){    			
     			return false;
+    		}
+    		if(userDAO.findUserByLogin(admin.getLogin()) != null) {
+    			throw new LoginAlreadyExistsException();
     		}
     		userId = userDAO.addUser(admin); 
     		admin.setUserId(userId);
@@ -51,11 +52,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-    public boolean signUp(Client client) throws ServiceException{
+    public boolean signUp(Client client) throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException{
 		int clientId = 0;
     	try {
     		if(!UserValidator.isValidClient(client) || !UserValidator.isValidPassword(client.getPassword())) {    			
     			return false;
+    		}
+    		if(userDAO.findUserByLogin(client.getLogin()) != null) {
+    			throw new LoginAlreadyExistsException();
+    		}
+    		if(userDAO.findClientByPassportId(client.getPassportId()) != null) {
+    			throw new PassportIdAlreadyExistsException();
     		}
     		clientId = userDAO.addUserClient(client);
     		client.setClientId(clientId);
@@ -66,10 +73,13 @@ public class UserServiceImpl implements UserService {
     }
 	
 	@Override
-	public boolean addClient(Client client) throws ServiceException {
+	public boolean addClient(Client client) throws ServiceException, PassportIdAlreadyExistsException {
     	try {   
     		if(!UserValidator.isValidClient(client)) {    			
     			return false;
+    		}
+    		if(userDAO.findClientByPassportId(client.getPassportId()) != null) {
+    			throw new PassportIdAlreadyExistsException();
     		}
     		if(client.getLogin()!=null && !client.getLogin().equals("")) {
     			int userId = userDAO.getUserId(client.getLogin());
@@ -83,10 +93,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean edit(Admin admin, String login) throws ServiceException {    	
+	public boolean edit(Admin admin, String login) throws ServiceException, LoginAlreadyExistsException {    	
     	try {
     		if(!UserValidator.isValidAdmin(admin)) {    			
     			return false;
+    		}
+    		if(userDAO.findUserByLogin(admin.getLogin()) != null) {
+    			throw new LoginAlreadyExistsException();
     		}
     		int userId = userDAO.getUserId(login);
     		userDAO.updateUser(userId, admin);
@@ -98,10 +111,16 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean edit(Client client, String login, String passportId) throws ServiceException{
+	public boolean edit(Client client, String login, String passportId) throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException{
     	try {
     		if(!UserValidator.isValidClient(client)) {
     			return false;
+    		}
+    		if(userDAO.findUserByLogin(client.getLogin()) != null) {
+    			throw new LoginAlreadyExistsException();
+    		}
+    		if(userDAO.findClientByPassportId(client.getPassportId()) != null) {
+    			throw new PassportIdAlreadyExistsException();
     		}
     		int userId = userDAO.getUserId(login);
     		userDAO.updateUser(userId, client);

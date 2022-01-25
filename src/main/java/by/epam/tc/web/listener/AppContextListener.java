@@ -6,7 +6,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.dao.database.connection_pool.ConnectionPool;
 import by.epam.tc.web.dao.database.connection_pool.ConnectionPoolException;
 
@@ -20,7 +20,7 @@ public class AppContextListener implements ServletContextListener {
 			connectionPool.initPoolData();
 		} catch (ConnectionPoolException e) {
 			logger.fatal("connection pool not created", e);
-			sce.getServletContext().setAttribute(Constant.Utility.ERROR, e);
+			sce.getServletContext().setAttribute(Utility.ERROR, e);
 		}
 	}
 

@@ -10,25 +10,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.tc.web.controller.Command;
-import by.epam.tc.web.controller.constant.Constant;
-import by.epam.tc.web.service.ServiceException;
+import by.epam.tc.web.controller.constant.Redirect;
+import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.service.ServiceFactory;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public class ApproveBookingCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.ApproveBookingCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter(Constant.Utility.BOOKING_ID)!=null) {
-			int id = Integer.parseInt(request.getParameter(Constant.Utility.BOOKING_ID));
-			boolean isApproved = Boolean.parseBoolean(request.getParameter(Constant.Utility.APPROVE));
+		if(request.getParameter(Utility.BOOKING_ID)!=null) {
+			int id = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));
+			boolean isApproved = Boolean.parseBoolean(request.getParameter(Utility.APPROVE));
 			try {
 				ServiceFactory.getInstance().getStaysService().approveBooking(id, isApproved);
-				response.sendRedirect(Constant.Redirect.TO_BOOKINGS_PAGE);
+				response.sendRedirect(Redirect.TO_BOOKINGS_PAGE);
 			}
 			catch (ServiceException e) {
 				logger.error("error while approving booking", e);
-				response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+				response.sendRedirect(Redirect.TO_ERROR_PAGE);
 			}			
 		}		
 	}

@@ -16,8 +16,8 @@ import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.entity.stay.Stay;
 import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.entity.user.Role;
-import by.epam.tc.web.service.ServiceException;
 import by.epam.tc.web.service.StaysService;
+import by.epam.tc.web.service.exception.ServiceException;
 
 public class StaysServiceImpl implements StaysService {
 	

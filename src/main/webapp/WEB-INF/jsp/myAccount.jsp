@@ -107,10 +107,10 @@
                                         <td>Name:<br><br></td>
                                         <td><input class="input" disabled="true" type="text" name="name" value = "${admin.getName()}"/><br><br></td>
                                     </tr>
-                                    <tr>
+                               <%--      <tr>
                                         <td>Photo:<br><br></td>
                                         <td><input class="input" disabled="true" type="text" name="photo" value = "${admin.getPhotoPath()}"/><br><br></td>
-                                    </tr>
+                                    </tr>  --%>
                                 </c:when>
                                 <c:otherwise>
                                     <tr>

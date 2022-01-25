@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.epam.tc.web.controller.constant.Constant;
+import by.epam.tc.web.controller.constant.CommandName;
+import by.epam.tc.web.controller.constant.Redirect;
+import by.epam.tc.web.controller.constant.Utility;
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,11 +34,11 @@ public class Controller extends HttpServlet {
 	}
 	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(getServletContext().getAttribute(Constant.Utility.ERROR)!=null) {
-			response.sendRedirect(Constant.Redirect.TO_ERROR_PAGE);
+		if(getServletContext().getAttribute(Utility.ERROR)!=null) {
+			response.sendRedirect(Redirect.TO_ERROR_PAGE);
 		}else {
-			String commandName = request.getParameter(Constant.Utility.COMMAND);
-			if(!commandName.equals(Constant.Command.CHANGE_LANGUAGE)) {
+			String commandName = request.getParameter(Utility.COMMAND);
+			if(!commandName.equals(CommandName.CHANGE_LANGUAGE)) {
 				HttpSession session = request.getSession();
 				StringBuilder urlBuilder = new StringBuilder();
 				urlBuilder.append(request.getRequestURI());
@@ -57,7 +59,7 @@ public class Controller extends HttpServlet {
 		                urlBuilder.append(paramValue);
 		            }
 		        }
-				session.setAttribute(Constant.Utility.URL, urlBuilder.toString());
+				session.setAttribute(Utility.URL, urlBuilder.toString());
 			}
 			Command command = provider.getCommand(commandName);		
 			command.execute(request, response);

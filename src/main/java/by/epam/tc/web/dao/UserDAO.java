@@ -27,6 +27,7 @@ public interface UserDAO {
     Client findClientByUserId(int id) throws DAOException;
     Client findClientByLogin(String login) throws DAOException; ///////////
     Client findClientByClientId(int id) throws DAOException;
+    Client findClientByPassportId(String passportId) throws DAOException;
     BlackListClient findInBlacklistById(int id) throws DAOException;
     RegularClient findInRegularCustomersById(int id) throws DAOException;
 
