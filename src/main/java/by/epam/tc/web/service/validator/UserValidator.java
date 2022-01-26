@@ -83,7 +83,7 @@ public class UserValidator {
 		if(phone.equals("") || phone == null) {
 			return false;
 		}
-		String pattern = "^\\+?[1-9]?[0-9]{4,15}$";
+		String pattern = "^\\+?[1-9][0-9]{4,15}$";
         return isValid(phone, pattern);
 	}
 

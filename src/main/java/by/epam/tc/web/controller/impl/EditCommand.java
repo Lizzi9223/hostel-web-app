@@ -28,7 +28,6 @@ public class EditCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String passportId = request.getParameter(Utility.PASSPORT_ID);
-			
 			if(passportId != null) { 
 				String login = request.getParameter(Utility.LOGIN);
 				String name = request.getParameter(Utility.NAME);
@@ -68,9 +67,11 @@ public class EditCommand implements Command {
 		}catch (LoginAlreadyExistsException e) {
 			logger.warn("Login already exists");
 			request.getSession().setAttribute(Utility.ERROR, Message.LOGIN_EXISTS);
+			response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
 		} catch (PassportIdAlreadyExistsException e) {
 			logger.warn("Passport ID already exists");
 			request.getSession().setAttribute(Utility.ERROR, Message.PASSPORT_EXISTS);
+			response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
 		} catch (ServiceException e) {
 			logger.error("error while editing account", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);

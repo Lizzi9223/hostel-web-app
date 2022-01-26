@@ -11,8 +11,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.tc.web.controller.Command;
+import by.epam.tc.web.controller.constant.CommandName;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
+import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.entity.stay.Stay;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
@@ -23,6 +25,12 @@ public class SubmitStayCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			if(request.getParameter(Utility.COMMAND).equals(CommandName.GUESTS_ARRIVED)) {
+				int bookingId = Integer.parseInt(request.getParameter(Utility.CHOSEN_BOOKING_ID));
+				//Booking booking = ServiceFactory.getInstance().getStaysService(). 
+				//TODO
+				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
+			}
 			if(request.getParameter(Utility.EDITED_STAY_ID)!=null
 					&& !request.getParameter(Utility.EDITED_STAY_ID).equals(Utility.EMPTY)) {
 				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));

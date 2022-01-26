@@ -3,6 +3,7 @@
  Array.prototype.forEach.call(inputs, function(el) {
  el.disabled = false;
  });
+ document.getElementById("valid_login_msg").style.display="block";
  document.getElementById("save_button").style.visibility="visible";
  document.getElementById("cancel_button").style.visibility="visible";
  }
@@ -11,7 +12,8 @@
  var inputs = document.getElementsByClassName("input");
  Array.prototype.forEach.call(inputs, function(el) {
  el.disabled = true;
- });
+ });	
+ document.getElementById("valid_login_msg").style.display="none";
  document.getElementById("save_button").style.visibility="hidden";
  document.getElementById("cancel_button").style.visibility="hidden";
  window.location.reload();

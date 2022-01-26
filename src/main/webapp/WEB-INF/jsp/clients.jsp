@@ -125,10 +125,11 @@
                 	<form style="margin-left:50%">
                 		<label><c:out value="${search_by_word}:" /></label>
                 	 	<select name="${Utility.SEARCH_CRITERIA}" style="padding:10">
-                	 		<option value="${Utility.LOGIN}"><c:out value="${login_word}" /></option>
-                	 		<option value="${Utility.PASSPORT_ID}" selected><c:out value="${passport_id_word}"/></option>
-                	 		<option value="${Utility.SURNAME}"><c:out value="${surname_word}" /></option>
+                	 		<option value="${Utility.LOGIN}" ${currentSearchCriteria == Utility.LOGIN ? 'selected' : ''}><c:out value="${login_word}" /></option>
+                	 		<option value="${Utility.PASSPORT_ID}" ${(currentSearchCriteria == Utility.PASSPORT_ID || currentSearchCriteria == null) ? 'selected' : ''}><c:out value="${passport_id_word}"/></option>
+                	 		<option value="${Utility.SURNAME}" ${currentSearchCriteria == Utility.SURNAME ? 'selected' : ''}><c:out value="${surname_word}" /></option>
                 	 	</select>
+                	 	<input type="text" name="${Utility.SEARCH_DATA}" value="${currentSearchData}"/>
                 	 	<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SEARCH_CLIENT}"/>
                 	 	<input class="submit_button" type="submit" value="${search}" style="padding:10; font-size:14px"/>
                 	</form><br>
@@ -264,7 +265,7 @@
 		            </div>
 	            </c:if>
 	            
-	            <c:if test="">
+	     <%--        <c:if test="">
 	            		<div class="popup-bg" style="display: block">
 			                <div class="popup" style="width:auto; padding-top:30px">
 			                    <a href="Controller?command=GO_TO_BOOKINGS_PAGE">
@@ -273,7 +274,7 @@
 			                    <h5 style="margin-top:15px"><c:out value="${please_check_data_word}:"/></h5>
 			                    <form>			                    	
 				                    <table>
-				                    <%-- 	<tr>
+				                     	<tr>
 				                    		<td><b>Since:</b></td>
 				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
 				                    	</tr>
@@ -284,7 +285,7 @@
 				                    	<tr>
 				                    		<td><b>Guests number:</b></td>
 				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
-				                    	</tr>   --%>
+				                    	</tr>  
 				                    </table>			                    
 				                    <br>
 				                    <input type="hidden" name="${Utility.EDITED_CLIENT_ID}" value="${editedClientId}" />
@@ -293,7 +294,7 @@
 			                    </form>			                    
 			                </div>
 			            </div>
-	            </c:if>
+	            </c:if>  --%>
 	         	
           </div> 
         </div>

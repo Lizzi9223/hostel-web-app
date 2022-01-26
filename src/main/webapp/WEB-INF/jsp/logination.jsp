@@ -34,7 +34,7 @@
 </head>
 <body>
 
-    <div class="container" style="background: rgba(255,255,255,0.7)">
+    <div class="container">
     
         <div class="menu">
 
@@ -68,7 +68,7 @@
 
         </div>
 
-        <div class="main">
+        <div class="main" style="background: rgba(255,255,255,0.7)">
 
             <div class="form">
                 <form action="Controller" method="post">

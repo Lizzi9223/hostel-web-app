@@ -174,7 +174,7 @@
                                     <c:set var="dateToParse" value="${booking.getApproveDate()}"/>
                                     <fmt:parseDate value="${dateToParse}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
                                     <td><fmt:formatDate value="${parsedDate}" pattern="dd.MM.yyyy" /></td>
-                                    <td><c:out value="${booking.getPrice()}" /></td>
+                                    <td><fmt:formatNumber value="${booking.getPrice()}" type="currency" pattern=".0# BYN"/></td>
                                     <td><c:out value="${booking.isPaid()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">
@@ -243,7 +243,7 @@
 		                    				<tr>
 		                    					<td>
 		                    						<form>
-					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.ADD_STAY}" />
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.GUESTS_ARRIVED}" />
 					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
 					                    				<input class="submit_button" type="submit" value="${guests_arrived_word}" style="margin-right:20px"/>
 					                    			</form>	

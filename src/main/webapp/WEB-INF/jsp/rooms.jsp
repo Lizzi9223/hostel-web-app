@@ -330,7 +330,7 @@
 						        	<form>
 						        		<c:choose>
 						        			<c:when test="${empty sessionScope.role}">
-							        			<input class="buttons open-popup" type="button" value="${booking}">
+							        			<input class="buttons open-popup" type="button" value="${booking_word}">
 							        		</c:when>
 							        		<c:otherwise>
 							        			<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.BOOK_ROOM}" />

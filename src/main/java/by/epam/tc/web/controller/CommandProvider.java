@@ -65,6 +65,7 @@ public final class CommandProvider {
 		commands.put(CommandName.FINISH_CHOOSING_CLIENT, new ChooseClientCommand());
 		commands.put(CommandName.ADD_CLIENT, new AddClientCommand());
 		commands.put(CommandName.SEARCH_CLIENT, new GoToClientsPageCommand());
+		commands.put(CommandName.GUESTS_ARRIVED, new SubmitStayCommand());
 		
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPageCommand());
 		commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());

@@ -114,5 +114,8 @@
 	<fmt:message bundle="${lang}" key="bookings.booking_was_rejected_msg" var="booking_was_rejected_msg" />	
 	<fmt:message bundle="${lang}" key="bookings.booking_not_approved_yet_msg" var="booking_not_approved_yet_msg" />
 	<fmt:message bundle="${lang}" key="bookings.new_room_not_select_if_no_need" var="new_room_not_select_if_no_need" />
+	
+	<fmt:message bundle="${lang}" key="validation.valid_login_msg" var="valid_login_msg" />
+	<fmt:message bundle="${lang}" key="validation.valid_password_msg" var="valid_password_msg" />
 </head>
 </html>

@@ -35,7 +35,7 @@
 </head>
 <body>
 
-    <div class="container" style="background: rgba(255,255,255,0.7)">
+    <div class="container">
     
         <div class="menu">
 
@@ -69,7 +69,7 @@
 
         </div>
 
-        <div class="main">
+        <div class="main" style="background: rgba(255,255,255,0.7)">
             <div class="form">
                 <form action="Controller" method="post">
                 <table>
@@ -79,13 +79,15 @@
                     </tr>
 
                     <tr>
-                        <td><c:out value="${login_word}"/>:<br><br></td>
-                        <td><input type="text" name="${Utility.LOGIN}" value = "" required/><br><br></td>
+                        <td><c:out value="${login_word}"/>:</td>
+                        <td><input type="text" name="${Utility.LOGIN}" value = "" required/></td>                        
                     </tr>
+                    <tr><td></td><td style="color:red; font-size:12px"><c:out value="${valid_login_msg}"/><br><br></td></tr>
                     <tr>
-                        <td><c:out value="${password_word}"/>:<br><br><br></td>
-                        <td><input type="password" name="${Utility.PASSWORD}" value = "" required/><br><br><br></td>
+                        <td><c:out value="${password_word}"/>:</td>
+                        <td><input type="password" name="${Utility.PASSWORD}" value = "" required/></td>
                     </tr>
+                    <tr><td></td><td style="color:red; font-size:12px"><c:out value="${valid_password_msg}"/><br><br><br></td></tr>
                     
                     		<c:choose>
                                 <c:when test="${create eq 'admin'}">
@@ -112,7 +114,7 @@
                                         <td><input type="text" name="${Utility.PASSPORT_ID}" value = "" required/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td><c:out value="${date_of_birth_word}"/>:<br><br></td>
+                                        <td><c:out value="${date_of_birth_word}"/><br><br>:</td>
                                         <td><input type="date" id="datefield" name="${Utility.DATE_OF_BIRTH}" required></td>
                                     </tr>
                                     <tr>

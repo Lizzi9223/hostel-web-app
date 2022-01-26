@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
     		if(!UserValidator.isValidAdmin(admin)) {    			
     			return false;
     		}
-    		if(userDAO.findUserByLogin(admin.getLogin()) != null) {
+    		if(!login.equals(admin.getLogin()) && userDAO.findUserByLogin(admin.getLogin()) != null) {
     			throw new LoginAlreadyExistsException();
     		}
     		int userId = userDAO.getUserId(login);
@@ -116,10 +116,10 @@ public class UserServiceImpl implements UserService {
     		if(!UserValidator.isValidClient(client)) {
     			return false;
     		}
-    		if(userDAO.findUserByLogin(client.getLogin()) != null) {
+    		if(!login.equals(client.getLogin()) && userDAO.findUserByLogin(client.getLogin()) != null) {
     			throw new LoginAlreadyExistsException();
     		}
-    		if(userDAO.findClientByPassportId(client.getPassportId()) != null) {
+    		if(!passportId.equals(client.getPassportId()) && userDAO.findClientByPassportId(client.getPassportId()) != null) {
     			throw new PassportIdAlreadyExistsException();
     		}
     		int userId = userDAO.getUserId(login);
@@ -185,7 +185,9 @@ public class UserServiceImpl implements UserService {
 			clients = userDAO.getAllClients();
 			for(Client client : clients) {
 				User user = userDAO.findUserById(client.getUserId());
-				client.setLogin(user.getLogin());
+				if(user!=null) {
+					client.setLogin(user.getLogin());
+				}
 			}			
 		} catch (DAOException e) {
 			throw new ServiceException(e);

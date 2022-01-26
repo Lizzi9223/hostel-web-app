@@ -34,10 +34,7 @@
 </head>
 <body style="background-color: #D2B48C">
 
-	<c:set var="passportId" scope="page" value="${passportId}" />
-
     <div class="container">
-    
         <div class="menu">
 
             <div class="tabs" style="justify-content: flex-start">
@@ -72,7 +69,7 @@
 
         <div class="main">
             <div class="form">
-                <form action="Controller" method="post">
+                <form>
                 <table>
                     <tr>
                         <td><h2><c:out value="${my_account}"/></h2><br></td>
@@ -85,14 +82,15 @@
 
                     <tr>
                         <td>${login_word}:<br><br></td>
-                        <td><input class="input" disabled="true" type="text" name="${Utility.LOGIN}" value = "${sessionScope.login}"/><br><br></td>
+                        <td><input class="input" disabled type="text" name="${Utility.LOGIN}" value="${sessionScope.login}"/><br><br></td>
                     </tr>
+                    <tr><td></td><td id="valid_login_msg" style="color:red; font-size:12px; display:none"><c:out value="${valid_login_msg}"/><br><br></td></tr>
                     
                     		<c:choose>
                                 <c:when test="${sessionScope.role eq 'ADMIN'}">
                                     <tr>
                                         <td>${name_word}:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.NAME}" value = "${admin.getName()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.NAME}" value="${admin.getName()}"/><br><br></td>
                                     </tr>
                                <%--      <tr>
                                         <td>Photo:<br><br></td>
@@ -102,38 +100,38 @@
                                 <c:otherwise>
                                     <tr>
                                         <td><c:out value="${name_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.NAME}" value="${client.getFirstName()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.NAME}" value="${client.getFirstName()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${surname_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.SURNAME}" value = "${client.getLastName()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.SURNAME}" value = "${client.getLastName()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${passport_id_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.PASSPORT_ID}" value = "${client.getPassportId()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.PASSPORT_ID}" value = "${client.getPassportId()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${date_of_birth_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.DATE_OF_BIRTH}" value = "${client.getBirthDate()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.DATE_OF_BIRTH}" value = "${client.getBirthDate()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${country_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.COUNTRY}" value = "${client.getCountry()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.COUNTRY}" value = "${client.getCountry()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${phone_number_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.PHONE}" value = "${client.getPhoneNumber()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.PHONE}" value = "${client.getPhoneNumber()}"/><br><br></td>
                                     </tr>
                                     <tr>
                                         <td><c:out value="${email_word}"/>:<br><br></td>
-                                        <td><input class="input" disabled="true" type="text" name="${Utility.EMAIL}" value = "${client.getEmail()}"/><br><br></td>
+                                        <td><input class="input" disabled type="text" name="${Utility.EMAIL}" value = "${client.getEmail()}"/><br><br></td>
                                     </tr>	
                                 </c:otherwise>
                             </c:choose>
                     
                     <tr>
                     	  <c:set var="passportId" scope="session" value="${client.getPassportId()}"/> 
-                          <td><input id="save_button" style="visibility: hidden;" class="buttons" type="submit" value="<c:out value="${save}"/>"/><br><br><br></td>
+                          <td><input id="save_button" style="visibility: hidden" class="buttons" type="submit" value="${save}"/><br><br><br></td>
                           <td><div></div></td>
                           <td><button id="cancel_button" class="buttons" style="visibility: hidden" type="button" onclick="cancelEdit()">
                           	<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out value="${cancel}"/></a></button><br><br><br></td>
@@ -219,6 +217,7 @@
                         <input type="password" name="${Utility.INITIAL_PASSWORD}" value="" required/>
                         <p><c:out value="${new_password}"/>:</p>
                         <input type="password" name="${Utility.NEW_PASSWORD}" value="" required/>
+                        <div style="color:red; font-size:12px"><c:out value="${valid_password_msg}"/></div>
                         <p><c:out value="${repeat_new_password}"/>:</p>
                         <input type="password" name="confirmPassword" value="" required/>
                         <input class="buttons" type="submit" value="${change_password}"/>

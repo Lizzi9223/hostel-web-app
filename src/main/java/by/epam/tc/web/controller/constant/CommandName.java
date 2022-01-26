@@ -28,6 +28,7 @@ public final class CommandName{
 	public final static String CHOOSE_CLIENT = "ChooseClient";	
 	public final static String SEARCH_CLIENT = "SearchClient";
 	public final static String FINISH_CHOOSING_CLIENT = "FinishChoosingClient";	
+	public final static String GUESTS_ARRIVED = "GuestsArrived";
 	public final static String GO_TO_WELCOME_PAGE = "GO_TO_WELCOME_PAGE";
 	public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";	
 	public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";	

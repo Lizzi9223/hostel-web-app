@@ -31,10 +31,12 @@ public class GoToClientsPageCommand implements Command {
 		try {			
 			List<Client> clients = new LinkedList<Client>(ServiceFactory.getInstance().getUserService().getAllClients());
 			Collections.sort(clients, 
-				     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));			
+				     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
+			String criteria = null;
+			String searchData = null;
 			if(request.getParameter(Utility.COMMAND).equals(CommandName.SEARCH_CLIENT)) {
-				String criteria = (String)request.getParameter(Utility.SEARCH_CRITERIA);
-				String searchData = (String)request.getParameter(Utility.SEARCH_DATA);
+				criteria = (String)request.getParameter(Utility.SEARCH_CRITERIA);
+				searchData = (String)request.getParameter(Utility.SEARCH_DATA);
 				if(searchData!=null && !searchData.equals(Utility.EMPTY)) {
 					switch(criteria) {
 					case Utility.LOGIN:
@@ -61,6 +63,8 @@ public class GoToClientsPageCommand implements Command {
 					}
 				}				
 			}
+			request.setAttribute(Utility.CURRENT_SEARCH_CRITERIA, criteria);
+			request.setAttribute(Utility.CURRENT_SEARCH_DATA, searchData);
 			request.setAttribute(Utility.CLIENTS, clients);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_CLIENTS_PAGE);
 			dispatcher.forward(request, response);
