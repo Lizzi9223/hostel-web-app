@@ -99,7 +99,8 @@
                 </table>                
                </form> 
                	<c:if test="${not empty error}">
-               		<p class="error"><c:out value="${error}" /></p>
+               		<fmt:message bundle="${lang}" key="${error}" var="error_msg" />
+               		<p class="error"><c:out value="${error_msg}" /></p>
                	</c:if>
 	        	<br>
             </div>

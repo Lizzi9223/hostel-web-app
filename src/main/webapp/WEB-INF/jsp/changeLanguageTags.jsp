@@ -41,7 +41,7 @@
 	<fmt:message bundle="${lang}" key="stays.to" var="to" />
 	<fmt:message bundle="${lang}" key="stays.room" var="room" />
 	<fmt:message bundle="${lang}" key="stays.notes" var="notes" />
-	<fmt:message bundle="${lang}" key="stays.clientId" var="clientId" />
+	<fmt:message bundle="${lang}" key="stays.clientId" var="clientId_word" />
 	<fmt:message bundle="${lang}" key="stays.edit" var="edit" />
 	<fmt:message bundle="${lang}" key="stays.delete" var="delete" />
 	<fmt:message bundle="${lang}" key="stays.departure_date" var="departure_date" />
@@ -84,5 +84,35 @@
 	<fmt:message bundle="${lang}" key="account.cancel" var="cancel" />
 	<fmt:message bundle="${lang}" key="account.save" var="save" />
 	<fmt:message bundle="${lang}" key="account.del_acc_check_msg" var="del_acc_check_msg" />
+	
+	<fmt:message bundle="${lang}" key="clients.choose_client" var="choose_client_word" />
+	<fmt:message bundle="${lang}" key="clients.all_clients" var="all_clients_word" />
+	<fmt:message bundle="${lang}" key="clients.clients_left_word" var="clients_left_word" />	
+	<fmt:message bundle="${lang}" key="clients.finish_word" var="finish_word" />
+	<fmt:message bundle="${lang}" key="clients.new_client_word" var="new_client_word" />
+	<fmt:message bundle="${lang}" key="clients.search_by_word" var="search_by_word" />
+	<fmt:message bundle="${lang}" key="clients.please_check_data_word" var="please_check_data_word" />
+		
+	<fmt:message bundle="${lang}" key="bookRoom.check_for_avail_places" var="check_for_avail_places" />
+	<fmt:message bundle="${lang}" key="bookRoom.sorry_no_avail_places" var="sorry_no_avail_places" />
+	<fmt:message bundle="${lang}" key="bookRoom.submit_booking" var="submit_booking" />
+	
+	<fmt:message bundle="${lang}" key="bookings.all_bookings_word" var="all_bookings_word" />
+	<fmt:message bundle="${lang}" key="bookings.my_bookings_word" var="my_bookings_word" />	
+	<fmt:message bundle="${lang}" key="bookings.new_booking_word" var="new_booking_word" />
+	<fmt:message bundle="${lang}" key="bookings.user_id_word" var="user_id_word" />
+	<fmt:message bundle="${lang}" key="bookings.guests_word" var="guests_word" />	
+	<fmt:message bundle="${lang}" key="bookings.is_approved_word" var="is_approved_word" />
+	<fmt:message bundle="${lang}" key="bookings.approve_date_word" var="approve_date_word" />
+	<fmt:message bundle="${lang}" key="bookings.price_word" var="price_word" />
+	<fmt:message bundle="${lang}" key="bookings.is_paid_word" var="is_paid_word" />
+	<fmt:message bundle="${lang}" key="bookings.approve_word" var="approve_word" />
+	<fmt:message bundle="${lang}" key="bookings.disapprove_word" var="disapprove_word" />	
+	<fmt:message bundle="${lang}" key="bookings.guests_arrived_word" var="guests_arrived_word" />	
+	<fmt:message bundle="${lang}" key="bookings.pay" var="pay" />
+	<fmt:message bundle="${lang}" key="bookings.current_room_word" var="current_room_word" />	
+	<fmt:message bundle="${lang}" key="bookings.booking_was_rejected_msg" var="booking_was_rejected_msg" />	
+	<fmt:message bundle="${lang}" key="bookings.booking_not_approved_yet_msg" var="booking_not_approved_yet_msg" />
+	<fmt:message bundle="${lang}" key="bookings.new_room_not_select_if_no_need" var="new_room_not_select_if_no_need" />
 </head>
 </html>

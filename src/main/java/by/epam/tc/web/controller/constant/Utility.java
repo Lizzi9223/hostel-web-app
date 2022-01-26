@@ -76,4 +76,5 @@ public final class Utility{
 	public final static String ALL_CLIENT_USERS = "allClientUsers";
 	public final static String SEARCH_CRITERIA = "searchCriteria";
 	public final static String SEARCH_DATA = "searchData";
+	public final static String EDITED_CLIENT_ID = "editedClientId";
 }

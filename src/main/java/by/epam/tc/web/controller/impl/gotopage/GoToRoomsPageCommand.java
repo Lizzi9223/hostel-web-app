@@ -55,13 +55,13 @@ public class GoToRoomsPageCommand implements Command {
 				request.setAttribute(Utility.CURRENT_MIN_COST, request.getParameter(Utility.PRICE_LEFT));
 				request.setAttribute(Utility.CURRENT_MAX_COST, request.getParameter(Utility.PRICE_RIGHT));
 				request.setAttribute(Utility.CURRENT_MIN_CAPACITY, request.getParameter(Utility.CAPACITY_LEFT));
-				request.setAttribute(Utility.MAX_CAPACITY, request.getParameter(Utility.CAPACITY_RIGHT));
+				request.setAttribute(Utility.CURRENT_MAX_CAPACITY, request.getParameter(Utility.CAPACITY_RIGHT));
 			}
 			else {
 				request.setAttribute(Utility.CURRENT_MIN_COST, minCost);
 				request.setAttribute(Utility.CURRENT_MAX_COST, maxCost);
 				request.setAttribute(Utility.CURRENT_MIN_CAPACITY, minCapacity);
-				request.setAttribute(Utility.MAX_CAPACITY, maxCapacity);
+				request.setAttribute(Utility.CURRENT_MAX_CAPACITY, maxCapacity);
 			}
 			rooms.removeAll(roomsToRemove);
 			roomsToRemove.clear();

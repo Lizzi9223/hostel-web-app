@@ -2,6 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,21 +38,6 @@
 		 }
     
     </style>
-    
-    <fmt:setLocale value="${sessionScope.language}"/>
-	<fmt:setBundle basename="prop" var="lang"/>
-	<fmt:message bundle="${lang}" key="menu.main" var="main" />
-	<fmt:message bundle="${lang}" key="menu.rooms" var="rooms" />
-	<fmt:message bundle="${lang}" key="menu.photos" var="photos" />
-	<fmt:message bundle="${lang}" key="menu.contacts" var="contacts" />
-	<fmt:message bundle="${lang}" key="menu.my_account" var="my_account" />
-	<fmt:message bundle="${lang}" key="menu.sign_in" var="sign_in" />
-	<fmt:message bundle="${lang}" key="menu.sign_up" var="sign_up" />
-	<fmt:message bundle="${lang}" key="menu.log_out" var="log_out" />
-	<fmt:message bundle="${lang}" key="menu.ru" var="ru" />
-	<fmt:message bundle="${lang}" key="menu.en" var="en" />
-	
-	
     
 </head>
 
@@ -95,8 +82,8 @@
 	            </div>	
 	            <div class="tabs" style="justify-content: flex-end">
 	                <form>
-	                    <input type="hidden" name="command" value="ChangeLanguage" >
-	                    <select name="language" onchange="submit()">
+	                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    	<select name="${Utility.LANGUAGE}" onchange="submit()">
 	                            <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
 	                            <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
 	                    </select>  
@@ -121,45 +108,44 @@
                 		<c:choose>
                 	 		<c:when test="${newStayGuestsNumber > 0}">
                 	 			<p style="font-size:14px; color: #808080">
-                	 				<c:out value="${newStayGuestsNumber} more clients to choose"/>
+                	 				<c:out value="${newStayGuestsNumber} "/><c:out value="${clients_left_word}"/>
                 	 			</p>
                 	 			<form>
-                	 				<input type="hidden" name="command" value="FinishChoosingClient"/>
-                	 				<input class="submit_button" type="submit" value="Finish" style="font-size:14px"/>
-                	 			</form><br>                	 			                	 			
-                	 			CHOOSE CLIENT:
+                	 				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.FINISH_CHOOSING_CLIENT}"/>
+                	 				<input class="submit_button" type="submit" value="${finish_word}" style="font-size:14px"/>
+                	 			</form><br>
+                	 			<c:out value="${choose_client_word}"/>:    
                 	 		</c:when>
                 	 		<c:otherwise>
-                	 			All clients                	 			
+                	 			<c:out value="${all_clients_word}"/>                	 			
                 	 		</c:otherwise>                	 		
                 	 	</c:choose>
-                	 	<input class="submit_button open-popup client" type="button" value="New client" style="margin-left:20px"/>
+                	 	<input class="submit_button open-popup client" type="button" value="${new_client_word}" style="margin-left:20px"/>
                 	</h3>
                 	<form style="margin-left:50%">
-                		<label><c:out value="Search by:" /></label>
-                	 	<select name="searchCriteria" style="padding:10">
-                	 		<option value="login"><c:out value="Login" /></option>
-                	 		<option value="passportId" selected><c:out value="Passport ID"/></option>
-                	 		<option value="surname"><c:out value="Surname" /></option>
+                		<label><c:out value="${search_by_word}:" /></label>
+                	 	<select name="${Utility.SEARCH_CRITERIA}" style="padding:10">
+                	 		<option value="${Utility.LOGIN}"><c:out value="${login_word}" /></option>
+                	 		<option value="${Utility.PASSPORT_ID}" selected><c:out value="${passport_id_word}"/></option>
+                	 		<option value="${Utility.SURNAME}"><c:out value="${surname_word}" /></option>
                 	 	</select>
-                	 	<input type="text" name="searchData" value=""/>
-                	 	<input type="hidden" name="command" value="SearchClient"/>
-                	 	<input class="submit_button" type="submit" value="Search" style="padding:10; font-size:14px"/>
+                	 	<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SEARCH_CLIENT}"/>
+                	 	<input class="submit_button" type="submit" value="${search}" style="padding:10; font-size:14px"/>
                 	</form><br>
                 	
                     <table class="table table-hover">
                     
                         <thead>
                             <tr>
-                            	<th scope="col">ClientId</th>                            	
-                                <th scope="col">Login</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Surname</th>
-                                <th scope="col">Passport ID</th>
-                                <th scope="col">Date of birth</th>
-                                <th scope="col">Country</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Email</th>
+                            	<th scope="col"><c:out value="${clientId_word}" /></th>                            	
+                                <th scope="col"><c:out value="${login_word}" /></th>
+                                <th scope="col"><c:out value="${name_word}" /></th>
+                                <th scope="col"><c:out value="${surname_word}" /></th>
+                                <th scope="col"><c:out value="${passport_id_word}"/></th>
+                                <th scope="col"><c:out value="${date_of_birth_word}" /></th>
+                                <th scope="col"><c:out value="${country_word}" /></th>
+                                <th scope="col"><c:out value="${phone_number_word}" /></th>
+                                <th scope="col"><c:out value="${email_word}" /></th>
                             </tr>
                         </thead>
 
@@ -185,8 +171,8 @@
                                     <td><c:out value="${client.getEmail()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">
-                                    		<input type="hidden" name="command" value="ChooseClient" />
-                                   			<input type="hidden" name="chosenClientId" value="${client.getClientId()}"/>
+                                    		<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHOOSE_CLIENT}" />
+                                   			<input type="hidden" name="${Utility.CHOSEN_CLIENT_ID}" value="${client.getClientId()}"/>
                                     	</form>
                                     </td>
                                  </tr>
@@ -226,43 +212,43 @@
 		                </div>
 		            </div>  --%> 
 	        	</c:if>
-                                
+	        	
 				<div class="popup-bg client">
 	                <div class="popup">
 	                    <img class="close-popup" src="images/close.png" style="width:25px">
 	                    <form>
 		                    <table style="margin-left:20px;margin-top:10px">
 		                    	<tr>
-		                    		<td><c:out value="Name:"/></td>
-		                    		<td><input type="text" id="newClientName" name="name" required></td>
+		                    		<td><c:out value="${name_word}:"/></td>
+		                    		<td><input type="text" id="newClientName" name="${Utility.NAME}" required></td>
 		                    	</tr>
 		                    	<tr>
-		                    		<td><c:out value="Surname:"/></td>
-		                    		<td><input type="text" id="newClientSurname" name="surname" required></td>
+		                    		<td><c:out value="${surname_word}:"/></td>
+		                    		<td><input type="text" id="newClientSurname" name="${Utility.SURNAME}" required></td>
 		                    	</tr>
 		                    	<tr>
-		                    		<td><c:out value="Passport ID:"/></td>
-		                    		<td><input type="text" id="newClientPassportId" name="passportId" required></td>
+		                    		<td><c:out value="${passport_id_word}:"/></td>
+		                    		<td><input type="text" id="newClientPassportId" name="${Utility.PASSPORT_ID}" required></td>
 		                    	</tr>
 		                    	<tr>
-		                    		<td><c:out value="Date of birth:"/></td>
-		                    		<td><input type="date" id="newClientBirthDate" name="dateOfBith" required></td>
+		                    		<td><c:out value="${date_of_birth_word}:"/></td>
+		                    		<td><input type="date" id="newClientBirthDate" name="${Utility.DATE_OF_BIRTH}" required></td>
 		                    	</tr>
 		                    	<tr>
-		                    		<td><c:out value="Country:"/></td>
-		                    		<td><input type="text" id="newClientCountry" name="country"></td>
+		                    		<td><c:out value="${country_word}:"/></td>
+		                    		<td><input type="text" id="newClientCountry" name="${Utility.COUNTRY}"></td>
 		                    	</tr>
 		                    	<tr>
-		                    		<td><c:out value="Phone:"/></td>
-		                    		<td><input type="text" id="newClientPhone" name="phone"></td>
+		                    		<td><c:out value="${phone_number_word}:"/></td>
+		                    		<td><input type="text" id="newClientPhone" name="${Utility.PHONE}"></td>
 		                    	</tr>
 		                    	<tr>
-		                    		<td><c:out value="Email:"/></td>
-		                    		<td><input type="text" id="newClientEmail" name="email"></td>
+		                    		<td><c:out value="${email_word}:"/></td>
+		                    		<td><input type="text" id="newClientEmail" name="${Utility.EMAIL}"></td>
 		                    	</tr>
 		                    </table><br>
-		                    <input type="hidden" name="command" value="AddClient" />
-		                    <input class="submit_button" type="submit" value="Submit" style="margin-left:20px"/>
+		                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.ADD_CLIENT}" />
+		                    <input class="submit_button" type="submit" value="${save}" style="margin-left:20px"/>
 		               </form>
 	                </div>
 	            </div>
@@ -270,8 +256,9 @@
 	            <c:if test="${not empty error and error ne ''}">
 	            	<div class="popup-bg editBooking" style="display: block">
 		                <div class="popup" style="width:auto; padding: 40px">	                    
-		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
-		                    <p><c:out value="${error}" /></p>
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	
+		                    <fmt:message bundle="${lang}" key="${error}" var="error_msg" />                    
+		                    <p><c:out value="${error_msg}" /></p>
 		                </div>
 		                <c:remove var="error"/>
 		            </div>
@@ -283,7 +270,7 @@
 			                    <a href="Controller?command=GO_TO_BOOKINGS_PAGE">
 			                		<img src="images/close.png" style="width:25px;">
 			                	</a>
-			                    <h5 style="margin-top:15px">Please, check data:</h5>
+			                    <h5 style="margin-top:15px"><c:out value="${please_check_data_word}:"/></h5>
 			                    <form>			                    	
 				                    <table>
 				                    <%-- 	<tr>
@@ -300,9 +287,9 @@
 				                    	</tr>   --%>
 				                    </table>			                    
 				                    <br>
-				                    <input type="hidden" name="editedClientId" value="${editedClientId}" />
-				                    <input type="hidden" name="command" value="SubmitClient" />
-				                    <input class="submit_button" type="submit" value="Submit"/>
+				                    <input type="hidden" name="${Utility.EDITED_CLIENT_ID}" value="${editedClientId}" />
+				                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SUBMIT_CLIENT}" />
+				                    <input class="submit_button" type="submit" value="${save}"/>
 			                    </form>			                    
 			                </div>
 			            </div>

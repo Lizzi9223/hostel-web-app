@@ -244,7 +244,8 @@
             	<div class="popup-bg info" style="display:block">
 	                <div class="popup" style="width:auto">
 	                    <img id="closePopUp" class="close-popup" src="images/close.png" style="width:25px">
-	                    <p><c:out value="${error}" /></p>
+	                    <fmt:message bundle="${lang}" key="${error}" var="error_msg" />
+	                    <p><c:out value="${error_msg}" /></p>
 	                </div>
 	            </div>
             </c:if>

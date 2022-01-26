@@ -523,7 +523,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        User user = new User();
+        User user = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.USERS_TABLE,
@@ -558,7 +558,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        User user = new User();
+        User user = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.USERS_TABLE,
@@ -593,7 +593,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Admin admin = new Admin();
+        Admin admin = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.USERS_TABLE,
@@ -628,7 +628,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Admin admin = new Admin();
+        Admin admin = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.USERS_TABLE,
@@ -662,7 +662,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Client client = new Client();
+        Client client = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.ALL_CLIENTS_TABLE,
@@ -703,7 +703,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Client client = new Client();
+        Client client = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.ALL_CLIENTS_TABLE,
@@ -743,7 +743,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Client client = new Client();
+        Client client = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.ALL_CLIENTS_TABLE,
@@ -784,7 +784,7 @@ public class UserDAOImpl implements UserDAO{
     	Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        Client client = new Client();
+        Client client = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.ALL_CLIENTS_TABLE,
@@ -825,7 +825,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        BlackListClient client = new BlackListClient();
+        BlackListClient client = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.BLACK_LIST_TABLE,
@@ -867,7 +867,7 @@ public class UserDAOImpl implements UserDAO{
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        RegularClient client = new RegularClient();
+        RegularClient client = null;
         try{
             con = connectionPool.takeConnection();
             st = con.prepareStatement(selectQueryProvider.getInnerJoinSelectQueryWhere(Metadata.REGULAR_CUSTOMERS_TABLE,

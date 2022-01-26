@@ -20,6 +20,7 @@ public final class CommandName{
 	public final static String DELETE_STAY = "DeleteStay";
 	public final static String CHECK_ROOM_AVAILABILITY = "CheckRoomAvailability";
 	public final static String SUBMIT_BOOKING = "SubmitBooking";
+	public final static String SUBMIT_CLIENT = "SubmitClient";
 	public final static String CHOOSE_BOOKING = "ChooseBooking";
 	public final static String APPROVE_BOOKING = "ApproveBooking";
 	public final static String CHOOSE_STAY = "ChooseStay";

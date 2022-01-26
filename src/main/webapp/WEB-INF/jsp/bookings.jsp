@@ -2,6 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="by.epam.tc.web.controller.constant.*" %>
+<%@ include file="changeLanguageTags.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,8 +98,8 @@
 
             <div class="tabs" style="justify-content: flex-end">
                 <form>
-                    <input type="hidden" name="command" value="ChangeLanguage" >
-                    <select name="language" onchange="submit()">
+                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHANGE_LANGUAGE}">
+                    <select name="${Utility.LANGUAGE}" onchange="submit()">
                             <option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out value="${ru}"/></option>
                             <option value="en" ${language == 'en' ? 'selected' : ''}><c:out value="${en}"/></option>
                     </select>  
@@ -115,46 +117,41 @@
 
         </div>
 
-        <div class="container-body">   
-        
+        <div class="container-body"> 
         	<div class="main">
-                
                 <div class="form">
-                
                 	<h3>
                 	 	<c:choose>
                 	 		<c:when test="${role eq 'ADMIN' }">
-                	 			All bookings
-                	 			<input class="submit_button open-popup booking" type="button" value="New booking" style="margin-left:20px"/>
+                	 			<c:out value="${all_bookings_word}"/>
+                	 			<input class="submit_button open-popup booking" type="button" value="${new_booking_word}" style="margin-left:20px"/>
                 	 		</c:when>
                 	 		<c:otherwise>
-                	 			My bookings
+                	 			<c:out value="${my_bookings_word}"/>
                 	 		</c:otherwise>
                 	 	</c:choose>
                 	</h3><br>
                 
                     <table class="table table-hover">
-                    
                         <thead>
                             <tr>
                             	<th scope="col"></th>
                             	<c:if test="${role eq 'ADMIN'}">
-	                            	<th scope="col">UserId</th>                               	
+	                            	<th scope="col"><c:out value="${user_id_word}"/></th>                               	
 		                        </c:if>                            	
-                                <th scope="col">Since</th>
-                                <th scope="col">To</th>
-                                <th scope="col">Guests</th>
-                                <th scope="col">Room</th>
-                                <th scope="col">Is approved</th>
-                                <th scope="col">Approve date</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Is paid</th>
+                                <th scope="col"><c:out value="${since}"/></th>
+                                <th scope="col"><c:out value="${to}"/></th>
+                                <th scope="col"><c:out value="${guests_word}"/></th>
+                                <th scope="col"><c:out value="${roomLabel}"/></th>
+                                <th scope="col"><c:out value="${is_approved_word}"/></th>
+                                <th scope="col"><c:out value="${approve_date_word}"/></th>
+                                <th scope="col"><c:out value="${price_word}"/></th>
+                                <th scope="col"><c:out value="${is_paid_word}"/></th>
                                 <th scope="col" style="visibility: hidden"></th>
                             </tr>
                         </thead>
 
-                        <c:forEach var="booking" items="${bookings}">
-                            
+                        <c:forEach var="booking" items="${bookings}">                            
                             <tbody>
                                 <tr class="choose-booking" style="cursor: pointer">
                                 	<td scope="row">
@@ -181,16 +178,14 @@
                                     <td><c:out value="${booking.isPaid()}" /></td>
                                     <td style="visibility: hidden" >
                                     	<form class="target">
-                                    		<input type="hidden" name="command" value="ChooseBooking" />
-                                    		<input type="hidden" name="chosenBookingId" value="${booking.getId()}" />
+                                    		<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.CHOOSE_BOOKING}" />
+                                    		<input type="hidden" name="${Utility.CHOSEN_BOOKING_ID}" value="${booking.getId()}" />
                                     	</form>
                                     </td>
                                 </tr>
                             </tbody>
-
                         </c:forEach>
-                    </table>
-                
+                    </table>                
                 </div> 
                 
 	        	<c:if test="${popUpView eq 'options'}">
@@ -205,20 +200,20 @@
 			                    			<tr>
 			                    				<td>
 			                    					<form>
-					                    				<input type="hidden" name="command" value="ApproveBooking" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input type="hidden" name="approve" value="true" />
-					                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.APPROVE_BOOKING}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input type="hidden" name="${Utility.APPROVE}" value="true" />
+					                    				<input class="submit_button" type="submit" value="${approve_word}" style="margin-right:20px"/>
 					                    			</form>
 			                    				</td>
 			                    			</tr>
 		                    				<tr>
 		                    					<td>
 		                    						<form>
-					                    				<input type="hidden" name="command" value="ApproveBooking" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input type="hidden" name="approve" value="false" />
-					                    				<input class="submit_button" type="submit" value="Disapprove"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.APPROVE_BOOKING}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input type="hidden" name="${Utility.APPROVE}" value="false" />
+					                    				<input class="submit_button" type="submit" value="${disapprove_word}"/>
 					                    			</form>	
 		                    					</td>
 		                    				</tr>	                    				
@@ -227,19 +222,19 @@
 			                    			<tr>
 			                    				<td>
 			                    					<form>
-					                    				<input type="hidden" name="command" value="ApproveBooking" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input type="hidden" name="approve" value="true" />
-					                    				<input class="submit_button" type="submit" value="Approve" style="margin-right:20px"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.APPROVE_BOOKING}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input type="hidden" name="${Utility.APPROVE}" value="true" />
+					                    				<input class="submit_button" type="submit" value="${approve_word}" style="margin-right:20px"/>
 					                    			</form>
 			                    				</td>
 			                    			</tr>
 		                    				<tr>
 		                    					<td>
 		                    						<form>
-					                    				<input type="hidden" name="command" value="DeleteBooking" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input class="submit_button" type="submit" value="Delete"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.DELETE_BOOKING}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="${delete}"/>
 					                    			</form>
 		                    					</td>
 		                    				</tr>		                    				
@@ -248,27 +243,27 @@
 		                    				<tr>
 		                    					<td>
 		                    						<form>
-					                    				<input type="hidden" name="command" value="AddStay" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input class="submit_button" type="submit" value="Guests arrived" style="margin-right:20px"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.ADD_STAY}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="${guests_arrived_word}" style="margin-right:20px"/>
 					                    			</form>	
 		                    					</td>
 		                    				</tr>		                    			
 		                    				<tr>
 		                    					<td>
 		                    						<form>
-					                    				<input type="hidden" name="command" value="EditBooking" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input class="submit_button" type="submit" value="Edit" style="margin-right:20px"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.EDIT_BOOKING}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="${edit}" style="margin-right:20px"/>
 					                    			</form>
 		                    					</td>
 		                    				</tr>
 			                    			<tr>
 			                    				<td>
 			                    					<form>
-					                    				<input type="hidden" name="command" value="DeleteBooking" />
-					                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-					                    				<input class="submit_button" type="submit" value="Delete"/>
+					                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.DELETE_BOOKING}" />
+					                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+					                    				<input class="submit_button" type="submit" value="${delete}"/>
 					                    			</form>
 			                    				</td>
 			                    			</tr>			                    			
@@ -281,25 +276,25 @@
 			                    				<c:if test="${chosenBookingIsPaid eq false}">
 			                    					<tr>
 			                    						<td>
-			                    							<input class="submit_button" type="submit" value="Pay" style="margin-right:10px"/>
+			                    							<input class="submit_button" type="submit" value="${pay}" disabled style="margin-right:10px"/>
 			                    						</td>
 			                    					</tr>
 			                    				</c:if>
 			                    				<tr>
 			                    					<td>
 			                    						<form>
-						                    				<input type="hidden" name="command" value="DeleteBooking" />
-						                    				<input type="hidden" name="bookingId" value="${chosenBookingId}" />
-						                    				<input class="submit_button" type="submit" value="Delete"/>
+						                    				<input type="hidden" name="${Utility.COMMAND}" value="${CommandName.DELETE_BOOKING}" />
+						                    				<input type="hidden" name="${Utility.BOOKING_ID}" value="${chosenBookingId}" />
+						                    				<input class="submit_button" type="submit" value="${delete}"/>
 						                    			</form>
 			                    					</td>
 			                    				</tr>
 			                    			</c:when>
 			                    			<c:when test="${chosenBookingIsApproved eq false}">
-			                    				<tr><td><p>Your booking has been rejected</p></td></tr>
+			                    				<tr><td><p><c:out value="${booking_was_rejected_msg}"/></p></td></tr>
 			                    			</c:when>
 			                    			<c:otherwise>
-			                    				<tr><td><p>Your booking hasn't been approved yet</p></td></tr>
+			                    				<tr><td><p><c:out value="${booking_not_approved_yet_msg}"/></p></td></tr>
 			                    			</c:otherwise>
 		                    			</c:choose>
 		                    	</c:otherwise>
@@ -314,20 +309,20 @@
 		                <div class="popup" style="width:auto; padding: 40px">	                    
 		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
 		                    <form>                
-			                    <label for="fromDate">Arrive date:</label>
-			                    <input type="date" id="fromDate" name="fromDate" value="${booking.getFromDate()}" onchange="setToDate()" required>
-			                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
-			                    <input type="date" id="toDate" name="toDate" value="${booking.getToDate()}" required>                
+			                    <label for="fromDate"><c:out value="${arrive_date}"/>:</label>
+			                    <input type="date" id="fromDate" name="${Utility.FROM_DATE}" value="${booking.getFromDate()}" onchange="setToDate()" required>
+			                    <label for="toDate">&#160;&#160;&#160;&#160;<c:out value="${departure_date}"/>:</label>
+			                    <input type="date" id="toDate" name="${Utility.TO_DATE}" value="${booking.getToDate()}" required>                
 			                    <br><br>
-			                    <label for="questsNumber">Number of guests:&#160;</label>
-			                    <input type="number" id="guestsNumber" name="guestsNumber" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 40px">
-			                    <label for="roomNumber">Current room:</label>
-			                    <input type="radio" id="roomNumber" name="roomNumber" value="${booking.getRoomNumber()}" checked>
+			                    <label for="questsNumber"><c:out value="${number_of_guests}"/>:&#160;</label>
+			                    <input type="number" id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 40px">
+			                    <label for="roomNumber"><c:out value="${current_room_word}"/>:</label>
+			                    <input type="radio" id="roomNumber" name="${Utility.ROOM_NUMBER}" value="${booking.getRoomNumber()}" checked>
 			                    <c:out value="${booking.getRoomNumber()}" /><br>
-			                    <input type="hidden" name="bookingId" value="${booking.getId()}" />
-			                    <input type="hidden" name="command" value="EditBookingCheck" />
-			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
-			                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
+			                    <input type="hidden" name="${Utility.BOOKING_ID}" value="${booking.getId()}" />
+			                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.EDIT_BOOKING_CHECK}" />
+			                    <input class="submit_button" type="submit" value="${check}" style="margin-right: 50px"/>
+			                    <input id="check-among-all-rooms" type="checkbox" name="${Utility.CHECK_AMONG_ALL_ROOMS}" value="${check_among_all_rooms}" checked style="visibility:hidden"/>
 			                </form>
 		                </div>
 		            </div>
@@ -337,16 +332,16 @@
 	                <div class="popup">
 	                    <img class="close-popup" src="images/close.png" style="width:25px">
 	                    <form>                
-		                    <label for="fromDate">Arrive date:</label>
-		                    <input type="date" id="fromDate" name="fromDate" onchange="setToDate()" required>
-		                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
-		                    <input type="date" id="toDate" name="toDate" required>                
+		                    <label for="fromDate"><c:out value="${arrive_date}"/>:</label>
+		                    <input type="date" id="fromDate" name="${Utility.FROM_DATE}" onchange="setToDate()" required>
+		                    <label for="toDate">&#160;&#160;&#160;&#160;<c:out value="${departure_date}"/>:</label>
+		                    <input type="date" id="toDate" name="${Utility.TO_DATE}" required>                
 		                    <br><br>
-		                    <label for="questsNumber">Number of guests:&#160;</label>
-		                    <input type="number" id="guestsNumber" name="guestsNumber" value="1" min="1" max="15" style="margin-right: 90px">
-		                    <input type="hidden" name="command" value="AddBooking" />
-		                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
-		                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
+		                    <label for="questsNumber"><c:out value="${number_of_guests}"/>:&#160;</label>
+		                    <input type="number" id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="1" min="1" max="15" style="margin-right: 90px">
+		                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.ADD_BOOKING}" />
+		                    <input class="submit_button" type="submit" value="${check}" style="margin-right: 50px"/>
+		                    <input id="check-among-all-rooms" type="checkbox" name="${Utility.CHECK_AMONG_ALL_ROOMS}" value="${check_among_all_rooms}" checked style="visibility:hidden"/>
 		                </form>
 	                </div>
 	            </div>
@@ -358,7 +353,7 @@
 			                	<a href="Controller?command=GO_TO_BOOKINGS_PAGE">
 			                		<img src="images/close.png" style="width:25px">
 			                	</a>
-			                    <p>Sorry, no available places</p>
+			                    <p><c:out value="${sorry_no_avail_places}"/></p>
 			                </div>
 			            </div>
 	            	</c:when>
@@ -368,42 +363,42 @@
 			                    <a href="Controller?command=GO_TO_BOOKINGS_PAGE">
 			                		<img src="images/close.png" style="width:25px;">
 			                	</a>
-			                    <h5 style="margin-top:15px">Please, check data:</h5>
+			                    <h5 style="margin-top:15px"><c:out value="${please_check_data_word}"/>:</h5>
 			                    <form>
 			                    	<c:choose>
 			                    		<c:when test="${not empty editedBookingId and editedBookingId ne ''}">
-			                    			<b>New room (don't select if u don't need):</b><br>
+			                    			<b><c:out value="${new_room_not_select_if_no_need}"/>:</b><br>
 			                    			<c:forEach var="room" items="${availableRooms}">
-			                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}">
+			                                    <input type="radio" name="${Utility.ROOM_NUMBER}" value="${room.getRoomNumber()}">
 						                    	<c:out value="${room.getRoomNumber()}" /><br>
 						                    </c:forEach>
 			                    		</c:when>
 			                    		<c:otherwise>
-			                    			<b>Room:</b><br>
+			                    			<b><c:out value="${roomLabel}"/>:</b><br>
 			                    			<c:forEach var="room" items="${availableRooms}">
-			                                    <input type="radio" name="roomNumber" value="${room.getRoomNumber()}" required>
+			                                    <input type="radio" name="${Utility.ROOM_NUMBER}" value="${room.getRoomNumber()}" required>
 						                    	<c:out value="${room.getRoomNumber()}" /><br>
 						                    </c:forEach>
 			                    		</c:otherwise>
 			                    	</c:choose>
 				                    <table>
 				                    	<tr>
-				                    		<td><b>Since:</b></td>
-				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
+				                    		<td><b><c:out value="${since}"/>:</b></td>
+				                    		<td><input type="date" name="${Utility.FROM_DATE}" value="${fromDate}" readonly /></td>
 				                    	</tr>
 				                    	<tr>
-				                    		<td><b>To:</b></td>
-				                    		<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
+				                    		<td><b><c:out value="${to}"/>:</b></td>
+				                    		<td><input type="date" name="${Utility.TO_DATE}" value="${toDate}" readonly /></td>
 				                    	</tr>
 				                    	<tr>
-				                    		<td><b>Guests number:</b></td>
-				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
+				                    		<td><b><c:out value="${number_of_guests}"/>:</b></td>
+				                    		<td><input type="number" name="${Utility.GUESTS_NUMBER}" value="${guestsNumber}" readonly /></td>
 				                    	</tr>
 				                    </table>			                    
 				                    <br>
-				                    <input type="hidden" name="editedBookingId" value="${editedBookingId}" />
-				                    <input type="hidden" name="command" value="SubmitBooking" />
-				                    <input class="submit_button" type="submit" value="Submit booking"/>
+				                    <input type="hidden" name="${Utility.EDITED_BOOKING_ID}" value="${editedBookingId}" />
+				                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SUBMIT_BOOKING}" />
+				                    <input class="submit_button" type="submit" value="${submit_booking}"/>
 			                    </form>			                    
 			                </div>
 			            </div>
@@ -416,13 +411,8 @@
 	         	<c:remove var="chosenBookingIsPaid"/>
 	         	<c:remove var="popUpView"/>
 	         	
-          </div>        
-        
+          </div>
         </div>
-        
-
        </div> 
-
-
 	</body>
 </html>

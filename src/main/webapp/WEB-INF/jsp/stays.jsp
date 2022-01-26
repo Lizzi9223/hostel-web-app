@@ -125,7 +125,7 @@
                         <thead>
                             <tr>
                             	<c:if test="${role eq 'ADMIN'}">
-	                            	<th scope="col">${clientId}</th>                               	
+	                            	<th scope="col">${clientId_word}</th>                               	
 		                        </c:if>                           	
                                 <th scope="col">${since}</th>
                                 <th scope="col">${to}</th>                                

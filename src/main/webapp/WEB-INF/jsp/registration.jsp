@@ -138,7 +138,8 @@
                     <tr>
                         <td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out value="${back}"/></a><br><br></td>
                         <c:if test="${not empty error and error ne ''}">
-                        	<td><p class="error"><c:out value="${error}" /></p></td>
+                        	<fmt:message bundle="${lang}" key="${error}" var="error_msg" />
+                        	<td><p class="error"><c:out value="${error_msg}" /></p></td>
                         	<c:remove var="error"/>
                         </c:if>
                     </tr>
