@@ -86,6 +86,7 @@
 	<fmt:message bundle="${lang}" key="account.del_acc_check_msg" var="del_acc_check_msg" />
 	
 	<fmt:message bundle="${lang}" key="clients.choose_client" var="choose_client_word" />
+	<fmt:message bundle="${lang}" key="clients.client_already_added" var="client_already_added" />
 	<fmt:message bundle="${lang}" key="clients.all_clients" var="all_clients_word" />
 	<fmt:message bundle="${lang}" key="clients.clients_left_word" var="clients_left_word" />	
 	<fmt:message bundle="${lang}" key="clients.finish_word" var="finish_word" />

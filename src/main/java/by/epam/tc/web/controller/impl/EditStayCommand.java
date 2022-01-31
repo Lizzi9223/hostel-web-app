@@ -38,7 +38,7 @@ public class EditStayCommand implements Command {
 				if(ServiceFactory.getInstance().getStaysService().areAvailablePlaces(
 						stay.getRoomNumber(), stay.getFromDate(), toDate, 1, 0, stayId)) {					
 					request.setAttribute(Utility.TO_DATE, toDate);
-					request.setAttribute(Utility.NOTES, request.getParameter(Utility.NOTES));
+					request.setAttribute(Utility.EDITED_NOTES, request.getParameter(Utility.NOTES));
 					request.setAttribute(Utility.CHECK_RESULT, true);
 					request.setAttribute(Utility.EDITED_STAY_ID, stayId);
 				}else {

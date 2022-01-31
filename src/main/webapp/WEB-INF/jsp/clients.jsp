@@ -265,6 +265,16 @@
 		            </div>
 	            </c:if>
 	            
+	            <c:if test="${not empty clientIsAlreadyAdded and clientIsAlreadyAdded ne '' }">
+	            	<div class="popup-bg editBooking" style="display: block">
+		                <div class="popup" style="width:auto; padding: 40px">	                    
+		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>           
+		                    <p><c:out value="${client_already_added}" /></p>
+		                </div>
+		                <c:remove var="clientIsAlreadyAdded"/>
+		            </div>
+	            </c:if>
+	            
 	     <%--        <c:if test="">
 	            		<div class="popup-bg" style="display: block">
 			                <div class="popup" style="width:auto; padding-top:30px">

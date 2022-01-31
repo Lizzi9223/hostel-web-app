@@ -2,6 +2,8 @@ package by.epam.tc.web.controller.impl;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +28,18 @@ public class SubmitStayCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			if(request.getParameter(Utility.COMMAND).equals(CommandName.GUESTS_ARRIVED)) {
-				int bookingId = Integer.parseInt(request.getParameter(Utility.CHOSEN_BOOKING_ID));
-				//Booking booking = ServiceFactory.getInstance().getStaysService(). 
-				//TODO
+				int bookingId = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));
+				Booking booking = ServiceFactory.getInstance().getStaysService().getBookingById(bookingId);
+				List<Integer> clients = new ArrayList<>();
+				request.getSession().setAttribute(Utility.NEW_STAY_FROM_DATE, booking.getFromDate());
+				request.getSession().setAttribute(Utility.NEW_STAY_TO_DATE, booking.getToDate());
+				request.getSession().setAttribute(Utility.NEW_STAY_GUESTS_NUMBER, booking.getGuestsCount());
+				request.getSession().setAttribute(Utility.NEW_STAY_ROOM_NUMBER, booking.getRoomNumber());
+				request.getSession().setAttribute(Utility.GUESTS_ARRIVED_BOOKING_ID, booking.getId());
+				request.getSession().setAttribute(Utility.NEW_STAY_GUESTS_TO_ADD, clients);
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 			}
-			if(request.getParameter(Utility.EDITED_STAY_ID)!=null
+			else if(request.getParameter(Utility.EDITED_STAY_ID)!=null
 					&& !request.getParameter(Utility.EDITED_STAY_ID).equals(Utility.EMPTY)) {
 				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));
 				String notes = request.getParameter(Utility.NOTES);
@@ -46,10 +54,12 @@ public class SubmitStayCommand implements Command {
 				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));
 				int guestsNumber = Integer.parseInt(request.getParameter(Utility.GUESTS_NUMBER));
 				int roomNumber = Integer.parseInt(request.getParameter(Utility.ROOM_NUMBER));
+				List<Integer> clients = new ArrayList<>();
 				request.getSession().setAttribute(Utility.NEW_STAY_FROM_DATE, fromDate);
 				request.getSession().setAttribute(Utility.NEW_STAY_TO_DATE, toDate);
 				request.getSession().setAttribute(Utility.NEW_STAY_GUESTS_NUMBER, guestsNumber);
 				request.getSession().setAttribute(Utility.NEW_STAY_ROOM_NUMBER, roomNumber);
+				request.getSession().setAttribute(Utility.NEW_STAY_GUESTS_TO_ADD, clients);
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 			}			
 		} catch (ServiceException e) {

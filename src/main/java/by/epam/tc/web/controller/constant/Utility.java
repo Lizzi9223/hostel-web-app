@@ -44,6 +44,7 @@ public final class Utility{
 	public final static String GUESTS_NUMBER = "guestsNumber";
 	public final static String ROOM_NUMBER = "roomNumber";
 	public final static String NOTES = "notes";
+	public final static String EDITED_NOTES = "editedNotes";
 	public final static String EDITED_STAY_ID = "editedStayId";
 	public final static String EDITED_BOOKING_ID = "editedBookingId";
 	public final static String CHECK_RESULT = "checkResult";
@@ -72,7 +73,10 @@ public final class Utility{
 	public final static String NEW_STAY_TO_DATE = "newStayToDate";
 	public final static String NEW_STAY_ROOM_NUMBER = "newStayRoomNumber";
 	public final static String NEW_STAY_GUESTS_NUMBER = "newStayGuestsNumber";
+	public final static String NEW_STAY_GUESTS_TO_ADD = "newStayGuestsToAdd";
+	public final static String GUESTS_ARRIVED_BOOKING_ID = "guestsArrivedBookingId";
 	public final static String CHOSEN_CLIENT_ID = "chosenClientId";
+	public final static String CLIENT_IS_ALREADY_ADDED = "clientIsAlreadyAdded";
 	public final static String ALL_CLIENT_USERS = "allClientUsers";
 	public final static String SEARCH_CRITERIA = "searchCriteria";
 	public final static String SEARCH_DATA = "searchData";

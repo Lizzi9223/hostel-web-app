@@ -114,7 +114,7 @@
                                         <td><input type="text" name="${Utility.PASSPORT_ID}" value = "" required/><br><br></td>
                                     </tr>
                                     <tr>
-                                        <td><c:out value="${date_of_birth_word}"/><br><br>:</td>
+                                        <td><c:out value="${date_of_birth_word}"/>:<br><br></td>
                                         <td><input type="date" id="datefield" name="${Utility.DATE_OF_BIRTH}" required></td>
                                     </tr>
                                     <tr>

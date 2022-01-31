@@ -293,7 +293,7 @@
 					                    </tr>			                    	
 				                    	<tr>
 				                    		<td><b>${notes}:</b></td>
-				                    		<td><textarea name="${Utility.NOTES}" rows="5" cols="30" readonly><c:out value="${notes}"></c:out></textarea></td>
+				                    		<td><textarea name="${Utility.NOTES}" rows="5" cols="30" readonly><c:out value="${editedNotes}"></c:out></textarea></td>
 				                    	</tr>
 				                    </table>			                    
 				                    <br>
