@@ -27,7 +27,7 @@ public class SubmitStayCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			if(request.getParameter(Utility.COMMAND).equals(CommandName.GUESTS_ARRIVED)) {
+			if (request.getParameter(Utility.COMMAND).equals(CommandName.GUESTS_ARRIVED)) {
 				int bookingId = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));
 				Booking booking = ServiceFactory.getInstance().getStaysService().getBookingById(bookingId);
 				List<Integer> clients = new ArrayList<>();
@@ -38,8 +38,7 @@ public class SubmitStayCommand implements Command {
 				request.getSession().setAttribute(Utility.GUESTS_ARRIVED_BOOKING_ID, booking.getId());
 				request.getSession().setAttribute(Utility.NEW_STAY_GUESTS_TO_ADD, clients);
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
-			}
-			else if(request.getParameter(Utility.EDITED_STAY_ID)!=null
+			} else if (request.getParameter(Utility.EDITED_STAY_ID) != null
 					&& !request.getParameter(Utility.EDITED_STAY_ID).equals(Utility.EMPTY)) {
 				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));
 				String notes = request.getParameter(Utility.NOTES);
@@ -49,7 +48,7 @@ public class SubmitStayCommand implements Command {
 				stay.setNotes(notes);
 				ServiceFactory.getInstance().getStaysService().updateStay(id, stay);
 				response.sendRedirect(Redirect.TO_STAYS_PAGE);
-			}else {
+			} else {
 				LocalDate fromDate = LocalDate.parse(request.getParameter(Utility.FROM_DATE));
 				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));
 				int guestsNumber = Integer.parseInt(request.getParameter(Utility.GUESTS_NUMBER));
@@ -61,11 +60,11 @@ public class SubmitStayCommand implements Command {
 				request.getSession().setAttribute(Utility.NEW_STAY_ROOM_NUMBER, roomNumber);
 				request.getSession().setAttribute(Utility.NEW_STAY_GUESTS_TO_ADD, clients);
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
-			}			
+			}
 		} catch (ServiceException e) {
 			logger.error("error while submitting stay", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
-		}	
+		}
 	}
 
 }

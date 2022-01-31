@@ -22,62 +22,61 @@ import by.epam.tc.web.service.exception.LoginAlreadyExistsException;
 import by.epam.tc.web.service.exception.PassportIdAlreadyExistsException;
 import by.epam.tc.web.service.exception.ServiceException;
 
-public class RegistrationCommand implements Command{
+public class RegistrationCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.RegistrationCommand.class);
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String login = request.getParameter(Utility.LOGIN);
-			String password = request.getParameter(Utility.PASSWORD);		
+			String password = request.getParameter(Utility.PASSWORD);
 			String passportId = request.getParameter(Utility.PASSPORT_ID);
-			
-			if(passportId != null) { 
+
+			if (passportId != null) {
 				String name = request.getParameter(Utility.NAME);
 				String surname = request.getParameter(Utility.SURNAME);
 				LocalDate dateOfBith = LocalDate.parse(request.getParameter(Utility.DATE_OF_BIRTH));
 				String country = request.getParameter(Utility.COUNTRY);
 				String phone = request.getParameter(Utility.PHONE);
-				String email = request.getParameter(Utility.EMAIL);				
-				Client client = new Client(login, password, name, surname, passportId, dateOfBith, 
-						country, phone, email);
+				String email = request.getParameter(Utility.EMAIL);
+				Client client = new Client(login, password, name, surname, passportId, dateOfBith, country, phone,
+						email);
 				password = null;
 				boolean isSignedUp = ServiceFactory.getInstance().getUserService().signUp(client);
-				if(isSignedUp) {
+				if (isSignedUp) {
 					request.getSession().setAttribute(Utility.ROLE, Role.CLIENT.toString());
 					request.getSession().setAttribute(Utility.LOGIN, login);
 					response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
-				}else {
+				} else {
 					logger.info("Validation failed while client registration");
 					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
 					response.sendRedirect(Redirect.TO_REGISTRATION_PAGE);
-				}				
-			}
-			else {
+				}
+			} else {
 				String name = request.getParameter(Utility.NAME);
-				String photo = request.getParameter(Utility.PHOTO);				
+				String photo = request.getParameter(Utility.PHOTO);
 				Admin admin = new Admin(login, password, name, photo);
 				password = null;
 				boolean isSignedUp = ServiceFactory.getInstance().getUserService().signUp(admin);
-				if(isSignedUp) {					
+				if (isSignedUp) {
 					request.getSession().setAttribute(Utility.ROLE, Role.ADMIN.toString());
 					request.getSession().setAttribute(Utility.LOGIN, login);
 					response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
-				}else {
+				} else {
 					logger.info("Validation failed while admin registration");
 					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
 					response.sendRedirect(Redirect.TO_REGISTRATION_PAGE);
-				}				
+				}
 			}
-		}catch(LoginAlreadyExistsException e) {
+		} catch (LoginAlreadyExistsException e) {
 			logger.warn("Login already exists");
 			request.getSession().setAttribute(Utility.ERROR, Message.LOGIN_EXISTS);
 			response.sendRedirect(Redirect.TO_REGISTRATION_PAGE);
-		}catch(PassportIdAlreadyExistsException e) {
+		} catch (PassportIdAlreadyExistsException e) {
 			logger.warn("Passport ID already exists");
 			request.getSession().setAttribute(Utility.ERROR, Message.PASSPORT_EXISTS);
 			response.sendRedirect(Redirect.TO_REGISTRATION_PAGE);
-		}catch (ServiceException e) {
+		} catch (ServiceException e) {
 			logger.warn("error while registration", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
 		}

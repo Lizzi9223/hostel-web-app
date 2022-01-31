@@ -17,29 +17,29 @@ import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class ChangePasswordCommand implements Command {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.ChangePasswordCommand.class);
-	
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.ChangePasswordCommand.class);
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		try {			
+
+		try {
 			String login = request.getSession().getAttribute(Utility.LOGIN).toString();
 			String password = request.getParameter(Utility.INITIAL_PASSWORD);
-			if(ServiceFactory.getInstance().getUserService().signIn(login, password)!=null) {
+			if (ServiceFactory.getInstance().getUserService().signIn(login, password) != null) {
 				password = request.getParameter(Utility.NEW_PASSWORD);
-				if(ServiceFactory.getInstance().getUserService().editPassword(login, password)) {
+				if (ServiceFactory.getInstance().getUserService().editPassword(login, password)) {
 					password = null;
 					response.sendRedirect(Redirect.LOG_OUT);
-				}else {
+				} else {
 					password = null;
-					request.getSession().setAttribute(Utility.ERROR,Message.VALIDATION);
+					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
 					response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
 				}
-			}
-			else {
+			} else {
 				password = null;
 				logger.info("Validation failed while changing password registration");
-				request.getSession().setAttribute(Utility.ERROR,Message.WRONG_PASSWORD);
+				request.getSession().setAttribute(Utility.ERROR, Message.WRONG_PASSWORD);
 				response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
 			}
 		} catch (ServiceException e) {

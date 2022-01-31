@@ -24,30 +24,30 @@ public class AddClientCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {	
+		try {
 			String name = request.getParameter(Utility.NAME);
 			String surname = request.getParameter(Utility.SURNAME);
 			String passportId = request.getParameter(Utility.PASSPORT_ID);
 			LocalDate dateOfBith = LocalDate.parse(request.getParameter(Utility.DATE_OF_BIRTH));
 			String country = request.getParameter(Utility.COUNTRY);
 			String phone = request.getParameter(Utility.PHONE);
-			String email = request.getParameter(Utility.EMAIL);				
+			String email = request.getParameter(Utility.EMAIL);
 			Client client = new Client(name, surname, passportId, dateOfBith, country, phone, email);
-			if(ServiceFactory.getInstance().getUserService().addClient(client)) {
+			if (ServiceFactory.getInstance().getUserService().addClient(client)) {
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
-			}else {
+			} else {
 				logger.info("Validation failed while adding new client (by admin)");
 				request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
-			}			
-		}catch (PassportIdAlreadyExistsException e) {
+			}
+		} catch (PassportIdAlreadyExistsException e) {
 			logger.warn("Passport ID already exists");
 			request.getSession().setAttribute(Utility.ERROR, Message.PASSPORT_EXISTS);
 			response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 		} catch (ServiceException e) {
 			logger.error("error while adding new client", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
-		} 
+		}
 	}
 
 }

@@ -14,7 +14,7 @@ public class ChooseStayCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter(Utility.CHOSEN_STAY_ID));			
+		int id = Integer.parseInt(request.getParameter(Utility.CHOSEN_STAY_ID));
 		request.getSession().setAttribute(Utility.CHOSEN_STAY_ID, id);
 		request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
 		response.sendRedirect(Redirect.TO_STAYS_PAGE);

@@ -28,20 +28,20 @@ public class EditStayCommand implements Command {
 		try {
 			int stayId = Integer.parseInt(request.getParameter(Utility.STAY_ID));
 			Stay stay = ServiceFactory.getInstance().getStaysService().getStayById(stayId);
-			if(request.getParameter(Utility.COMMAND).equals(CommandName.EDIT_STAY)) {				
+			if (request.getParameter(Utility.COMMAND).equals(CommandName.EDIT_STAY)) {
 				request.getSession().setAttribute(Utility.STAY, stay);
 				request.getSession().setAttribute(Utility.POPUP_VIEW, CommandName.EDIT_STAY);
 				response.sendRedirect(Redirect.TO_STAYS_PAGE);
-			}else if(request.getParameter(Utility.COMMAND).equals(CommandName.EDIT_STAY_CHECK)) {
-				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+			} else if (request.getParameter(Utility.COMMAND).equals(CommandName.EDIT_STAY_CHECK)) {
+				// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 				LocalDate toDate = LocalDate.parse(request.getParameter(Utility.TO_DATE));
-				if(ServiceFactory.getInstance().getStaysService().areAvailablePlaces(
-						stay.getRoomNumber(), stay.getFromDate(), toDate, 1, 0, stayId)) {					
+				if (ServiceFactory.getInstance().getStaysService().areAvailablePlaces(stay.getRoomNumber(),
+						stay.getFromDate(), toDate, 1, 0, stayId)) {
 					request.setAttribute(Utility.TO_DATE, toDate);
 					request.setAttribute(Utility.EDITED_NOTES, request.getParameter(Utility.NOTES));
 					request.setAttribute(Utility.CHECK_RESULT, true);
 					request.setAttribute(Utility.EDITED_STAY_ID, stayId);
-				}else {
+				} else {
 					request.setAttribute(Utility.CHECK_RESULT, false);
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_STAYS_PAGE);

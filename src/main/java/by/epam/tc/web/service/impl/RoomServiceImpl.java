@@ -12,14 +12,14 @@ import by.epam.tc.web.service.RoomService;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class RoomServiceImpl implements RoomService {
-	
+
 	private final RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 	private final List<Room> rooms;
-	
+
 	public RoomServiceImpl() throws ServiceException {
 		try {
 			rooms = roomDAO.getAllRooms();
-			for(Room room : rooms) {
+			for (Room room : rooms) {
 				List<Image> images = roomDAO.getAllRoomImages(room.getRoomNumber());
 				room.setImages(images);
 			}
@@ -27,64 +27,63 @@ public class RoomServiceImpl implements RoomService {
 			throw new ServiceException(e);
 		}
 	}
-	
+
 	@Override
-	public List<Room> getAllRooms(){
+	public List<Room> getAllRooms() {
 		return rooms;
 	}
-	
+
 	@Override
-	public Room getRoomByNumber(int roomNumber) throws ServiceException{
+	public Room getRoomByNumber(int roomNumber) throws ServiceException {
 		Room room = null;
 		try {
 			room = roomDAO.findRoomByNumber(roomNumber);
 			List<Image> images = roomDAO.getAllRoomImages(room.getRoomNumber());
 			room.setImages(images);
-		}
-		catch (DAOException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 		return room;
 	}
 
 	@Override
-	public BigDecimal getMinCost(){
+	public BigDecimal getMinCost() {
 		BigDecimal minCost = BigDecimal.valueOf(Integer.MAX_VALUE);
-		for(Room room : rooms) {
-			if(room.getCost().compareTo(minCost) < 0) {
+		for (Room room : rooms) {
+			if (room.getCost().compareTo(minCost) < 0) {
 				minCost = room.getCost();
 			}
 		}
 		return minCost;
 	}
-	
+
 	@Override
-	public BigDecimal getMaxCost(){
+	public BigDecimal getMaxCost() {
 		BigDecimal maxCost = BigDecimal.valueOf(Integer.MIN_VALUE);
-		for(Room room : rooms) {
-			if(room.getCost().compareTo(maxCost) > 0) {
+		for (Room room : rooms) {
+			if (room.getCost().compareTo(maxCost) > 0) {
 				maxCost = room.getCost();
 			}
 		}
 		return maxCost;
 	}
-	
+
 	@Override
-	public int getMinCapacity(){
+	public int getMinCapacity() {
 		int minCapacity = Integer.MAX_VALUE;
-		for(Room room : rooms) {
-			if(room.getCapacity()<minCapacity) {
+		for (Room room : rooms) {
+			if (room.getCapacity() < minCapacity) {
 				minCapacity = room.getCapacity();
 			}
 		}
 		return minCapacity;
 	}
-	
+
 	@Override
 	public int getMaxCapacity() {
 		int maxCapacity = Integer.MIN_VALUE;
-		for(Room room : rooms) {
-			if(room.getCapacity()>maxCapacity) {
+		for (Room room : rooms) {
+			if (room.getCapacity() > maxCapacity) {
 				maxCapacity = room.getCapacity();
 			}
 		}

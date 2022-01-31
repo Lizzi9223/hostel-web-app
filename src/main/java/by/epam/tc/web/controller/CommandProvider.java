@@ -37,11 +37,11 @@ import by.epam.tc.web.controller.impl.gotopage.GoToWelcomePageCommand;
 public final class CommandProvider {
 
 	private final Map<String, Command> commands = new HashMap<String, Command>();
-	
+
 	public CommandProvider() {
 		commands.put(CommandName.LOGINATION, new LoginationCommand());
 		commands.put(CommandName.REGISTRATION, new RegistrationCommand());
-		commands.put(CommandName.EDIT_ACCOUNT, new EditCommand());	
+		commands.put(CommandName.EDIT_ACCOUNT, new EditCommand());
 		commands.put(CommandName.CHANGE_PASSWORD, new ChangePasswordCommand());
 		commands.put(CommandName.CHANGE_LANGUAGE, new ChangeLanguageCommand());
 		commands.put(CommandName.BOOK_ROOM, new BookRoomCommand());
@@ -51,7 +51,7 @@ public final class CommandProvider {
 		commands.put(CommandName.SUBMIT_BOOKING, new SubmitBookingCommand());
 		commands.put(CommandName.CHOOSE_BOOKING, new ChooseBookingCommand());
 		commands.put(CommandName.APPROVE_BOOKING, new ApproveBookingCommand());
-		commands.put(CommandName.EDIT_BOOKING, new EditBookingCommand());		
+		commands.put(CommandName.EDIT_BOOKING, new EditBookingCommand());
 		commands.put(CommandName.DELETE_BOOKING, new DeleteBookingCommand());
 		commands.put(CommandName.ADD_STAY, new CheckRoomAvailabilityCommand());
 		commands.put(CommandName.ADD_BOOKING, new CheckRoomAvailabilityCommand());
@@ -66,7 +66,7 @@ public final class CommandProvider {
 		commands.put(CommandName.ADD_CLIENT, new AddClientCommand());
 		commands.put(CommandName.SEARCH_CLIENT, new GoToClientsPageCommand());
 		commands.put(CommandName.GUESTS_ARRIVED, new SubmitStayCommand());
-		
+
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPageCommand());
 		commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());
 		commands.put(CommandName.GO_TO_LOGINATION_PAGE, new GoToLoginationPageCommand());
@@ -78,7 +78,7 @@ public final class CommandProvider {
 		commands.put(CommandName.GO_TO_CONTACTS_PAGE, new GoToContactsPageCommand());
 		commands.put(CommandName.GO_TO_CLIENTS_PAGE, new GoToClientsPageCommand());
 	}
-	
+
 	public final Command getCommand(String commandName) {
 		Command command = commands.get(commandName);
 		return command;

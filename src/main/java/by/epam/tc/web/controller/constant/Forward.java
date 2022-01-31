@@ -1,6 +1,6 @@
 package by.epam.tc.web.controller.constant;
 
-public final class Forward{
+public final class Forward {
 	public final static String TO_ERROR_PAGE = "error.jsp";
 	public final static String TO_BOOKINGS_PAGE = "/WEB-INF/jsp/bookings.jsp";
 	public final static String TO_BOOK_ROOM_PAGE = "/WEB-INF/jsp/bookRoom.jsp";

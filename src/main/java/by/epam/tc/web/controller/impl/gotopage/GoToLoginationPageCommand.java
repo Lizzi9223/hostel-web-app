@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Forward;
 
-public class GoToLoginationPageCommand implements Command{
-	
+public class GoToLoginationPageCommand implements Command {
+
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_LOGINATION_PAGE);
-		dispatcher.forward(request, response);	
+		dispatcher.forward(request, response);
 	}
 
 }

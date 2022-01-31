@@ -21,17 +21,16 @@ public class EditBookingCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));			
+		int id = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));
 		try {
 			Booking booking = ServiceFactory.getInstance().getStaysService().getBookingById(id);
 			request.getSession().setAttribute(Utility.BOOKING, booking);
 			request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.EDIT_BOOKING);
 			response.sendRedirect(Redirect.TO_BOOKINGS_PAGE);
-		}
-		catch (ServiceException e) {
+		} catch (ServiceException e) {
 			logger.error("error while editing booking", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
-		}	
+		}
 	}
 
 }

@@ -7,110 +7,111 @@ import java.util.Objects;
 
 public class Booking implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-    private int id;
-    private int userId;
-    private int roomNumber;
-    private LocalDate fromDate;
-    private LocalDate toDate;
-    private int guestsCount;
-    private Boolean isApproved;
-    private LocalDate approveDate;
-    private boolean isPaid;
-    private BigDecimal price;
 
-    public Booking(){}
+	private int id;
+	private int userId;
+	private int roomNumber;
+	private LocalDate fromDate;
+	private LocalDate toDate;
+	private int guestsCount;
+	private Boolean isApproved;
+	private LocalDate approveDate;
+	private boolean isPaid;
+	private BigDecimal price;
 
-    public Booking(int userId, int roomNumber, LocalDate fromDate, LocalDate toDate,
-                   int guestsCount, Boolean isApproved, LocalDate approveDate, boolean isPaid) {
-        this.userId = userId;
-        this.roomNumber = roomNumber;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.guestsCount = guestsCount;
-        this.isApproved = isApproved;
-        this.approveDate = approveDate;
-        this.isPaid = isPaid;
-    }
+	public Booking() {
+	}
 
-    public Booking(int id, int userId, int roomNumber, LocalDate fromDate, LocalDate toDate,
-                   int guestsCount, Boolean isApproved, LocalDate approveDate, boolean isPaid) {
-        this.id = id;
-        this.userId = userId;
-        this.roomNumber = roomNumber;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.guestsCount = guestsCount;
-        this.isApproved = isApproved;
-        this.approveDate = approveDate;
-        this.isPaid = isPaid;
-    }
+	public Booking(int userId, int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsCount,
+			Boolean isApproved, LocalDate approveDate, boolean isPaid) {
+		this.userId = userId;
+		this.roomNumber = roomNumber;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.guestsCount = guestsCount;
+		this.isApproved = isApproved;
+		this.approveDate = approveDate;
+		this.isPaid = isPaid;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public Booking(int id, int userId, int roomNumber, LocalDate fromDate, LocalDate toDate, int guestsCount,
+			Boolean isApproved, LocalDate approveDate, boolean isPaid) {
+		this.id = id;
+		this.userId = userId;
+		this.roomNumber = roomNumber;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.guestsCount = guestsCount;
+		this.isApproved = isApproved;
+		this.approveDate = approveDate;
+		this.isPaid = isPaid;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getUserId() {
-        return userId;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public int getUserId() {
+		return userId;
+	}
 
-    public int getRoomNumber() {
-        return roomNumber;
-    }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
+	public int getRoomNumber() {
+		return roomNumber;
+	}
 
-    public LocalDate getFromDate() {
-        return fromDate;
-    }
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
-    }
+	public LocalDate getFromDate() {
+		return fromDate;
+	}
 
-    public LocalDate getToDate() {
-        return toDate;
-    }
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
+	}
 
-    public void setToDate(LocalDate toDate) {
-        this.toDate = toDate;
-    }
+	public LocalDate getToDate() {
+		return toDate;
+	}
 
-    public int getGuestsCount() {
-        return guestsCount;
-    }
+	public void setToDate(LocalDate toDate) {
+		this.toDate = toDate;
+	}
 
-    public void setGuestsCount(int guestsCount) {
-        this.guestsCount = guestsCount;
-    }
+	public int getGuestsCount() {
+		return guestsCount;
+	}
 
-    public Boolean isApproved() {
-        return isApproved;
-    }
+	public void setGuestsCount(int guestsCount) {
+		this.guestsCount = guestsCount;
+	}
 
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
-    }
+	public Boolean isApproved() {
+		return isApproved;
+	}
 
-    public LocalDate getApproveDate() {
-        return approveDate;
-    }
+	public void setApproved(Boolean approved) {
+		isApproved = approved;
+	}
 
-    public void setApproveDate(LocalDate approveDate) {
-        this.approveDate = approveDate;
-    }
+	public LocalDate getApproveDate() {
+		return approveDate;
+	}
 
-    public BigDecimal getPrice() {
+	public void setApproveDate(LocalDate approveDate) {
+		this.approveDate = approveDate;
+	}
+
+	public BigDecimal getPrice() {
 		return price;
 	}
 
@@ -119,12 +120,12 @@ public class Booking implements Serializable {
 	}
 
 	public boolean isPaid() {
-        return isPaid;
-    }
+		return isPaid;
+	}
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
-    }
+	public void setPaid(boolean paid) {
+		isPaid = paid;
+	}
 
 	@Override
 	public int hashCode() {
@@ -153,5 +154,5 @@ public class Booking implements Serializable {
 				+ ", toDate=" + toDate + ", guestsCount=" + guestsCount + ", isApproved=" + isApproved
 				+ ", approveDate=" + approveDate + ", isPaid=" + isPaid + ", price=" + price + "]";
 	}
-	
+
 }

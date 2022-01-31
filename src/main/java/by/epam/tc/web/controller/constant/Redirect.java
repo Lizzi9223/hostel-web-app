@@ -1,6 +1,6 @@
 package by.epam.tc.web.controller.constant;
 
-public final class Redirect{
+public final class Redirect {
 	public final static String TO_ERROR_PAGE = "Controller?command=GO_TO_ERROR_PAGE";
 	public final static String TO_LOGINATION_PAGE = "Controller?command=GO_TO_LOGINATION_PAGE";
 	public final static String TO_REGISTRATION_PAGE = "Controller?command=GO_TO_REGISTRATION_PAGE";

@@ -1,6 +1,6 @@
 package by.epam.tc.web.controller.constant;
 
-public final class CommandName{
+public final class CommandName {
 	public final static String LOGINATION = "Logination";
 	public final static String REGISTRATION = "Registration";
 	public final static String EDIT_ACCOUNT = "Edit";
@@ -25,13 +25,13 @@ public final class CommandName{
 	public final static String APPROVE_BOOKING = "ApproveBooking";
 	public final static String CHOOSE_STAY = "ChooseStay";
 	public final static String SUBMIT_STAY = "SubmitStay";
-	public final static String CHOOSE_CLIENT = "ChooseClient";	
+	public final static String CHOOSE_CLIENT = "ChooseClient";
 	public final static String SEARCH_CLIENT = "SearchClient";
-	public final static String FINISH_CHOOSING_CLIENT = "FinishChoosingClient";	
+	public final static String FINISH_CHOOSING_CLIENT = "FinishChoosingClient";
 	public final static String GUESTS_ARRIVED = "GuestsArrived";
 	public final static String GO_TO_WELCOME_PAGE = "GO_TO_WELCOME_PAGE";
-	public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";	
-	public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";	
+	public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";
+	public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";
 	public final static String GO_TO_ROOMS_PAGE = "GO_TO_ROOMS_PAGE";
 	public final static String GO_TO_ERROR_PAGE = "GO_TO_ERROR_PAGE";
 	public final static String GO_TO_MY_ACCOUNT_PAGE = "GO_TO_MY_ACCOUNT_PAGE";

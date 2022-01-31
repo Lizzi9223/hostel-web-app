@@ -2,67 +2,68 @@ package by.epam.tc.web.entity.user;
 
 import java.util.Objects;
 
-public class Admin extends User{
+public class Admin extends User {
 	private static final long serialVersionUID = 1L;
-	
-    private String name;
-    private String photoPath;
 
-    public Admin(){}
+	private String name;
+	private String photoPath;
 
-    public Admin(String name) {
-        this.name = name;
-        this.setRole(Role.ADMIN);
-    }
+	public Admin() {
+	}
 
-    public Admin(String name, String photoPath) {
-        this.setRole(Role.ADMIN);
-        this.name = name;
-        this.photoPath = photoPath;
-    }
+	public Admin(String name) {
+		this.name = name;
+		this.setRole(Role.ADMIN);
+	}
 
-    public Admin(int id, String login, String name) {
-        super(login, Role.ADMIN);
-        this.setUserId(id);
-        this.name = name;
-    }
+	public Admin(String name, String photoPath) {
+		this.setRole(Role.ADMIN);
+		this.name = name;
+		this.photoPath = photoPath;
+	}
 
-    public Admin(int id, String login, String name, String photoPath) {
-        super(login, Role.ADMIN);
-        this.setUserId(id);
-        this.name = name;
-        this.photoPath = photoPath;
-    }
-    
-    public Admin(String login, String password, String name, String photoPath) {
-    	super(login, password, Role.ADMIN);
-    	this.name = name;
-        this.photoPath = photoPath;
-    }
-    
-    public Admin(String login, String name, String photoPath) {
-    	super(login, Role.ADMIN);
-    	this.name = name;
-        this.photoPath = photoPath;
-    }
+	public Admin(int id, String login, String name) {
+		super(login, Role.ADMIN);
+		this.setUserId(id);
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Admin(int id, String login, String name, String photoPath) {
+		super(login, Role.ADMIN);
+		this.setUserId(id);
+		this.name = name;
+		this.photoPath = photoPath;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Admin(String login, String password, String name, String photoPath) {
+		super(login, password, Role.ADMIN);
+		this.name = name;
+		this.photoPath = photoPath;
+	}
 
-    public String getPhotoPath() {
-        return photoPath;
-    }
+	public Admin(String login, String name, String photoPath) {
+		super(login, Role.ADMIN);
+		this.name = name;
+		this.photoPath = photoPath;
+	}
 
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
-    }
+	public String getName() {
+		return name;
+	}
 
-    @Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
@@ -83,11 +84,7 @@ public class Admin extends User{
 	}
 
 	@Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + getUserId() +
-                ", name='" + name + '\'' +
-                ", photoPath='" + photoPath + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Admin{" + "id=" + getUserId() + ", name='" + name + '\'' + ", photoPath='" + photoPath + '\'' + '}';
+	}
 }

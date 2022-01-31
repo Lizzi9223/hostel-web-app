@@ -24,24 +24,25 @@ import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class GoToBookingsPageCommand implements Command {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToBookingsPageCommand.class);
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToBookingsPageCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Booking> bookings = null;
-		try {			
-			if(request.getSession().getAttribute(Utility.ROLE).toString().equals(Role.ADMIN.toString())) {
-				bookings = new LinkedList<Booking>(ServiceFactory.getInstance().getStaysService().getAllBookings());				
+		try {
+			if (request.getSession().getAttribute(Utility.ROLE).toString().equals(Role.ADMIN.toString())) {
+				bookings = new LinkedList<Booking>(ServiceFactory.getInstance().getStaysService().getAllBookings());
+			} else {
+				String userLogin = (String) request.getSession().getAttribute(Utility.LOGIN);
+				bookings = new LinkedList<Booking>(
+						ServiceFactory.getInstance().getStaysService().getAllUserBookings(userLogin));
 			}
-			else {
-				String userLogin = (String)request.getSession().getAttribute(Utility.LOGIN);	
-				bookings = new LinkedList<Booking>(ServiceFactory.getInstance().getStaysService().getAllUserBookings(userLogin));
-			}
-			for(Booking booking : bookings) {
+			for (Booking booking : bookings) {
 				booking.setPrice(ServiceFactory.getInstance().getStaysService().getBookingPrice(booking));
 			}
-			Collections.sort(bookings, 
-				     Comparator.comparing(Booking::isApproved, Comparator.nullsFirst(Comparator.naturalOrder())));
+			Collections.sort(bookings,
+					Comparator.comparing(Booking::isApproved, Comparator.nullsFirst(Comparator.naturalOrder())));
 			request.setAttribute(Utility.BOOKINGS, bookings);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_BOOKINGS_PAGE);
 			dispatcher.forward(request, response);

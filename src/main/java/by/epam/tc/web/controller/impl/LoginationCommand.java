@@ -17,7 +17,7 @@ import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
-public class LoginationCommand implements Command{
+public class LoginationCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.LoginationCommand.class);
 
 	@Override
@@ -28,12 +28,11 @@ public class LoginationCommand implements Command{
 		try {
 			user = ServiceFactory.getInstance().getUserService().signIn(login, password);
 			password = null;
-			if(user!=null) {
+			if (user != null) {
 				request.getSession().setAttribute(Utility.ROLE, user.getRole().toString());
 				request.getSession().setAttribute(Utility.LOGIN, login);
 				response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
-			}
-			else {
+			} else {
 				request.getSession().setAttribute(Utility.ERROR, Message.LOGINATION);
 				response.sendRedirect(Redirect.TO_LOGINATION_PAGE);
 			}

@@ -13,8 +13,8 @@ import by.epam.tc.web.controller.constant.Utility;
 
 public class CharsetFilter implements Filter {
 
-	private String encoding;	
-	
+	private String encoding;
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		encoding = filterConfig.getInitParameter(Utility.REQUEST_ENCODING);
@@ -29,7 +29,8 @@ public class CharsetFilter implements Filter {
 		request.setCharacterEncoding(encoding);
 		chain.doFilter(request, response);
 	}
-	
-	public void destroy() {}
+
+	public void destroy() {
+	}
 
 }

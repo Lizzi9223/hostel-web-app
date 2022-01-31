@@ -16,16 +16,16 @@ import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class DeleteBookingCommand implements Command {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.DeleteBookingCommand.class);
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.DeleteBookingCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));			
+		int id = Integer.parseInt(request.getParameter(Utility.BOOKING_ID));
 		try {
 			ServiceFactory.getInstance().getStaysService().deleteBooking(id);
 			response.sendRedirect(Redirect.TO_BOOKINGS_PAGE);
-		}
-		catch (ServiceException e) {
+		} catch (ServiceException e) {
 			logger.error("error while deleting booking", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
 		}

@@ -7,75 +7,76 @@ import java.util.Objects;
 
 public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-    private int roomNumber;
-    private BigDecimal cost;
-    private int capacity;
-    private String gender;
-    private boolean isBathroomInRoom;
-    private String notes;
-    private List<Image> images;
 
-    public Room(){}
+	private int roomNumber;
+	private BigDecimal cost;
+	private int capacity;
+	private String gender;
+	private boolean isBathroomInRoom;
+	private String notes;
+	private List<Image> images;
 
-    public Room(int roomNumber, BigDecimal cost, int capacity, String gender, boolean isBathroomInRoom, String notes) {
-        this.roomNumber = roomNumber;
-        this.cost = cost;
-        this.capacity = capacity;
-        this.gender = gender;
-        this.isBathroomInRoom = isBathroomInRoom;
-        this.notes = notes;
-    }
+	public Room() {
+	}
 
-    public int getRoomNumber() {
-        return roomNumber;
-    }
+	public Room(int roomNumber, BigDecimal cost, int capacity, String gender, boolean isBathroomInRoom, String notes) {
+		this.roomNumber = roomNumber;
+		this.cost = cost;
+		this.capacity = capacity;
+		this.gender = gender;
+		this.isBathroomInRoom = isBathroomInRoom;
+		this.notes = notes;
+	}
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
+	public int getRoomNumber() {
+		return roomNumber;
+	}
 
-    public BigDecimal getCost() {
-        return cost;
-    }
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
+	public BigDecimal getCost() {
+		return cost;
+	}
 
-    public int getCapacity() {
-        return capacity;
-    }
+	public void setCost(BigDecimal cost) {
+		this.cost = cost;
+	}
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
+	public int getCapacity() {
+		return capacity;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public boolean isBathroomInRoom() {
-        return isBathroomInRoom;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public void setBathroomInRoom(boolean bathroomInRoom) {
-        isBathroomInRoom = bathroomInRoom;
-    }
+	public boolean isBathroomInRoom() {
+		return isBathroomInRoom;
+	}
 
-    public String getNotes() {
-        return notes;
-    }
+	public void setBathroomInRoom(boolean bathroomInRoom) {
+		isBathroomInRoom = bathroomInRoom;
+	}
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }  
+	public String getNotes() {
+		return notes;
+	}
 
-    public List<Image> getImages() {
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public List<Image> getImages() {
 		return images;
 	}
 
@@ -107,5 +108,5 @@ public class Room implements Serializable {
 		return "Room [roomNumber=" + roomNumber + ", cost=" + cost + ", capacity=" + capacity + ", gender=" + gender
 				+ ", isBathroomInRoom=" + isBathroomInRoom + ", notes=" + notes + ", images=" + images + "]";
 	}
-	
+
 }

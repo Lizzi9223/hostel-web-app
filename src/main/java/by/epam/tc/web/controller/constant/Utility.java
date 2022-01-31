@@ -1,6 +1,6 @@
 package by.epam.tc.web.controller.constant;
 
-public final class Utility{
+public final class Utility {
 	public final static String EMPTY = "";
 	public final static String CLIENTS = "clients";
 	public final static String BOOKINGS = "bookings";

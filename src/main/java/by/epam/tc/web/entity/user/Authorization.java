@@ -3,12 +3,12 @@ package by.epam.tc.web.entity.user;
 import java.util.Objects;
 
 public class Authorization {
-	
+
 	private String login;
 	private String password;
-	
+
 	public Authorization() {
-		
+
 	}
 
 	public Authorization(String login, String password) {

@@ -10,17 +10,31 @@ import by.epam.tc.web.service.exception.PassportIdAlreadyExistsException;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public interface UserService {
-	User signIn(String login, String password) throws ServiceException;	
+	User signIn(String login, String password) throws ServiceException;
+
 	boolean signUp(Admin admin) throws ServiceException, LoginAlreadyExistsException;
-    boolean signUp(Client client) throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
-    boolean addClient(Client client) throws ServiceException, PassportIdAlreadyExistsException;
-    boolean edit(Admin admin, String login) throws ServiceException, LoginAlreadyExistsException;
-    boolean edit(Client client, String login, String passportId) throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
-    boolean editPassword(String login, String password) throws ServiceException;    
-    Admin findAdminByLogin(String login) throws ServiceException;
-    Client findClientByLogin(String login) throws ServiceException;    
-    void deleteAccount(String login) throws ServiceException;    
-    List<Client> getAllClients() throws ServiceException;
-    List<User> getAllUsers() throws ServiceException;
-    List<Client> getAllClientUsers() throws ServiceException;
+
+	boolean signUp(Client client)
+			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
+
+	boolean addClient(Client client) throws ServiceException, PassportIdAlreadyExistsException;
+
+	boolean edit(Admin admin, String login) throws ServiceException, LoginAlreadyExistsException;
+
+	boolean edit(Client client, String login, String passportId)
+			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
+
+	boolean editPassword(String login, String password) throws ServiceException;
+
+	Admin findAdminByLogin(String login) throws ServiceException;
+
+	Client findClientByLogin(String login) throws ServiceException;
+
+	void deleteAccount(String login) throws ServiceException;
+
+	List<Client> getAllClients() throws ServiceException;
+
+	List<User> getAllUsers() throws ServiceException;
+
+	List<Client> getAllClientUsers() throws ServiceException;
 }

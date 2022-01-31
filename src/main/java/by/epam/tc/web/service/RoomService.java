@@ -8,9 +8,14 @@ import by.epam.tc.web.service.exception.ServiceException;
 
 public interface RoomService {
 	List<Room> getAllRooms();
-	Room getRoomByNumber(int roomNumber) throws ServiceException;	
+
+	Room getRoomByNumber(int roomNumber) throws ServiceException;
+
 	BigDecimal getMinCost();
+
 	BigDecimal getMaxCost();
+
 	int getMinCapacity();
+
 	int getMaxCapacity();
 }

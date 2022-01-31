@@ -24,45 +24,47 @@ import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class GoToClientsPageCommand implements Command {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToClientsPageCommand.class);
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToClientsPageCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {			
+		try {
 			logger.info("in GoToClientsPageCommand");
-			List<Client> clients = new LinkedList<Client>(ServiceFactory.getInstance().getUserService().getAllClients());
-			Collections.sort(clients, 
-				     Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
+			List<Client> clients = new LinkedList<Client>(
+					ServiceFactory.getInstance().getUserService().getAllClients());
+			Collections.sort(clients, Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
 			String criteria = null;
 			String searchData = null;
-			if(request.getParameter(Utility.COMMAND).equals(CommandName.SEARCH_CLIENT)) {
-				criteria = (String)request.getParameter(Utility.SEARCH_CRITERIA);
-				searchData = (String)request.getParameter(Utility.SEARCH_DATA);
-				if(searchData!=null && !searchData.equals(Utility.EMPTY)) {
-					switch(criteria) {
+			if (request.getParameter(Utility.COMMAND).equals(CommandName.SEARCH_CLIENT)) {
+				criteria = (String) request.getParameter(Utility.SEARCH_CRITERIA);
+				searchData = (String) request.getParameter(Utility.SEARCH_DATA);
+				if (searchData != null && !searchData.equals(Utility.EMPTY)) {
+					switch (criteria) {
 					case Utility.LOGIN:
-						for(int i=0; i<clients.size();i++) {
-							if(clients.get(i).getLogin()== null || !clients.get(i).getLogin().startsWith(searchData)) {
+						for (int i = 0; i < clients.size(); i++) {
+							if (clients.get(i).getLogin() == null
+									|| !clients.get(i).getLogin().startsWith(searchData)) {
 								clients.remove(i--);
 							}
 						}
 						break;
 					case Utility.PASSPORT_ID:
-						for(int i=0; i<clients.size();i++) {
-							if(!clients.get(i).getPassportId().startsWith(searchData)) {
+						for (int i = 0; i < clients.size(); i++) {
+							if (!clients.get(i).getPassportId().startsWith(searchData)) {
 								clients.remove(i--);
 							}
 						}
 						break;
 					case Utility.SURNAME:
-						for(int i=0; i<clients.size();i++) {
-							if(!clients.get(i).getLastName().startsWith(searchData)) {
+						for (int i = 0; i < clients.size(); i++) {
+							if (!clients.get(i).getLastName().startsWith(searchData)) {
 								clients.remove(i--);
 							}
 						}
 						break;
 					}
-				}				
+				}
 			}
 			request.setAttribute(Utility.CURRENT_SEARCH_CRITERIA, criteria);
 			request.setAttribute(Utility.CURRENT_SEARCH_DATA, searchData);

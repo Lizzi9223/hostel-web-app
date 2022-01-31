@@ -23,48 +23,46 @@ import by.epam.tc.web.service.exception.ServiceException;
 
 public class EditCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.EditCommand.class);
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String passportId = request.getParameter(Utility.PASSPORT_ID);
-			if(passportId != null) { 
+			if (passportId != null) {
 				String login = request.getParameter(Utility.LOGIN);
 				String name = request.getParameter(Utility.NAME);
 				String surname = request.getParameter(Utility.SURNAME);
 				LocalDate dateOfBith = LocalDate.parse(request.getParameter(Utility.DATE_OF_BIRTH));
 				String country = request.getParameter(Utility.COUNTRY);
 				String phone = request.getParameter(Utility.PHONE);
-				String email = request.getParameter(Utility.EMAIL);				
-				Client client = new Client(login, name, surname, passportId, dateOfBith, 
-						country, phone, email);
-				boolean isEdited = ServiceFactory.getInstance().getUserService().edit(client, 
-						(String)request.getSession().getAttribute(Utility.LOGIN),
-						(String)request.getSession().getAttribute(Utility.PASSPORT_ID));
+				String email = request.getParameter(Utility.EMAIL);
+				Client client = new Client(login, name, surname, passportId, dateOfBith, country, phone, email);
+				boolean isEdited = ServiceFactory.getInstance().getUserService().edit(client,
+						(String) request.getSession().getAttribute(Utility.LOGIN),
+						(String) request.getSession().getAttribute(Utility.PASSPORT_ID));
 				request.getSession().removeAttribute(Utility.PASSPORT_ID);
-				if(isEdited) {
-					request.getSession().setAttribute(Utility.LOGIN, login);					
-				}else {
+				if (isEdited) {
+					request.getSession().setAttribute(Utility.LOGIN, login);
+				} else {
 					logger.info("Validation failed while editing client");
 					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
 				}
-			}
-			else {
+			} else {
 				String login = request.getParameter(Utility.LOGIN);
 				String name = request.getParameter(Utility.NAME);
-				String photo = request.getParameter(Utility.PHOTO);				
-				Admin admin = new Admin(login, name, photo);				
-				boolean isEdited = ServiceFactory.getInstance().getUserService().edit(admin, 
+				String photo = request.getParameter(Utility.PHOTO);
+				Admin admin = new Admin(login, name, photo);
+				boolean isEdited = ServiceFactory.getInstance().getUserService().edit(admin,
 						request.getSession().getAttribute(Utility.LOGIN).toString());
-				if(isEdited) {
+				if (isEdited) {
 					request.getSession().setAttribute(Utility.LOGIN, login);
-				}else {
+				} else {
 					logger.info("Validation failed while editing admin");
 					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
 				}
 			}
 			response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
-		}catch (LoginAlreadyExistsException e) {
+		} catch (LoginAlreadyExistsException e) {
 			logger.warn("Login already exists");
 			request.getSession().setAttribute(Utility.ERROR, Message.LOGIN_EXISTS);
 			response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
@@ -75,7 +73,7 @@ public class EditCommand implements Command {
 		} catch (ServiceException e) {
 			logger.error("error while editing account", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
-		} 
+		}
 	}
 
 }

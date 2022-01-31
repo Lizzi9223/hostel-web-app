@@ -20,15 +20,14 @@ public class DeleteStayCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter(Utility.STAY_ID));			
+		int id = Integer.parseInt(request.getParameter(Utility.STAY_ID));
 		try {
 			ServiceFactory.getInstance().getStaysService().deleteStay(id);
 			response.sendRedirect(Redirect.TO_STAYS_PAGE);
-		}
-		catch (ServiceException e) {
+		} catch (ServiceException e) {
 			logger.error("error while deleting stay", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
-		}	
+		}
 	}
 
 }

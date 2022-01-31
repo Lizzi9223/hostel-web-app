@@ -18,12 +18,13 @@ import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class DeleteAccountCommand implements Command {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.DeleteAccountCommand.class);
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.DeleteAccountCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String login = (String)request.getSession().getAttribute(Utility.LOGIN);
+			String login = (String) request.getSession().getAttribute(Utility.LOGIN);
 			ServiceFactory.getInstance().getUserService().deleteAccount(login);
 			request.getSession().removeAttribute(Utility.ROLE);
 			request.getSession().removeAttribute(Utility.LOGIN);

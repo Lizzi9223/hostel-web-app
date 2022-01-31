@@ -11,16 +11,17 @@ import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Forward;
 import by.epam.tc.web.controller.constant.Utility;
 
-public class GoToRegistrationPageCommand implements Command{
+public class GoToRegistrationPageCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(request.getParameter(Utility.CREATE) != null && request.getParameter(Utility.CREATE).equals(Utility.ADMIN)) {
+
+		if (request.getParameter(Utility.CREATE) != null
+				&& request.getParameter(Utility.CREATE).equals(Utility.ADMIN)) {
 			request.setAttribute(Utility.CREATE, Utility.ADMIN);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_REGISTRATION_PAGE);
-		dispatcher.forward(request, response);		
+		dispatcher.forward(request, response);
 	}
 
 }

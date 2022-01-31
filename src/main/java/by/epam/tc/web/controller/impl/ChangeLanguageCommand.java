@@ -15,7 +15,7 @@ public class ChangeLanguageCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String language = request.getParameter(Utility.LANGUAGE);
 		request.getSession().setAttribute(Utility.LANGUAGE, language);
-		String url = (String)request.getSession().getAttribute(Utility.URL);
+		String url = (String) request.getSession().getAttribute(Utility.URL);
 		response.sendRedirect(url);
 	}
 

@@ -20,13 +20,14 @@ import by.epam.tc.web.service.StaysService;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class StaysServiceImpl implements StaysService {
-	
+
 	private final StaysDAO staysDAO = DAOFactory.getInstance().getStaysDAO();
 	private final RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
-	
-	public StaysServiceImpl(){}
-	
+
+	public StaysServiceImpl() {
+	}
+
 	@Override
 	public List<Booking> getAllBookings() throws ServiceException {
 		List<Booking> bookings = new ArrayList<Booking>();
@@ -37,7 +38,7 @@ public class StaysServiceImpl implements StaysService {
 		}
 		return bookings;
 	}
-	
+
 	@Override
 	public List<Booking> getAllUserBookings(String userLogin) throws ServiceException {
 		List<Booking> bookings = new ArrayList<Booking>();
@@ -60,15 +61,15 @@ public class StaysServiceImpl implements StaysService {
 		}
 		return booking;
 	}
-	
+
 	@Override
-	public BigDecimal getBookingPrice(Booking booking) throws ServiceException{
+	public BigDecimal getBookingPrice(Booking booking) throws ServiceException {
 		try {
-			int nights = (int)ChronoUnit.DAYS.between(booking.getFromDate(), booking.getToDate());
+			int nights = (int) ChronoUnit.DAYS.between(booking.getFromDate(), booking.getToDate());
 			BigDecimal pricePerNight = roomDAO.findRoomByNumber(booking.getRoomNumber()).getCost();
 			return pricePerNight.multiply(BigDecimal.valueOf(nights));
-			
-		}catch (DAOException e) {
+
+		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
 	}
@@ -114,15 +115,15 @@ public class StaysServiceImpl implements StaysService {
 		try {
 			Booking booking;
 			int userId = userDAO.getUserId(userLogin);
-			if(userDAO.getUserRole(userLogin) == Role.CLIENT) {
+			if (userDAO.getUserRole(userLogin) == Role.CLIENT) {
 				booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, null, null, false);
-			}else {
+			} else {
 				booking = new Booking(userId, roomNumber, fromDate, toDate, guestsNumber, true, LocalDate.now(), false);
-			}			
+			}
 			staysDAO.addBooking(booking);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}		
+		}
 	}
 
 	@Override
@@ -133,7 +134,7 @@ public class StaysServiceImpl implements StaysService {
 			staysDAO.addStay(stay);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
 
 	@Override
@@ -142,47 +143,48 @@ public class StaysServiceImpl implements StaysService {
 		try {
 			List<Booking> bookings = staysDAO.findAllBookingsByRoomNumber(roomNumber);
 			List<Stay> stays = staysDAO.findAllStaysByRoomNumber(roomNumber);
-			for(LocalDate i = fromDate; i.isBefore(toDate); i=i.plusDays(1)) {
+			for (LocalDate i = fromDate; i.isBefore(toDate); i = i.plusDays(1)) {
 				int bookedPlacesAmount = 0;
-				for(Booking booking : bookings) {
-					if((i.isAfter(booking.getFromDate()) || i.equals(booking.getFromDate())) 
-							&& (i.isBefore(booking.getToDate()) && booking.getId()!=bookingToEditId)) {
+				for (Booking booking : bookings) {
+					if ((i.isAfter(booking.getFromDate()) || i.equals(booking.getFromDate()))
+							&& (i.isBefore(booking.getToDate()) && booking.getId() != bookingToEditId)) {
 						bookedPlacesAmount += booking.getGuestsCount();
 					}
-				}	
-				for(Stay stay : stays) {
-					if(i.isBefore(stay.getToDate()) && stay.getId()!=stayToEditId) {
+				}
+				for (Stay stay : stays) {
+					if (i.isBefore(stay.getToDate()) && stay.getId() != stayToEditId) {
 						bookedPlacesAmount += 1;
 					}
 				}
-				if((roomDAO.findRoomByNumber(roomNumber).getGender().equals(null) 
+				if ((roomDAO.findRoomByNumber(roomNumber).getGender().equals(null)
 						|| roomDAO.findRoomByNumber(roomNumber).getGender().equals("")) && bookedPlacesAmount > 0) {
 					return false;
 				}
-				if(roomDAO.findRoomByNumber(roomNumber).getCapacity() - bookedPlacesAmount < guestsNumber) {
+				if (roomDAO.findRoomByNumber(roomNumber).getCapacity() - bookedPlacesAmount < guestsNumber) {
 					return false;
 				}
 			}
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}		
+		}
 		return true;
 	}
 
 	@Override
-	public List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber, 
-			int bookingToEditId, int stayToEditId) throws ServiceException {
+	public List<Room> areAvailablePlaces(LocalDate fromDate, LocalDate toDate, int guestsNumber, int bookingToEditId,
+			int stayToEditId) throws ServiceException {
 		List<Room> availableRooms = new ArrayList<Room>();
 		try {
-			List<Room> rooms = roomDAO.getAllRooms();			
-			for(Room room : rooms) {
-				if(areAvailablePlaces(room.getRoomNumber(), fromDate, toDate, guestsNumber, bookingToEditId, stayToEditId)){
+			List<Room> rooms = roomDAO.getAllRooms();
+			for (Room room : rooms) {
+				if (areAvailablePlaces(room.getRoomNumber(), fromDate, toDate, guestsNumber, bookingToEditId,
+						stayToEditId)) {
 					availableRooms.add(room);
 				}
-			}			
+			}
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}		
+		}
 		return availableRooms;
 	}
 
@@ -191,22 +193,22 @@ public class StaysServiceImpl implements StaysService {
 		try {
 			Booking booking = staysDAO.findBookingById(id);
 			booking.setApproved(isApproved);
-			if(isApproved) {
+			if (isApproved) {
 				booking.setApproveDate(LocalDate.now());
 			}
 			staysDAO.updateBooking(id, booking);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
-	
+
 	@Override
 	public void updateBooking(int id, Booking booking) throws ServiceException {
 		try {
 			staysDAO.updateBooking(id, booking);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
 
 	@Override
@@ -215,7 +217,7 @@ public class StaysServiceImpl implements StaysService {
 			staysDAO.updateStay(id, stay);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
 
 	@Override
@@ -224,7 +226,7 @@ public class StaysServiceImpl implements StaysService {
 			staysDAO.deleteBooking(id);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
 
 	@Override
@@ -233,6 +235,6 @@ public class StaysServiceImpl implements StaysService {
 			staysDAO.deleteStay(id);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
 }

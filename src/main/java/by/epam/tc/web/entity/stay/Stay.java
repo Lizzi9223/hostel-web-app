@@ -6,82 +6,83 @@ import java.util.Objects;
 
 public class Stay implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-    private int id;
-    private int clientId;
-    private int roomNumber;
-    private LocalDate fromDate;
-    private LocalDate toDate;
-    private String notes;
 
-    public Stay(){}
+	private int id;
+	private int clientId;
+	private int roomNumber;
+	private LocalDate fromDate;
+	private LocalDate toDate;
+	private String notes;
 
-    public Stay(int clientId, int roomNumber, LocalDate fromDate, LocalDate toDate, String notes) {
-        this.clientId = clientId;
-        this.roomNumber = roomNumber;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.notes = notes;
-    }
+	public Stay() {
+	}
 
-    public Stay(int id, int clientId, int roomNumber, LocalDate fromDate, LocalDate toDate, String notes) {
-        this.id = id;
-        this.clientId = clientId;
-        this.roomNumber = roomNumber;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-        this.notes = notes;
-    }
+	public Stay(int clientId, int roomNumber, LocalDate fromDate, LocalDate toDate, String notes) {
+		this.clientId = clientId;
+		this.roomNumber = roomNumber;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.notes = notes;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public Stay(int id, int clientId, int roomNumber, LocalDate fromDate, LocalDate toDate, String notes) {
+		this.id = id;
+		this.clientId = clientId;
+		this.roomNumber = roomNumber;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+		this.notes = notes;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getClientId() {
-        return clientId;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
+	public int getClientId() {
+		return clientId;
+	}
 
-    public int getRoomNumber() {
-        return roomNumber;
-    }
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
+	public int getRoomNumber() {
+		return roomNumber;
+	}
 
-    public LocalDate getFromDate() {
-        return fromDate;
-    }
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
-    }
+	public LocalDate getFromDate() {
+		return fromDate;
+	}
 
-    public LocalDate getToDate() {
-        return toDate;
-    }
+	public void setFromDate(LocalDate fromDate) {
+		this.fromDate = fromDate;
+	}
 
-    public void setToDate(LocalDate toDate) {
-        this.toDate = toDate;
-    }
+	public LocalDate getToDate() {
+		return toDate;
+	}
 
-    public String getNotes() {
-        return notes;
-    }
+	public void setToDate(LocalDate toDate) {
+		this.toDate = toDate;
+	}
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
+	public String getNotes() {
+		return notes;
+	}
 
-    @Override
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(clientId, fromDate, id, notes, roomNumber, toDate);
 	}
@@ -101,14 +102,8 @@ public class Stay implements Serializable {
 	}
 
 	@Override
-    public String toString() {
-        return "Stay{" +
-                "id=" + id +
-                ", clientId=" + clientId +
-                ", roomNumber=" + roomNumber +
-                ", fromDate=" + fromDate +
-                ", toDate=" + toDate +
-                ", notes='" + notes + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Stay{" + "id=" + id + ", clientId=" + clientId + ", roomNumber=" + roomNumber + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + ", notes='" + notes + '\'' + '}';
+	}
 }

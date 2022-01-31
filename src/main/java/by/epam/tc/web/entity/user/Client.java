@@ -3,147 +3,148 @@ package by.epam.tc.web.entity.user;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Client extends User{
+public class Client extends User {
 	private static final long serialVersionUID = 1L;
-	
-    private int clientId;
-    private String firstName;
-    private String lastName;
-    private String passportId;
-    private LocalDate birthDate;
-    private String country;
-    private String phoneNumber;
-    private String email;
 
-    public Client(){}
+	private int clientId;
+	private String firstName;
+	private String lastName;
+	private String passportId;
+	private LocalDate birthDate;
+	private String country;
+	private String phoneNumber;
+	private String email;
 
-    public Client(String firstName, String lastName, String passportId, LocalDate birthDate,
-                  String country, String phoneNumber, String email) {
-        this.setRole(Role.CLIENT);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.passportId = passportId;
-        this.birthDate = birthDate;
-        this.country = country;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-
-    public Client(int clientId, String firstName, String lastName, String passportId, LocalDate birthDate,
-                  String country, String phoneNumber, String email) {
-        this.setRole(Role.CLIENT);
-        this.clientId = clientId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.passportId = passportId;
-        this.birthDate = birthDate;
-        this.country = country;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-
-    public Client(int userId, String login, int clientId, String firstName, String lastName,
-                  String passportId, LocalDate birthDate, String country, String phoneNumber, String email) {
-        super(userId,login,Role.CLIENT);
-        this.clientId = clientId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.passportId = passportId;
-        this.birthDate = birthDate;
-        this.country = country;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-    
-    public Client(String login, String password, String firstName, String lastName,
-            String passportId, LocalDate birthDate, String country, String phoneNumber, String email) {
-	  super(login, password, Role.CLIENT);
-	  this.firstName = firstName;
-	  this.lastName = lastName;
-	  this.passportId = passportId;
-	  this.birthDate = birthDate;
-	  this.country = country;
-	  this.phoneNumber = phoneNumber;
-	  this.email = email;
+	public Client() {
 	}
-    
-    public Client(String login, String firstName, String lastName,
-            String passportId, LocalDate birthDate, String country, String phoneNumber, String email) {
-	  super(login, Role.CLIENT);
-	  this.firstName = firstName;
-	  this.lastName = lastName;
-	  this.passportId = passportId;
-	  this.birthDate = birthDate;
-	  this.country = country;
-	  this.phoneNumber = phoneNumber;
-	  this.email = email;
+
+	public Client(String firstName, String lastName, String passportId, LocalDate birthDate, String country,
+			String phoneNumber, String email) {
+		this.setRole(Role.CLIENT);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passportId = passportId;
+		this.birthDate = birthDate;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
 	}
-    
-    public int getClientId() {
-        return clientId;
-    }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
+	public Client(int clientId, String firstName, String lastName, String passportId, LocalDate birthDate,
+			String country, String phoneNumber, String email) {
+		this.setRole(Role.CLIENT);
+		this.clientId = clientId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passportId = passportId;
+		this.birthDate = birthDate;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public Client(int userId, String login, int clientId, String firstName, String lastName, String passportId,
+			LocalDate birthDate, String country, String phoneNumber, String email) {
+		super(userId, login, Role.CLIENT);
+		this.clientId = clientId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passportId = passportId;
+		this.birthDate = birthDate;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public Client(String login, String password, String firstName, String lastName, String passportId,
+			LocalDate birthDate, String country, String phoneNumber, String email) {
+		super(login, password, Role.CLIENT);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passportId = passportId;
+		this.birthDate = birthDate;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public Client(String login, String firstName, String lastName, String passportId, LocalDate birthDate,
+			String country, String phoneNumber, String email) {
+		super(login, Role.CLIENT);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passportId = passportId;
+		this.birthDate = birthDate;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public int getClientId() {
+		return clientId;
+	}
 
-    public String getPassportId() {
-        return passportId;
-    }
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
 
-    public void setPassportId(String passportId) {
-        this.passportId = passportId;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public String getPassportId() {
+		return passportId;
+	}
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+	public void setPassportId(String passportId) {
+		this.passportId = passportId;
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getCountry() {
+		return country;
+	}
 
-    @Override
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
@@ -168,16 +169,9 @@ public class Client extends User{
 	}
 
 	@Override
-    public String toString() {
-        return "Client{" +
-                "id=" + clientId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", passportId='" + passportId + '\'' +
-                ", birthDate=" + birthDate +
-                ", country='" + country + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Client{" + "id=" + clientId + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
+				+ ", passportId='" + passportId + '\'' + ", birthDate=" + birthDate + ", country='" + country + '\''
+				+ ", phoneNumber='" + phoneNumber + '\'' + ", email='" + email + '\'' + '}';
+	}
 }

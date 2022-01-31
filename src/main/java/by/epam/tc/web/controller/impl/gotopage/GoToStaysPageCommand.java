@@ -24,28 +24,27 @@ import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
 public class GoToStaysPageCommand implements Command {
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToStaysPageCommand.class);
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToStaysPageCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Stay> stays = null;
-		try {			
-			if(request.getSession().getAttribute(Utility.ROLE).toString().equals(Role.ADMIN.toString())) {
-				stays = new LinkedList<Stay>(ServiceFactory.getInstance().getStaysService().getAllStays());				
-			}
-			else {
-				String userLogin = (String)request.getSession().getAttribute(Utility.LOGIN);	
+		try {
+			if (request.getSession().getAttribute(Utility.ROLE).toString().equals(Role.ADMIN.toString())) {
+				stays = new LinkedList<Stay>(ServiceFactory.getInstance().getStaysService().getAllStays());
+			} else {
+				String userLogin = (String) request.getSession().getAttribute(Utility.LOGIN);
 				stays = new LinkedList<Stay>(ServiceFactory.getInstance().getStaysService().getAllUserStays(userLogin));
 			}
-			Collections.sort(stays, 
-				     Comparator.comparing(Stay::getFromDate, Comparator.reverseOrder()));
+			Collections.sort(stays, Comparator.comparing(Stay::getFromDate, Comparator.reverseOrder()));
 			request.setAttribute(Utility.STAYS, stays);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_STAYS_PAGE);
 			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
 			logger.error("error while going to stays page", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);
-		}		
+		}
 	}
 
 }

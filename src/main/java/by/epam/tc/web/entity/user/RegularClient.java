@@ -5,59 +5,60 @@ import java.util.Objects;
 
 public class RegularClient extends Client {
 	private static final long serialVersionUID = 1L;
-	
-    private LocalDate sinceDate;
-    private int discount;
-    private String note;
 
-    public RegularClient() {}
+	private LocalDate sinceDate;
+	private int discount;
+	private String note;
 
-    public RegularClient(LocalDate sinceDate, int discount, String note) {
-        this.sinceDate = sinceDate;
-        this.discount = discount;
-        this.note = note;
-    }
+	public RegularClient() {
+	}
 
-    public RegularClient(int id, LocalDate sinceDate, int discount, String note) {
-        this.setClientId(id);
-        this.sinceDate = sinceDate;
-        this.discount = discount;
-        this.note=note;
-    }
+	public RegularClient(LocalDate sinceDate, int discount, String note) {
+		this.sinceDate = sinceDate;
+		this.discount = discount;
+		this.note = note;
+	}
 
-    public RegularClient(int clientId, LocalDate sinceDate, int discount, String note, String firstName, String lastName,
-                           String passportId, LocalDate birthDate, String country, String phoneNumber, String email) {
-        super(clientId, firstName, lastName, passportId, birthDate, country, phoneNumber, email);
-        this.sinceDate = sinceDate;
-        this.discount = discount;
-        this.note=note;
-    }
+	public RegularClient(int id, LocalDate sinceDate, int discount, String note) {
+		this.setClientId(id);
+		this.sinceDate = sinceDate;
+		this.discount = discount;
+		this.note = note;
+	}
 
-    public LocalDate getSinceDate() {
-        return sinceDate;
-    }
+	public RegularClient(int clientId, LocalDate sinceDate, int discount, String note, String firstName,
+			String lastName, String passportId, LocalDate birthDate, String country, String phoneNumber, String email) {
+		super(clientId, firstName, lastName, passportId, birthDate, country, phoneNumber, email);
+		this.sinceDate = sinceDate;
+		this.discount = discount;
+		this.note = note;
+	}
 
-    public void setSinceDate(LocalDate sinceDate) {
-        this.sinceDate = sinceDate;
-    }
+	public LocalDate getSinceDate() {
+		return sinceDate;
+	}
 
-    public int getDiscount() {
-        return discount;
-    }
+	public void setSinceDate(LocalDate sinceDate) {
+		this.sinceDate = sinceDate;
+	}
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
+	public int getDiscount() {
+		return discount;
+	}
 
-    public String getNote() {
-        return note;
-    }
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    @Override
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
@@ -79,12 +80,8 @@ public class RegularClient extends Client {
 	}
 
 	@Override
-    public String toString() {
-        return "RegularClient{" +
-                "id=" + getClientId() +
-                ", sinceDate=" + sinceDate +
-                ", discount=" + discount +
-                ", note='" + note + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "RegularClient{" + "id=" + getClientId() + ", sinceDate=" + sinceDate + ", discount=" + discount
+				+ ", note='" + note + '\'' + '}';
+	}
 }

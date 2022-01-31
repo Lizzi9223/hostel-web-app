@@ -20,32 +20,32 @@ import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
-public class GoToMyAccountPageCommand implements Command{
-	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToMyAccountPageCommand.class);
+public class GoToMyAccountPageCommand implements Command {
+	private static final Logger logger = LogManager
+			.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToMyAccountPageCommand.class);
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute(Utility.ROLE) != null) {
-			Role role = Role.valueOf(request.getSession().getAttribute(Utility.ROLE).toString());			
+		if (request.getSession().getAttribute(Utility.ROLE) != null) {
+			Role role = Role.valueOf(request.getSession().getAttribute(Utility.ROLE).toString());
 			String login = request.getSession().getAttribute(Utility.LOGIN).toString();
 			try {
-				if(role == Role.CLIENT) {
+				if (role == Role.CLIENT) {
 					Client client = ServiceFactory.getInstance().getUserService().findClientByLogin(login);
 					request.setAttribute(Utility.CLIENT, client);
-				}else {
+				} else {
 					Admin admin = ServiceFactory.getInstance().getUserService().findAdminByLogin(login);
 					request.setAttribute(Utility.ADMIN, admin);
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_ACCOUNT_PAGE);
 				dispatcher.forward(request, response);
-			}
-			catch (ServiceException e) {
+			} catch (ServiceException e) {
 				request.getSession().removeAttribute(Utility.ROLE);
 				request.getSession().removeAttribute(Utility.LOGIN);
 				logger.error("error while going to account page", e);
 				response.sendRedirect(Redirect.TO_ERROR_PAGE);
 			}
-		}else {
+		} else {
 			response.sendRedirect(Redirect.TO_LOGINATION_PAGE);
 		}
 	}
