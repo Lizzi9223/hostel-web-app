@@ -25,10 +25,18 @@ public interface UserService {
 			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
 
 	boolean editPassword(String login, String password) throws ServiceException;
+	
+	Admin findAdminById(int id) throws ServiceException;
 
 	Admin findAdminByLogin(String login) throws ServiceException;
+	
+	User findUserById(int id) throws ServiceException;
+	
+	Client findClientById(int id) throws ServiceException;
 
 	Client findClientByLogin(String login) throws ServiceException;
+	
+	Client findClientByUserId(int id) throws ServiceException;
 
 	void deleteAccount(String login) throws ServiceException;
 
@@ -37,4 +45,6 @@ public interface UserService {
 	List<User> getAllUsers() throws ServiceException;
 
 	List<Client> getAllClientUsers() throws ServiceException;
+	
+	List<Admin> getAllAdmins() throws ServiceException;
 }

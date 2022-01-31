@@ -2,6 +2,7 @@ package by.epam.tc.web.controller.constant;
 
 public final class Utility {
 	public final static String EMPTY = "";
+	public final static String ID = "Id";
 	public final static String CLIENTS = "clients";
 	public final static String BOOKINGS = "bookings";
 	public final static String STAYS = "stays";
@@ -13,6 +14,7 @@ public final class Utility {
 	public final static String INITIAL_PASSWORD = "initialPassword";
 	public final static String NEW_PASSWORD = "newPassword";
 	public final static String ADMIN = "admin";
+	public final static String ADMINS = "admins";
 	public final static String CLIENT = "client";
 	public final static String CREATE = "create";
 	public final static String MIN_COST = "minCost";
@@ -75,7 +77,10 @@ public final class Utility {
 	public final static String NEW_STAY_GUESTS_NUMBER = "newStayGuestsNumber";
 	public final static String NEW_STAY_GUESTS_TO_ADD = "newStayGuestsToAdd";
 	public final static String GUESTS_ARRIVED_BOOKING_ID = "guestsArrivedBookingId";
+	public final static String CHOSEN_CLIENT = "chosenClient";
 	public final static String CHOSEN_CLIENT_ID = "chosenClientId";
+	public final static String CHOSEN_ADMIN = "chosenAdmin";
+	public final static String CHOSEN_ADMIN_ID = "chosenAdminId";
 	public final static String CLIENT_IS_ALREADY_ADDED = "clientIsAlreadyAdded";
 	public final static String ALL_CLIENT_USERS = "allClientUsers";
 	public final static String SEARCH_CRITERIA = "searchCriteria";

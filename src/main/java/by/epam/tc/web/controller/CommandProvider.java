@@ -10,9 +10,11 @@ import by.epam.tc.web.controller.impl.BookRoomCommand;
 import by.epam.tc.web.controller.impl.ChangeLanguageCommand;
 import by.epam.tc.web.controller.impl.ChangePasswordCommand;
 import by.epam.tc.web.controller.impl.CheckRoomAvailabilityCommand;
+import by.epam.tc.web.controller.impl.ChooseAdminCommand;
 import by.epam.tc.web.controller.impl.ChooseBookingCommand;
 import by.epam.tc.web.controller.impl.ChooseClientCommand;
 import by.epam.tc.web.controller.impl.ChooseStayCommand;
+import by.epam.tc.web.controller.impl.ChooseUserCommand;
 import by.epam.tc.web.controller.impl.DeleteAccountCommand;
 import by.epam.tc.web.controller.impl.DeleteBookingCommand;
 import by.epam.tc.web.controller.impl.DeleteStayCommand;
@@ -23,6 +25,7 @@ import by.epam.tc.web.controller.impl.LoginationCommand;
 import by.epam.tc.web.controller.impl.RegistrationCommand;
 import by.epam.tc.web.controller.impl.SubmitBookingCommand;
 import by.epam.tc.web.controller.impl.SubmitStayCommand;
+import by.epam.tc.web.controller.impl.gotopage.GoToAdminsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToBookingsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToClientsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToContactsPageCommand;
@@ -46,6 +49,7 @@ public final class CommandProvider {
 		commands.put(CommandName.CHANGE_LANGUAGE, new ChangeLanguageCommand());
 		commands.put(CommandName.BOOK_ROOM, new BookRoomCommand());
 		commands.put(CommandName.DELETE_ACCOUNT, new DeleteAccountCommand());
+		commands.put(CommandName.DELETE_ADMIN, new DeleteAccountCommand());
 		commands.put(CommandName.SEARCH_ROOMS, new GoToRoomsPageCommand());
 		commands.put(CommandName.CHECK_ROOM_AVAILABILITY, new CheckRoomAvailabilityCommand());
 		commands.put(CommandName.SUBMIT_BOOKING, new SubmitBookingCommand());
@@ -66,6 +70,8 @@ public final class CommandProvider {
 		commands.put(CommandName.ADD_CLIENT, new AddClientCommand());
 		commands.put(CommandName.SEARCH_CLIENT, new GoToClientsPageCommand());
 		commands.put(CommandName.GUESTS_ARRIVED, new SubmitStayCommand());
+		commands.put(CommandName.CHOOSE_USER, new ChooseUserCommand());
+		commands.put(CommandName.CHOOSE_ADMIN, new ChooseAdminCommand());
 
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPageCommand());
 		commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());
@@ -77,6 +83,7 @@ public final class CommandProvider {
 		commands.put(CommandName.GO_TO_STAYS_PAGE, new GoToStaysPageCommand());
 		commands.put(CommandName.GO_TO_CONTACTS_PAGE, new GoToContactsPageCommand());
 		commands.put(CommandName.GO_TO_CLIENTS_PAGE, new GoToClientsPageCommand());
+		commands.put(CommandName.GO_TO_ADMINS_PAGE, new GoToAdminsPageCommand());
 	}
 
 	public final Command getCommand(String commandName) {

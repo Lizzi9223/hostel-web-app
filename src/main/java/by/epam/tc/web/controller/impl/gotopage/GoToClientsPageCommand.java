@@ -30,7 +30,6 @@ public class GoToClientsPageCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			logger.info("in GoToClientsPageCommand");
 			List<Client> clients = new LinkedList<Client>(
 					ServiceFactory.getInstance().getUserService().getAllClients());
 			Collections.sort(clients, Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));

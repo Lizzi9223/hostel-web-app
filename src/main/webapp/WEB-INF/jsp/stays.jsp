@@ -220,6 +220,17 @@
 												</form>
 											</td>
 										</tr>
+										<tr>
+											<td>
+												<form>
+													<input type="hidden" name="${Utility.COMMAND}"
+														value="${CommandName.CHOOSE_USER}" /> <input type="hidden"
+														name="${Utility.STAY_ID}" value="${chosenStayId}" /> <input
+														class="submit_button" type="submit" value="${show_client}"
+														style="margin-right: 20px" />
+												</form>
+											</td>
+										</tr>
 										<c:if test="${login eq 'ADMIN'}">
 											<tr>
 												<td>
@@ -249,8 +260,8 @@
 								<label for="toDate"><c:out value="${departure_date}" />:</label>
 								<input type="date" id="toDate" name="${Utility.TO_DATE}"
 									value="${stay.getToDate()}"
-									min="${stay.getFromDate().plusDays(1)}"> <br>
-								<br> <label><c:out value="${notes}" />:&#160;</label><br>
+									min="${stay.getFromDate().plusDays(1)}"> <br> <br>
+								<label><c:out value="${notes}" />:&#160;</label><br>
 								<textarea id="notes" name="${Utility.NOTES}" rows="5" cols="30"><c:out
 										value="${stay.getNotes()}"></c:out></textarea>
 								<input type="hidden" name="${Utility.STAY_ID}"
@@ -271,11 +282,10 @@
 						<form>
 							<label for="fromDate"><c:out value="${arrive_date}" />:</label>
 							<input type="date" id="fromDate" name="${Utility.FROM_DATE}"
-								onchange="setToDate()" required> <label for="toDate">&#160;&#160;&#160;&#160;<c:out
-									value="${departure_date}" />:
+								onchange="setToDate()" required> <label for="toDate">&#160;&#160;&#160;&#160;
+								<c:out value="${departure_date}" />:
 							</label> <input type="date" id="toDate" name="${Utility.TO_DATE}"
-								required> <br>
-							<br> <label for="questsNumber"><c:out
+								required> <br> <br> <label for="questsNumber"><c:out
 									value="${number_of_guests}" />:&#160;</label> <input type="number"
 								id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="1"
 								min="1" max="15" style="margin-right: 90px"> <input

@@ -266,6 +266,18 @@
 														</form>
 													</td>
 												</tr>
+												<tr>
+													<td>
+														<form>
+															<input type="hidden" name="${Utility.COMMAND}"
+																value="${CommandName.CHOOSE_USER}" /> <input
+																type="hidden" name="${Utility.BOOKING_ID}"
+																value="${chosenBookingId}" /><input
+																class="submit_button" type="submit"
+																value="${show_client}" />
+														</form>
+													</td>
+												</tr>
 											</c:when>
 											<c:when test="${chosenBookingIsApproved eq false}">
 												<tr>
@@ -289,6 +301,18 @@
 																type="hidden" name="${Utility.BOOKING_ID}"
 																value="${chosenBookingId}" /> <input
 																class="submit_button" type="submit" value="${delete}" />
+														</form>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<form>
+															<input type="hidden" name="${Utility.COMMAND}"
+																value="${CommandName.CHOOSE_USER}" /> <input
+																type="hidden" name="${Utility.BOOKING_ID}"
+																value="${chosenBookingId}" /><input
+																class="submit_button" type="submit"
+																value="${show_client}" />
 														</form>
 													</td>
 												</tr>
@@ -323,13 +347,25 @@
 													<td>
 														<form>
 															<input type="hidden" name="${Utility.COMMAND}"
+																value="${CommandName.CHOOSE_USER}" /> <input
+																type="hidden" name="${Utility.BOOKING_ID}"
+																value="${chosenBookingId}" /><input
+																class="submit_button" type="submit"
+																value="${show_user}" />
+														</form>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<form>
+															<input type="hidden" name="${Utility.COMMAND}"
 																value="${CommandName.DELETE_BOOKING}" /> <input
 																type="hidden" name="${Utility.BOOKING_ID}"
 																value="${chosenBookingId}" /> <input
 																class="submit_button" type="submit" value="${delete}" />
 														</form>
 													</td>
-												</tr>
+												</tr>												
 											</c:otherwise>
 										</c:choose>
 									</c:when>

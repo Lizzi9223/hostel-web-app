@@ -12,4 +12,5 @@ public final class Forward {
 	public final static String TO_WELCOME_PAGE = "/WEB-INF/jsp/welcome.jsp";
 	public final static String TO_CONTACTS_PAGE = "/WEB-INF/jsp/contacts.jsp";
 	public final static String TO_CLIENTS_PAGE = "/WEB-INF/jsp/clients.jsp";
+	public final static String TO_ADMINS_PAGE = "/WEB-INF/jsp/admins.jsp";
 }

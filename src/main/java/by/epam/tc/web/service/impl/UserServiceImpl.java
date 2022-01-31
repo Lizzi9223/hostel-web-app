@@ -150,6 +150,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public Admin findAdminById(int id) throws ServiceException {
+		Admin admin = null;
+		try {
+			admin = userDAO.findAdminById(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return admin;
+	}
+
+	@Override
 	public Admin findAdminByLogin(String login) throws ServiceException {
 		Admin admin = null;
 		try {
@@ -161,10 +172,51 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User findUserById(int id) throws ServiceException {
+		User user = null;
+		try {
+			user = userDAO.findUserById(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return user;
+	}
+
+	@Override
 	public Client findClientByLogin(String login) throws ServiceException {
 		Client client = null;
 		try {
 			client = userDAO.findClientByLogin(login);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return client;
+	}
+
+	@Override
+	public Client findClientById(int id) throws ServiceException {
+		Client client = null;
+		try {
+			client = userDAO.findClientByClientId(id);
+			User user = userDAO.findUserById(client.getUserId());
+			if (user != null) {
+				client.setLogin(user.getLogin());
+			}
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return client;
+	}
+
+	@Override
+	public Client findClientByUserId(int id) throws ServiceException {
+		Client client = null;
+		try {
+			client = userDAO.findClientByUserId(id);
+			User user = userDAO.findUserById(client.getUserId());
+			if (user != null) {
+				client.setLogin(user.getLogin());
+			}
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
@@ -219,4 +271,15 @@ public class UserServiceImpl implements UserService {
 		}
 		return clientUsers;
 	}
+
+	@Override
+	public List<Admin> getAllAdmins() throws ServiceException {
+		List<Admin> admins = new ArrayList<Admin>();
+		try {
+			admins = userDAO.getAllAdmins();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return admins;
+	}	
 }

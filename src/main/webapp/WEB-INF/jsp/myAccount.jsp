@@ -264,6 +264,20 @@
 					<tr>
 						<td>
 							<form>
+								<c:if test="${sessionScope.role eq 'ADMIN'}">
+									<a
+										href="Controller?command=GO_TO_ADMINS_PAGE">
+										<button class="buttons" type="button">
+											<c:out value="${all_admins_word}" />
+										</button>
+									</a>
+								</c:if>
+							</form>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<form>
 								<c:if test="${sessionScope.login eq 'ADMIN'}">
 									<a
 										href="Controller?command=GO_TO_REGISTRATION_PAGE&create=admin">
@@ -332,7 +346,7 @@
 							?
 						</p>
 						<div style="display: flex; flex-direction: row">
-							<input class="buttons" type="submit" name="changePassword"
+							<input class="buttons" type="submit"
 								value="${delete}" style="width: 100px; margin-right: 100px" /> <input
 								class="close-popup del-acc buttons" type="button"
 								name="changePassword" value="${cancel}" style="width: 100px" />

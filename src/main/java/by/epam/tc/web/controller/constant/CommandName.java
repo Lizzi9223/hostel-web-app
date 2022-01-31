@@ -4,6 +4,7 @@ public final class CommandName {
 	public final static String LOGINATION = "Logination";
 	public final static String REGISTRATION = "Registration";
 	public final static String EDIT_ACCOUNT = "Edit";
+	public final static String EDIT_CLIENT = "EditClient";
 	public final static String EDIT_STAY = "EditStay";
 	public final static String EDIT_STAY_CHECK = "EditStayCheck";
 	public final static String ADD_CLIENT = "AddClient";
@@ -16,6 +17,7 @@ public final class CommandName {
 	public final static String SEARCH_ROOMS = "SearchRooms";
 	public final static String BOOK_ROOM = "BookRoom";
 	public final static String DELETE_ACCOUNT = "DeleteAccount";
+	public final static String DELETE_ADMIN = "DeleteAdmin";
 	public final static String DELETE_BOOKING = "DeleteBooking";
 	public final static String DELETE_STAY = "DeleteStay";
 	public final static String CHECK_ROOM_AVAILABILITY = "CheckRoomAvailability";
@@ -26,9 +28,13 @@ public final class CommandName {
 	public final static String CHOOSE_STAY = "ChooseStay";
 	public final static String SUBMIT_STAY = "SubmitStay";
 	public final static String CHOOSE_CLIENT = "ChooseClient";
+	public final static String CHOOSE_ADMIN = "ChooseAdmin";
+	public final static String CHOOSE_USER = "ChooseUser";
 	public final static String SEARCH_CLIENT = "SearchClient";
 	public final static String FINISH_CHOOSING_CLIENT = "FinishChoosingClient";
 	public final static String GUESTS_ARRIVED = "GuestsArrived";
+	public final static String ADD_TO_BLACKLIST = "AddToBlacklist";
+	public final static String ADD_TO_REGULAR_CUSTOMERS = "AddToRegularCustomers";
 	public final static String GO_TO_WELCOME_PAGE = "GO_TO_WELCOME_PAGE";
 	public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";
 	public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";
@@ -39,4 +45,5 @@ public final class CommandName {
 	public final static String GO_TO_STAYS_PAGE = "GO_TO_STAYS_PAGE";
 	public final static String GO_TO_CONTACTS_PAGE = "GO_TO_CONTACTS_PAGE";
 	public final static String GO_TO_CLIENTS_PAGE = "GO_TO_CLIENTS_PAGE";
+	public final static String GO_TO_ADMINS_PAGE = "GO_TO_ADMINS_PAGE";
 }

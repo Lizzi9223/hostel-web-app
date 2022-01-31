@@ -111,6 +111,8 @@
 <fmt:message bundle="${lang}" key="account.save" var="save" />
 <fmt:message bundle="${lang}" key="account.del_acc_check_msg"
 	var="del_acc_check_msg" />
+<fmt:message bundle="${lang}" key="account.del_admin_check_msg"
+	var="del_admin_check_msg" />
 
 <fmt:message bundle="${lang}" key="clients.choose_client"
 	var="choose_client_word" />
@@ -128,6 +130,10 @@
 	var="search_by_word" />
 <fmt:message bundle="${lang}" key="clients.please_check_data_word"
 	var="please_check_data_word" />
+<fmt:message bundle="${lang}" key="clients.add_to_blacklist"
+	var="add_to_blacklist" />
+<fmt:message bundle="${lang}" key="clients.add_to_regular_customers"
+	var="add_to_regular_customers" />
 
 <fmt:message bundle="${lang}" key="bookRoom.check_for_avail_places"
 	var="check_for_avail_places" />
@@ -170,10 +176,20 @@
 <fmt:message bundle="${lang}"
 	key="bookings.new_room_not_select_if_no_need"
 	var="new_room_not_select_if_no_need" />
+<fmt:message bundle="${lang}" key="bookings.show_client"
+	var="show_client" />
+<fmt:message bundle="${lang}" key="bookings.show_user"
+	var="show_user" />
 
 <fmt:message bundle="${lang}" key="validation.valid_login_msg"
 	var="valid_login_msg" />
 <fmt:message bundle="${lang}" key="validation.valid_password_msg"
 	var="valid_password_msg" />
+	
+<fmt:message bundle="${lang}" key="admins.all_admins"
+	var="all_admins_word" />
+<fmt:message bundle="${lang}" key="admins.admin_id"
+	var="admin_id_word" />
+
 </head>
 </html>

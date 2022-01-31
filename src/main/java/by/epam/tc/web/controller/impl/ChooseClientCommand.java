@@ -16,6 +16,7 @@ import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.CommandName;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
+import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
@@ -71,6 +72,8 @@ public class ChooseClientCommand implements Command {
 						}
 					}
 				} else {
+					Client client = ServiceFactory.getInstance().getUserService().findClientById(id);
+					request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
 					request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, id);
 					request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
 					response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
