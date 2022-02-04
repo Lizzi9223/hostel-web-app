@@ -65,7 +65,7 @@ public class RegistrationCommand implements Command {
 				} else {
 					logger.info("Validation failed while admin registration");
 					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
-					response.sendRedirect(Redirect.TO_REGISTRATION_PAGE);
+					response.sendRedirect(Redirect.CREATE_ADMIN);
 				}
 			}
 		} catch (LoginAlreadyExistsException e) {

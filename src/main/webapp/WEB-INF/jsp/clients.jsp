@@ -157,6 +157,13 @@
 						</c:choose>
 						<input class="submit_button open-popup client" type="button"
 							value="${new_client_word}" style="margin-left: 20px" />
+						<a href="Controller?command=GO_TO_REGULAR_CUST_PAGE"> <input
+										class="buttons" type="button" value="${regular_cust}" style="margin-left: 310px"/>
+									</a>
+						<a href="Controller?command=GO_TO_BLACKLIST_PAGE"> <input
+										class="buttons" type="button" value="${blacklist}" />
+									</a>
+						
 					</h3>
 					<form style="margin-left: 50%">
 						<label><c:out value="${search_by_word}:" /></label> <select

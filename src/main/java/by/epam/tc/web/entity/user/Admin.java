@@ -85,6 +85,7 @@ public class Admin extends User {
 
 	@Override
 	public String toString() {
-		return "Admin{" + "id=" + getUserId() + ", name='" + name + '\'' + ", photoPath='" + photoPath + '\'' + '}';
+		return "Admin{" + "id=" + getUserId() + ", name='" + name + '\'' + ", photoPath='" + photoPath 
+				+ ", login =" + this.getLogin() + ", role=" + this.getRole() + ",password = " + this.getPassword()+ '\'' + '}';
 	}
 }

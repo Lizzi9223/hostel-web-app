@@ -34,22 +34,26 @@ public class ChooseUserCommand implements Command {
 				User user = ServiceFactory.getInstance().getUserService().findUserById(booking.getUserId());
 				if(user.getRole().equals(Role.CLIENT)) {
 					client = ServiceFactory.getInstance().getUserService().findClientByUserId(booking.getUserId());
+					request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
+					request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, client.getClientId());
+					request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
+					response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 				}else {
 					Admin admin = ServiceFactory.getInstance().getUserService().findAdminByLogin(user.getLogin());
 					request.getSession().setAttribute(Utility.CHOSEN_ADMIN, admin);
 					request.getSession().setAttribute(Utility.CHOSEN_ADMIN_ID, admin.getUserId());
 					request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
-					response.sendRedirect(Redirect.TO_ADMINS_PAGE); //TODO: DO NOT WORK
+					response.sendRedirect(Redirect.TO_ADMINS_PAGE);
 				}	
 			}else {
 				int stayId = Integer.parseInt(request.getParameter(Utility.STAY_ID));
 				Stay stay = ServiceFactory.getInstance().getStaysService().getStayById(stayId);
 				client = ServiceFactory.getInstance().getUserService().findClientById(stay.getClientId());
+				request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
+				request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, client.getClientId());
+				request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
+				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 			}
-//			request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
-//			request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, client.getClientId());
-//			request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
-//			response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 		} catch (ServiceException e) {
 			logger.error("error while choosing user", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);

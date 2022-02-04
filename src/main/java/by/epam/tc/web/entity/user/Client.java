@@ -42,6 +42,20 @@ public class Client extends User {
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
+	
+	public Client(int userId, int clientId, String firstName, String lastName, String passportId, LocalDate birthDate,
+			String country, String phoneNumber, String email) {
+		this.setRole(Role.CLIENT);
+		this.setUserId(userId);
+		this.clientId = clientId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.passportId = passportId;
+		this.birthDate = birthDate;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.email = email;		
+	}
 
 	public Client(int userId, String login, int clientId, String firstName, String lastName, String passportId,
 			LocalDate birthDate, String country, String phoneNumber, String email) {

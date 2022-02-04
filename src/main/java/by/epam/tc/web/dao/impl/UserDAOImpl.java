@@ -879,20 +879,20 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void updateClient(int clientId, Client user) throws DAOException {
+	public void updateClient(int clientId, Client client) throws DAOException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = connectionPool.takeConnection();
 			st = con.prepareStatement(updateQueryProvide.getUpdateQueryWhere(Metadata.ALL_CLIENTS_TABLE,
 					Metadata.AllClientsTableColumn.CLIENT_ID));
-			st.setString(1, user.getLastName());
-			st.setString(2, user.getFirstName());
-			st.setString(3, user.getPassportId());
-			st.setDate(4, java.sql.Date.valueOf(user.getBirthDate()));
-			st.setString(5, user.getCountry());
-			st.setString(6, user.getPhoneNumber());
-			st.setString(7, user.getEmail());
+			st.setString(1, client.getLastName());
+			st.setString(2, client.getFirstName());
+			st.setString(3, client.getPassportId());
+			st.setDate(4, java.sql.Date.valueOf(client.getBirthDate()));
+			st.setString(5, client.getCountry());
+			st.setString(6, client.getPhoneNumber());
+			st.setString(7, client.getEmail());
 			st.setInt(8, clientId);
 			st.executeUpdate();
 		} catch (ConnectionPoolException | SQLException e) {
