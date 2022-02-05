@@ -184,7 +184,7 @@ public class StaysDAOImpl implements StaysDAO {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		Booking booking = new Booking();
+		Booking booking = null;
 		try {
 			con = connectionPool.takeConnection();
 			st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.BOOKING_TABLE,
@@ -274,7 +274,7 @@ public class StaysDAOImpl implements StaysDAO {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		Stay stay = new Stay();
+		Stay stay = null;
 		try {
 			con = connectionPool.takeConnection();
 			st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.ALL_STAYS_TABLE,
@@ -336,12 +336,15 @@ public class StaysDAOImpl implements StaysDAO {
 	}
 
 	@Override
-	public void addBooking(Booking booking) throws DAOException {
+	public int addBooking(Booking booking) throws DAOException {
 		Connection con = null;
 		PreparedStatement st = null;
+		ResultSet rs = null;
+		int id = 0;
 		try {
 			con = connectionPool.takeConnection();
-			st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.BOOKING_TABLE));
+			st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.BOOKING_TABLE),
+					Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, booking.getUserId());
 			st.setInt(2, booking.getRoomNumber());
 			st.setDate(3, java.sql.Date.valueOf(booking.getFromDate()));
@@ -360,39 +363,50 @@ public class StaysDAOImpl implements StaysDAO {
 			}
 			st.setBoolean(8, booking.isPaid());
 			st.executeUpdate();
+			rs = st.getGeneratedKeys();
+			rs.next();
+			id = rs.getInt(1);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
 			try {
-				connectionPool.closeConnection(con, st);
+				connectionPool.closeConnection(con, st, rs);
 			} catch (ConnectionPoolException e) {
 				throw new DAOException(e);
 			}
 		}
+		return id;
 	}
 
 	@Override
-	public void addStay(Stay stay) throws DAOException {
+	public int addStay(Stay stay) throws DAOException {
 		Connection con = null;
 		PreparedStatement st = null;
+		ResultSet rs = null;
+		int id = 0;
 		try {
 			con = connectionPool.takeConnection();
-			st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.ALL_STAYS_TABLE));
+			st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.ALL_STAYS_TABLE),
+					Statement.RETURN_GENERATED_KEYS);
 			st.setInt(1, stay.getClientId());
 			st.setInt(2, stay.getRoomNumber());
 			st.setDate(3, java.sql.Date.valueOf(stay.getFromDate()));
 			st.setDate(4, java.sql.Date.valueOf(stay.getToDate()));
 			st.setString(5, stay.getNotes());
 			st.executeUpdate();
+			rs = st.getGeneratedKeys();
+			rs.next();
+			id = rs.getInt(1);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
 			try {
-				connectionPool.closeConnection(con, st);
+				connectionPool.closeConnection(con, st, rs);
 			} catch (ConnectionPoolException e) {
 				throw new DAOException(e);
 			}
 		}
+		return id;
 	}
 
 	@Override

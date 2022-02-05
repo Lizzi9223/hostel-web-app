@@ -92,7 +92,7 @@ public class RoomDAOImpl implements RoomDAO {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		Room room = new Room();
+		Room room = null;
 		try {
 			con = connectionPool.takeConnection();
 			st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.ROOMS_TABLE,
@@ -125,7 +125,7 @@ public class RoomDAOImpl implements RoomDAO {
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		Image image = new Image();
+		Image image = null;
 		try {
 			con = connectionPool.takeConnection();
 			st = con.prepareStatement(selectQueryProvider.getSelectQueryWhere(Metadata.IMAGES_TABLE,
@@ -176,15 +176,21 @@ public class RoomDAOImpl implements RoomDAO {
 	}
 
 	@Override
-	public void addImage(Image image) throws DAOException {
+	public int addImage(Image image) throws DAOException {
 		Connection con = null;
 		PreparedStatement st = null;
+		ResultSet rs = null;
+		int id = 0;
 		try {
 			con = connectionPool.takeConnection();
-			st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.IMAGES_TABLE));
+			st = con.prepareStatement(insertQueryProvider.getInsertQuery(Metadata.IMAGES_TABLE),
+					Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, image.getImgPath());
 			st.setInt(2, image.getRoomNumber());
 			st.executeUpdate();
+			rs = st.getGeneratedKeys();
+			rs.next();
+			id = rs.getInt(1);
 		} catch (ConnectionPoolException | SQLException e) {
 			throw new DAOException(e);
 		} finally {
@@ -194,6 +200,7 @@ public class RoomDAOImpl implements RoomDAO {
 				throw new DAOException(e);
 			}
 		}
+		return id;
 	}
 
 	@Override

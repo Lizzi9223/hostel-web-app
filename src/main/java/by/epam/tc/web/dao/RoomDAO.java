@@ -16,13 +16,13 @@ public interface RoomDAO {
 
 	void addRoom(Room room) throws DAOException;
 
-	void addImage(Image image) throws DAOException;
+	int addImage(Image image) throws DAOException;
 
 	void updateRoom(int roomNumber, Room room) throws DAOException;
 
 	void updateImage(int imgId, Image image) throws DAOException;
 
-	void deleteRoom(int roomNUmber) throws DAOException;
+	void deleteRoom(int roomNumber) throws DAOException;
 
 	void deleteImage(int id) throws DAOException;
 }

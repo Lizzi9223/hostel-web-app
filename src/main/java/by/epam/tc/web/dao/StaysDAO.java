@@ -22,9 +22,9 @@ public interface StaysDAO {
 
 	List<Stay> findAllStaysByRoomNumber(int roomNumber) throws DAOException;
 
-	void addBooking(Booking booking) throws DAOException;
+	int addBooking(Booking booking) throws DAOException;
 
-	void addStay(Stay stay) throws DAOException;
+	int addStay(Stay stay) throws DAOException;
 
 	void updateBooking(int id, Booking booking) throws DAOException;
 
