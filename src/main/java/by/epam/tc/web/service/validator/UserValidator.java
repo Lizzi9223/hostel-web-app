@@ -11,8 +11,18 @@ public class UserValidator {
 	private UserValidator() {
 	}
 
-	public static boolean isValidClient(Client client) {
+	public static boolean isValidUserClient(Client client) {
 		if (!isValidLogin(client.getLogin()) || !isValidName(client.getFirstName())
+				|| !isValidSurname(client.getLastName()) || !isValidPassportId(client.getPassportId())
+				|| !isValidCountry(client.getCountry()) || !isValidPhone(client.getPhoneNumber())
+				|| !isValidEmail(client.getEmail())) {
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean isValidClient(Client client) {
+		if (!isValidName(client.getFirstName())
 				|| !isValidSurname(client.getLastName()) || !isValidPassportId(client.getPassportId())
 				|| !isValidCountry(client.getCountry()) || !isValidPhone(client.getPhoneNumber())
 				|| !isValidEmail(client.getEmail())) {

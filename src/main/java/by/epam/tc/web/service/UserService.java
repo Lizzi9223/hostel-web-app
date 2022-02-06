@@ -23,6 +23,9 @@ public interface UserService {
 
 	boolean edit(Client client, String login, String passportId)
 			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
+	
+	boolean edit(Client client, int clientId)
+			throws ServiceException, PassportIdAlreadyExistsException;
 
 	boolean editPassword(String login, String password) throws ServiceException;
 	

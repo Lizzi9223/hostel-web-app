@@ -68,7 +68,21 @@
             	$(this).find('.target').submit();
             })
             
+            $('#cancel_button').click(function(){
+            	$('div').find('.target').submit();
+            })
+            
         });
+		
+		 function edit(){
+			 var inputs = document.getElementsByClassName("input");
+			 Array.prototype.forEach.call(inputs, function(el) {
+			 el.disabled = false;
+			 });
+			 document.getElementById("save_button").style.visibility="visible";
+			 document.getElementById("cancel_button").style.visibility="visible";
+			 document.getElementById("colorfulButtons").style.visibility="hidden";
+			 }
         
     </script>
 
@@ -243,8 +257,9 @@
 						<div class="popup"
 							style="width: auto; padding: 40px; padding-bottom: 0">
 							<img class="close-popup" src="images/close.png"
-								style="width: 25px"><br>
-							<table><tr>
+								style="width: 25px">
+							<button class="buttons" type="button" onclick="edit()" style="margin-left:60%"><c:out value="${edit}" /></button><br><br>
+							<form><table><tr>
 									<td><c:out value="${login_word}" />:</td>
 								<c:choose>
 									<c:when test="${not empty chosenClient.getUserId() and chosenClient.getUserId() ne ''}">
@@ -260,68 +275,69 @@
 								</c:choose>	</tr>							
 								<tr>
 									<td><c:out value="${name_word}" />:</td>
-									<td><input type="text" name="${Utility.NAME}"
+									<td><input class="input" type="text" name="${Utility.NAME}"
 										value="${chosenClient.getFirstName()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><c:out value="${surname_word}" />:</td>
-									<td><input type="text" name="${Utility.SURNAME}"
+									<td><input class="input" type="text" name="${Utility.SURNAME}"
 										value="${chosenClient.getLastName()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><c:out value="${passport_id_word}" />:</td>
-									<td><input type="text" name="${Utility.PASSPORT_ID}"
+									<td><input class="input" type="text" name="${Utility.PASSPORT_ID}"
 										value="${chosenClient.getPassportId()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><c:out value="${date_of_birth_word}" />:</td>
-									<td><input type="date" name="${Utility.DATE_OF_BIRTH}"
+									<td><input class="input" type="date" name="${Utility.DATE_OF_BIRTH}"
 										value="${chosenClient.getBirthDate()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><c:out value="${country_word}" />:</td>
-									<td><input type="text" name="${Utility.COUNTRY}"
+									<td><input class="input" type="text" name="${Utility.COUNTRY}"
 										value="${chosenClient.getCountry()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><c:out value="${phone_number_word}" />:</td>
-									<td><input type="text" name="${Utility.PHONE}"
+									<td><input class="input" type="text" name="${Utility.PHONE}"
 										value="${chosenClient.getPhoneNumber()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><c:out value="${email_word}" />:</td>
-									<td><input type="text" name="${Utility.EMAIL}"
+									<td><input class="input" type="text" name="${Utility.EMAIL}"
 										value="${chosenClient.getEmail()}" disabled><br></td>
 								</tr>
-							</table>
-							<br>
-							<table>
 								<tr>
-									<td>
-										<form>
-											<input type="hidden" name="${Utility.COMMAND}"
+									<td><br>
+										<input type="hidden" name="${Utility.COMMAND}"
 												value="${CommandName.EDIT_CLIENT}" /><input type="hidden"
 												name="${Utility.CHOSEN_CLIENT_ID}" value="${chosenClientId}" />
-											<input class="submit_button" type="submit" value="${edit}"
-												style="margin-left: 20px" />
-										</form>
-
+											<input id="save_button" class="submit_button" type="submit" value="${save}"
+												style="margin-left: 20px; visibility:hidden" />
+									</td>
+									<td class="choose-client"><br>
+										<button id="cancel_button" class="buttons"
+									style="visibility: hidden" type="button"><c:out
+											value="${cancel}" />
+										</button>
 									</td>
 								</tr>
-								<tr>
-									<td>
-										<form>
+							</table>
+							</form>
+							
+							<div style="visibility: hidden">
+								<form class="target">
 											<input type="hidden" name="${Utility.COMMAND}"
-												value="${CommandName.ADD_TO_BLACKLIST}" /><input
+												value="${CommandName.CHOOSE_CLIENT}" /> <input
 												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-												value="${chosenClientId}" /> <input class="submit_button"
-												type="submit" value="${add_to_blacklist}"
-												style="margin-left: 20px" />
+												value="${chosenClientId}" />
 										</form>
-
-									</td>
-								</tr>
-								<tr>
+							</div>
+							
+							<br>
+							<table>
+								<tr id="colorfulButtons">
 									<td>
 										<form>
 											<input type="hidden" name="${Utility.COMMAND}"
@@ -329,39 +345,28 @@
 												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
 												value="${chosenClientId}" /> <input class="submit_button"
 												type="submit" value="${add_to_regular_customers}"
-												style="margin-left: 20px" />
+												style="margin-left: 20px; background:#9ACD32" />
 										</form>
-
+									</td>
+									<td style="margin-left:20px">
+										<form>
+											<input type="hidden" name="${Utility.COMMAND}"
+												value="${CommandName.ADD_TO_BLACKLIST}" /><input
+												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+												value="${chosenClientId}" /> <input class="submit_button"
+												type="submit" value="${add_to_blacklist}"
+												style="margin-left: 20px; background:#808080" />
+										</form>
 									</td>
 								</tr>
+								<tr>
+									
+								</tr>
+								
 							</table>
 							<br>
 						</div>
 					</div>
-				</c:if>
-
-				<c:if test="${popUpView eq 'editClient'}">
-					<%--        		<div class="popup-bg editBooking" style="display: block">
-		                <div class="popup" style="width:auto; padding: 40px">	                    
-		                    <img class="close-popup" src="images/close.png" style="width:25px"><br>	                    
-		                    <form>                
-			                    <label for="fromDate">Arrive date:</label>
-			                    <input type="date" id="fromDate" name="fromDate" value="${booking.getFromDate()}" onchange="setToDate()" required>
-			                    <label for="toDate">&#160;&#160;&#160;&#160;Departure date:</label>
-			                    <input type="date" id="toDate" name="toDate" value="${booking.getToDate()}" required>                
-			                    <br><br>
-			                    <label for="questsNumber">Number of guests:&#160;</label>
-			                    <input type="number" id="guestsNumber" name="guestsNumber" value="${booking.getGuestsCount()}" min="1" max="15" style="margin-right: 40px">
-			                    <label for="roomNumber">Current room:</label>
-			                    <input type="radio" id="roomNumber" name="roomNumber" value="${booking.getRoomNumber()}" checked>
-			                    <c:out value="${booking.getRoomNumber()}" /><br>
-			                    <input type="hidden" name="bookingId" value="${booking.getId()}" />
-			                    <input type="hidden" name="command" value="EditBookingCheck" />
-			                    <input class="submit_button" type="submit" value="Check" style="margin-right: 50px"/>
-			                    <input id="check-among-all-rooms" type="checkbox" name="checkAmongAllRooms" value="Check among all rooms" checked style="visibility:hidden"/>
-			                </form>
-		                </div>
-		            </div>  --%>
 				</c:if>
 
 				<div class="popup-bg client">
@@ -441,37 +446,6 @@
 						<c:remove var="clientIsAlreadyAdded" />
 					</div>
 				</c:if>
-
-				<%--        <c:if test="">
-	            		<div class="popup-bg" style="display: block">
-			                <div class="popup" style="width:auto; padding-top:30px">
-			                    <a href="Controller?command=GO_TO_BOOKINGS_PAGE">
-			                		<img src="images/close.png" style="width:25px;">
-			                	</a>
-			                    <h5 style="margin-top:15px"><c:out value="${please_check_data_word}:"/></h5>
-			                    <form>			                    	
-				                    <table>
-				                     	<tr>
-				                    		<td><b>Since:</b></td>
-				                    		<td><input type="date" name="fromDate" value="${fromDate}" readonly /></td>
-				                    	</tr>
-				                    	<tr>
-				                    		<td><b>To:</b></td>
-				                    		<td><input type="date" name="toDate" value="${toDate}" readonly /></td>
-				                    	</tr>
-				                    	<tr>
-				                    		<td><b>Guests number:</b></td>
-				                    		<td><input type="number" name="guestsNumber" value="${guestsNumber}" readonly /></td>
-				                    	</tr>  
-				                    </table>			                    
-				                    <br>
-				                    <input type="hidden" name="${Utility.EDITED_CLIENT_ID}" value="${editedClientId}" />
-				                    <input type="hidden" name="${Utility.COMMAND}" value="${CommandName.SUBMIT_CLIENT}" />
-				                    <input class="submit_button" type="submit" value="${save}"/>
-			                    </form>			                    
-			                </div>
-			            </div>
-	            </c:if>  --%>
 
 			</div>
 		</div>

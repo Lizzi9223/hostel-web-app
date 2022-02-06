@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException {
 		int clientId = 0;
 		try {
-			if (!UserValidator.isValidClient(client) || !UserValidator.isValidPassword(client.getPassword())) {
+			if (!UserValidator.isValidUserClient(client) || !UserValidator.isValidPassword(client.getPassword())) {
 				return false;
 			}
 			if (userDAO.findUserByLogin(client.getLogin()) != null) {
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean addClient(Client client) throws ServiceException, PassportIdAlreadyExistsException {
 		try {
-			if (!UserValidator.isValidClient(client)) {
+			if (!UserValidator.isValidUserClient(client)) {
 				return false;
 			}
 			if (userDAO.findClientByPassportId(client.getPassportId()) != null) {
@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
 	public boolean edit(Client client, String login, String passportId)
 			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException {
 		try {
-			if (!UserValidator.isValidClient(client)) {
+			if (!UserValidator.isValidUserClient(client)) {
 				return false;
 			}
 			if (!login.equals(client.getLogin()) && userDAO.findUserByLogin(client.getLogin()) != null) {
@@ -128,6 +128,26 @@ public class UserServiceImpl implements UserService {
 			int userId = userDAO.getUserId(login);
 			userDAO.updateUser(userId, client);
 			int clientId = userDAO.getClientId(passportId);
+			userDAO.updateClient(clientId, client);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return true;
+	}
+
+	@Override
+	public boolean edit(Client client, int clientId)
+			throws ServiceException, PassportIdAlreadyExistsException {
+		try {
+			if (!UserValidator.isValidClient(client)) {
+				return false;
+			}
+			Client initialClient = userDAO.findClientByClientId(clientId);
+			String passportId = initialClient.getPassportId();
+			if (!passportId.equals(client.getPassportId())
+					&& userDAO.findClientByPassportId(client.getPassportId()) != null) {
+				throw new PassportIdAlreadyExistsException();
+			}
 			userDAO.updateClient(clientId, client);
 		} catch (DAOException e) {
 			throw new ServiceException(e);

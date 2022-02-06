@@ -19,6 +19,7 @@ import by.epam.tc.web.controller.impl.DeleteAccountCommand;
 import by.epam.tc.web.controller.impl.DeleteBookingCommand;
 import by.epam.tc.web.controller.impl.DeleteStayCommand;
 import by.epam.tc.web.controller.impl.EditBookingCommand;
+import by.epam.tc.web.controller.impl.EditClientCommand;
 import by.epam.tc.web.controller.impl.EditCommand;
 import by.epam.tc.web.controller.impl.EditStayCommand;
 import by.epam.tc.web.controller.impl.LoginationCommand;
@@ -72,6 +73,7 @@ public final class CommandProvider {
 		commands.put(CommandName.GUESTS_ARRIVED, new SubmitStayCommand());
 		commands.put(CommandName.CHOOSE_USER, new ChooseUserCommand());
 		commands.put(CommandName.CHOOSE_ADMIN, new ChooseAdminCommand());
+		commands.put(CommandName.EDIT_CLIENT, new EditClientCommand());
 
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPageCommand());
 		commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());
