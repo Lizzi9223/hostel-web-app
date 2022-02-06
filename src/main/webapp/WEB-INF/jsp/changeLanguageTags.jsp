@@ -19,6 +19,10 @@
 <fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
 <fmt:message bundle="${lang}" key="main.hostel_Samartia"
 	var="hostel_Samartia" />
+	
+<fmt:message bundle="${lang}" key="contacts.contacts_word" var="contacts_word" />
+<fmt:message bundle="${lang}" key="contacts.address_word" var="address_word" />
+<fmt:message bundle="${lang}" key="contacts.address_value" var="address_value" />
 
 <fmt:message bundle="${lang}" key="logination.logination"
 	var="logination" />

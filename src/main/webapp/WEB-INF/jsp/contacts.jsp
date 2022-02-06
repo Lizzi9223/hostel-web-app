@@ -13,6 +13,21 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
+body {
+	background: url("images/bg.jpg") no-repeat;
+	background-size: cover;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+
+.main {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
 </style>
 
 </head>
@@ -79,7 +94,17 @@
 
 		</div>
 
-		<div class="main"></div>
+		<div class="main">
+			<div class="form">
+				<div><h3><c:out value="${contacts_word}"/></h3></div><br><br>
+				<div><i><c:out value="${phone_number_word}:"/></i><b><c:out value="  A1  +375(29)194-67-78"/></b></div><br>
+				<div><i><c:out value="${address_word}:"/></i><b><c:out value=" ${address_value}"/></b></div><br>
+				<div><i><c:out value="${email_word}:"/></i><b><c:out value="  hostel_samartia@gmail.com"/></b></div><br><br>
+				<div>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2350.323783344461!2d27.569659215752818!3d53.908222080100614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbcfbc207c9b33%3A0xd33f13a65d0ae529!2zSG9zdGVsIFRvd2VyIDMxLzE4ICjQpdC-0YHRgtC10Lsg0JzQuNC90YHQuik!5e0!3m2!1sru!2sby!4v1644144783084!5m2!1sru!2sby" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				</div><br>
+			</div>
+		</div>
 
 	</div>
 

@@ -21,7 +21,8 @@ public class LoginationFilter implements Filter {
 
 	private final List<String> availableForGuestCommands = Arrays.asList(CommandName.GO_TO_WELCOME_PAGE,
 			CommandName.GO_TO_LOGINATION_PAGE, CommandName.GO_TO_REGISTRATION_PAGE, CommandName.GO_TO_ROOMS_PAGE,
-			CommandName.LOGINATION, CommandName.REGISTRATION, CommandName.CHANGE_LANGUAGE, CommandName.SEARCH_ROOMS);
+			CommandName.LOGINATION, CommandName.REGISTRATION, CommandName.CHANGE_LANGUAGE, CommandName.SEARCH_ROOMS,
+			CommandName.GO_TO_CONTACTS_PAGE);
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
