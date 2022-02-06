@@ -142,6 +142,10 @@
 	var="blacklist" />
 <fmt:message bundle="${lang}" key="clients.regular_cust"
 	var="regular_cust" />
+<fmt:message bundle="${lang}" key="clients.show_in_blacklist"
+	var="show_in_blacklist" />
+<fmt:message bundle="${lang}" key="clients.show_in_regular"
+	var="show_in_regular" />
 
 <fmt:message bundle="${lang}" key="bookRoom.check_for_avail_places"
 	var="check_for_avail_places" />

@@ -25,7 +25,6 @@ public class EditClientCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			logger.info("----- EditClientCommand");
 			int id = Integer.parseInt(request.getParameter(Utility.CHOSEN_CLIENT_ID));
 			String name = request.getParameter(Utility.NAME);
 			String surname = request.getParameter(Utility.SURNAME);
@@ -36,7 +35,6 @@ public class EditClientCommand implements Command {
 			String email = request.getParameter(Utility.EMAIL);
 			Client client = new Client(name, surname, passportId, dateOfBith, country, phone, email);
 			client.setClientId(id);
-			logger.info("----- client object created");
 			if (ServiceFactory.getInstance().getUserService().edit(client, id)) {
 				request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
 				request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, id);

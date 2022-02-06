@@ -1,9 +1,9 @@
 package by.epam.tc.web.controller.impl.gotopage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -32,10 +32,10 @@ public class GoToStaysPageCommand implements Command {
 		List<Stay> stays = null;
 		try {
 			if (request.getSession().getAttribute(Utility.ROLE).toString().equals(Role.ADMIN.toString())) {
-				stays = new LinkedList<Stay>(ServiceFactory.getInstance().getStaysService().getAllStays());
+				stays = new ArrayList<Stay>(ServiceFactory.getInstance().getStaysService().getAllStays());
 			} else {
 				String userLogin = (String) request.getSession().getAttribute(Utility.LOGIN);
-				stays = new LinkedList<Stay>(ServiceFactory.getInstance().getStaysService().getAllUserStays(userLogin));
+				stays = new ArrayList<Stay>(ServiceFactory.getInstance().getStaysService().getAllUserStays(userLogin));
 			}
 			Collections.sort(stays, Comparator.comparing(Stay::getFromDate, Comparator.reverseOrder()));
 			request.setAttribute(Utility.STAYS, stays);

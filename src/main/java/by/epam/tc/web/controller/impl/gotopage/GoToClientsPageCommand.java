@@ -1,9 +1,9 @@
 package by.epam.tc.web.controller.impl.gotopage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -30,9 +30,17 @@ public class GoToClientsPageCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<Client> clients = new LinkedList<Client>(
+			List<Client> clients = new ArrayList<Client>(
 					ServiceFactory.getInstance().getUserService().getAllClients());
 			Collections.sort(clients, Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
+			for (Client client : clients) {
+				if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
+					client.setInBlackList(true);
+				}
+				if(ServiceFactory.getInstance().getUserService().isRegularCustomer(client.getClientId())) {
+					client.setRegularCustomer(true);
+				}
+			}
 			String criteria = null;
 			String searchData = null;
 			if (request.getParameter(Utility.COMMAND).equals(CommandName.SEARCH_CLIENT)) {
@@ -68,6 +76,7 @@ public class GoToClientsPageCommand implements Command {
 			request.setAttribute(Utility.CURRENT_SEARCH_CRITERIA, criteria);
 			request.setAttribute(Utility.CURRENT_SEARCH_DATA, searchData);
 			request.setAttribute(Utility.CLIENTS, clients);
+			logger.info("TO_CLIENTS_PAGE");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_CLIENTS_PAGE);
 			dispatcher.forward(request, response);
 		} catch (ServiceException e) {

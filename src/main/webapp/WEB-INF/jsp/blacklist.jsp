@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Clients</title>
+<title>Blacklist</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -88,7 +88,6 @@
 
 	<div class="container">
 
-		<c:if test="${!(newStayGuestsNumber > 0)}">
 			<div class="menu">
 				<div class="tabs" style="justify-content: flex-start">
 					<div>
@@ -144,41 +143,17 @@
 					</c:choose>
 				</div>
 			</div>
-		</c:if>
 
 		<div class="container-body">
 			<div class="main">
 				<div class="form" style="padding-left: 20px">
 					<h3>
-						<c:choose>
-							<c:when test="${newStayGuestsNumber > 0}">
-								<p style="font-size: 14px; color: #808080">
-									<c:out value="${newStayGuestsNumber} " />
-									<c:out value="${clients_left_word}" />
-								</p>
-								<form>
-									<input type="hidden" name="${Utility.COMMAND}"
-										value="${CommandName.FINISH_CHOOSING_CLIENT}" /> <input
-										class="submit_button" type="submit" value="${finish_word}"
-										style="font-size: 14px" />
-								</form>
-								<br>
-								<c:out value="${choose_client_word}" />:    
-                	 		</c:when>
-							<c:otherwise>
-								<c:out value="${all_clients_word}" />
-							</c:otherwise>
-						</c:choose>
-						<input class="submit_button open-popup client" type="button"
-							value="${new_client_word}" style="margin-left: 20px" />
-						<a href="Controller?command=GO_TO_REGULAR_CUST_PAGE"> <input
-										class="buttons" type="button" value="${regular_cust}" style="margin-left: 310px"/>
-									</a>
-						<a href="Controller?command=GO_TO_BLACKLIST_PAGE"> <input
-										class="buttons" type="button" value="${blacklist}" />
-									</a>
-						
+						<c:out value="${blacklist}" />
+						<a href="Controller?command=GO_TO_CLIENTS_PAGE"> <input
+										class="buttons" type="button" value="${all_clients_word}" style="margin-left: 310px"/>
+									</a>						
 					</h3>
+					<%--
 					<form style="margin-left: 50%">
 						<label><c:out value="${search_by_word}:" /></label> <select
 							name="${Utility.SEARCH_CRITERIA}" style="padding: 10">
@@ -197,6 +172,7 @@
 						<input class="submit_button" type="submit" value="${search}"
 							style="padding: 10; font-size: 14px" />
 					</form>
+					 --%>
 					<br>
 
 					<table class="table table-hover">
@@ -259,7 +235,7 @@
 							<img class="close-popup" src="images/close.png"
 								style="width: 25px">
 							<button class="buttons" type="button" onclick="edit()" style="margin-left:60%"><c:out value="${edit}" /></button><br><br>
-							<form style="${chosenClient.isRegularCustomer() == true ? 'background:#9ACD32; ' : ''} ${chosenClient.isInBlackList() == true ? 'background:#808080; ' : ''}"><table><tr>
+							<form><table><tr>
 									<td><c:out value="${login_word}" />:</td>
 								<c:choose>
 									<c:when test="${not empty chosenClient.getUserId() and chosenClient.getUserId() ne ''}">
@@ -456,21 +432,6 @@
 						<c:remove var="error" />
 					</div>
 				</c:if>
-
-				<c:if
-					test="${not empty clientIsAlreadyAdded and clientIsAlreadyAdded ne '' }">
-					<div class="popup-bg editBooking" style="display: block">
-						<div class="popup" style="width: auto; padding: 40px">
-							<img class="close-popup" src="images/close.png"
-								style="width: 25px"><br>
-							<p>
-								<c:out value="${client_already_added}" />
-							</p>
-						</div>
-						<c:remove var="clientIsAlreadyAdded" />
-					</div>
-				</c:if>
-
 			</div>
 		</div>
 	</div>

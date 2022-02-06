@@ -50,4 +50,8 @@ public interface UserService {
 	List<Client> getAllClientUsers() throws ServiceException;
 	
 	List<Admin> getAllAdmins() throws ServiceException;
+	
+	boolean isInBlacklist(int clientId) throws ServiceException;
+	
+	boolean isRegularCustomer(int clientId) throws ServiceException;
 }

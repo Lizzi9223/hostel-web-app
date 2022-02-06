@@ -1,9 +1,9 @@
 package by.epam.tc.web.controller.impl.gotopage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,7 +29,7 @@ public class GoToAdminsPageCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<Admin> admins = new LinkedList<Admin>(
+			List<Admin> admins = new ArrayList<Admin>(
 					ServiceFactory.getInstance().getUserService().getAllAdmins());
 			Collections.sort(admins, Comparator.comparing(Admin::getUserId, Comparator.naturalOrder()));
 			request.setAttribute(Utility.ADMINS, admins);

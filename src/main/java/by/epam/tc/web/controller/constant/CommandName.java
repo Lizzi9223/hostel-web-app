@@ -35,6 +35,8 @@ public final class CommandName {
 	public final static String GUESTS_ARRIVED = "GuestsArrived";
 	public final static String ADD_TO_BLACKLIST = "AddToBlacklist";
 	public final static String ADD_TO_REGULAR_CUSTOMERS = "AddToRegularCustomers";
+	public final static String CHOOSE_BLACKLIST_CLIENT = "ChooseBlacklistClient";
+	public final static String CHOOSE_REGULAR_CLIENT = "ChooseRegularClient";
 	public final static String GO_TO_WELCOME_PAGE = "GO_TO_WELCOME_PAGE";
 	public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";
 	public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";

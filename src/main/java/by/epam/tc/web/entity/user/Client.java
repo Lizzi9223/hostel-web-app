@@ -14,6 +14,8 @@ public class Client extends User {
 	private String country;
 	private String phoneNumber;
 	private String email;
+	private boolean isInBlackList = false;
+	private boolean isRegularCustomer = false;
 
 	public Client() {
 	}
@@ -158,12 +160,28 @@ public class Client extends User {
 		this.email = email;
 	}
 
+	public boolean isInBlackList() {
+		return isInBlackList;
+	}
+
+	public void setInBlackList(boolean isInBlackList) {
+		this.isInBlackList = isInBlackList;
+	}
+
+	public boolean isRegularCustomer() {
+		return isRegularCustomer;
+	}
+
+	public void setRegularCustomer(boolean isRegularCustomer) {
+		this.isRegularCustomer = isRegularCustomer;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ Objects.hash(birthDate, clientId, country, email, firstName, lastName, passportId, phoneNumber);
+		result = prime * result + Objects.hash(birthDate, clientId, country, email, firstName, isInBlackList,
+				isRegularCustomer, lastName, passportId, phoneNumber);
 		return result;
 	}
 
@@ -178,14 +196,17 @@ public class Client extends User {
 		Client other = (Client) obj;
 		return Objects.equals(birthDate, other.birthDate) && clientId == other.clientId
 				&& Objects.equals(country, other.country) && Objects.equals(email, other.email)
-				&& Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(firstName, other.firstName) && isInBlackList == other.isInBlackList
+				&& isRegularCustomer == other.isRegularCustomer && Objects.equals(lastName, other.lastName)
 				&& Objects.equals(passportId, other.passportId) && Objects.equals(phoneNumber, other.phoneNumber);
 	}
 
 	@Override
 	public String toString() {
-		return "Client{" + "id=" + clientId + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
-				+ ", passportId='" + passportId + '\'' + ", birthDate=" + birthDate + ", country='" + country + '\''
-				+ ", phoneNumber='" + phoneNumber + '\'' + ", email='" + email + '\'' + '}';
+		return "Client [clientId=" + clientId + ", firstName=" + firstName + ", lastName=" + lastName + ", passportId="
+				+ passportId + ", birthDate=" + birthDate + ", country=" + country + ", phoneNumber=" + phoneNumber
+				+ ", email=" + email + ", isInBlackList=" + isInBlackList + ", isRegularCustomer=" + isRegularCustomer
+				+ ", getUserId()=" + getUserId() + ", getLogin()=" + getLogin() + "]";
 	}
+	
 }

@@ -7,7 +7,9 @@ import by.epam.tc.web.dao.DAOException;
 import by.epam.tc.web.dao.DAOFactory;
 import by.epam.tc.web.dao.UserDAO;
 import by.epam.tc.web.entity.user.Admin;
+import by.epam.tc.web.entity.user.BlackListClient;
 import by.epam.tc.web.entity.user.Client;
+import by.epam.tc.web.entity.user.RegularClient;
 import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.UserService;
 import by.epam.tc.web.service.exception.LoginAlreadyExistsException;
@@ -301,5 +303,31 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}
 		return admins;
+	}
+
+	@Override
+	public boolean isInBlacklist(int clientId) throws ServiceException {
+		try {
+			BlackListClient blackListClient = userDAO.findInBlacklistById(clientId);
+			if(blackListClient != null) {
+				return true;
+			}
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}		
+		return false;
+	}
+
+	@Override
+	public boolean isRegularCustomer(int clientId) throws ServiceException {
+		try {
+			RegularClient regularClient = userDAO.findInRegularCustomersById(clientId);
+			if(regularClient != null) {
+				return true;
+			}
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}		
+		return false;
 	}	
 }
