@@ -202,6 +202,13 @@
 	var="all_admins_word" />
 <fmt:message bundle="${lang}" key="admins.admin_id"
 	var="admin_id_word" />
+	
+<fmt:message bundle="${lang}" key="blacklist.since_date_word" var="since_date_word" />
+<fmt:message bundle="${lang}" key="blacklist.reason_word" var="reason_word" />
+<fmt:message bundle="${lang}" key="blacklist.delete_from_blacklist" var="delete_from_blacklist" />
+
+<fmt:message bundle="${lang}" key="regularCust.discount_word" var="discount_word" />
+<fmt:message bundle="${lang}" key="regularCust.delete_from_regular" var="delete_from_regular" />
 
 </head>
 </html>

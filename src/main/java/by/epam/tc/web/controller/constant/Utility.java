@@ -88,4 +88,9 @@ public final class Utility {
 	public final static String EDITED_CLIENT_ID = "editedClientId";
 	public final static String CURRENT_SEARCH_CRITERIA = "currentSearchCriteria";
 	public final static String CURRENT_SEARCH_DATA = "currentSearchData";
+	public final static String BLACKLIST_CLIENTS = "blacklistClients";
+	public final static String REGULAR_CLIENTS = "regularClients";
+	public final static String SINCE_DATE = "sinceDate";
+	public final static String REASON = "reason";
+	public final static String DISCOUNT = "discount";
 }

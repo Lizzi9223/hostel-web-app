@@ -4,29 +4,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 import by.epam.tc.web.controller.constant.CommandName;
+import by.epam.tc.web.controller.impl.AddToBlacklistCommand;
 import by.epam.tc.web.controller.impl.AddClientCommand;
+import by.epam.tc.web.controller.impl.AddToRegularCustCommand;
 import by.epam.tc.web.controller.impl.ApproveBookingCommand;
 import by.epam.tc.web.controller.impl.BookRoomCommand;
 import by.epam.tc.web.controller.impl.ChangeLanguageCommand;
 import by.epam.tc.web.controller.impl.ChangePasswordCommand;
 import by.epam.tc.web.controller.impl.CheckRoomAvailabilityCommand;
 import by.epam.tc.web.controller.impl.ChooseAdminCommand;
+import by.epam.tc.web.controller.impl.ChooseBlacklistClientCommand;
 import by.epam.tc.web.controller.impl.ChooseBookingCommand;
 import by.epam.tc.web.controller.impl.ChooseClientCommand;
+import by.epam.tc.web.controller.impl.ChooseRegularClientCommand;
 import by.epam.tc.web.controller.impl.ChooseStayCommand;
 import by.epam.tc.web.controller.impl.ChooseUserCommand;
 import by.epam.tc.web.controller.impl.DeleteAccountCommand;
 import by.epam.tc.web.controller.impl.DeleteBookingCommand;
+import by.epam.tc.web.controller.impl.DeleteFromBlacklistCommand;
+import by.epam.tc.web.controller.impl.DeleteFromRegularCustCommand;
 import by.epam.tc.web.controller.impl.DeleteStayCommand;
+import by.epam.tc.web.controller.impl.EditBlacklistClientCommand;
 import by.epam.tc.web.controller.impl.EditBookingCommand;
 import by.epam.tc.web.controller.impl.EditClientCommand;
 import by.epam.tc.web.controller.impl.EditCommand;
+import by.epam.tc.web.controller.impl.EditRegularClientCommand;
 import by.epam.tc.web.controller.impl.EditStayCommand;
 import by.epam.tc.web.controller.impl.LoginationCommand;
 import by.epam.tc.web.controller.impl.RegistrationCommand;
 import by.epam.tc.web.controller.impl.SubmitBookingCommand;
 import by.epam.tc.web.controller.impl.SubmitStayCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToAdminsPageCommand;
+import by.epam.tc.web.controller.impl.gotopage.GoToBlacklistPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToBookingsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToClientsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToContactsPageCommand;
@@ -34,6 +43,7 @@ import by.epam.tc.web.controller.impl.gotopage.GoToErrorPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToLoginationPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToMyAccountPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToRegistrationPageCommand;
+import by.epam.tc.web.controller.impl.gotopage.GoToRegularCustomerPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToRoomsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToStaysPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToWelcomePageCommand;
@@ -74,6 +84,16 @@ public final class CommandProvider {
 		commands.put(CommandName.CHOOSE_USER, new ChooseUserCommand());
 		commands.put(CommandName.CHOOSE_ADMIN, new ChooseAdminCommand());
 		commands.put(CommandName.EDIT_CLIENT, new EditClientCommand());
+		commands.put(CommandName.ADD_TO_BLACKLIST, new AddToBlacklistCommand());
+		commands.put(CommandName.SUBMIT_ADD_TO_BLACKLIST, new AddToBlacklistCommand());
+		commands.put(CommandName.ADD_TO_REGULAR_CUSTOMERS, new AddToRegularCustCommand());
+		commands.put(CommandName.SUBMIT_ADD_TO_REGULAR_CUSTOMERS, new AddToRegularCustCommand());
+		commands.put(CommandName.EDIT_BLACKLIST_CLIENT, new EditBlacklistClientCommand());
+		commands.put(CommandName.EDIT_REGULAR_CLIENT, new EditRegularClientCommand());
+		commands.put(CommandName.CHOOSE_BLACKLIST_CLIENT, new ChooseBlacklistClientCommand());
+		commands.put(CommandName.CHOOSE_REGULAR_CLIENT, new ChooseRegularClientCommand());
+		commands.put(CommandName.DELETE_FROM_BLACKLIST, new DeleteFromBlacklistCommand());
+		commands.put(CommandName.DELETE_FROM_REGULAR, new DeleteFromRegularCustCommand());
 
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPageCommand());
 		commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());
@@ -86,6 +106,8 @@ public final class CommandProvider {
 		commands.put(CommandName.GO_TO_CONTACTS_PAGE, new GoToContactsPageCommand());
 		commands.put(CommandName.GO_TO_CLIENTS_PAGE, new GoToClientsPageCommand());
 		commands.put(CommandName.GO_TO_ADMINS_PAGE, new GoToAdminsPageCommand());
+		commands.put(CommandName.GO_TO_BLACKLIST_PAGE, new GoToBlacklistPageCommand());
+		commands.put(CommandName.GO_TO_REGULAR_CUST_PAGE, new GoToRegularCustomerPageCommand());
 	}
 
 	public final Command getCommand(String commandName) {

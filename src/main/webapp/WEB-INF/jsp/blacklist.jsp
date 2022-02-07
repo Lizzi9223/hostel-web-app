@@ -180,44 +180,26 @@
 						<thead>
 							<tr>
 								<th scope="col"><c:out value="${clientId_word}" /></th>
-								<th scope="col"><c:out value="${login_word}" /></th>
-								<th scope="col"><c:out value="${name_word}" /></th>
-								<th scope="col"><c:out value="${surname_word}" /></th>
 								<th scope="col"><c:out value="${passport_id_word}" /></th>
-								<th scope="col"><c:out value="${date_of_birth_word}" /></th>
-								<th scope="col"><c:out value="${country_word}" /></th>
-								<th scope="col"><c:out value="${phone_number_word}" /></th>
-								<th scope="col"><c:out value="${email_word}" /></th>
+								<th scope="col"><c:out value="${since_date_word}" /></th>
+								<th scope="col"><c:out value="${reason_word}" /></th>
 							</tr>
 						</thead>
 
-						<c:forEach var="client" items="${clients}">
+						<c:forEach var="client" items="${blacklistClients}">
 							<tbody>					
-									<tr class="choose-client" style="cursor: pointer; ${client.isRegularCustomer() == true ? 'background:#9ACD32; ' : ''} ${client.isInBlackList() == true ? 'background:#808080; ' : ''}">
+									<tr class="choose-client" style="cursor: pointer; ${client.isInBlackList() == true ? 'background:#808080; ' : ''}">
 										<td><c:out value="${client.getClientId()}" /></td>
-										<c:choose>
-											<c:when
-												test="${not empty client.getUserId() and client.getUserId() ne ''}">
-												<td><c:out value="${client.getLogin()}" /></td>
-											</c:when>
-											<c:otherwise>
-												<td><c:out value="-" /></td>
-											</c:otherwise>
-										</c:choose>
-										<td><c:out value="${client.getFirstName()}" /></td>
-										<td><c:out value="${client.getLastName()}" /></td>
 										<td><c:out value="${client.getPassportId()}" /></td>
-										<fmt:parseDate value="${client.getBirthDate()}"
+										<fmt:parseDate value="${client.getSinceDate()}"
 											pattern="yyyy-MM-dd" var="parsedDate" type="date" />
 										<td><fmt:formatDate value="${parsedDate}"
 												pattern="dd.MM.yyyy" /></td>
-										<td><c:out value="${client.getCountry()}" /></td>
-										<td><c:out value="${client.getPhoneNumber()}" /></td>
-										<td><c:out value="${client.getEmail()}" /></td>
+										<td><c:out value="${client.getReason()}" /></td>
 										<td style="visibility: hidden">
 											<form class="target">
 												<input type="hidden" name="${Utility.COMMAND}"
-													value="${CommandName.CHOOSE_CLIENT}" /> <input
+													value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /> <input
 													type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
 													value="${client.getClientId()}" />
 											</form>
@@ -235,59 +217,26 @@
 							<img class="close-popup" src="images/close.png"
 								style="width: 25px">
 							<button class="buttons" type="button" onclick="edit()" style="margin-left:60%"><c:out value="${edit}" /></button><br><br>
-							<form><table><tr>
-									<td><c:out value="${login_word}" />:</td>
-								<c:choose>
-									<c:when test="${not empty chosenClient.getUserId() and chosenClient.getUserId() ne ''}">
-									
-									<td><input type="text" name="${Utility.LOGIN}"
-										value="${chosenClient.getLogin()}" disabled><br></td>
-								
-								</c:when>
-								<c:otherwise>
-								<td><input type="text" name="${Utility.LOGIN}"
-										value="-" disabled><br></td>
-								</c:otherwise>
-								</c:choose>	</tr>							
-								<tr>
-									<td><c:out value="${name_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.NAME}"
-										value="${chosenClient.getFirstName()}" disabled><br></td>
-								</tr>
-								<tr>
-									<td><c:out value="${surname_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.SURNAME}"
-										value="${chosenClient.getLastName()}" disabled><br></td>
-								</tr>
+							<form><table>
 								<tr>
 									<td><c:out value="${passport_id_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.PASSPORT_ID}"
+									<td><input type="text" name="${Utility.PASSPORT_ID}"
 										value="${chosenClient.getPassportId()}" disabled><br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${date_of_birth_word}" />:</td>
-									<td><input class="input" type="date" name="${Utility.DATE_OF_BIRTH}"
-										value="${chosenClient.getBirthDate()}" disabled><br></td>
+									<td><c:out value="${since_date_word}" />:</td>
+									<td><input class="input" type="date" name="${Utility.SINCE_DATE}"
+										value="${chosenClient.getSinceDate()}" disabled><br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${country_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.COUNTRY}"
-										value="${chosenClient.getCountry()}" disabled><br></td>
-								</tr>
-								<tr>
-									<td><c:out value="${phone_number_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.PHONE}"
-										value="${chosenClient.getPhoneNumber()}" disabled><br></td>
-								</tr>
-								<tr>
-									<td><c:out value="${email_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.EMAIL}"
-										value="${chosenClient.getEmail()}" disabled><br></td>
+									<td><c:out value="${reason_word}" />:</td>
+									<td><input class="input" type="text" name="${Utility.REASON}"
+										value="${chosenClient.getReason()}" disabled><br></td>
 								</tr>
 								<tr>
 									<td><br>
 										<input type="hidden" name="${Utility.COMMAND}"
-												value="${CommandName.EDIT_CLIENT}" /><input type="hidden"
+												value="${CommandName.EDIT_BLACKLIST_CLIENT}" /><input type="hidden"
 												name="${Utility.CHOSEN_CLIENT_ID}" value="${chosenClientId}" />
 											<input id="save_button" class="submit_button" type="submit" value="${save}"
 												style="margin-left: 20px; visibility:hidden" />
@@ -305,7 +254,7 @@
 							<div style="visibility: hidden">
 								<form class="target">
 											<input type="hidden" name="${Utility.COMMAND}"
-												value="${CommandName.CHOOSE_CLIENT}" /> <input
+												value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /> <input
 												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
 												value="${chosenClientId}" />
 										</form>
@@ -314,54 +263,16 @@
 							<br>
 							<table>
 								<tr id="colorfulButtons">
-									<c:choose>
-										<c:when test="${chosenClient.isInBlackList() == true}">
-											<td style="margin-left:20px">
+									<td style="margin-left:20px">
 												<form>
 													<input type="hidden" name="${Utility.COMMAND}"
-														value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /><input
+														value="${CommandName.DELETE_FROM_BLACKLIST}" /><input
 														type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
 														value="${chosenClientId}" /> <input class="submit_button"
-														type="submit" value="${show_in_blacklist}"
-														style="margin-left: 20px; background:#808080" />
+														type="submit" value="${delete_from_blacklist}"
+														style="margin-left: 20px;" />
 												</form>
-											</td>
-										</c:when>
-										<c:when test="${chosenClient.isRegularCustomer() == true}">
-											<td>
-												<form>
-													<input type="hidden" name="${Utility.COMMAND}"
-														value="${CommandName.CHOOSE_REGULAR_CLIENT}" /><input
-														type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-														value="${chosenClientId}" /> <input class="submit_button"
-														type="submit" value="${show_in_regular}"
-														style="margin-left: 20px; background:#9ACD32" />
-												</form>
-											</td>
-										</c:when>										
-										<c:otherwise>
-											<td>
-												<form>
-													<input type="hidden" name="${Utility.COMMAND}"
-														value="${CommandName.ADD_TO_REGULAR_CUSTOMERS}" /><input
-														type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-														value="${chosenClientId}" /> <input class="submit_button"
-														type="submit" value="${add_to_regular_customers}"
-														style="margin-left: 20px; background:#9ACD32" />
-												</form>
-											</td>
-											<td style="margin-left:20px">
-												<form>
-													<input type="hidden" name="${Utility.COMMAND}"
-														value="${CommandName.ADD_TO_BLACKLIST}" /><input
-														type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-														value="${chosenClientId}" /> <input class="submit_button"
-														type="submit" value="${add_to_blacklist}"
-														style="margin-left: 20px; background:#808080" />
-												</form>
-											</td>
-										</c:otherwise>
-									</c:choose>									
+									</td>								
 								</tr>								
 							</table>
 							<br>
@@ -369,69 +280,46 @@
 					</div>
 				</c:if>
 
-				<div class="popup-bg client">
+				<c:if test="${popUpView eq 'AddToBlacklist'}">
+					<div class="popup-bg client" style="display: block">
 					<div class="popup">
-						<img class="close-popup" src="images/close.png"
-							style="width: 25px">
 						<form>
 							<table style="margin-left: 20px; margin-top: 10px">
 								<tr>
-									<td><c:out value="${name_word}:" /></td>
-									<td><input type="text" id="newClientName"
-										name="${Utility.NAME}" required></td>
-								</tr>
-								<tr>
-									<td><c:out value="${surname_word}:" /></td>
-									<td><input type="text" id="newClientSurname"
-										name="${Utility.SURNAME}" required></td>
-								</tr>
-								<tr>
 									<td><c:out value="${passport_id_word}:" /></td>
-									<td><input type="text" id="newClientPassportId"
-										name="${Utility.PASSPORT_ID}" required></td>
+									<td><input type="text" 
+										name="${Utility.PASSPORT_ID}" value="${chosenClient.getPassportId()}" disabled></td>
 								</tr>
 								<tr>
-									<td><c:out value="${date_of_birth_word}:" /></td>
-									<td><input type="date" id="newClientBirthDate"
-										name="${Utility.DATE_OF_BIRTH}" required></td>
+									<td><c:out value="${since_date_word}:" /></td>
+									<td><input type="date" id="newBlacklistSinceDate"
+										name="${Utility.SINCE_DATE}" required></td>
 								</tr>
 								<tr>
-									<td><c:out value="${country_word}:" /></td>
-									<td><input type="text" id="newClientCountry"
-										name="${Utility.COUNTRY}"></td>
-								</tr>
-								<tr>
-									<td><c:out value="${phone_number_word}:" /></td>
-									<td><input type="text" id="newClientPhone"
-										name="${Utility.PHONE}"></td>
-								</tr>
-								<tr>
-									<td><c:out value="${email_word}:" /></td>
-									<td><input type="text" id="newClientEmail"
-										name="${Utility.EMAIL}"></td>
+									<td><c:out value="${reason_word}:" /></td>
+									<td><input type="text" 
+										name="${Utility.REASON}"></td>
 								</tr>
 							</table>
-							<br> <input type="hidden" name="${Utility.COMMAND}"
-								value="${CommandName.ADD_CLIENT}" /> <input
+							<br> 
+							<table>
+							<tr>
+							<td><input type="hidden" name="${Utility.COMMAND}"
+								value="${CommandName.SUBMIT_ADD_TO_BLACKLIST}" /><input type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+								value="${chosenClientId}" /> <input
 								class="submit_button" type="submit" value="${save}"
-								style="margin-left: 20px" />
+								style="margin-left: 20px" /></td>
+							<td><a href="Controller?command=GO_TO_CLIENTS_PAGE"> <input
+										class="buttons" type="button" value="${cancel}" style="margin-left: 310px"/>
+									</a></td>
+							</tr>
+							</table>
+							
 						</form>
+						
 					</div>
 				</div>
-
-				<c:if test="${not empty error and error ne ''}">
-					<div class="popup-bg editBooking" style="display: block">
-						<div class="popup" style="width: auto; padding: 40px">
-							<img class="close-popup" src="images/close.png"
-								style="width: 25px"><br>
-							<fmt:message bundle="${lang}" key="${error}" var="error_msg" />
-							<p>
-								<c:out value="${error_msg}" />
-							</p>
-						</div>
-						<c:remove var="error" />
-					</div>
-				</c:if>
+				</c:if>				
 			</div>
 		</div>
 	</div>
@@ -455,7 +343,7 @@
 		    } 
 		        
 		    today = yyyy + '-' + mm + '-' + dd;
-		    document.getElementById("newClientBirthDate").setAttribute("max", today);
+		    document.getElementById("newBlacklistSinceDate").setAttribute("max", today);
 	    </script>
 
 </body>

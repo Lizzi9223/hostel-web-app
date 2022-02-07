@@ -3,7 +3,9 @@ package by.epam.tc.web.service;
 import java.util.List;
 
 import by.epam.tc.web.entity.user.Admin;
+import by.epam.tc.web.entity.user.BlackListClient;
 import by.epam.tc.web.entity.user.Client;
+import by.epam.tc.web.entity.user.RegularClient;
 import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.exception.LoginAlreadyExistsException;
 import by.epam.tc.web.service.exception.PassportIdAlreadyExistsException;
@@ -18,6 +20,10 @@ public interface UserService {
 			throws ServiceException, LoginAlreadyExistsException, PassportIdAlreadyExistsException;
 
 	boolean addClient(Client client) throws ServiceException, PassportIdAlreadyExistsException;
+	
+	void addBlacklistClient(BlackListClient client) throws ServiceException;
+	
+	void addRegularClient(RegularClient client) throws ServiceException;
 
 	boolean edit(Admin admin, String login) throws ServiceException, LoginAlreadyExistsException;
 
@@ -28,6 +34,10 @@ public interface UserService {
 			throws ServiceException, PassportIdAlreadyExistsException;
 
 	boolean editPassword(String login, String password) throws ServiceException;
+	
+	void editBlacklistClient(int clientId, BlackListClient client) throws ServiceException;
+	
+	void editRegularClient(int clientId, RegularClient client) throws ServiceException;
 	
 	Admin findAdminById(int id) throws ServiceException;
 
@@ -40,8 +50,16 @@ public interface UserService {
 	Client findClientByLogin(String login) throws ServiceException;
 	
 	Client findClientByUserId(int id) throws ServiceException;
+	
+	BlackListClient findBlackListClientByClientId(int id) throws ServiceException;
+	
+	RegularClient findRegularClientByClientId(int id) throws ServiceException;
 
 	void deleteAccount(String login) throws ServiceException;
+	
+	void deleteFromBlacklist(int clientId) throws ServiceException;
+	
+	void deleteFromRegularCustomers(int clientId) throws ServiceException;
 
 	List<Client> getAllClients() throws ServiceException;
 
@@ -50,6 +68,10 @@ public interface UserService {
 	List<Client> getAllClientUsers() throws ServiceException;
 	
 	List<Admin> getAllAdmins() throws ServiceException;
+	
+	List<BlackListClient> getAllBlackListClients() throws ServiceException;
+	
+	List<RegularClient> getAllRegularClients() throws ServiceException;
 	
 	boolean isInBlacklist(int clientId) throws ServiceException;
 	

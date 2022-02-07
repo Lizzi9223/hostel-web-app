@@ -11,5 +11,7 @@ public final class Redirect {
 	public final static String TO_CLIENTS_PAGE = "Controller?command=GO_TO_CLIENTS_PAGE";
 	public final static String TO_ADMINS_PAGE = "Controller?command=GO_TO_ADMINS_PAGE";
 	public final static String TO_WELCOME_PAGE = "Controller?command=GO_TO_WELCOME_PAGE";
+	public final static String TO_BLACKLIST_PAGE = "Controller?command=GO_TO_BLACKLIST_PAGE";
+	public final static String TO_REGULAR_CUST_PAGE = "Controller?command=GO_TO_REGULAR_CUST_PAGE";
 	public final static String CREATE_ADMIN = "Controller?command=GO_TO_REGISTRATION_PAGE&create=admin";
 }

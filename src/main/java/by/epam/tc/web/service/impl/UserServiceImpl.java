@@ -96,6 +96,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void addBlacklistClient(BlackListClient client) throws ServiceException {
+		try {
+			userDAO.addToBlackList(client);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public void addRegularClient(RegularClient client) throws ServiceException {
+		try {
+			userDAO.addToRegularCustomers(client);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
 	public boolean edit(Admin admin, String login) throws ServiceException, LoginAlreadyExistsException {
 		try {
 			if (!UserValidator.isValidAdmin(admin)) {
@@ -169,6 +187,24 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}
 		return true;
+	}
+
+	@Override
+	public void editBlacklistClient(int clientId, BlackListClient client) throws ServiceException {
+		try {
+			userDAO.updateBlacklistClient(clientId, client);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public void editRegularClient(int clientId, RegularClient client) throws ServiceException {
+		try {
+			userDAO.updateRegularClient(clientId, client);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 	}
 
 	@Override
@@ -246,10 +282,50 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public BlackListClient findBlackListClientByClientId(int id) throws ServiceException {
+		BlackListClient blackListClient = null;
+		try {
+			blackListClient = userDAO.findInBlacklistById(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return blackListClient;
+	}
+
+	@Override
+	public RegularClient findRegularClientByClientId(int id) throws ServiceException {
+		RegularClient regularClient = null;
+		try {
+			regularClient = userDAO.findInRegularCustomersById(id);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return regularClient;
+	}
+
+	@Override
 	public void deleteAccount(String login) throws ServiceException {
 		try {
 			int userId = userDAO.getUserId(login);
 			userDAO.deleteUser(userId);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public void deleteFromBlacklist(int clientId) throws ServiceException {
+		try {
+			userDAO.deleteFromBlackList(clientId);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public void deleteFromRegularCustomers(int clientId) throws ServiceException {
+		try {
+			userDAO.deleteFromRegularCustomers(clientId);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
@@ -303,6 +379,28 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}
 		return admins;
+	}
+
+	@Override
+	public List<BlackListClient> getAllBlackListClients() throws ServiceException {
+		List<BlackListClient> blackListClients = new ArrayList<BlackListClient>();
+		try {
+			blackListClients = userDAO.getAllBlackListClients();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return blackListClients;
+	}
+
+	@Override
+	public List<RegularClient> getAllRegularClients() throws ServiceException {
+		List<RegularClient> regularClients = new ArrayList<RegularClient>();
+		try {
+			regularClients = userDAO.getAllRegularClients();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return regularClients;
 	}
 
 	@Override

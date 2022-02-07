@@ -2,7 +2,6 @@ package by.epam.tc.web.controller.impl.gotopage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -31,8 +30,7 @@ public class GoToClientsPageCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			List<Client> clients = new ArrayList<Client>(
-					ServiceFactory.getInstance().getUserService().getAllClients());
-			Collections.sort(clients, Comparator.comparing(Client::getClientId, Comparator.naturalOrder()));
+					ServiceFactory.getInstance().getUserService().getAllClients());			
 			for (Client client : clients) {
 				if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
 					client.setInBlackList(true);
@@ -41,6 +39,8 @@ public class GoToClientsPageCommand implements Command {
 					client.setRegularCustomer(true);
 				}
 			}
+			clients.sort(Comparator.comparing(Client::isInBlackList)
+					.thenComparing(item -> !item.isInBlackList() && !item.isRegularCustomer()));
 			String criteria = null;
 			String searchData = null;
 			if (request.getParameter(Utility.COMMAND).equals(CommandName.SEARCH_CLIENT)) {
@@ -76,7 +76,6 @@ public class GoToClientsPageCommand implements Command {
 			request.setAttribute(Utility.CURRENT_SEARCH_CRITERIA, criteria);
 			request.setAttribute(Utility.CURRENT_SEARCH_DATA, searchData);
 			request.setAttribute(Utility.CLIENTS, clients);
-			logger.info("TO_CLIENTS_PAGE");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_CLIENTS_PAGE);
 			dispatcher.forward(request, response);
 		} catch (ServiceException e) {

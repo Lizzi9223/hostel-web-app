@@ -74,11 +74,9 @@ public class ChooseClientCommand implements Command {
 				} else {
 					Client client = ServiceFactory.getInstance().getUserService().findClientById(id);
 					if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
-						logger.info("setInBlackList");
 						client.setInBlackList(true);
 					}
 					if(ServiceFactory.getInstance().getUserService().isRegularCustomer(client.getClientId())) {
-						logger.info("setRegularCustomer");
 						client.setRegularCustomer(true);
 					}
 					request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);

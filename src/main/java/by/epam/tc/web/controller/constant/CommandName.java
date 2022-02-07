@@ -5,6 +5,8 @@ public final class CommandName {
 	public final static String REGISTRATION = "Registration";
 	public final static String EDIT_ACCOUNT = "Edit";
 	public final static String EDIT_CLIENT = "EditClient";
+	public final static String EDIT_BLACKLIST_CLIENT = "EditBlacklistClient";
+	public final static String EDIT_REGULAR_CLIENT = "EditRegularClient";
 	public final static String EDIT_STAY = "EditStay";
 	public final static String EDIT_STAY_CHECK = "EditStayCheck";
 	public final static String ADD_CLIENT = "AddClient";
@@ -34,9 +36,14 @@ public final class CommandName {
 	public final static String FINISH_CHOOSING_CLIENT = "FinishChoosingClient";
 	public final static String GUESTS_ARRIVED = "GuestsArrived";
 	public final static String ADD_TO_BLACKLIST = "AddToBlacklist";
+	public final static String SUBMIT_ADD_TO_BLACKLIST = "SubmitAddToBlacklist";
 	public final static String ADD_TO_REGULAR_CUSTOMERS = "AddToRegularCustomers";
+	public final static String SUBMIT_ADD_TO_REGULAR_CUSTOMERS = "SubmitAddToRegularCustomers";
 	public final static String CHOOSE_BLACKLIST_CLIENT = "ChooseBlacklistClient";
 	public final static String CHOOSE_REGULAR_CLIENT = "ChooseRegularClient";
+	public final static String DELETE_FROM_BLACKLIST = "DeleteFromBlacklist";
+	public final static String DELETE_FROM_REGULAR = "DeleteFromRegular";
+	
 	public final static String GO_TO_WELCOME_PAGE = "GO_TO_WELCOME_PAGE";
 	public final static String GO_TO_LOGINATION_PAGE = "GO_TO_LOGINATION_PAGE";
 	public final static String GO_TO_REGISTRATION_PAGE = "GO_TO_REGISTRATION_PAGE";
@@ -48,4 +55,6 @@ public final class CommandName {
 	public final static String GO_TO_CONTACTS_PAGE = "GO_TO_CONTACTS_PAGE";
 	public final static String GO_TO_CLIENTS_PAGE = "GO_TO_CLIENTS_PAGE";
 	public final static String GO_TO_ADMINS_PAGE = "GO_TO_ADMINS_PAGE";
+	public final static String GO_TO_BLACKLIST_PAGE = "GO_TO_BLACKLIST_PAGE";
+	public final static String GO_TO_REGULAR_CUST_PAGE = "GO_TO_REGULAR_CUST_PAGE";
 }

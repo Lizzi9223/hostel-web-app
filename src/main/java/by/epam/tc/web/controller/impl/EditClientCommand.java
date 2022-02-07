@@ -36,6 +36,14 @@ public class EditClientCommand implements Command {
 			Client client = new Client(name, surname, passportId, dateOfBith, country, phone, email);
 			client.setClientId(id);
 			if (ServiceFactory.getInstance().getUserService().edit(client, id)) {
+				if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
+					logger.info("setInBlackList");
+					client.setInBlackList(true);
+				}
+				if(ServiceFactory.getInstance().getUserService().isRegularCustomer(client.getClientId())) {
+					logger.info("setRegularCustomer");
+					client.setRegularCustomer(true);
+				}
 				request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
 				request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, id);
 				request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);

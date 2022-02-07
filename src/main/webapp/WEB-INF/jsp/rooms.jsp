@@ -426,9 +426,9 @@
 							<div>
 								<div>
 									<span style="font-size: 16px"><b><c:out
-												value="${roomLabel}" />:</b></span>${room.getRoomNumber()}</div>
+												value="${roomLabel}"/>: </b></span>${room.getRoomNumber()}</div>
 								<div>
-									<b><c:out value="${cost}" />:</b>${room.getCost()} BYN
+									<b><c:out value="${cost}" />: </b>${room.getCost()} BYN
 								</div>
 								<div>
 									<b><c:out value="${capacity}" />: </b>${room.getCapacity()}</div>
