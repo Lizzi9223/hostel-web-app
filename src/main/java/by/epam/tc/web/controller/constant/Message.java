@@ -6,4 +6,5 @@ public final class Message {
 	public final static String WRONG_PASSWORD = "message.wrong_password";
 	public final static String LOGIN_EXISTS = "message.login_exists";
 	public final static String PASSPORT_EXISTS = "message.passport_id_exists";
+	public final static String BLACKLIST_USER = "message.u_r_in_blacklist";
 }

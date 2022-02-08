@@ -976,6 +976,27 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
+	public void updateClientsUserId(int clientId, int newUserId) throws DAOException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = connectionPool.takeConnection();
+			st = con.prepareStatement(updateQueryProvide.getUpdateClientsUserIdQueryWhere(Metadata.AllClientsTableColumn.CLIENT_ID));
+			st.setInt(1, newUserId);
+			st.setInt(2, clientId);
+			st.executeUpdate();
+		} catch (ConnectionPoolException | SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			try {
+				connectionPool.closeConnection(con, st);
+			} catch (ConnectionPoolException e) {
+				throw new DAOException(e);
+			}
+		}
+	}
+
+	@Override
 	public void deleteUser(int userId) throws DAOException {
 		deleteById(userId, Metadata.USERS_TABLE, Metadata.UsersTableColumn.USER_ID);
 	}

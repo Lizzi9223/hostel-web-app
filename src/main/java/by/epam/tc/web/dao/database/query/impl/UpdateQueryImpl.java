@@ -4,10 +4,10 @@ import by.epam.tc.web.dao.database.metadata.Metadata;
 import by.epam.tc.web.dao.database.query.UpdateQuery;
 
 public class UpdateQueryImpl implements UpdateQuery {
+	private final String insertQuery = "update %s set %s where %s = ?;";
 
 	@Override
 	public String getUpdateQueryWhere(String tableName, String whereClauseColumnName) {
-		String insertQuery = "update %s set %s where %s = ?;";
 		String params = "";
 		switch (tableName) {
 		case Metadata.USERS_TABLE:
@@ -45,9 +45,14 @@ public class UpdateQueryImpl implements UpdateQuery {
 	}
 
 	@Override
-	public String getUpdatePasswordQueryWhere(String whereClauseColumnName) {
-		String insertQuery = "update %s set %s where %s = ?;";
+	public String getUpdatePasswordQueryWhere(String whereClauseColumnName) {		
 		String params = "password=?";
 		return String.format(insertQuery, Metadata.USERS_TABLE, params, whereClauseColumnName);
+	}
+
+	@Override
+	public String getUpdateClientsUserIdQueryWhere(String whereClauseColumnName) {
+		String params = "user_id=?";
+		return String.format(insertQuery, Metadata.ALL_CLIENTS_TABLE, params, whereClauseColumnName);
 	}
 }

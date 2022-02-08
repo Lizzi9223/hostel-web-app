@@ -96,6 +96,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean addUser(User user) throws ServiceException, LoginAlreadyExistsException {
+		try {
+			if (!UserValidator.isValidLogin(user.getLogin()) || !UserValidator.isValidPassword(user.getPassword())) {
+				return false;
+			}
+			if (userDAO.findUserByLogin(user.getLogin()) != null) {
+				throw new LoginAlreadyExistsException();
+			}
+			userDAO.addUser(user);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return true;
+	}
+
+	@Override
 	public void addBlacklistClient(BlackListClient client) throws ServiceException {
 		try {
 			userDAO.addToBlackList(client);
@@ -190,6 +206,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void editClientsUserId(int clientId, int newUserId) throws ServiceException {
+		try {
+			userDAO.updateClientsUserId(clientId, newUserId);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
 	public void editBlacklistClient(int clientId, BlackListClient client) throws ServiceException {
 		try {
 			userDAO.updateBlacklistClient(clientId, client);
@@ -275,6 +300,23 @@ public class UserServiceImpl implements UserService {
 			if (user != null) {
 				client.setLogin(user.getLogin());
 			}
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return client;
+	}
+
+	@Override
+	public Client findClientByPassportId(String passportId) throws ServiceException {
+		Client client = null;
+		try {
+			client = userDAO.findClientByPassportId(passportId);
+			if(client != null) {
+				User user = userDAO.findUserById(client.getUserId());
+				if (user != null) {
+					client.setLogin(user.getLogin());
+				}
+			}			
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
@@ -427,5 +469,14 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}		
 		return false;
+	}
+
+	@Override
+	public int getUserIdByLogin(String login) throws ServiceException {
+		try {
+			return userDAO.getUserId(login);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
 	}	
 }

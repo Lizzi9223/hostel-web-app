@@ -14,8 +14,8 @@ public class Client extends User {
 	private String country;
 	private String phoneNumber;
 	private String email;
-	private boolean isInBlackList = false;
-	private boolean isRegularCustomer = false;
+	private boolean isInBlackList;
+	private boolean isRegularCustomer;
 
 	public Client() {
 	}

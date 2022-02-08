@@ -13,6 +13,8 @@ import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Message;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
+import by.epam.tc.web.entity.user.Client;
+import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
@@ -29,13 +31,25 @@ public class LoginationCommand implements Command {
 			user = ServiceFactory.getInstance().getUserService().signIn(login, password);
 			password = null;
 			if (user != null) {
-				request.getSession().setAttribute(Utility.ROLE, user.getRole().toString());
-				request.getSession().setAttribute(Utility.LOGIN, login);
-				response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
-			} else {
+				if(user.getRole().equals(Role.CLIENT)) {
+					Client client = ServiceFactory.getInstance().getUserService().findClientByLogin(login);
+					if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
+						request.getSession().setAttribute(Utility.ERROR, Message.BLACKLIST_USER);
+						response.sendRedirect(Redirect.TO_LOGINATION_PAGE);
+					}else {
+						request.getSession().setAttribute(Utility.ROLE, user.getRole().toString());
+						request.getSession().setAttribute(Utility.LOGIN, login);
+						response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
+					}
+				}else {
+					request.getSession().setAttribute(Utility.ROLE, user.getRole().toString());
+					request.getSession().setAttribute(Utility.LOGIN, login);
+					response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
+				}
+			}else {
 				request.getSession().setAttribute(Utility.ERROR, Message.LOGINATION);
 				response.sendRedirect(Redirect.TO_LOGINATION_PAGE);
-			}
+			}			
 		} catch (ServiceException e) {
 			logger.error("error while authorization", e);
 			response.sendRedirect(Redirect.TO_ERROR_PAGE);

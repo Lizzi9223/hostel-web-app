@@ -5,4 +5,6 @@ public interface UpdateQuery {
 	String getUpdateQueryWhere(String tableName, String whereClauseColumnName);
 
 	String getUpdatePasswordQueryWhere(String whereClauseColumnName);
+	
+	String getUpdateClientsUserIdQueryWhere(String whereClauseColumnName);
 }
