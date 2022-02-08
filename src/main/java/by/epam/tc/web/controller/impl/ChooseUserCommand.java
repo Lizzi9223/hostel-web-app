@@ -34,6 +34,12 @@ public class ChooseUserCommand implements Command {
 				User user = ServiceFactory.getInstance().getUserService().findUserById(booking.getUserId());
 				if(user.getRole().equals(Role.CLIENT)) {
 					client = ServiceFactory.getInstance().getUserService().findClientByUserId(booking.getUserId());
+					if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
+						client.setInBlackList(true);
+					}
+					if(ServiceFactory.getInstance().getUserService().isRegularCustomer(client.getClientId())) {
+						client.setRegularCustomer(true);
+					}
 					request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
 					request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, client.getClientId());
 					request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);
@@ -49,6 +55,12 @@ public class ChooseUserCommand implements Command {
 				int stayId = Integer.parseInt(request.getParameter(Utility.STAY_ID));
 				Stay stay = ServiceFactory.getInstance().getStaysService().getStayById(stayId);
 				client = ServiceFactory.getInstance().getUserService().findClientById(stay.getClientId());
+				if(ServiceFactory.getInstance().getUserService().isInBlacklist(client.getClientId())) {
+					client.setInBlackList(true);
+				}
+				if(ServiceFactory.getInstance().getUserService().isRegularCustomer(client.getClientId())) {
+					client.setRegularCustomer(true);
+				}
 				request.getSession().setAttribute(Utility.CHOSEN_CLIENT, client);
 				request.getSession().setAttribute(Utility.CHOSEN_CLIENT_ID, client.getClientId());
 				request.getSession().setAttribute(Utility.POPUP_VIEW, Utility.OPTIONS);

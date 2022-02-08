@@ -1,6 +1,7 @@
 package by.epam.tc.web.controller.impl.gotopage;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,7 +20,10 @@ import by.epam.tc.web.controller.constant.Forward;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.entity.stay.Booking;
+import by.epam.tc.web.entity.user.Client;
+import by.epam.tc.web.entity.user.RegularClient;
 import by.epam.tc.web.entity.user.Role;
+import by.epam.tc.web.entity.user.User;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
@@ -39,7 +43,17 @@ public class GoToBookingsPageCommand implements Command {
 						ServiceFactory.getInstance().getStaysService().getAllUserBookings(userLogin));
 			}
 			for (Booking booking : bookings) {
-				booking.setPrice(ServiceFactory.getInstance().getStaysService().getBookingPrice(booking));
+				BigDecimal bookingPrice = ServiceFactory.getInstance().getStaysService().getBookingPrice(booking);
+				User user = ServiceFactory.getInstance().getUserService().findUserById(booking.getUserId());
+				if(user.getRole().equals(Role.CLIENT)) {
+					Client client = ServiceFactory.getInstance().getUserService().findClientByUserId(booking.getUserId());
+					if(ServiceFactory.getInstance().getUserService().isRegularCustomer(client.getClientId())) {
+						RegularClient regularClient = ServiceFactory.getInstance().getUserService().findRegularClientByClientId(client.getClientId());
+						BigDecimal discountValue = bookingPrice.multiply(BigDecimal.valueOf(regularClient.getDiscount())).divide(BigDecimal.valueOf(100));
+						bookingPrice = bookingPrice.subtract(discountValue);
+					}
+				}
+				booking.setPrice(bookingPrice);
 			}
 			Collections.sort(bookings,
 					Comparator.comparing(Booking::isApproved, Comparator.nullsFirst(Comparator.naturalOrder())));

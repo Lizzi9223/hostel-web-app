@@ -274,18 +274,63 @@ public interface UserDAO {
 	 */
 	void updateClientsUserId(int clientId, int newUserId) throws DAOException; 
 
+	/**
+	 * Deletes user account from database
+	 * 
+	 * @param userId identifier of the user to delete
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	void deleteUser(int userId) throws DAOException; 
 
+	/**
+	 * Deletes client from database
+	 * 
+	 * @param clientId identifier of the client to delete
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	void deleteClient(int clientId) throws DAOException;
 
+	/**
+	 * Deletes client from blacklist
+	 * 
+	 * @param clientId identifier of the client to delete from blacklist
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	void deleteFromBlackList(int clientId) throws DAOException;
 
+	/**
+	 * Deletes client from regular customers
+	 * 
+	 * @param clientId identifier of the client to delete from regular customers
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	void deleteFromRegularCustomers(int clientId) throws DAOException;
 
+	/**
+	 * Gets user identifier of the specific user based on login
+	 * 
+	 * @param login user login whose identifier to get
+	 * @return user identifier
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	int getUserId(String login) throws DAOException;
 
+	/**
+	 * Gets Role of the specific user based on login
+	 * 
+	 * @param login user login whose role to get
+	 * @return Role of the user
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	Role getUserRole(String login) throws DAOException;
 
+	/**
+	 * Gets client identifier of the specific user based on passport identifier
+	 * 
+	 * @param passportId passport identifier of the client whose identifier to get
+	 * @return client identifier
+	 * @throws DAOException if exception in connection pool occurs
+	 */
 	int getClientId(String passportId) throws DAOException;
 
 }
