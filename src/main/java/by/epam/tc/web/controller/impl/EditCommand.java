@@ -21,6 +21,12 @@ import by.epam.tc.web.service.exception.LoginAlreadyExistsException;
 import by.epam.tc.web.service.exception.PassportIdAlreadyExistsException;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code EditCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class EditCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.EditCommand.class);
 

@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Forward;
 
+/** 
+ * The class {@code GoToErrorPageCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class GoToErrorPageCommand implements Command {
 
 	@Override

@@ -1,5 +1,11 @@
 package by.epam.tc.web.controller.constant;
 
+/** 
+ * Class containing strings with paths for forward operation
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class Forward {
 	public final static String TO_ERROR_PAGE = "error.jsp";
 	public final static String TO_BOOKINGS_PAGE = "/WEB-INF/jsp/bookings.jsp";

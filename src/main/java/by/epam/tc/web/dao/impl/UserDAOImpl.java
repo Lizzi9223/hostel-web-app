@@ -14,6 +14,12 @@ import java.util.*;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+/** 
+ * The class {@code UserDAOImpl} implements {@code UserDAO}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class UserDAOImpl implements UserDAO {
 
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();

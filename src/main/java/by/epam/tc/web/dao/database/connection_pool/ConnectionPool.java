@@ -13,6 +13,12 @@ import java.util.concurrent.Executor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * Stores, provides with and closes database connections
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class ConnectionPool {
 	private static final Logger logger = LogManager
 			.getLogger(by.epam.tc.web.dao.database.connection_pool.ConnectionPool.class);

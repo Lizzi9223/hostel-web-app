@@ -1,5 +1,11 @@
 package by.epam.tc.web.controller.constant;
 
+/** 
+ * Class containing names of all commands executed by controller
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class CommandName {
 	public final static String LOGINATION = "Logination";
 	public final static String REGISTRATION = "Registration";

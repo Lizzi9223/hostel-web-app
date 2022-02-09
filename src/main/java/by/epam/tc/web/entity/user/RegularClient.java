@@ -3,6 +3,14 @@ package by.epam.tc.web.entity.user;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/** 
+ * RegularClient bean
+ * 
+ * The class {@code RegularClient} extends {@code Client}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class RegularClient extends Client {
 	private static final long serialVersionUID = 1L;
 

@@ -1,5 +1,11 @@
 package by.epam.tc.web.dao.database;
 
+/**
+ * Contains parameters to access database
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class DBParameter {
 	private DBParameter() {
 	}

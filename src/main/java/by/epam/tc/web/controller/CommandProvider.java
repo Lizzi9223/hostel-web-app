@@ -48,6 +48,12 @@ import by.epam.tc.web.controller.impl.gotopage.GoToRoomsPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToStaysPageCommand;
 import by.epam.tc.web.controller.impl.gotopage.GoToWelcomePageCommand;
 
+/** 
+ * Matches name of the command and action to do when receive this command
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class CommandProvider {
 
 	private final Map<String, Command> commands = new HashMap<String, Command>();

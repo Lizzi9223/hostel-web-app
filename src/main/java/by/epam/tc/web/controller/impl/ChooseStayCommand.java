@@ -10,6 +10,12 @@ import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
 
+/** 
+ * The class {@code ChooseStayCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class ChooseStayCommand implements Command {
 
 	@Override

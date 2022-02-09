@@ -13,6 +13,14 @@ import by.epam.tc.web.controller.constant.CommandName;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
 
+/** 
+ * Servlet that processes requests and returns the processing result
+ * 
+ * The class {@code Controller} implements {@code HttpServlet}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

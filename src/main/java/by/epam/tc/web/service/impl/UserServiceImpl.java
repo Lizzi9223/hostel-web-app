@@ -17,6 +17,12 @@ import by.epam.tc.web.service.exception.PassportIdAlreadyExistsException;
 import by.epam.tc.web.service.exception.ServiceException;
 import by.epam.tc.web.service.validator.UserValidator;
 
+/** 
+ * The class {@code UserServiceImpl} implements {@code UserService}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class UserServiceImpl implements UserService {
 	private final UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 

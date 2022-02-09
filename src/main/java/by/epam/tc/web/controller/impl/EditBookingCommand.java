@@ -16,6 +16,12 @@ import by.epam.tc.web.entity.stay.Booking;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code EditBookingCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class EditBookingCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.EditBookingCommand.class);
 

@@ -4,6 +4,12 @@ import by.epam.tc.web.dao.impl.RoomDAOImpl;
 import by.epam.tc.web.dao.impl.StaysDAOImpl;
 import by.epam.tc.web.dao.impl.UserDAOImpl;
 
+/**
+ * Provides with access to DAO
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class DAOFactory {
 	private final static DAOFactory instance = new DAOFactory();
 

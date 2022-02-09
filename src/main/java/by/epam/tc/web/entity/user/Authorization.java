@@ -2,6 +2,12 @@ package by.epam.tc.web.entity.user;
 
 import java.util.Objects;
 
+/** 
+ * Bean for authorization
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class Authorization {
 
 	private String login;

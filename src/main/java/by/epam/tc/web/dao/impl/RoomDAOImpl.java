@@ -14,6 +14,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/** 
+ * The class {@code RoomDAOImpl} implements {@code RoomDAO}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class RoomDAOImpl implements RoomDAO {
 
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();

@@ -19,6 +19,12 @@ import by.epam.tc.web.entity.user.Role;
 import by.epam.tc.web.service.StaysService;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code StaysServiceImpl} implements {@code StaysService}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class StaysServiceImpl implements StaysService {
 
 	private final StaysDAO staysDAO = DAOFactory.getInstance().getStaysDAO();

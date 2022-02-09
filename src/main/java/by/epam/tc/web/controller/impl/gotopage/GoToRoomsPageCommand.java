@@ -21,6 +21,12 @@ import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code GoToRoomsPageCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class GoToRoomsPageCommand implements Command {
 	private static final Logger logger = LogManager
 			.getLogger(by.epam.tc.web.controller.impl.gotopage.GoToRoomsPageCommand.class);

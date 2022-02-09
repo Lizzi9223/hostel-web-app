@@ -1,5 +1,11 @@
 package by.epam.tc.web.controller.constant;
 
+/** 
+ * Class containing strings with keys to get records from resources for localization
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class Message {
 	public final static String LOGINATION = "message.logination";
 	public final static String VALIDATION = "message.validation";

@@ -3,6 +3,14 @@ package by.epam.tc.web.entity.user;
 import java.io.Serializable;
 import java.util.Objects;
 
+/** 
+ * User bean
+ * 
+ * The class {@code User} implements {@code Serializable}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

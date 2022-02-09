@@ -1,5 +1,11 @@
 package by.epam.tc.web.dao.database.metadata;
 
+/**
+ * Contains table names from database and their column names 
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class Metadata {
 
 	public final static String USERS_TABLE = "users";

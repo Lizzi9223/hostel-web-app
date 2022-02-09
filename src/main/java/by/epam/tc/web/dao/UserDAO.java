@@ -5,7 +5,7 @@ import by.epam.tc.web.entity.user.*;
 import java.util.List;
 
 /**
- * Provides with methods for work with rooms on DAO layer
+ * Provides with methods for work with users, clients, administrators, blacklist clients, regular clients on DAO layer
  * 
  * @author Lizzi9223
  *
@@ -275,7 +275,7 @@ public interface UserDAO {
 	void updateClientsUserId(int clientId, int newUserId) throws DAOException; 
 
 	/**
-	 * Deletes user account from database
+	 * Deletes user account 
 	 * 
 	 * @param userId identifier of the user to delete
 	 * @throws DAOException if exception in connection pool occurs
@@ -283,7 +283,7 @@ public interface UserDAO {
 	void deleteUser(int userId) throws DAOException; 
 
 	/**
-	 * Deletes client from database
+	 * Deletes client 
 	 * 
 	 * @param clientId identifier of the client to delete
 	 * @throws DAOException if exception in connection pool occurs
@@ -291,7 +291,7 @@ public interface UserDAO {
 	void deleteClient(int clientId) throws DAOException;
 
 	/**
-	 * Deletes client from blacklist
+	 * Deletes client 
 	 * 
 	 * @param clientId identifier of the client to delete from blacklist
 	 * @throws DAOException if exception in connection pool occurs

@@ -5,6 +5,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/** 
+ * Booking bean
+ * 
+ * The class {@code Booking} implements {@code Serializable}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class Booking implements Serializable {
 	private static final long serialVersionUID = 1L;
 

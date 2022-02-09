@@ -17,6 +17,12 @@ import by.epam.tc.web.controller.constant.CommandName;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
 
+/** 
+ * The class {@code LoginationFilter} implements {@code Filter}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class LoginationFilter implements Filter {
 
 	private final List<String> availableForGuestCommands = Arrays.asList(CommandName.GO_TO_WELCOME_PAGE,

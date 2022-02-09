@@ -11,6 +11,12 @@ import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.service.RoomService;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code RoomServiceImpl} implements {@code RoomService}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class RoomServiceImpl implements RoomService {
 
 	private final RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();

@@ -3,6 +3,12 @@ package by.epam.tc.web.dao.database.query.impl;
 import by.epam.tc.web.dao.database.metadata.Metadata;
 import by.epam.tc.web.dao.database.query.UpdateQuery;
 
+/** 
+ * The class {@code UpdateQueryImpl} implements {@code UpdateQuery}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class UpdateQueryImpl implements UpdateQuery {
 	private final String insertQuery = "update %s set %s where %s = ?;";
 

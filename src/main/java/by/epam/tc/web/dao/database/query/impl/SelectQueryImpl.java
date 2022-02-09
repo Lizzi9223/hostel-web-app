@@ -2,6 +2,12 @@ package by.epam.tc.web.dao.database.query.impl;
 
 import by.epam.tc.web.dao.database.query.SelectQuery;
 
+/** 
+ * The class {@code SelectQueryImpl} implements {@code SelectQuery}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class SelectQueryImpl implements SelectQuery {
 
 	@Override

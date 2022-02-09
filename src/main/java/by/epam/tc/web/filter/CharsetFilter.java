@@ -11,6 +11,12 @@ import javax.servlet.ServletResponse;
 
 import by.epam.tc.web.controller.constant.Utility;
 
+/** 
+ * The class {@code CharsetFilter} implements {@code Filter}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class CharsetFilter implements Filter {
 
 	private String encoding;

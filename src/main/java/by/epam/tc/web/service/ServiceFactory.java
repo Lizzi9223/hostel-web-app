@@ -5,6 +5,12 @@ import by.epam.tc.web.service.impl.RoomServiceImpl;
 import by.epam.tc.web.service.impl.StaysServiceImpl;
 import by.epam.tc.web.service.impl.UserServiceImpl;
 
+/**
+ * Provides with access to services
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class ServiceFactory {
 	private static final ServiceFactory instance = new ServiceFactory();
 

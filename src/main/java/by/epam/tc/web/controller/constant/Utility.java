@@ -1,5 +1,11 @@
 package by.epam.tc.web.controller.constant;
 
+/** 
+ * Class containing names of all parameters recognized by controller
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class Utility {
 	public final static String EMPTY = "";
 	public final static String ID = "Id";

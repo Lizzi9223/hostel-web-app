@@ -15,6 +15,12 @@ import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code ApproveBookingCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class ApproveBookingCommand implements Command {
 	private static final Logger logger = LogManager
 			.getLogger(by.epam.tc.web.controller.impl.ApproveBookingCommand.class);

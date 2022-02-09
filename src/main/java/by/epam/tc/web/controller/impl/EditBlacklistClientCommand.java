@@ -18,6 +18,12 @@ import by.epam.tc.web.entity.user.Client;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code EditBlacklistClientCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class EditBlacklistClientCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.EditBlacklistClientCommand.class);
 

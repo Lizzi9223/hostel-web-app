@@ -10,6 +10,12 @@ import by.epam.tc.web.controller.constant.Utility;
 import by.epam.tc.web.dao.database.connection_pool.ConnectionPool;
 import by.epam.tc.web.dao.database.connection_pool.ConnectionPoolException;
 
+/** 
+ * The class {@code AppContextListener} implements {@code ServletContextListener}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class AppContextListener implements ServletContextListener {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.listener.AppContextListener.class);
 

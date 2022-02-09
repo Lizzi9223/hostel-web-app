@@ -11,6 +11,12 @@ import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Forward;
 import by.epam.tc.web.controller.constant.Utility;
 
+/** 
+ * The class {@code GoToRegistrationPageCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class GoToRegistrationPageCommand implements Command {
 
 	@Override

@@ -14,6 +14,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/** 
+ * The class {@code StaysDAOImpl} implements {@code StaysDAO}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class StaysDAOImpl implements StaysDAO {
 
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();

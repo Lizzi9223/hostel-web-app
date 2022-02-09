@@ -4,6 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/** 
+ * Stay bean
+ * 
+ * The class {@code Stay} implements {@code Serializable}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class Stay implements Serializable {
 	private static final long serialVersionUID = 1L;
 

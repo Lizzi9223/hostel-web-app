@@ -2,6 +2,14 @@ package by.epam.tc.web.entity.user;
 
 import java.util.Objects;
 
+/** 
+ * Administrator bean
+ * 
+ * The class {@code Admin} extends {@code User}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class Admin extends User {
 	private static final long serialVersionUID = 1L;
 

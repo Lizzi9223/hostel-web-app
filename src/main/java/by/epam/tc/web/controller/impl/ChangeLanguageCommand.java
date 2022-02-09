@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Utility;
 
+/** 
+ * The class {@code ChangeLanguageCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class ChangeLanguageCommand implements Command {
 
 	@Override

@@ -21,6 +21,12 @@ import by.epam.tc.web.entity.stay.Stay;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
+/** 
+ * The class {@code SubmitStayCommand} implements {@code Command}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class SubmitStayCommand implements Command {
 	private static final Logger logger = LogManager.getLogger(by.epam.tc.web.controller.impl.SubmitStayCommand.class);
 

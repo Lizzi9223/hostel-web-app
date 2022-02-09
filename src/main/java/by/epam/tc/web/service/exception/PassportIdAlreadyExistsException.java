@@ -1,5 +1,13 @@
 package by.epam.tc.web.service.exception;
 
+/**
+ * Represents an exception that can occur if entered passport identifier already exists in the application
+ * 
+ * The class {@code LoginAlreadyExistsException} is a subclass of {@code Exception}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class PassportIdAlreadyExistsException extends Exception {
 	private static final long serialVersionUID = 1L;
 

@@ -3,6 +3,14 @@ package by.epam.tc.web.entity.room;
 import java.io.Serializable;
 import java.util.Objects;
 
+/** 
+ * Image bean
+ * 
+ * The class {@code Image} implements {@code Serializable}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class Image implements Serializable {
 	private static final long serialVersionUID = 1L;
 

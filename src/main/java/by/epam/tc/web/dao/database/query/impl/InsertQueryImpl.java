@@ -3,6 +3,12 @@ package by.epam.tc.web.dao.database.query.impl;
 import by.epam.tc.web.dao.database.metadata.Metadata;
 import by.epam.tc.web.dao.database.query.InsertQuery;
 
+/** 
+ * The class {@code InsertQueryImpl} implements {@code InsertQuery}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class InsertQueryImpl implements InsertQuery {
 
 	@Override

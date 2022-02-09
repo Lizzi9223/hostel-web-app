@@ -2,6 +2,12 @@ package by.epam.tc.web.dao.database.query;
 
 import by.epam.tc.web.dao.database.query.impl.*;
 
+/**
+ * Provides with access to queries
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class QueryFactory {
 	private final static QueryFactory instance = new QueryFactory();
 

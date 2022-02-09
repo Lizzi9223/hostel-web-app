@@ -2,6 +2,12 @@ package by.epam.tc.web.dao.database;
 
 import java.util.ResourceBundle;
 
+/**
+ * Gets database parameters from resource file
+ * 
+ * @author Lizzi9223
+ *
+ */
 public final class DBResourceManager {
 	private final static DBResourceManager instance = new DBResourceManager();
 

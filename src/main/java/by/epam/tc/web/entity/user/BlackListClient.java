@@ -3,6 +3,14 @@ package by.epam.tc.web.entity.user;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/** 
+ * BlackListClient bean
+ * 
+ * The class {@code BlackListClient} extends {@code Client}
+ * 
+ * @author Lizzi9223
+ *
+ */
 public class BlackListClient extends Client {
 	private static final long serialVersionUID = 1L;
 
