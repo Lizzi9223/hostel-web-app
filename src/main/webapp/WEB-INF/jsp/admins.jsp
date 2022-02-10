@@ -137,12 +137,14 @@
 				<div class="form" style="padding-left: 20px">
 					<h3>
 						<c:out value="${all_admins_word}" />
-						<a
+						<c:if test="${sessionScope.login eq 'ADMIN'}">
+							<a
 										href="Controller?command=GO_TO_REGISTRATION_PAGE&create=admin">
 										<button class="buttons" type="button" style="margin-left:20px">
 											<c:out value="${create_new_admin}" />
 										</button>
 									</a>
+						</c:if>
 					</h3>
 					<br>
 

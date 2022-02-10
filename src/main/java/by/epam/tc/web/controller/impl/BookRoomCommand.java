@@ -14,6 +14,7 @@ import by.epam.tc.web.controller.Command;
 import by.epam.tc.web.controller.constant.Forward;
 import by.epam.tc.web.controller.constant.Redirect;
 import by.epam.tc.web.controller.constant.Utility;
+import by.epam.tc.web.entity.room.Room;
 import by.epam.tc.web.service.ServiceFactory;
 import by.epam.tc.web.service.exception.ServiceException;
 
@@ -30,8 +31,8 @@ public class BookRoomCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int roomNumber = Integer.parseInt(request.getParameter(Utility.ROOM_NUMBER));
 		try {
-			request.setAttribute(Utility.ROOM,
-					ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber));
+			Room room = ServiceFactory.getInstance().getRoomService().getRoomByNumber(roomNumber);
+			request.getSession().setAttribute(Utility.ROOM_TO_BOOK, room);
 			request.getSession().setAttribute(Utility.ALL_ROOMS,
 					ServiceFactory.getInstance().getRoomService().getAllRooms());
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_BOOK_ROOM_PAGE);

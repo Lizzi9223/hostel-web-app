@@ -113,15 +113,11 @@ input[type=range]::-webkit-slider-thumb {
 			style="flex-direction: column; justify-content: center">
 
 			<div class="form" style="padding-bottom: 20px; margin-top: 20px">
-
 				<h4>
-					<c:out value="${check_for_avail_places}" />
-					#
-					<c:out value="${room.getRoomNumber()}" />
-					:
+					<c:out value="${check_for_avail_places} #${roomToBook.getRoomNumber()} :" />
 				</h4>
 				<br>
-				<form>
+		 		<form>
 					<label for="fromDate"><c:out value="${arrive_date}" />:</label> <input
 						type="date" id="fromDate" name="${Utility.FROM_DATE}"
 						onchange="setToDate()" required> <label for="toDate">&#160;&#160;&#160;&#160;<c:out
@@ -133,7 +129,7 @@ input[type=range]::-webkit-slider-thumb {
 						id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="1"
 						min="1" max="15" style="margin-right: 90px"> <input
 						type="hidden" name="${Utility.ROOM_NUMBER}"
-						value="${room.getRoomNumber()}" /> <input type="hidden"
+						value="${roomToBook.getRoomNumber()}" /> <input type="hidden"
 						name="${Utility.COMMAND}"
 						value="${CommandName.CHECK_ROOM_AVAILABILITY}" /> <input
 						class="submit_button" type="submit" value="${check}"
@@ -142,7 +138,7 @@ input[type=range]::-webkit-slider-thumb {
 						value="Check among all rooms" /> <label
 						for="check-among-all-rooms"><c:out
 							value="${check_among_all_rooms}" /></label>
-				</form>
+				</form> 
 			</div>
 
 			<div class="form rooms">
@@ -151,11 +147,11 @@ input[type=range]::-webkit-slider-thumb {
 						<div class="col-10">
 							<div class="swiper-container product-slider">
 								<div class="swiper-wrapper">
-									<c:forEach var="image" items="${room.getImages()}">
+									<c:forEach var="image" items="${roomToBook.getImages()}">
 										<div class="swiper-slide">
 											<img src="${image.getImgPath()}" alt="1">
 										</div>
-									</c:forEach>
+									</c:forEach> 
 								</div>
 								<div class="swiper-button-next">
 									<i class="fa fa-chevron-right"></i>
@@ -168,29 +164,41 @@ input[type=range]::-webkit-slider-thumb {
 						<div class="col-2">
 							<div class="swiper-container product-thumbs">
 								<div class="swiper-wrapper">
-									<c:forEach var="image" items="${room.getImages()}">
+									<c:forEach var="image" items="${roomToBook.getImages()}">
 										<div class="swiper-slide">
 											<img src="${image.getImgPath()}" alt="1">
 										</div>
-									</c:forEach>
+									</c:forEach> 
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>  
 
 				<div class="info">
 					<div>
-						<div>${room.getRoomNumber()}</div>
-						<div>${room.getCost()}</div>
-						<div>${room.getCapacity()}</div>
-						<div>${room.getGender()}</div>
-						<div>${room.isBathroomInRoom()}</div>
-						<div>${room.getNotes()}</div>
-					</div>
+								<div>
+									<span style="font-size: 16px"><b><c:out
+												value="${roomLabel}"/>: </b></span>${roomToBook.getRoomNumber()}</div>
+								<div>
+									<b><c:out value="${cost}" />: </b>${roomToBook.getCost()} BYN
+								</div>
+								<div>
+									<b><c:out value="${capacity}" />: </b>${roomToBook.getCapacity()}</div>
+								<c:if
+									test="${not empty roomToBook.getGender() and roomToBook.getGender() ne ''}">
+									<div>
+										<b><c:out value="${gender}" />: </b>${roomToBook.getGender()}</div>
+								</c:if>
+								<c:if test="${roomToBook.isBathroomInRoom() eq true }">
+									<c:out value="${private_bathroom_in_room}" />
+								</c:if>
+								<div>${roomToBook.getNotes()}</div>
+							</div>
+						</div>
 				</div>
-			</div>
-
+			</div> 
+			
 			<div class="form">
 				<div style="padding-bottom: 30px">
 					<c:forEach var="room" items="${allRooms}">
@@ -234,8 +242,8 @@ input[type=range]::-webkit-slider-thumb {
 								<b><c:out value="${roomLabel}" /> #:</b><br>
 								<c:forEach var="room" items="${availableRooms}">
 									<input type="radio" name="${Utility.ROOM_NUMBER}"
-										value="${room.getRoomNumber()}">
-									<c:out value="${room.getRoomNumber()}" />
+										value="${room.getRoomNumber()}" required>
+									<c:out value="${room.getRoomNumber()}"/>
 									<br>
 								</c:forEach>
 								<table>
@@ -263,6 +271,8 @@ input[type=range]::-webkit-slider-thumb {
 					</div>
 				</c:when>
 			</c:choose>
+		
+
 		</div>
 	</div>
 

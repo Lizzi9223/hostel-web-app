@@ -54,6 +54,8 @@ public class SubmitBookingCommand implements Command {
 				String userLogin = (String) request.getSession().getAttribute(Utility.LOGIN);
 				ServiceFactory.getInstance().getStaysService().addBooking(userLogin, fromDate, toDate, guestsNumber,
 						roomNumber);
+				request.getSession().removeAttribute(Utility.ROOM_TO_BOOK);
+				request.getSession().removeAttribute(Utility.ALL_ROOMS);
 			}
 			response.sendRedirect(Redirect.TO_BOOKINGS_PAGE);
 		} catch (ServiceException e) {

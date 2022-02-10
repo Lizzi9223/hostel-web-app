@@ -67,6 +67,7 @@ public final class Utility {
 	public final static String PHOTO = "photo";
 	public final static String APPROVE = "approve";
 	public final static String ROOM = "room";
+	public final static String ROOM_TO_BOOK = "roomToBook";
 	public final static String ALL_ROOMS = "allRooms";
 	public final static String LANGUAGE = "language";
 	public final static String URL = "url";

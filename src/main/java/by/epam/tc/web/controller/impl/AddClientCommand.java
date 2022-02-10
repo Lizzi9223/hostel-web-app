@@ -39,7 +39,8 @@ public class AddClientCommand implements Command {
 			String phone = request.getParameter(Utility.PHONE);
 			String email = request.getParameter(Utility.EMAIL);
 			Client client = new Client(name, surname, passportId, dateOfBith, country, phone, email);
-			if (ServiceFactory.getInstance().getUserService().addClient(client)) {
+			boolean isClientAdded = ServiceFactory.getInstance().getUserService().addClient(client);
+			if (isClientAdded) {
 				response.sendRedirect(Redirect.TO_CLIENTS_PAGE);
 			} else {
 				logger.info("Validation failed while adding new client (by admin)");

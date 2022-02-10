@@ -102,11 +102,12 @@ public class RegistrationCommand implements Command {
 				if (isSignedUp) {
 					request.getSession().setAttribute(Utility.ROLE, Role.ADMIN.toString());
 					request.getSession().setAttribute(Utility.LOGIN, login);
+					request.getSession().removeAttribute(Utility.CREATE);
 					response.sendRedirect(Redirect.TO_ACCOUNT_PAGE);
 				} else {
 					logger.info("Validation failed while admin registration");
 					request.getSession().setAttribute(Utility.ERROR, Message.VALIDATION);
-					response.sendRedirect(Redirect.CREATE_ADMIN);
+					response.sendRedirect(Redirect.TO_REGISTRATION_PAGE);
 				}
 			}
 		} catch (LoginAlreadyExistsException e) {

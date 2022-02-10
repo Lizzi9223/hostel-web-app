@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean addClient(Client client) throws ServiceException, PassportIdAlreadyExistsException {
 		try {
-			if (!UserValidator.isValidUserClient(client)) {
+			if (!UserValidator.isValidClient(client)) {
 				return false;
 			}
 			if (userDAO.findClientByPassportId(client.getPassportId()) != null) {

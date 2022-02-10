@@ -24,7 +24,7 @@ public class GoToRegistrationPageCommand implements Command {
 
 		if (request.getParameter(Utility.CREATE) != null
 				&& request.getParameter(Utility.CREATE).equals(Utility.ADMIN)) {
-			request.setAttribute(Utility.CREATE, Utility.ADMIN);
+			request.getSession().setAttribute(Utility.CREATE, Utility.ADMIN);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(Forward.TO_REGISTRATION_PAGE);
 		dispatcher.forward(request, response);
