@@ -11,17 +11,13 @@ import by.epam.tc.web.dao.impl.UserDAOImpl;
  *
  */
 public final class DAOFactory {
-	private final static DAOFactory instance = new DAOFactory();
+	private static DAOFactory instance;
 
 	private UserDAO userDAO;
 	private StaysDAO staysDAO;
 	private RoomDAO roomDAO;
 
 	private DAOFactory() {
-	}
-
-	public static DAOFactory getInstance() {
-		return instance;
 	}
 
 	public UserDAO getUserDAO() {
@@ -43,5 +39,12 @@ public final class DAOFactory {
 			roomDAO = new RoomDAOImpl();
 		}
 		return roomDAO;
+	}
+	
+	public static DAOFactory getInstance() {
+		if(instance == null) {
+			instance = new DAOFactory();
+		}
+		return instance;
 	}
 }
