@@ -19,10 +19,13 @@
 <fmt:message bundle="${lang}" key="main.welcome_to" var="welcome_to" />
 <fmt:message bundle="${lang}" key="main.hostel_Samartia"
 	var="hostel_Samartia" />
-	
-<fmt:message bundle="${lang}" key="contacts.contacts_word" var="contacts_word" />
-<fmt:message bundle="${lang}" key="contacts.address_word" var="address_word" />
-<fmt:message bundle="${lang}" key="contacts.address_value" var="address_value" />
+
+<fmt:message bundle="${lang}" key="contacts.contacts_word"
+	var="contacts_word" />
+<fmt:message bundle="${lang}" key="contacts.address_word"
+	var="address_word" />
+<fmt:message bundle="${lang}" key="contacts.address_value"
+	var="address_value" />
 
 <fmt:message bundle="${lang}" key="logination.logination"
 	var="logination" />
@@ -138,8 +141,7 @@
 	var="add_to_blacklist" />
 <fmt:message bundle="${lang}" key="clients.add_to_regular_customers"
 	var="add_to_regular_customers" />
-<fmt:message bundle="${lang}" key="clients.blacklist"
-	var="blacklist" />
+<fmt:message bundle="${lang}" key="clients.blacklist" var="blacklist" />
 <fmt:message bundle="${lang}" key="clients.regular_cust"
 	var="regular_cust" />
 <fmt:message bundle="${lang}" key="clients.show_in_blacklist"
@@ -190,25 +192,28 @@
 	var="new_room_not_select_if_no_need" />
 <fmt:message bundle="${lang}" key="bookings.show_client"
 	var="show_client" />
-<fmt:message bundle="${lang}" key="bookings.show_user"
-	var="show_user" />
+<fmt:message bundle="${lang}" key="bookings.show_user" var="show_user" />
 
 <fmt:message bundle="${lang}" key="validation.valid_login_msg"
 	var="valid_login_msg" />
 <fmt:message bundle="${lang}" key="validation.valid_password_msg"
 	var="valid_password_msg" />
-	
+
 <fmt:message bundle="${lang}" key="admins.all_admins"
 	var="all_admins_word" />
-<fmt:message bundle="${lang}" key="admins.admin_id"
-	var="admin_id_word" />
-	
-<fmt:message bundle="${lang}" key="blacklist.since_date_word" var="since_date_word" />
-<fmt:message bundle="${lang}" key="blacklist.reason_word" var="reason_word" />
-<fmt:message bundle="${lang}" key="blacklist.delete_from_blacklist" var="delete_from_blacklist" />
+<fmt:message bundle="${lang}" key="admins.admin_id" var="admin_id_word" />
 
-<fmt:message bundle="${lang}" key="regularCust.discount_word" var="discount_word" />
-<fmt:message bundle="${lang}" key="regularCust.delete_from_regular" var="delete_from_regular" />
+<fmt:message bundle="${lang}" key="blacklist.since_date_word"
+	var="since_date_word" />
+<fmt:message bundle="${lang}" key="blacklist.reason_word"
+	var="reason_word" />
+<fmt:message bundle="${lang}" key="blacklist.delete_from_blacklist"
+	var="delete_from_blacklist" />
+
+<fmt:message bundle="${lang}" key="regularCust.discount_word"
+	var="discount_word" />
+<fmt:message bundle="${lang}" key="regularCust.delete_from_regular"
+	var="delete_from_regular" />
 
 </head>
 </html>

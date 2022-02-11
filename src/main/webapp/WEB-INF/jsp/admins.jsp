@@ -138,12 +138,11 @@
 					<h3>
 						<c:out value="${all_admins_word}" />
 						<c:if test="${sessionScope.login eq 'ADMIN'}">
-							<a
-										href="Controller?command=GO_TO_REGISTRATION_PAGE&create=admin">
-										<button class="buttons" type="button" style="margin-left:20px">
-											<c:out value="${create_new_admin}" />
-										</button>
-									</a>
+							<a href="Controller?command=GO_TO_REGISTRATION_PAGE&create=admin">
+								<button class="buttons" type="button" style="margin-left: 20px">
+									<c:out value="${create_new_admin}" />
+								</button>
+							</a>
 						</c:if>
 					</h3>
 					<br>
@@ -160,7 +159,7 @@
 
 						<c:forEach var="admin" items="${admins}">
 							<tbody>
-								<tr class="choose-client" style="cursor: pointer">
+								<tr ${admin.getLogin() ne 'ADMIN' ? 'class="choose-client"' : '' } style="cursor: pointer">
 									<td><c:out value="${admin.getUserId()}" /></td>
 									<td><c:out value="${admin.getLogin()}" /></td>
 									<td><c:out value="${admin.getName()}" /></td>
@@ -168,8 +167,8 @@
 									<td style="visibility: hidden">
 										<form class="target">
 											<input type="hidden" name="${Utility.COMMAND}"
-												value="${CommandName.CHOOSE_ADMIN}" /> <input
-												type="hidden" name="${Utility.CHOSEN_ADMIN_ID}"
+												value="${CommandName.CHOOSE_ADMIN}" /> <input type="hidden"
+												name="${Utility.CHOSEN_ADMIN_ID}"
 												value="${admin.getUserId()}" />
 										</form>
 									</td>
@@ -195,7 +194,7 @@
 									<td><c:out value="${login_word}" />:</td>
 									<td><input type="text" name="${Utility.LOGIN}"
 										value="${chosenAdmin.getLogin()}" disabled><br></td>
-								</tr>							
+								</tr>
 								<tr>
 									<td><c:out value="${name_word}" />:</td>
 									<td><input type="text" name="${Utility.NAME}"
@@ -214,11 +213,11 @@
 										<td>
 											<form>
 												<input class="buttons open-popup del-acc" type="button"
-										value="${delete_account}" />
+													value="${delete_account}" />
 											</form>
 										</td>
 									</tr>
-								</c:if>								
+								</c:if>
 							</table>
 							<br>
 						</div>
@@ -231,16 +230,16 @@
 							style="width: 25px">
 						<form class="change-password-form">
 							<input type="hidden" name="${Utility.COMMAND}"
-								value="${CommandName.DELETE_ADMIN}" />
-							 	<input type="hidden" name="${Utility.CHOSEN_ADMIN_ID}" value="${chosenAdminId}" />
+								value="${CommandName.DELETE_ADMIN}" /> <input type="hidden"
+								name="${Utility.CHOSEN_ADMIN_ID}" value="${chosenAdminId}" />
 							<p>
 								<c:out value="${del_admin_check_msg}" />
 								<c:out value=" ${chosenAdmin.getLogin()}" />
 								?
 							</p>
 							<div style="display: flex; flex-direction: row">
-								<input class="buttons" type="submit"
-									value="${delete}" style="width: 100px; margin-right: 100px" /> <input
+								<input class="buttons" type="submit" value="${delete}"
+									style="width: 100px; margin-right: 100px" /> <input
 									class="close-popup del-acc buttons" type="button"
 									name="changePassword" value="${cancel}" style="width: 100px" />
 							</div>

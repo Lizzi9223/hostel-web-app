@@ -100,8 +100,7 @@
 						<tr>
 							<td><h2>
 									<c:out value="${my_account}" />
-								</h2>
-								<br></td>
+								</h2> <br></td>
 							<td><div></div></td>
 							<c:if test="${login ne 'ADMIN'}">
 								<td><button class="buttons" type="button" onclick="edit()">
@@ -113,28 +112,25 @@
 						</tr>
 
 						<tr>
-							<td>${login_word}:<br>
-							<br></td>
+							<td>${login_word}:<br> <br></td>
 							<td><input class="input" disabled type="text"
 								name="${Utility.LOGIN}" value="${sessionScope.login}" /><br>
-							<br></td>
+								<br></td>
 						</tr>
 						<tr>
 							<td></td>
 							<td id="valid_login_msg"
 								style="color: red; font-size: 12px; display: none"><c:out
-									value="${valid_login_msg}" /><br>
-							<br></td>
+									value="${valid_login_msg}" /><br> <br></td>
 						</tr>
 
 						<c:choose>
 							<c:when test="${sessionScope.role eq 'ADMIN'}">
 								<tr>
-									<td>${name_word}:<br>
-									<br></td>
+									<td>${name_word}:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.NAME}" value="${admin.getName()}" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 								<%--      <tr>
                                         <td>Photo:<br><br></td>
@@ -143,55 +139,46 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td><c:out value="${name_word}" />:<br>
-									<br></td>
+									<td><c:out value="${name_word}" />:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.NAME}" value="${client.getFirstName()}" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${surname_word}" />:<br>
-									<br></td>
+									<td><c:out value="${surname_word}" />:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.SURNAME}" value="${client.getLastName()}" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${passport_id_word}" />:<br>
-									<br></td>
+									<td><c:out value="${passport_id_word}" />:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.PASSPORT_ID}"
-										value="${client.getPassportId()}" /><br>
-									<br></td>
+										value="${client.getPassportId()}" /><br> <br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${date_of_birth_word}" />:<br>
-									<br></td>
-									<td><input class="input" disabled type="text"
+									<td><c:out value="${date_of_birth_word}" />:<br> <br></td>
+									<td><input class="input" disabled type="date"
 										name="${Utility.DATE_OF_BIRTH}"
-										value="${client.getBirthDate()}" /><br>
-									<br></td>
+										value="${client.getBirthDate()}" /><br> <br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${country_word}" />:<br>
-									<br></td>
+									<td><c:out value="${country_word}" />:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.COUNTRY}" value="${client.getCountry()}" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${phone_number_word}" />:<br>
-									<br></td>
+									<td><c:out value="${phone_number_word}" />:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.PHONE}" value="${client.getPhoneNumber()}" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${email_word}" />:<br>
-									<br></td>
+									<td><c:out value="${email_word}" />:<br> <br></td>
 									<td><input class="input" disabled type="text"
 										name="${Utility.EMAIL}" value="${client.getEmail()}" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
@@ -200,18 +187,14 @@
 							<c:set var="passportId" scope="session"
 								value="${client.getPassportId()}" />
 							<td><input id="save_button" style="visibility: hidden"
-								class="buttons" type="submit" value="${save}" /><br>
-							<br>
-							<br></td>
+								class="buttons" type="submit" value="${save}" /><br> <br>
+								<br></td>
 							<td><div></div></td>
 							<td><button id="cancel_button" class="buttons"
 									style="visibility: hidden" type="button" onclick="cancelEdit()">
 									<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out
 											value="${cancel}" /></a>
-								</button>
-								<br>
-							<br>
-							<br></td>
+								</button> <br> <br> <br></td>
 						</tr>
 
 					</table>
@@ -265,8 +248,7 @@
 						<td>
 							<form>
 								<c:if test="${sessionScope.role eq 'ADMIN'}">
-									<a
-										href="Controller?command=GO_TO_ADMINS_PAGE">
+									<a href="Controller?command=GO_TO_ADMINS_PAGE">
 										<button class="buttons" type="button">
 											<c:out value="${all_admins_word}" />
 										</button>
@@ -346,8 +328,8 @@
 							?
 						</p>
 						<div style="display: flex; flex-direction: row">
-							<input class="buttons" type="submit"
-								value="${delete}" style="width: 100px; margin-right: 100px" /> <input
+							<input class="buttons" type="submit" value="${delete}"
+								style="width: 100px; margin-right: 100px" /> <input
 								class="close-popup del-acc buttons" type="button"
 								name="changePassword" value="${cancel}" style="width: 100px" />
 						</div>

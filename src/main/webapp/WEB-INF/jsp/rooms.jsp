@@ -181,8 +181,7 @@
 							name="${Utility.PRICE_LEFT}"> <label for="priceTo">&#160;&#160;&#160;<c:out
 								value="${to}" />:&#160;
 						</label> <input id="priceTo" type="text" readonly class="rangeInput"
-							name="${Utility.PRICE_RIGHT}"><br>
-						<br>
+							name="${Utility.PRICE_RIGHT}"><br> <br>
 
 						<div class="multi-range-slider" id="priceRange">
 
@@ -211,8 +210,7 @@
 							name="${Utility.CAPACITY_LEFT}"> <label for="capacityTo">&#160;&#160;&#160;<c:out
 								value="${to}" />:&#160;
 						</label> <input id="capacityTo" type="text" readonly class="rangeInput"
-							name="${Utility.CAPACITY_RIGHT}"><br>
-						<br>
+							name="${Utility.CAPACITY_RIGHT}"><br> <br>
 
 						<div class="multi-range-slider" id="capacityRange">
 
@@ -426,7 +424,7 @@
 							<div>
 								<div>
 									<span style="font-size: 16px"><b><c:out
-												value="${roomLabel}"/>: </b></span>${room.getRoomNumber()}</div>
+												value="${roomLabel}" />: </b></span>${room.getRoomNumber()}</div>
 								<div>
 									<b><c:out value="${cost}" />: </b>${room.getCost()} BYN
 								</div>

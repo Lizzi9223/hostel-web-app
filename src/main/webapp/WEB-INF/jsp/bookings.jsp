@@ -350,8 +350,7 @@
 																value="${CommandName.CHOOSE_USER}" /> <input
 																type="hidden" name="${Utility.BOOKING_ID}"
 																value="${chosenBookingId}" /><input
-																class="submit_button" type="submit"
-																value="${show_user}" />
+																class="submit_button" type="submit" value="${show_user}" />
 														</form>
 													</td>
 												</tr>
@@ -365,7 +364,7 @@
 																class="submit_button" type="submit" value="${delete}" />
 														</form>
 													</td>
-												</tr>												
+												</tr>
 											</c:otherwise>
 										</c:choose>
 									</c:when>
@@ -424,8 +423,8 @@
 									required> <label for="toDate">&#160;&#160;&#160;&#160;<c:out
 										value="${departure_date}" />:
 								</label> <input type="date" id="toDate" name="${Utility.TO_DATE}"
-									value="${booking.getToDate()}" required> <br>
-								<br> <label for="questsNumber"><c:out
+									value="${booking.getToDate()}" required> <br> <br>
+								<label for="questsNumber"><c:out
 										value="${number_of_guests}" />:&#160;</label> <input type="number"
 									id="guestsNumber" name="${Utility.GUESTS_NUMBER}"
 									value="${booking.getGuestsCount()}" min="1" max="15"
@@ -439,8 +438,9 @@
 									name="${Utility.COMMAND}"
 									value="${CommandName.EDIT_BOOKING_CHECK}" /> <input
 									class="submit_button" type="submit" value="${check}"
-									style="margin-right: 50px" /> <input id="check-among-all-rooms"
-									type="checkbox" name="${Utility.CHECK_AMONG_ALL_ROOMS}"
+									style="margin-right: 50px" /> <input
+									id="check-among-all-rooms" type="checkbox"
+									name="${Utility.CHECK_AMONG_ALL_ROOMS}"
 									value="${check_among_all_rooms}" checked
 									style="visibility: hidden" />
 							</form>
@@ -453,13 +453,12 @@
 						<img class="close-popup" src="images/close.png"
 							style="width: 25px">
 						<form>
-							<label for="fromDate"><c:out value="${arrive_date}" />:</label> <input
-								type="date" id="fromDate" name="${Utility.FROM_DATE}"
+							<label for="fromDate"><c:out value="${arrive_date}" />:</label>
+							<input type="date" id="fromDate" name="${Utility.FROM_DATE}"
 								onchange="setToDate()" required> <label for="toDate">&#160;&#160;&#160;&#160;<c:out
 									value="${departure_date}" />:
 							</label> <input type="date" id="toDate" name="${Utility.TO_DATE}"
-								required> <br>
-							<br> <label for="questsNumber"><c:out
+								required> <br> <br> <label for="questsNumber"><c:out
 									value="${number_of_guests}" />:&#160;</label> <input type="number"
 								id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="1"
 								min="1" max="15" style="margin-right: 90px"> <input

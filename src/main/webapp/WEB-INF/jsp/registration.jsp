@@ -102,8 +102,7 @@ body {
 							<td><h2>
 									<c:out value="${registration}" />
 									:
-								</h2>
-								<br></td>
+								</h2> <br></td>
 							<td><input type="hidden" name="${Utility.COMMAND}"
 								value="${CommandName.REGISTRATION}" /></td>
 						</tr>
@@ -116,8 +115,7 @@ body {
 						<tr>
 							<td></td>
 							<td style="color: red; font-size: 12px"><c:out
-									value="${valid_login_msg}" /><br>
-							<br></td>
+									value="${valid_login_msg}" /><br> <br></td>
 						</tr>
 						<tr>
 							<td><c:out value="${password_word}" />:</td>
@@ -127,19 +125,15 @@ body {
 						<tr>
 							<td></td>
 							<td style="color: red; font-size: 12px"><c:out
-									value="${valid_password_msg}" /><br>
-							<br>
-							<br></td>
+									value="${valid_password_msg}" /><br> <br> <br></td>
 						</tr>
 
 						<c:choose>
 							<c:when test="${create eq 'admin'}">
 								<tr>
-									<td><c:out value="${name_word}" />:<br>
-									<br></td>
+									<td><c:out value="${name_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.NAME}" value=""
-										required /><br>
-									<br></td>
+										required /><br> <br></td>
 								</tr>
 								<%--            <tr>
                                         <td><c:out value="${photo_word}"/>:<br><br></td>
@@ -148,67 +142,52 @@ body {
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td><c:out value="${name_word}" />:<br>
-									<br></td>
+									<td><c:out value="${name_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.NAME}" value=""
-										required /><br>
-									<br></td>
+										required /><br> <br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${surname_word}" />:<br>
-									<br></td>
+									<td><c:out value="${surname_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.SURNAME}" value=""
-										required /><br>
-									<br></td>
+										required /><br> <br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${passport_id_word}" />:<br>
-									<br></td>
+									<td><c:out value="${passport_id_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.PASSPORT_ID}"
-										value="" required /><br>
-									<br></td>
+										value="" required /><br> <br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${date_of_birth_word}" />:<br>
-									<br></td>
+									<td><c:out value="${date_of_birth_word}" />:<br> <br></td>
 									<td><input type="date" id="datefield"
 										name="${Utility.DATE_OF_BIRTH}" required></td>
 								</tr>
 								<tr>
-									<td><c:out value="${country_word}" />:<br>
-									<br></td>
+									<td><c:out value="${country_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.COUNTRY}" value="" /><br>
-									<br></td>
+										<br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${phone_number_word}" />:<br>
-									<br></td>
+									<td><c:out value="${phone_number_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.PHONE}" value=""
-										required /><br>
-									<br></td>
+										required /><br> <br></td>
 								</tr>
 								<tr>
-									<td><c:out value="${email_word}" />:<br>
-									<br></td>
+									<td><c:out value="${email_word}" />:<br> <br></td>
 									<td><input type="text" name="${Utility.EMAIL}" value=""
-										required /><br>
-									<br></td>
+										required /><br> <br></td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
 
 						<tr>
 							<td><input class="submit_button" type="submit"
-								value="${sign_up}" /><br>
-							<br>
-							<br></td>
+								value="${sign_up}" /><br> <br> <br></td>
 							<td></td>
 						</tr>
 
 						<tr>
 							<td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out
-										value="${back}" /></a><br>
-							<br></td>
+										value="${back}" /></a><br> <br></td>
 							<c:if test="${not empty error and error ne ''}">
 								<fmt:message bundle="${lang}" key="${error}" var="error_msg" />
 								<td><p class="error">

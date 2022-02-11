@@ -114,17 +114,17 @@ input[type=range]::-webkit-slider-thumb {
 
 			<div class="form" style="padding-bottom: 20px; margin-top: 20px">
 				<h4>
-					<c:out value="${check_for_avail_places} #${roomToBook.getRoomNumber()} :" />
+					<c:out
+						value="${check_for_avail_places} #${roomToBook.getRoomNumber()} :" />
 				</h4>
 				<br>
-		 		<form>
+				<form>
 					<label for="fromDate"><c:out value="${arrive_date}" />:</label> <input
 						type="date" id="fromDate" name="${Utility.FROM_DATE}"
 						onchange="setToDate()" required> <label for="toDate">&#160;&#160;&#160;&#160;<c:out
 							value="${departure_date}" />:
 					</label> <input type="date" id="toDate" name="${Utility.TO_DATE}" required>
-					<br>
-					<br> <label for="questsNumber"><c:out
+					<br> <br> <label for="questsNumber"><c:out
 							value="${number_of_guests}" />:&#160;</label> <input type="number"
 						id="guestsNumber" name="${Utility.GUESTS_NUMBER}" value="1"
 						min="1" max="15" style="margin-right: 90px"> <input
@@ -138,7 +138,7 @@ input[type=range]::-webkit-slider-thumb {
 						value="Check among all rooms" /> <label
 						for="check-among-all-rooms"><c:out
 							value="${check_among_all_rooms}" /></label>
-				</form> 
+				</form>
 			</div>
 
 			<div class="form rooms">
@@ -151,7 +151,7 @@ input[type=range]::-webkit-slider-thumb {
 										<div class="swiper-slide">
 											<img src="${image.getImgPath()}" alt="1">
 										</div>
-									</c:forEach> 
+									</c:forEach>
 								</div>
 								<div class="swiper-button-next">
 									<i class="fa fa-chevron-right"></i>
@@ -168,112 +168,112 @@ input[type=range]::-webkit-slider-thumb {
 										<div class="swiper-slide">
 											<img src="${image.getImgPath()}" alt="1">
 										</div>
-									</c:forEach> 
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>  
+				</div>
 
 				<div class="info">
 					<div>
-								<div>
-									<span style="font-size: 16px"><b><c:out
-												value="${roomLabel}"/>: </b></span>${roomToBook.getRoomNumber()}</div>
-								<div>
-									<b><c:out value="${cost}" />: </b>${roomToBook.getCost()} BYN
-								</div>
-								<div>
-									<b><c:out value="${capacity}" />: </b>${roomToBook.getCapacity()}</div>
-								<c:if
-									test="${not empty roomToBook.getGender() and roomToBook.getGender() ne ''}">
-									<div>
-										<b><c:out value="${gender}" />: </b>${roomToBook.getGender()}</div>
-								</c:if>
-								<c:if test="${roomToBook.isBathroomInRoom() eq true }">
-									<c:out value="${private_bathroom_in_room}" />
-								</c:if>
-								<div>${roomToBook.getNotes()}</div>
-							</div>
+						<div>
+							<span style="font-size: 16px"><b><c:out
+										value="${roomLabel}" />: </b></span>${roomToBook.getRoomNumber()}</div>
+						<div>
+							<b><c:out value="${cost}" />: </b>${roomToBook.getCost()} BYN
 						</div>
+						<div>
+							<b><c:out value="${capacity}" />: </b>${roomToBook.getCapacity()}</div>
+						<c:if
+							test="${not empty roomToBook.getGender() and roomToBook.getGender() ne ''}">
+							<div>
+								<b><c:out value="${gender}" />: </b>${roomToBook.getGender()}</div>
+						</c:if>
+						<c:if test="${roomToBook.isBathroomInRoom() eq true }">
+							<c:out value="${private_bathroom_in_room}" />
+						</c:if>
+						<div>${roomToBook.getNotes()}</div>
+					</div>
 				</div>
-			</div> 
-			
-			<div class="form">
-				<div style="padding-bottom: 30px">
-					<c:forEach var="room" items="${allRooms}">
-						<div
-							style="display: inline-block; margin-right: 20px; margin-bottom: 20px">
-							<form>
-								<input type="hidden" name="${Utility.COMMAND}"
-									value="${CommandName.BOOK_ROOM}" /> <input type="hidden"
-									name="${Utility.ROOM_NUMBER}" value="${room.getRoomNumber()}" />
-								<input class="submit_button" type="submit"
-									value="${roomLabel} #${room.getRoomNumber()}" />
-							</form>
-						</div>
-					</c:forEach>
-				</div>
+			</div>
+		</div>
 
+		<div class="form">
+			<div style="padding-bottom: 30px">
+				<c:forEach var="room" items="${allRooms}">
+					<div
+						style="display: inline-block; margin-right: 20px; margin-bottom: 20px">
+						<form>
+							<input type="hidden" name="${Utility.COMMAND}"
+								value="${CommandName.BOOK_ROOM}" /> <input type="hidden"
+								name="${Utility.ROOM_NUMBER}" value="${room.getRoomNumber()}" />
+							<input class="submit_button" type="submit"
+								value="${roomLabel} #${room.getRoomNumber()}" />
+						</form>
+					</div>
+				</c:forEach>
 			</div>
 
-			<c:choose>
-				<c:when test="${checkResult eq false}">
-					<div class="popup-bg" style="display: block">
-						<div class="popup" style="width: auto">
-							<img class="close-popup" src="images/close.png"
-								style="width: 25px">
-							<p>
-								<c:out value="${sorry_no_avail_places}" />
-							</p>
-						</div>
-					</div>
-				</c:when>
-				<c:when test="${checkResult eq true}">
-					<div class="popup-bg" style="display: block">
-						<div class="popup" style="width: auto">
-							<img class="close-popup" src="images/close.png"
-								style="width: 25px">
-							<h5>
-								<c:out value="${please_check_data_word}" />
-								:
-							</h5>
-							<form>
-								<b><c:out value="${roomLabel}" /> #:</b><br>
-								<c:forEach var="room" items="${availableRooms}">
-									<input type="radio" name="${Utility.ROOM_NUMBER}"
-										value="${room.getRoomNumber()}" required>
-									<c:out value="${room.getRoomNumber()}"/>
-									<br>
-								</c:forEach>
-								<table>
-									<tr>
-										<td><b><c:out value="${since}" />:</b></td>
-										<td><input type="date" name="${Utility.FROM_DATE}"
-											value="${fromDate}" readonly /></td>
-									</tr>
-									<tr>
-										<td><b><c:out value="${to}" />:</b></td>
-										<td><input type="date" name="${Utility.TO_DATE}"
-											value="${toDate}" readonly /></td>
-									</tr>
-									<tr>
-										<td><b><c:out value="${number_of_guests}" />:</b></td>
-										<td><input type="number" name="${Utility.GUESTS_NUMBER}"
-											value="${guestsNumber}" readonly /></td>
-									</tr>
-								</table>
-								<br> <input type="hidden" name="${Utility.COMMAND}"
-									value="${CommandName.SUBMIT_BOOKING}" /> <input
-									class="submit_button" type="submit" value="${submit_booking}" />
-							</form>
-						</div>
-					</div>
-				</c:when>
-			</c:choose>
-		
-
 		</div>
+
+		<c:choose>
+			<c:when test="${checkResult eq false}">
+				<div class="popup-bg" style="display: block">
+					<div class="popup" style="width: auto">
+						<img class="close-popup" src="images/close.png"
+							style="width: 25px">
+						<p>
+							<c:out value="${sorry_no_avail_places}" />
+						</p>
+					</div>
+				</div>
+			</c:when>
+			<c:when test="${checkResult eq true}">
+				<div class="popup-bg" style="display: block">
+					<div class="popup" style="width: auto">
+						<img class="close-popup" src="images/close.png"
+							style="width: 25px">
+						<h5>
+							<c:out value="${please_check_data_word}" />
+							:
+						</h5>
+						<form>
+							<b><c:out value="${roomLabel}" /> #:</b><br>
+							<c:forEach var="room" items="${availableRooms}">
+								<input type="radio" name="${Utility.ROOM_NUMBER}"
+									value="${room.getRoomNumber()}" required>
+								<c:out value="${room.getRoomNumber()}" />
+								<br>
+							</c:forEach>
+							<table>
+								<tr>
+									<td><b><c:out value="${since}" />:</b></td>
+									<td><input type="date" name="${Utility.FROM_DATE}"
+										value="${fromDate}" readonly /></td>
+								</tr>
+								<tr>
+									<td><b><c:out value="${to}" />:</b></td>
+									<td><input type="date" name="${Utility.TO_DATE}"
+										value="${toDate}" readonly /></td>
+								</tr>
+								<tr>
+									<td><b><c:out value="${number_of_guests}" />:</b></td>
+									<td><input type="number" name="${Utility.GUESTS_NUMBER}"
+										value="${guestsNumber}" readonly /></td>
+								</tr>
+							</table>
+							<br> <input type="hidden" name="${Utility.COMMAND}"
+								value="${CommandName.SUBMIT_BOOKING}" /> <input
+								class="submit_button" type="submit" value="${submit_booking}" />
+						</form>
+					</div>
+				</div>
+			</c:when>
+		</c:choose>
+
+
+	</div>
 	</div>
 
 </body>

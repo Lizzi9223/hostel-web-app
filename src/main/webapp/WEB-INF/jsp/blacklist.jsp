@@ -88,61 +88,61 @@
 
 	<div class="container">
 
-			<div class="menu">
-				<div class="tabs" style="justify-content: flex-start">
-					<div>
-						<a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out
-								value="${main}" /></a>
-					</div>
-					|
-					<div>
-						<a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out
-								value="${rooms}" /></a>
-					</div>
-					|
-					<div>
-						<a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out
-								value="${contacts}" /></a>
-					</div>
-					|
-					<c:if test="${not empty sessionScope.login}">
-						<div>
-							<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out
-									value="${my_account}" /></a>
-						</div>
-					</c:if>
+		<div class="menu">
+			<div class="tabs" style="justify-content: flex-start">
+				<div>
+					<a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out
+							value="${main}" /></a>
 				</div>
-				<div class="tabs" style="justify-content: flex-end">
-					<form>
-						<input type="hidden" name="${Utility.COMMAND}"
-							value="${CommandName.CHANGE_LANGUAGE}"> <select
-							name="${Utility.LANGUAGE}" onchange="submit()">
-							<option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out
-									value="${ru}" /></option>
-							<option value="en" ${language == 'en' ? 'selected' : ''}><c:out
-									value="${en}" /></option>
-						</select>
-					</form>
-					<c:choose>
-						<c:when test="${empty sessionScope.role}">
-							<div>
-								<a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out
-										value="${sign_in}" /></a>
-							</div>|
-			        		<div>
-								<a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out
-										value="${sign_up}" /></a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div>
-								<a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true"><c:out
-										value="${log_out}" /></a>
-							</div>|
-	        			</c:otherwise>
-					</c:choose>
+				|
+				<div>
+					<a href="Controller?command=GO_TO_ROOMS_PAGE"><c:out
+							value="${rooms}" /></a>
 				</div>
+				|
+				<div>
+					<a href="Controller?command=GO_TO_CONTACTS_PAGE"><c:out
+							value="${contacts}" /></a>
+				</div>
+				|
+				<c:if test="${not empty sessionScope.login}">
+					<div>
+						<a href="Controller?command=GO_TO_MY_ACCOUNT_PAGE"><c:out
+								value="${my_account}" /></a>
+					</div>
+				</c:if>
 			</div>
+			<div class="tabs" style="justify-content: flex-end">
+				<form>
+					<input type="hidden" name="${Utility.COMMAND}"
+						value="${CommandName.CHANGE_LANGUAGE}"> <select
+						name="${Utility.LANGUAGE}" onchange="submit()">
+						<option value="ru" ${language == 'ru' ? 'selected' : ''}><c:out
+								value="${ru}" /></option>
+						<option value="en" ${language == 'en' ? 'selected' : ''}><c:out
+								value="${en}" /></option>
+					</select>
+				</form>
+				<c:choose>
+					<c:when test="${empty sessionScope.role}">
+						<div>
+							<a href="Controller?command=GO_TO_LOGINATION_PAGE"><c:out
+									value="${sign_in}" /></a>
+						</div>|
+			        		<div>
+							<a href="Controller?command=GO_TO_REGISTRATION_PAGE"><c:out
+									value="${sign_up}" /></a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div>
+							<a href="Controller?command=GO_TO_WELCOME_PAGE&logOut=true"><c:out
+									value="${log_out}" /></a>
+						</div>|
+	        			</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 
 		<div class="container-body">
 			<div class="main">
@@ -150,8 +150,9 @@
 					<h3>
 						<c:out value="${blacklist}" />
 						<a href="Controller?command=GO_TO_CLIENTS_PAGE"> <input
-										class="buttons" type="button" value="${all_clients_word}" style="margin-left: 310px"/>
-									</a>						
+							class="buttons" type="button" value="${all_clients_word}"
+							style="margin-left: 310px" />
+						</a>
 					</h3>
 					<%--
 					<form style="margin-left: 50%">
@@ -187,24 +188,25 @@
 						</thead>
 
 						<c:forEach var="client" items="${blacklistClients}">
-							<tbody>					
-									<tr class="choose-client" style="cursor: pointer; ${client.isInBlackList() == true ? 'background:#808080; ' : ''}">
-										<td><c:out value="${client.getClientId()}" /></td>
-										<td><c:out value="${client.getPassportId()}" /></td>
-										<fmt:parseDate value="${client.getSinceDate()}"
-											pattern="yyyy-MM-dd" var="parsedDate" type="date" />
-										<td><fmt:formatDate value="${parsedDate}"
-												pattern="dd.MM.yyyy" /></td>
-										<td><c:out value="${client.getReason()}" /></td>
-										<td style="visibility: hidden">
-											<form class="target">
-												<input type="hidden" name="${Utility.COMMAND}"
-													value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /> <input
-													type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-													value="${client.getClientId()}" />
-											</form>
-										</td>
-									</tr>
+							<tbody>
+								<tr class="choose-client"
+									style="cursor: pointer; ${client.isInBlackList() == true ? 'background:#808080; ' : ''}">
+									<td><c:out value="${client.getClientId()}" /></td>
+									<td><c:out value="${client.getPassportId()}" /></td>
+									<fmt:parseDate value="${client.getSinceDate()}"
+										pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+									<td><fmt:formatDate value="${parsedDate}"
+											pattern="dd.MM.yyyy" /></td>
+									<td><c:out value="${client.getReason()}" /></td>
+									<td style="visibility: hidden">
+										<form class="target">
+											<input type="hidden" name="${Utility.COMMAND}"
+												value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /> <input
+												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+												value="${client.getClientId()}" />
+										</form>
+									</td>
+								</tr>
 							</tbody>
 						</c:forEach>
 					</table>
@@ -216,64 +218,70 @@
 							style="width: auto; padding: 40px; padding-bottom: 0">
 							<img class="close-popup" src="images/close.png"
 								style="width: 25px">
-							<button class="buttons" type="button" onclick="edit()" style="margin-left:60%"><c:out value="${edit}" /></button><br><br>
-							<form><table>
-								<tr>
-									<td><c:out value="${passport_id_word}" />:</td>
-									<td><input type="text" name="${Utility.PASSPORT_ID}"
-										value="${chosenClient.getPassportId()}" disabled><br></td>
-								</tr>
-								<tr>
-									<td><c:out value="${since_date_word}" />:</td>
-									<td><input class="input" type="date" name="${Utility.SINCE_DATE}"
-										value="${chosenClient.getSinceDate()}" disabled><br></td>
-								</tr>
-								<tr>
-									<td><c:out value="${reason_word}" />:</td>
-									<td><input class="input" type="text" name="${Utility.REASON}"
-										value="${chosenClient.getReason()}" disabled><br></td>
-								</tr>
-								<tr>
-									<td><br>
-										<input type="hidden" name="${Utility.COMMAND}"
-												value="${CommandName.EDIT_BLACKLIST_CLIENT}" /><input type="hidden"
-												name="${Utility.CHOSEN_CLIENT_ID}" value="${chosenClientId}" />
-											<input id="save_button" class="submit_button" type="submit" value="${save}"
-												style="margin-left: 20px; visibility:hidden" />
-									</td>
-									<td class="choose-client"><br>
-										<button id="cancel_button" class="buttons"
-									style="visibility: hidden" type="button"><c:out
-											value="${cancel}" />
-										</button>
-									</td>
-								</tr>
-							</table>
+							<button class="buttons" type="button" onclick="edit()"
+								style="margin-left: 60%">
+								<c:out value="${edit}" />
+							</button>
+							<br> <br>
+							<form>
+								<table>
+									<tr>
+										<td><c:out value="${passport_id_word}" />:</td>
+										<td><input type="text" name="${Utility.PASSPORT_ID}"
+											value="${chosenClient.getPassportId()}" disabled><br></td>
+									</tr>
+									<tr>
+										<td><c:out value="${since_date_word}" />:</td>
+										<td><input class="input" type="date"
+											name="${Utility.SINCE_DATE}"
+											value="${chosenClient.getSinceDate()}" disabled><br></td>
+									</tr>
+									<tr>
+										<td><c:out value="${reason_word}" />:</td>
+										<td><input class="input" type="text"
+											name="${Utility.REASON}" value="${chosenClient.getReason()}"
+											disabled><br></td>
+									</tr>
+									<tr>
+										<td><br> <input type="hidden"
+											name="${Utility.COMMAND}"
+											value="${CommandName.EDIT_BLACKLIST_CLIENT}" /><input
+											type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+											value="${chosenClientId}" /> <input id="save_button"
+											class="submit_button" type="submit" value="${save}"
+											style="margin-left: 20px; visibility: hidden" /></td>
+										<td class="choose-client"><br>
+											<button id="cancel_button" class="buttons"
+												style="visibility: hidden" type="button">
+												<c:out value="${cancel}" />
+											</button></td>
+									</tr>
+								</table>
 							</form>
-							
+
 							<div style="visibility: hidden">
 								<form class="target">
-											<input type="hidden" name="${Utility.COMMAND}"
-												value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /> <input
-												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-												value="${chosenClientId}" />
-										</form>
+									<input type="hidden" name="${Utility.COMMAND}"
+										value="${CommandName.CHOOSE_BLACKLIST_CLIENT}" /> <input
+										type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+										value="${chosenClientId}" />
+								</form>
 							</div>
-							
+
 							<br>
 							<table>
 								<tr id="colorfulButtons">
-									<td style="margin-left:20px">
-												<form>
-													<input type="hidden" name="${Utility.COMMAND}"
-														value="${CommandName.DELETE_FROM_BLACKLIST}" /><input
-														type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-														value="${chosenClientId}" /> <input class="submit_button"
-														type="submit" value="${delete_from_blacklist}"
-														style="margin-left: 20px;" />
-												</form>
-									</td>								
-								</tr>								
+									<td style="margin-left: 20px">
+										<form>
+											<input type="hidden" name="${Utility.COMMAND}"
+												value="${CommandName.DELETE_FROM_BLACKLIST}" /><input
+												type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+												value="${chosenClientId}" /> <input class="submit_button"
+												type="submit" value="${delete_from_blacklist}"
+												style="margin-left: 20px;" />
+										</form>
+									</td>
+								</tr>
 							</table>
 							<br>
 						</div>
@@ -282,44 +290,44 @@
 
 				<c:if test="${popUpView eq 'AddToBlacklist'}">
 					<div class="popup-bg client" style="display: block">
-					<div class="popup">
-						<form>
-							<table style="margin-left: 20px; margin-top: 10px">
-								<tr>
-									<td><c:out value="${passport_id_word}:" /></td>
-									<td><input type="text" 
-										name="${Utility.PASSPORT_ID}" value="${chosenClient.getPassportId()}" disabled></td>
-								</tr>
-								<tr>
-									<td><c:out value="${since_date_word}:" /></td>
-									<td><input type="date" id="newBlacklistSinceDate"
-										name="${Utility.SINCE_DATE}" required></td>
-								</tr>
-								<tr>
-									<td><c:out value="${reason_word}:" /></td>
-									<td><input type="text" 
-										name="${Utility.REASON}"></td>
-								</tr>
-							</table>
-							<br> 
-							<table>
-							<tr>
-							<td><input type="hidden" name="${Utility.COMMAND}"
-								value="${CommandName.SUBMIT_ADD_TO_BLACKLIST}" /><input type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
-								value="${chosenClientId}" /> <input
-								class="submit_button" type="submit" value="${save}"
-								style="margin-left: 20px" /></td>
-							<td><a href="Controller?command=GO_TO_CLIENTS_PAGE"> <input
-										class="buttons" type="button" value="${cancel}" style="margin-left: 310px"/>
-									</a></td>
-							</tr>
-							</table>
-							
-						</form>
-						
+						<div class="popup">
+							<form>
+								<table style="margin-left: 20px; margin-top: 10px">
+									<tr>
+										<td><c:out value="${passport_id_word}:" /></td>
+										<td><input type="text" name="${Utility.PASSPORT_ID}"
+											value="${chosenClient.getPassportId()}" disabled></td>
+									</tr>
+									<tr>
+										<td><c:out value="${since_date_word}:" /></td>
+										<td><input type="date" id="newBlacklistSinceDate"
+											name="${Utility.SINCE_DATE}" required></td>
+									</tr>
+									<tr>
+										<td><c:out value="${reason_word}:" /></td>
+										<td><input type="text" name="${Utility.REASON}"></td>
+									</tr>
+								</table>
+								<br>
+								<table>
+									<tr>
+										<td><input type="hidden" name="${Utility.COMMAND}"
+											value="${CommandName.SUBMIT_ADD_TO_BLACKLIST}" /><input
+											type="hidden" name="${Utility.CHOSEN_CLIENT_ID}"
+											value="${chosenClientId}" /> <input class="submit_button"
+											type="submit" value="${save}" style="margin-left: 20px" /></td>
+										<td><a href="Controller?command=GO_TO_CLIENTS_PAGE">
+												<input class="buttons" type="button" value="${cancel}"
+												style="margin-left: 310px" />
+										</a></td>
+									</tr>
+								</table>
+
+							</form>
+
+						</div>
 					</div>
-				</div>
-				</c:if>				
+				</c:if>
 			</div>
 		</div>
 	</div>

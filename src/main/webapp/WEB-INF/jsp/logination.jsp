@@ -102,41 +102,33 @@ body {
 							<td><h2>
 									<c:out value="${logination}" />
 									:
-								</h2>
-								<br></td>
+								</h2> <br></td>
 							<td><input type="hidden" name="${Utility.COMMAND}"
 								value="${CommandName.LOGINATION}" /></td>
 						</tr>
 
 						<tr>
-							<td><c:out value="${login_word}" />:<br>
-							<br></td>
+							<td><c:out value="${login_word}" />:<br> <br></td>
 							<td><input style="width: 200px" type="text"
-								name="${Utility.LOGIN}" value="" required /><br>
-							<br></td>
+								name="${Utility.LOGIN}" value="" required /><br> <br></td>
 						</tr>
 						<tr>
-							<td><c:out value="${password_word}" />:<br>
-							<br>
-							<br></td>
+							<td><c:out value="${password_word}" />:<br> <br>
+								<br></td>
 							<td><input style="width: 200px" type="password"
-								name="${Utility.PASSWORD}" value="" required /><br>
-							<br>
-							<br></td>
+								name="${Utility.PASSWORD}" value="" required /><br> <br>
+								<br></td>
 						</tr>
 
 						<tr>
 							<td><input class="submit_button" type="submit"
-								value="${sign_in}" /><br>
-							<br>
-							<br></td>
+								value="${sign_in}" /><br> <br> <br></td>
 							<td></td>
 						</tr>
 
 						<tr>
 							<td><a href="Controller?command=GO_TO_WELCOME_PAGE"><c:out
-										value="${back}" /></a><br>
-							<br></td>
+										value="${back}" /></a><br> <br></td>
 							<td></td>
 						</tr>
 					</table>

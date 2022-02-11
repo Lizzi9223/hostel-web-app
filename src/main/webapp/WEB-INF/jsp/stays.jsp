@@ -224,9 +224,10 @@
 											<td>
 												<form>
 													<input type="hidden" name="${Utility.COMMAND}"
-														value="${CommandName.CHOOSE_USER}" /> <input type="hidden"
-														name="${Utility.STAY_ID}" value="${chosenStayId}" /> <input
-														class="submit_button" type="submit" value="${show_client}"
+														value="${CommandName.CHOOSE_USER}" /> <input
+														type="hidden" name="${Utility.STAY_ID}"
+														value="${chosenStayId}" /> <input class="submit_button"
+														type="submit" value="${show_client}"
 														style="margin-right: 20px" />
 												</form>
 											</td>
